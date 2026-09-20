@@ -61,15 +61,14 @@
 ### 3. `数字人身份.md`（结构契约）
 
 - `## 为什么重要`：身份漂移对可用性的影响（长视频、对话场景）
-- 以下均为二级标题（原"现行做法"桶已取消）：
-  - `## 身份表示`：身份 latent / reference image / 3D prior
-  - `## 身份渲染器：常见路线的常见后端`（**专门说明**）：按"身份信号来源 → 身份怎么被保持 → 换身份代价"排表，覆盖隐式关键点+warping（LivePortrait / Ditto / MegaPortraits 血统）、flow-warp decoder（LIA-X）、appearance code 加法解耦（FLOAT / Avatar Forcing）、3DMM/FLAME 参数化（SadTalker）、3DGS/NeRF 资产、ARKit/引擎、视频级修正（Wav2Lip / LatentSync，非完整 renderer）、整帧视频模型自带解码（VASA-1 等，身份在权重/LoRA）
-  - `## 注入与保持的做法`：加法解耦、anchor guidance、条件化、区域抑制
-  - `## 一致性度量`：id-sim / face-consistency benchmark，及其适用边界
-- 以下均为二级标题（原"我们的工作"桶已取消）：
+- 以下均为二级标题（无桶标题）：
+  - `## 身份表示与渲染后端`（**合并节，按主要路线叙述**）：开头一句"表示决定渲染器能吃什么、渲染器决定身份怎么落地"；结尾一张跨路线对照表（路线 / 身份表示 / 渲染后端 / 身份怎么被保持 / 换身份代价）；正文按路线分小节点名代表模型——2D 换嘴（MuseTalk、SadTalker）、**动作空间 + 快速渲染器（我们的主线，写最细：隐式关键点 + warping = LivePortrait / Ditto / MegaPortraits 血统；外观特征 + flow-warp = LIA-X；appearance code + 加法解耦 = FLOAT / Avatar Forcing）**、视频基座模型（VASA-1、HunyuanVideo-Avatar、OmniAvatar）、3D 资产学习式（GaussianTalker / GAGAvatar / UIKA / FlexAvatar，非重点）、3D 资产参数化装配式（FLAME / ARKit / Audio2Face）、掩码局部多人控制
+  - `## 身份注入与保持的通用手段`：跨路线清单（加法解耦 → 推理期锚点引导 → 训练期条件化 → 区域抑制）；不重复逐路线描述
+  - `## 一致性度量`：id-sim / face-consistency benchmark 及适用边界
   - `## 漂移诊断`：模长实验被否证 → 夹角实验仅在单身份上得到支持
-  - `### 身份资产与参考提供`：单图/多图/视频参考、anchor banks、注入时机与成本
-  - `### 微调类身份提升尝试`：用 ArcFace 系身份特征/loss 提升身份一致性的实验（证据状态：口述待补，整理阶段须回捞记录）；与其他身份注入手段的效果对比与结论
+  - `## 治理尝试与裁决`：A1 锚点引导 GO / 参考条件化 v1 失败与 v2 归档失败 / Learned Anchor Force 终止
+  - `## 身份资产与参考提供`：单图/多图/视频参考、anchor banks、注入时机与成本
+  - `## 微调类身份提升尝试`：ArcFace 系身份特征/loss 的实验（证据状态：知识库/博客/代码三处均无记录 → 口述待补）
 - `## 可能的改进方向`：多身份夹角验证、治理消融、身份资产协议标准化
 - `## 汇报要点`：一页可直取的结论
 
@@ -84,7 +83,7 @@
   - `### 表情与听态`：表情"太用力"问题、AvatarForcing 双向听说、Ditto 眼嘴四层拆分
 - `## 可能的改进方向`：我们做到哪层、市面到哪层、下一步（听态质量、手部接入成本）
 
-### 4. `工程改进.md`（结构契约）
+### 5. `工程改进.md`（结构契约）
 
 - `## 为什么重要`：实时数字人系统的性能/稳定性天花板
 - `## 现行做法`：流式管线与编码链路、GPU 预算分配、会话生命周期管理的通用方案
