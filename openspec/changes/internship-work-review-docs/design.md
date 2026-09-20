@@ -61,13 +61,13 @@
 ### 3. `数字人身份.md`（结构契约）
 
 - `## 为什么重要`：身份漂移对可用性的影响（长视频、对话场景）
-- `## 现行做法`：
-  - `### 身份表示`：身份 latent / reference image / 3D prior
-  - `### 身份渲染器：常见路线的常见后端`（**专门说明**）：按"身份信号来源 → 身份怎么被保持 → 换身份代价"排表，覆盖隐式关键点+warping（LivePortrait / Ditto / MegaPortraits 血统）、flow-warp decoder（LIA-X）、appearance code 加法解耦（FLOAT / Avatar Forcing）、3DMM/FLAME 参数化（SadTalker）、3DGS/NeRF 资产、ARKit/引擎、视频级修正（Wav2Lip / LatentSync，非完整 renderer）、整帧视频模型自带解码（VASA-1 等，身份在权重/LoRA）
-  - `### 注入与保持的做法`：加法解耦、anchor guidance、条件化、区域抑制
-  - `### 一致性度量`：id-sim / face-consistency benchmark，及其适用边界
-- `## 我们的工作`：
-  - `### 漂移诊断与治理`：模长实验被否证 → 夹角实验仅在单身份上得到支持 → 治理方案（参考条件化 v2）
+- 以下均为二级标题（原"现行做法"桶已取消）：
+  - `## 身份表示`：身份 latent / reference image / 3D prior
+  - `## 身份渲染器：常见路线的常见后端`（**专门说明**）：按"身份信号来源 → 身份怎么被保持 → 换身份代价"排表，覆盖隐式关键点+warping（LivePortrait / Ditto / MegaPortraits 血统）、flow-warp decoder（LIA-X）、appearance code 加法解耦（FLOAT / Avatar Forcing）、3DMM/FLAME 参数化（SadTalker）、3DGS/NeRF 资产、ARKit/引擎、视频级修正（Wav2Lip / LatentSync，非完整 renderer）、整帧视频模型自带解码（VASA-1 等，身份在权重/LoRA）
+  - `## 注入与保持的做法`：加法解耦、anchor guidance、条件化、区域抑制
+  - `## 一致性度量`：id-sim / face-consistency benchmark，及其适用边界
+- 以下均为二级标题（原"我们的工作"桶已取消）：
+  - `## 漂移诊断`：模长实验被否证 → 夹角实验仅在单身份上得到支持
   - `### 身份资产与参考提供`：单图/多图/视频参考、anchor banks、注入时机与成本
   - `### 微调类身份提升尝试`：用 ArcFace 系身份特征/loss 提升身份一致性的实验（证据状态：口述待补，整理阶段须回捞记录）；与其他身份注入手段的效果对比与结论
 - `## 可能的改进方向`：多身份夹角验证、治理消融、身份资产协议标准化
@@ -149,6 +149,7 @@
   4. **用户审素材** ← 未过不放行
   5. 「动笔写作」：正文写进 `management/docs/实习复盘/<标题>.md`
   任一闸门未获明确确认，不得推进到下一步。
+- **D1b 禁桶标题**：`## 现行做法` / `## 我们的工作` / `## 概述` 这类**分类名不许当标题**，其下主题直接写成二级标题（骨架只约束写作顺序，不约束标题结构）；主题自身横向展开时才用子节，且子节父标题必须是该主题的名字
 - **D1 统一写作骨架**：内容文档按"为什么重要 → 现行做法 → 我们的工作 → 可能的改进方向"组织，避免写成单纯的改进流水账
 - **D2 目录与命名**：子文件夹夹内平铺；单篇 change：复盘系 `docs-intern-<slug>`、笔记系 `docs-note-<slug>`
 - **D2b 交付物位置**：**仓库里只保留文章正文**（`management/docs/...`）；计划（proposal/design/tasks）留在 change 目录；**素材/整理产物不进仓库**（按 D0 在对话中提交审核）

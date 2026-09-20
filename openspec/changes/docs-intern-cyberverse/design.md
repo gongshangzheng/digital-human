@@ -22,16 +22,14 @@
 - 论证/结论：没有统一框架，每换一个模型就要重搭一遍链路
 - 素材：CyberVerse README 功能特性、`models/` 五模型接口差异
 
-### 二、`## 现行做法`
-
-#### 2.1 `### 开源框架版图`
+### 二、`## 开源框架版图`
 - 表达内容:**一表对照 + 结论**（不逐家展开）——OpenAvatarChat（模块化对话式）、LiteAvatar（轻量 2D 数字人）、Ultralight（源码阅读类）；表列：定位 / 架构形态 / 支持模型 / 实时性 / 与我们的差距
 - 论证/结论：现有框架多在"轻量 2D / 纯对话"或"重型离线"，实时 + 可插拔 3D/扩散模型是缺口
 - **必须附一次对话的 mermaid `sequenceDiagram`**（用户 → 前端 → Go 编排 → Python 推理：ASR → LLM → TTS → Avatar 逐段产出），把"分块等待与排队"画在图上
 - 素材：knowledge/《open-avatar-chat-liteavatar》《lite-avatar-source-code-analysis》《ultralight-digital-human-source-read》《cyberverse-realtime-digital-human-agent》
 - 注意：竞品信息来自博客笔记（二手），**正文里用自然语言说明其性质**，不标出处、不写成定论
 
-#### 2.2 `### 系统架构与实时性`（自《数字人介绍与技术路线》迁入，**只在本文讨论**）
+### 三、`## 系统架构与实时性`（自《数字人介绍与技术路线》迁入，**只在本文讨论**）
 - 表达内容：
   - **级联四组件**：ASR → LLM → TTS → Avatar 渲染
   - **三种架构对照**：级联（组件独立可控，流式链路约 3.2s）/ 端到端（单模型吃完整链路，A2-LLM TTFA 535ms）/ 混合（级联框架 + 端到端局部模块）
@@ -42,7 +40,7 @@
 - 与《工程改进》的边界：《工程改进》写我们针对延迟/稳定性做的具体优化（编码链路、会话回收等），本节只写通用架构与判定口径
 - 素材：knowledge/《数字人基础》《5分钟认识数字人》《cyberverse-realtime-digital-human-agent》、CyberVerse README 的链路说明
 
-### 三、`## CyberVerse 架构`
+### 四、`## CyberVerse 架构`
 - `### 三服务`：Python inference gRPC :50051（进程内跑所有插件）/ Go orchestrator :8080 + TURN :8443 / Vue 前端 :5173；**必须附 mermaid `flowchart` 架构图**——画浏览器 / 服务器边界，标出三条链路（`/api`、`/ws` 代理，WebRTC 媒体，gRPC）
 - `### 插件体系`：`inference/core`（config/registry/types）+ `inference/plugins/{asr,llm,tts,voice_llm,avatar}` + `proto/*.proto` 七个 gRPC 接口；配置驱动（`cyberverse_config.yaml` + `/settings` UI）
 - `### Avatar 抽象`：`AvatarPlugin`（set_avatar/generate_stream/reset/get_fps/get_output_dimensions）与 `BidirectionalAvatarPlugin`（feed_user_audio/video，支持双向听说）；gRPC `AvatarService` 含 `SwitchAvatarBackend`（后端热切换）
@@ -50,22 +48,22 @@
 - **不含** `### Agent 与记忆`（PersonaAgent/SubAgent/RAG）：与框架骨架关系偏松，用户决定不写
 - 素材：@4968280 `inference/`、`server/internal/`、`proto/`
 
-### 四、`## 模型接入`
+### 五、`## 模型接入`
 - 表达内容：五模型（AvatarForcing / Ditto / FlashHead / MuseTalk / SoulX-LiveAct）接入形态与插件路径（`inference/plugins/avatar/*.py`）；接入契约（输入音频流 / 输出 VideoChunk）
 - 论证/结论：统一契约让模型可替换；各模型的差异被适配层吸收
 - 引用：链论文笔记五篇深读
 
-### 五、`## 部署形态`
+### 六、`## 部署形态`
 - 表达内容：远程 GPU 服务器运行（本地无 GPU）；三服务绑定 127.0.0.1 + SSH 隧道（5173/8080/8443）；"本地只编辑、远端只部署"的纪律（引 AGENTS.md）；`.env` 必须先加载
 - 论证/结论：这种纪律避免了远端工作树污染与密钥缺失类故障
 - 素材：AGENTS.md
 
-### 六、`## 我们的改造与扩展`
+### 七、`## 我们的改造与扩展`
 - 表达内容：按主题列落点（链《工程改进》）：silent-avatar 静默态、编码链路常驻 NVENC、会话回收；管理模块迁移（t3）；[shared] 脚手架协作（t10）；资产提取框架（t9）
 - 论证/结论：改造集中在"实时性 + 稳定性 + 工程基建"三块
 - 引用：链《工程改进》，不在此展开细节
 
-### 七、`## 开放问题与改进方向`
+### 八、`## 开放问题与改进方向`
 - 表达内容：插件内存泄漏（AvatarForcing 每 load/unload 约 1.4GB 残留）；多模型并行/热切换；远端部署自动化；竞品框架能力补差
 - 论证/结论：框架层下一阶段重点是资源回收与多模型共存
 
