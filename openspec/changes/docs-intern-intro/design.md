@@ -26,12 +26,22 @@
 - 论证/结论：数字人是"可见对话"的载体，实时性是可用性门槛
 - 事实分级：产品/技术价值标【待验证·判断】，落地形态【已验证】
 
-### 三、`## 主要技术路线`
-- 3.0 `> 框架说明`：三路线叙述 + 两轴（生成方式 × 渲染后端）非互斥（**待你定稿，见文末决策**）
-- `### 路线一：视频基座模型（整帧视频生成）`：做法 + 代表模型表（8 个，挂 papers slug）+ 优缺点（每帧重算、实时化困难）
-- `### 路线二：动作空间扩散`：做法 + 解耦数据流图 + 代表模型表（12 个）+ 优缺点（省算力、便于实时；上限受表示与渲染器限制）
-- `### 路线三：3D GS（渲染/资产后端）`：做法 + NeRF→3DGS 成本演进表 + VFHQ-Test 横评表（含硬件可行性与接入状态）+ 优缺点
-- 论证/结论：三路线本质是"生成什么"与"靠什么落地"的组合；3D GS 主要是渲染后端轴
+### 三、`## 技术路线版图`
+- 3.0 `> 框架说明`：**两条轴**——「生成方式」（模型直接预测什么）×「渲染/资产后端」（画面靠什么落地）；两轴可自由组合，不是互斥路线（引《数字人基础》原文）
+- **完整路线清单**（依据 `digital-human-avatar-survey` 表 2 的六条 taxonomy + `数字人渲染器专题` §二的 renderer 光谱）：
+
+| # | 路线 | 核心表示 | 代表工作 | 优势 / 限制 |
+|---|------|---------|---------|------------|
+| 1 | 2D talking-head / latent inpainting | landmarks、mask、latent | MuseTalk、SadTalker | 简单快、生态成熟 / 身体手势弱、3D 一致性弱 |
+| 2 | 结构化动作策略 | SMPL-X、FLAME、MANO、VQ motion token | EMAGE、Audio2Photoreal、EMO2 | 可解释可控、动作可单独评估 / 仍需 renderer |
+| 3 | 动作扩散 + 快速渲染器 | 低维 motion + warping GAN/renderer | ChatAnyone；**Ditto、Avatar Forcing（我们的主线）** | 实时性强、工程闭环清晰 / 画面自由度低于整帧大模型 |
+| 4 | 视频基座模型适配 | video latent、DiT/MM-DiT、ReferenceNet、LoRA | OmniAvatar、HunyuanVideo-Avatar、wan-streamer | 全画幅表达强 / 训练推理重、资产不可复用 |
+| 5 | **3D 资产驱动** | 3DGS 高斯 / NeRF 场 / **mesh + blendshape·FLAME rig** | 5a 学习式：GaussianTalker、UIKA、FlexAvatar；**5b 参数化装配式：FLAME/ARKit blendshape + 游戏引擎渲染（工业实时角色，Audio2Face 类）** | 身份可复用、渲染可控 / 注册难、训练成本高、极端动作风险 |
+| 6 | 掩码局部多人控制 | face mask + localized cross-attention | HunyuanVideo-Avatar | 可指定说话人 / 依赖 mask |
+
+- 补充：**渲染后端视角**（`数字人渲染器专题` §二）——2D warping renderer（Ditto/LivePortrait、LIA-X、FLOAT/AF decoder）、FLAME/3DMM、NeRF/3DGS 专人资产、**ARKit/blendshape/game engine**、视频级后处理（Wav2Lip/LatentSync，非完整 renderer）
+- 论证/结论：路线分野在「中间表示 + 渲染后端」；同一任务可由多条路线完成；**「操控 3D 模型」（参数化/rigged + 引擎渲染）是独立且工业成熟的一条路线**，与 5a 学习式资产区分（5b 资产为手工/标准接口，5a 需训练）
+- 素材：`digital-human-avatar-survey` 表 2、`数字人渲染器专题` §二/§三、`动作空间专题` 表示谱系
 
 ### 四、`## 数字人系统与实时性（现行做法）`
 - 表达内容：级联四组件；三种架构（级联/端到端/混合，含 A2-LLM 535ms、级联 3.2s）；两条工程战线（传输层 WebRTC；推理层流式分块）+ 轻量技巧；Agent 能力
@@ -56,7 +66,8 @@
 
 ## 【待审核】关键决策点
 
-1. **框架表述**：(A) 三路线为主 + 两轴说明【整理建议】 / (B) 纯两轴 / (C) 纯三路线不解释互斥性 —— 请选
+1. **框架表述**：(A) 两轴为主 + 六条路线清单（survey 口径）【已按 explore 更新】 / (B) 精简为 3–4 条常用路线 / (C) 其他分法 —— 请选
+2. **5b rigged mesh 路线证据薄**：工业实时角色（Audio2Face 类）我们没实测 —— 保留为路线介绍（标【待验证】+来源），还是删除？
 2. 是否保留 `## 数字人系统与实时性` 与 `## 评价口径` 两节（它们与《CyberVerse框架》《数字人身份》部分交叉，也可压缩为一句+链接）
 
 ## 整理清单（动笔前必须完成）
