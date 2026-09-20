@@ -210,6 +210,8 @@ async def get_meeting_detail(date: str):
 # ========== 文档 (wiki) ==========
 
 _DOCS_DIR = os.path.join(MANAGEMENT_DIR, 'docs')
+# 文档列表中文件夹的先后（未列出的排在已知之后）
+_DOCS_FOLDER_ORDER = ['实习复盘', '论文笔记', 'knowledge']
 # slug 允许 Unicode 单词字符（含中文）、空格、下划线、连字符与斜杠；
 # 路径穿越由 _valid_doc_slug 显式拒绝 + safe_resolve 根目录约束双重防护。
 _SLUG_RE = re.compile(r'^[\w][\w \-/]*$', re.UNICODE)
@@ -273,10 +275,48 @@ async def get_docs():
                 'tags': meta.get('tags', []),
                 'summary': meta.get('summary', ''),
                 'id': meta.get('id'),
+                'order': meta.get('order'),
             })
-    docs.sort(key=lambda d: d.get('date') or '', reverse=True)
-    docs.sort(key=lambda d: float(d['id']) if d.get('id') is not None and str(d['id']).replace('.', '').replace('-', '').isdigit() else float('inf'))
+    docs.sort(key=_doc_sort_key)
     return docs
+
+
+def _doc_number(value):
+    """数字字段（order / id）转 float；缺失或非数字统一为 inf（排最后）。"""
+    if value is None or isinstance(value, bool):
+        return float('inf')
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return float('inf')
+
+
+def _doc_date_ordinal(value):
+    """ISO 日期转 ordinal；缺失或非法返回 0，用于降序排序。"""
+    if not value:
+        return 0
+    try:
+        return datetime.date.fromisoformat(str(value)[:10]).toordinal()
+    except ValueError:
+        return 0
+
+
+def _doc_sort_key(doc):
+    """排序链：文件夹优先级 → order → id → date 降序 → slug 字典序。
+
+    最后一级 slug 是必需的：前几级全部相同时若不确定，列表顺序会落到
+    文件系统遍历顺序（APFS 无序），表现为刷新一次一个样。
+    """
+    slug = doc.get('slug') or ''
+    top = slug.split('/')[0] if '/' in slug else ''
+    folder_rank = _DOCS_FOLDER_ORDER.index(top) if top in _DOCS_FOLDER_ORDER else len(_DOCS_FOLDER_ORDER)
+    return (
+        folder_rank,
+        _doc_number(doc.get('order')),
+        _doc_number(doc.get('id')),
+        -_doc_date_ordinal(doc.get('date')),
+        slug,
+    )
 
 
 @router.get("/docs/{slug:path}")

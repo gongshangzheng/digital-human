@@ -37,6 +37,7 @@
 |----|------|------|
 | 文档详情接口支持 Unicode/中文 slug（放宽 `_SLUG_RE` + 拒绝 `..`） | 本仓库 `sync-projflow-shared-updates` | 待回灌（上游 `eb331fc` 同样存在此 bug） |
 | HIDDEN_KEYS 采用与 menu.js→hidden.js 迁移经验 | 本仓库同上 | 待回灌（上游已有 hidden.js，经验性补充） |
+| 文档列表排序：`order` 字段 + 文件夹优先级 + slug 兜底（不依赖文件系统顺序） | 本仓库 `docs-list-ordering` | 待回灌（上游排序链同样缺最后一级兜底） |
 
 ## 维护规则
 
