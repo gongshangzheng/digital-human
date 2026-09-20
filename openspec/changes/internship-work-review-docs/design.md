@@ -64,7 +64,7 @@
 - 以下均为二级标题（无桶标题）：
   - `## 身份表示与渲染后端`（**合并节，按主要路线叙述**）：开头一句"表示决定渲染器能吃什么、渲染器决定身份怎么落地"；结尾一张跨路线对照表（路线 / 身份表示 / 渲染后端 / 身份怎么被保持 / 换身份代价）；正文按路线分小节点名代表模型——2D 换嘴（MuseTalk、SadTalker）、**动作空间 + 快速渲染器（我们的主线，写最细：隐式关键点 + warping = LivePortrait / Ditto / MegaPortraits 血统；外观特征 + flow-warp = LIA-X；appearance code + 加法解耦 = FLOAT / Avatar Forcing）**、视频基座模型（VASA-1、HunyuanVideo-Avatar、OmniAvatar）、3D 资产学习式（GaussianTalker / GAGAvatar / UIKA / FlexAvatar，非重点）、3D 资产参数化装配式（FLAME / ARKit / Audio2Face）、掩码局部多人控制
   - `## 身份注入与保持`：跨路线清单（加法解耦 → 推理期锚点引导 → 训练期条件化 → 区域抑制）；不重复逐路线描述
-  - `## 一致性度量`：id-sim / face-consistency benchmark 及适用边界
+  - `## 一致性度量`：主用 CSIM / id-sim 与派生漂移指标；写清尺子出身（从人脸识别借来、无标准化协议）、五种失效场景一张表（照片域依赖 / 时序漂移 / 环境不鲁棒 / 长时演变 / 风格化不可度量）、一把尺子身兼裁判-教练-奖励-球员四职；三条用法结论（只作必要条件、必须配人工检查、跨域场景声明边界）；完整论证归论文笔记
   - `## 漂移诊断`：模长实验被否证 → 夹角实验仅在单身份上得到支持
   - `## 治理尝试与裁决`：A1 锚点引导 GO / 参考条件化 v1 失败与 v2 归档失败 / Learned Anchor Force 终止
   - `## 身份资产与参考提供`：单图/多图/视频参考、anchor banks、注入时机与成本
