@@ -37,16 +37,17 @@
   - **身份**：长什么样、是不是同一个人（外观、纹理、几何）→ 由**身份呈现/渲染后端**决定：身份靠什么落地
   - 关键表述：**动作生成对应"怎么动"，身份呈现/渲染后端对应"身份怎么落地"**；两者的搭配受接口契约与身份资产成本约束，本文讲的就是这套搭配关系（见 3.3）
   - 源材料（《数字人基础》）用的说法是"生成方式 × 渲染资产后端"，本文把它精确化为"动作生成 × 身份呈现"，并显式写出搭配约束
-- **完整路线清单**（依据 `digital-human-avatar-survey` 表 2 的六条 taxonomy + `数字人渲染器专题` §二的 renderer 光谱）：
+- **完整路线清单**（依据 `digital-human-avatar-survey` 表 2 的六条 taxonomy + `数字人渲染器专题` §二的 renderer 光谱）：**表格列按框架拆成「动作生成 / 身份呈现」两侧**，让每条路线的两个因素分别可见
 
-| # | 路线 | 核心表示 | 代表工作 | 优势 / 限制 |
-|---|------|---------|---------|------------|
-| 1 | 2D talking-head / latent inpainting | landmarks、mask、latent | MuseTalk、SadTalker | 简单快、生态成熟 / 身体手势弱、3D 一致性弱 |
-| 2 | 结构化动作策略 | SMPL-X、FLAME、MANO、VQ motion token | EMAGE、Audio2Photoreal、EMO2 | 可解释可控、动作可单独评估 / 仍需 renderer |
-| 3 | 动作扩散 + 快速渲染器 | 低维 motion + warping GAN/renderer | ChatAnyone；**Ditto、Avatar Forcing（我们的主线）** | 实时性强、工程闭环清晰 / 画面自由度低于整帧大模型 |
-| 4 | 视频基座模型适配 | video latent、DiT/MM-DiT、ReferenceNet、LoRA | OmniAvatar、HunyuanVideo-Avatar、wan-streamer | 全画幅表达强 / 训练推理重、资产不可复用 |
-| 5 | **3D 资产驱动** | 3DGS 高斯 / NeRF 场 / **mesh + blendshape·FLAME rig** | 5a 学习式：GaussianTalker、UIKA、FlexAvatar；**5b 参数化装配式：FLAME/ARKit blendshape + 游戏引擎渲染（工业实时角色，Audio2Face 类）** | 身份可复用、渲染可控 / 注册难、训练成本高、极端动作风险 |
-| 6 | 掩码局部多人控制 | face mask + localized cross-attention | HunyuanVideo-Avatar | 可指定说话人 / 依赖 mask |
+| # | 路线 | 动作生成（怎么动） | 身份呈现（怎么落地） | 代表工作 | 优势 / 限制 |
+|---|------|------------------|--------------------|---------|------------|
+| 1 | 2D talking-head / latent inpainting | 局部换嘴、视频级修正（landmarks / mask 驱动 latent inpainting） | 参考图或视频（2D warping，身份就是参考外观） | MuseTalk、SadTalker | 简单快、生态成熟 / 身体手势弱、3D 一致性弱 |
+| 2 | 结构化动作策略 | 动作空间生成（SMPL-X、FLAME、MANO、VQ motion token） | 参数化渲染器（FLAME / 3DMM / SMPL-X） | EMAGE、Audio2Photoreal、EMO2 | 可解释可控、动作可单独评估 / 仍需 renderer |
+| 3 | 动作扩散 + 快速渲染器 | 动作空间生成（低维 motion，扩散生成） | warping GAN 或 renderer（Ditto、LivePortrait、LIA-X、FLOAT/AF decoder） | ChatAnyone；**Ditto、Avatar Forcing（我们的主线）** | 实时性强、工程闭环清晰 / 画面自由度低于整帧大模型 |
+| 4 | 视频基座模型适配 | 整帧视频生成（video latent、DiT/MM-DiT） | 身份靠参考图条件注入（ReferenceNet、LoRA）——动作与身份一起生成 | OmniAvatar、HunyuanVideo-Avatar、wan-streamer | 全画幅表达强 / 训练推理重、资产不可复用 |
+| 5a | 3D 资产（学习式） | 动作空间生成（motion、pose） | 3DGS 高斯、NeRF 场（身份需先训练进资产） | GaussianTalker、UIKA、FlexAvatar | 身份可复用、渲染可控 / 注册难、训练成本高、极端动作风险 |
+| 5b | **3D 资产（参数化装配式）** | 动作空间生成（**blendshape / FLAME 系数**） | **rigged mesh 美术资产 + 游戏引擎渲染**（ARKit 52 等标准接口） | FLAME/3DMM 系、Audio2Face 类 | 接口标准、可跨软件 / 写实度靠美术资产、制作成本高 |
+| 6 | 掩码局部多人控制 | 整帧视频生成 + 局部控制（face mask、localized cross-attention） | 参考图条件 + 掩码限定说话人 | HunyuanVideo-Avatar | 可指定说话人 / 依赖 mask |
 
 - 注：**Blendshape/FLAME 作为动作表示的深度内容在《数字人动作》**，这里只作为资产接口与后端出现，一句话 + 链接，不展开
 - **必须辨析（易读歪点）**：FLAME / blendshape / 隐式关键点 / latent 是**动作表示**，属于「动作空间生成」的内部表示形式，**不是第四种生成方式**；它们同时出现在身份呈现后端里，是因为同一套参数化表示两用——既是动作生成要预测的目标，又是身份资产的驱动接口（如 FLAME canonical space 驱动 3DGS）。两因素说明下必须有一句显式辨析；5b 行的核心表示写成「blendshape/FLAME 系数 → 驱动 rigged mesh」，避免读成"blendshape 是一条生成方式"
