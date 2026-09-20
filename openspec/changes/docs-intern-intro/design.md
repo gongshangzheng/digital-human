@@ -41,6 +41,7 @@
 | 6 | 掩码局部多人控制 | face mask + localized cross-attention | HunyuanVideo-Avatar | 可指定说话人 / 依赖 mask |
 
 - 注：**Blendshape/FLAME 作为动作表示的深度内容在《数字人动作》**，这里只作为资产接口与后端出现，一句话 + 链接，不展开
+- **必须辨析（易读歪点）**：FLAME / blendshape / 隐式关键点 / latent 是**动作表示**，属于生成方式②「动作空间生成」的内部表示形式，**不是第四种生成方式**；它们同时出现在后端轴，是因为同一套参数化表示两用（既是被预测目标，又是资产/渲染器接口，如 FLAME canonical space 驱动 3DGS）。两轴表下必须有一句显式说明；5b 行的核心表示写成「blendshape/FLAME 系数 → 驱动 rigged mesh」，避免读成"blendshape 是一条生成方式"
 - 补充：**渲染后端视角**（`数字人渲染器专题` §二）——2D warping renderer（Ditto/LivePortrait、LIA-X、FLOAT/AF decoder）、FLAME/3DMM、NeRF/3DGS 专人资产、**ARKit/blendshape/game engine**、视频级后处理（Wav2Lip/LatentSync，非完整 renderer）
 - 论证/结论：路线分野在「中间表示 + 渲染后端」；同一任务可由多条路线完成；**「操控 3D 模型」（参数化/rigged + 引擎渲染）是独立且工业成熟的一条路线**，与 5a 学习式资产区分（5b 资产为手工/标准接口，5a 需训练）
 - 素材：`digital-human-avatar-survey` 表 2、`数字人渲染器专题` §二/§三、`动作空间专题` 表示谱系
