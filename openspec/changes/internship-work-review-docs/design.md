@@ -63,7 +63,7 @@
 - `## 为什么重要`：身份漂移对可用性的影响（长视频、对话场景）
 - 以下均为二级标题（无桶标题）：
   - `## 身份表示与渲染后端`（**合并节，按主要路线叙述**）：开头一句"表示决定渲染器能吃什么、渲染器决定身份怎么落地"；结尾一张跨路线对照表（路线 / 身份表示 / 渲染后端 / 身份怎么被保持 / 换身份代价）；正文按路线分小节点名代表模型——2D 换嘴（MuseTalk、SadTalker）、**动作空间 + 快速渲染器（我们的主线，写最细：隐式关键点 + warping = LivePortrait / Ditto / MegaPortraits 血统；外观特征 + flow-warp = LIA-X；appearance code + 加法解耦 = FLOAT / Avatar Forcing）**、视频基座模型（VASA-1、HunyuanVideo-Avatar、OmniAvatar）、3D 资产学习式（GaussianTalker / GAGAvatar / UIKA / FlexAvatar，非重点）、3D 资产参数化装配式（FLAME / ARKit / Audio2Face）、掩码局部多人控制
-  - `## 身份注入与保持的通用手段`：跨路线清单（加法解耦 → 推理期锚点引导 → 训练期条件化 → 区域抑制）；不重复逐路线描述
+  - `## 身份注入与保持`：跨路线清单（加法解耦 → 推理期锚点引导 → 训练期条件化 → 区域抑制）；不重复逐路线描述
   - `## 一致性度量`：id-sim / face-consistency benchmark 及适用边界
   - `## 漂移诊断`：模长实验被否证 → 夹角实验仅在单身份上得到支持
   - `## 治理尝试与裁决`：A1 锚点引导 GO / 参考条件化 v1 失败与 v2 归档失败 / Learned Anchor Force 终止
