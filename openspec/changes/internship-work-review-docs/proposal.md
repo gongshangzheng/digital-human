@@ -18,8 +18,8 @@
   3. `数字人动作.md`（`docs-intern-motion`）— 算法上的改进：分层框架（音唇同步→表情×语言交互→手部/全身），含我们的实验与市面工作总结
   5. `工程改进.md`（`docs-intern-engineering`）— 工程上的改进合集：系统级基建 + PasteBack 贴回技术
   5. `实时性改进.md`（`docs-intern-realtime`）— 用户可感知的交互体验：首帧/开口、打断收声、待机静默、画质粒度权衡
-  6. `数字人行业全景.md`（`docs-intern-industry`）— 由调研与测试成果合成：技术路线版图、15+ 模型横评（第一手数据）、竞品对标、选型结论、趋势判断
-  7. `发文方向.md`（`docs-intern-paper-directions`）— 从实习工作提炼候选选题（复盘的终极出口：循实习经验做出一篇文章）
+  5. `数字人行业全景.md`（`docs-intern-industry`）— 由调研与测试成果合成：技术路线版图、15+ 模型横评（第一手数据）、竞品对标、选型结论、趋势判断
+  6. `发文方向.md`（`docs-intern-paper-directions`）— 从实习工作提炼候选选题（复盘的终极出口：循实习经验做出一篇文章）
   8. `总览.md`（`docs-intern-overview`）— 实习主线、时间轴、核心工作互链、量化成果总表
 - 知识库 knowledge/ 保持复制件不动；本 change 只写第一方复盘文档
 - 引用锚定：涉及 CyberVerse 代码/文档处标注 `~/code/CyberVerse` 路径 + commit `4968280`
