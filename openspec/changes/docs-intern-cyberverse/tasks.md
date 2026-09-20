@@ -8,7 +8,7 @@
 - [ ] 1.4 读 `models/` 五模型接入形态（插件路径），链论文笔记
 - [ ] 1.5 读 knowledge/ 竞品框架三篇（open-avatar-chat-liteavatar / lite-avatar-source-code-analysis / ultralight-digital-human-source-read）+ cyberverse-realtime-digital-human-agent，整理框架版图对勘
 - [ ] 1.6 从 management/projects/cyberverse/tasks.json 提取我们的改造任务（t1–t25）归类
-- [ ] 1.7 汇总为 `整理-CyberVerse框架.md`（架构图 + 插件/模型清单 + 端口部署表 + 改造清单 + 竞品对勘 + 事实分级），交用户确认
+- [ ] 1.7 汇总为 `整理-CyberVerse框架.md`（架构图 + 插件/模型清单 + 端口部署表 + 改造清单 + 竞品对勘 + 事实分级），留 change 目录，交用户确认
 
 ## 2. 动笔写作（1.x 确认后启动）
 
