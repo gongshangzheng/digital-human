@@ -63,7 +63,7 @@
 - `## 为什么重要`：身份漂移对可用性的影响（长视频、对话场景）
 - **配图（4 张 mermaid）**：身份信号到画面的路径图、四类注入路径与约束层图、一把尺子兼四职循环图、AF 上的整条路径总览图
 - 以下均为二级标题（无桶标题）：
-  - `## 身份表示与渲染后端`（**合并节，按主要路线叙述**）：开头一句"表示决定渲染器能吃什么、渲染器决定身份怎么落地"；结尾一张跨路线对照表（路线 / 身份表示 / 渲染后端 / 身份怎么被保持 / 换身份代价）；正文按路线分小节点名代表模型——2D 换嘴（MuseTalk、SadTalker）、**动作空间 + 快速渲染器（我们的主线，写最细：隐式关键点 + warping = LivePortrait / Ditto / MegaPortraits 血统（**进来先交代关键点分显式/隐式两代，显式那一代在 2D 换嘴与部分混合管线里用**）；外观特征 + flow-warp = LIA-X；appearance code + 加法解耦 = FLOAT / Avatar Forcing）**、视频基座模型（VASA-1、HunyuanVideo-Avatar、OmniAvatar）、3D 资产学习式（GaussianTalker / GAGAvatar / UIKA / FlexAvatar，非重点）、3D 资产参数化装配式（FLAME / ARKit / Audio2Face）、掩码局部多人控制
+  - `## 身份表示与渲染后端`（**合并节，按主要路线叙述**）：开头一句"表示决定渲染器能吃什么、渲染器决定身份怎么落地"；**第一条路线子节是「显式表示：landmarks、参数化模型与身份编码器」**（在 2D 换嘴之前）——"显式"不止关键点，写成一族：① 关键点（68 点 iBUG 300-W / MediaPipe Face Mesh 468·478 / BlazeFace / 3D 关键点·3DMM 拟合）② 参数化 3D 模型（FLAME、3DMM/BFM）③ 标准接口（ARKit 52 blendshape）④ 专门设计的身份编码器（BlendFace，ICCV 2023：直接借 FR embedding 做生成会有属性泄漏，于是重设计只留身份、剥离属性，并兼作生成输入与身份损失）；再写共同点（语义由人定义、可读写可做规则动画）、四条局限（覆盖有限 / 协议不统一 / 遮挡大姿态不稳 / 身份仍来自参考图）与向隐式表示的演化；结尾一张跨路线对照表（路线 / 身份表示 / 渲染后端 / 身份怎么被保持 / 换身份代价）；正文按路线分小节点名代表模型——2D 换嘴（MuseTalk、SadTalker）、**动作空间 + 快速渲染器（我们的主线，写最细：隐式关键点 + warping = LivePortrait / Ditto / MegaPortraits 血统（**进来先交代关键点分显式/隐式两代，显式那一代在 2D 换嘴与部分混合管线里用**）；外观特征 + flow-warp = LIA-X；appearance code + 加法解耦 = FLOAT / Avatar Forcing）**、视频基座模型（VASA-1、HunyuanVideo-Avatar、OmniAvatar）、3D 资产学习式（GaussianTalker / GAGAvatar / UIKA / FlexAvatar，非重点）、3D 资产参数化装配式（FLAME / ARKit / Audio2Face）、掩码局部多人控制
   - `## 身份注入与保持`：**业界手法的横切归纳（现行做法层）**——四类注入路径（加法解耦 / 推理期锚点引导〔含时机与开销〕/ 训练期条件化 / 区域抑制），每类写"做什么 → 在哪一层约束 → 代价"；与 `### 锚帧库与参考图怎么选` 的分工：**本节讲投递方式、那节讲包裹内容**
   - `## 一致性度量`：**按三族写尺子**——FR embedding 余弦族（CSIM，编码器常用 ArcFace 系，另有 CurricularFace / AdaFace / FaceNet）、感知类（DINO Subject Consistency、CLIP-I、DreamSim）、结构/生成类（Arc2Face 反演）；另点名专用/新生度量（CCIP〔来源待核实〕、FaceSim-Arc/Cur、StyleID 感知对齐、ID-Sim、NexusScore）与时序漂移类（CSIM-drift / LPIPS-drift）；写清尺子出身（从人脸识别借来、无标准化协议）、五种失效场景一张表（照片域依赖 / 时序漂移 / 环境不鲁棒 / 长时演变 / 风格化不可度量）、一把尺子身兼裁判-教练-奖励-球员四职；三条用法结论（只作必要条件、必须配人工检查、跨域场景声明边界）；完整论证归论文笔记
   - `## Avatar Forcing 上的身份改进`（**四件事合并成一章**，开头统一交代实验载体：Avatar Forcing 流式路径 / 被测量 `r_d` / 身份侧 appearance code / c1 单身份 300 秒；末尾附一张 mermaid 流程图）：
@@ -78,7 +78,7 @@
 
 - `## 为什么重要`：动作自然度决定可看性；动作是分层递进的能力
 - `## 现行做法（分层）`：①音唇同步（wav2lip→musetalk→vasa1 系）②表情与语言内容交互（语义一致性、听态双向生成）③手部与全身动作（co-speech gesture）；每层主流方法与代表工作（papers 库互链）
-- `## 动作空间谱系`（**Blendshape 的深度内容在这里**）：表示谱系按「人能读懂多少」排列——3DMM 系数（BFM/FLAME，语义高）/ **Blendshape 系数（ARKit 52 维等，工业标准接口）** / **显式关键点（人脸 landmarks 68/478 点，人工定义、可直接编辑）** / 部署运动向量（Ditto 265 维）/ 隐式关键点（LivePortrait，隐式 blendshape，无标注语义）/ latent（AF 20 维）；**必须写清显式与隐式关键点是两代**（有隐式就有显式）：显式语义明确但覆盖有限，隐式表达强但无天然语义、需靠扰动观察反推控制；讲语义可读性、训练来源、可控制性、跨软件通用性（引《动作空间专题》）
+- `## 动作空间谱系`（**Blendshape 的深度内容在这里**）：表示谱系按「人能读懂多少」排列——3DMM 系数（BFM/FLAME，语义高）/ **Blendshape 系数（ARKit 52 维等，工业标准接口）** / **显式这一族要单独讲透（landmarks：68 点 iBUG 300-W / MediaPipe Face Mesh 468·478 / BlazeFace / 3DDFA 类 3D 关键点；参数化模型 FLAME、3DMM/BFM；标准接口 ARKit 52 blendshape；专门身份编码器 BlendFace；人工定义、可直接编辑、协议互不兼容）** / 部署运动向量（Ditto 265 维）/ 隐式关键点（LivePortrait，隐式 blendshape，无标注语义）/ latent（AF 20 维）；**必须写清显式与隐式关键点是两代**（有隐式就有显式）：显式语义明确但覆盖有限，隐式表达强但无天然语义、需靠扰动观察反推控制；讲语义可读性、训练来源、可控制性、跨软件通用性（引《动作空间专题》）
 - `## 我们的工作`：
   - `### 中文音频适配（桥系列）`：蒸馏桥 → geom（单边 hinge，反塌缩）→ georkd（geom+RKD 关系蒸馏），附 LSE-C/LSE-D 与 sync_c/sync_d 指标表
   - `### 微调方法（Loss 与注入点）`：微调形态谱系（全冻结+桥 / LoRA / 单层解冻）与注入点审计方法；loss 设计如何影响音唇同步（引《微调策略专题》）
