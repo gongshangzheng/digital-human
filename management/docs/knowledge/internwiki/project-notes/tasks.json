@@ -1,0 +1,492 @@
+{
+  "project": "digital-human",
+  "intern": "tangwen",
+  "tasks": [
+    {
+      "id": "done-1",
+      "title": "技术调研（20+ 篇系列文章）",
+      "status": "completed",
+      "startDate": "2026-06-08",
+      "endDate": "2026-06-22",
+      "description": "完成数字人技术全景调研，覆盖换嘴配音、运动空间、3DGS/NeRF、扩散基模、整帧全身、实时流式 6 条路线，产出 20+ 篇系列文章",
+      "children": [
+        {
+          "id": "done-1-1",
+          "title": "换嘴与视频配音路线（Wav2Lip/MuseTalk）",
+          "status": "completed",
+          "startDate": null,
+          "endDate": null,
+          "description": "系列（二）",
+          "children": []
+        },
+        {
+          "id": "done-1-2",
+          "title": "运动空间路线（SadTalker/VASA-1/Ditto）",
+          "status": "completed",
+          "startDate": null,
+          "endDate": null,
+          "description": "系列（三）",
+          "children": []
+        },
+        {
+          "id": "done-1-3",
+          "title": "3DGS / NeRF Avatar 路线（GAGAvatar/UIKA）",
+          "status": "completed",
+          "startDate": null,
+          "endDate": null,
+          "description": "系列（四）",
+          "children": []
+        },
+        {
+          "id": "done-1-4",
+          "title": "扩散基模与整帧路线（FlashHead/LivePortrait）",
+          "status": "completed",
+          "startDate": null,
+          "endDate": null,
+          "description": "系列（五）",
+          "children": []
+        },
+        {
+          "id": "done-1-5",
+          "title": "整帧与全身生成（OmniAvatar/LongCat）",
+          "status": "completed",
+          "startDate": null,
+          "endDate": null,
+          "description": "系列（六）",
+          "children": []
+        },
+        {
+          "id": "done-1-6",
+          "title": "实时流式与蒸馏（LiveAvatar/Self-Forcing）",
+          "status": "completed",
+          "startDate": null,
+          "endDate": null,
+          "description": "系列（七）",
+          "children": []
+        },
+        {
+          "id": "done-1-7",
+          "title": "评测指标 / 数据集 / 算力 Benchmark",
+          "status": "completed",
+          "startDate": null,
+          "endDate": null,
+          "description": "系列（九）· 5 大指标族 · 28 个模型规格 · 15 个数据集",
+          "children": []
+        },
+        {
+          "id": "done-1-8",
+          "title": "工程解读（CyberVerse/FlashHead/Ultralight）",
+          "status": "completed",
+          "startDate": null,
+          "endDate": null,
+          "description": "源码解读 + 推理 Benchmark 实测",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "done-2",
+      "title": "评测框架设计与实现",
+      "status": "completed",
+      "startDate": "2026-06-22",
+      "endDate": "2026-06-26",
+      "description": "从零实现数字人模型验证框架：核心类型/接口、15 项指标、4 个数据集适配器、FlashHead 适配器、Pipeline 编排、CLI、HTML 报告，177 项单元测试通过",
+      "children": [
+        {
+          "id": "done-2-1",
+          "title": "设计文档 v1.0 + 11 步实现",
+          "status": "completed",
+          "startDate": "2026-06-22",
+          "endDate": "2026-06-22",
+          "description": "脚手架→接口→标准化器→指标→Logic→Pipeline→数据集→模型→CLI→报告→测试",
+          "children": []
+        },
+        {
+          "id": "done-2-2",
+          "title": "FlashHead 适配器接入",
+          "status": "completed",
+          "startDate": "2026-06-24",
+          "endDate": "2026-06-25",
+          "description": "FlashHead 模型适配器 + TalkVid 数据格式适配 + 推理输出重构 + GT 标准化",
+          "children": []
+        },
+        {
+          "id": "done-2-3",
+          "title": "指标实现补全 + 报告增强",
+          "status": "completed",
+          "startDate": "2026-06-25",
+          "endDate": "2026-06-26",
+          "description": "PSNR/SSIM/LPIPS/TOPIQ-FR/CSIM/SyncNet/Dino-S + 效率指标全量实现",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "t1",
+      "title": "卡通数字人",
+      "status": "active",
+      "startDate": "2026-07-01",
+      "endDate": null,
+      "description": "相关算法、主观测试和客观指标测试",
+      "children": [
+        {
+          "id": "t1-1",
+          "title": "算法调研与实现",
+          "status": "active",
+          "startDate": null,
+          "endDate": null,
+          "description": "调研并实现卡通数字人相关算法",
+          "children": []
+        },
+        {
+          "id": "t1-2",
+          "title": "主观测试",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "人眼感知质量评估",
+          "children": []
+        },
+        {
+          "id": "t1-3",
+          "title": "客观指标测试",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "PSNR、SSIM、LPIPS 等指标",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "title": "数字人产品调研",
+      "status": "active",
+      "startDate": "2026-07-01",
+      "endDate": null,
+      "description": "调研主流数字人产品的效果与实现原理，覆盖技术路线分类（2D整图生成/换唇/3D数字人模型）、主观效果、实时通话支持、延迟等维度，为选型方案提供对标依据",
+      "children": [
+        {
+          "id": "t2-1",
+          "title": "Agent 设计理念调研",
+          "status": "active",
+          "startDate": null,
+          "endDate": null,
+          "description": "调研数字人后端 Agent 的设计理念",
+          "children": []
+        },
+        {
+          "id": "t2-2",
+          "title": "主流数字人产品实现原理调研",
+          "status": "active",
+          "startDate": "2026-07-13",
+          "endDate": null,
+          "description": "调研主流数字人产品（如 HeyGen、D-ID、Synthesia、硅基智能、腾讯智影、阿里通义等）的实现原理与技术路线分类：2D整图生成 vs 换唇驱动 vs 3D数字人模型，梳理各产品采用的方案类型",
+          "children": []
+        },
+        {
+          "id": "t2-3",
+          "title": "竞品效果与实时通话能力评估",
+          "status": "planned",
+          "startDate": "2026-07-13",
+          "endDate": null,
+          "description": "评估各竞品的实际效果（主观画质/唇同步/表情自然度）、是否支持实时通话、端到端延迟水平，输出竞品效果对比表",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "title": "评测框架优化",
+      "status": "active",
+      "startDate": "2026-07-01",
+      "endDate": null,
+      "description": "评测框架的多项优化：人脸 matting、唇同步指标验证、无参评测模型补充",
+      "children": [
+        {
+          "id": "t3-1",
+          "title": "人脸 matting 前置处理",
+          "status": "active",
+          "startDate": null,
+          "endDate": null,
+          "description": "PSNR 等指标需先做人脸 matting 再测，否则对 3DGS 等无背景算法不公平",
+          "children": []
+        },
+        {
+          "id": "t3-2",
+          "title": "Wave2Lip 唇同步异常排查",
+          "status": "active",
+          "startDate": null,
+          "endDate": null,
+          "description": "之前测试 Wave2Lip 唇同步分数最高，结果可疑，需复验",
+          "children": []
+        },
+        {
+          "id": "t3-3",
+          "title": "无参视频质量评测模型调研",
+          "status": "active",
+          "startDate": null,
+          "endDate": null,
+          "description": "除 TOPIQ 外调研更多 no-reference 视频质量评测模型，补充有参方案对照",
+          "children": []
+        },
+        {
+          "id": "t3-4",
+          "title": "输出一版完整评测结果",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "优化完成后对所有模型进行一次完整评测",
+          "children": []
+        },
+        {
+          "id": "t3-5",
+          "title": "合并代码",
+          "status": "completed",
+          "startDate": "2026-07-07",
+          "endDate": null,
+          "startTime": "09:00",
+          "endTime": "10:30",
+          "location": "工位",
+          "category": "work",
+          "description": "合并各分支代码到主分支",
+          "children": []
+        },
+        {
+          "id": "t3-6",
+          "title": "跑通评测代码全流程",
+          "status": "completed",
+          "startDate": "2026-07-07",
+          "endDate": "2026-07-09",
+          "startTime": "14:00",
+          "endTime": "17:30",
+          "location": "工位",
+          "category": "work",
+          "description": "端到端跑通评测代码的完整流程，验证各环节可用",
+          "children": []
+        },
+        {
+          "id": "t3-7",
+          "title": "新增 speed run 线路",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": "2026-07-09",
+          "endDate": "2026-07-09",
+          "description": "在评测框架中增加快速运行模式，端到端跑通项目并获取输出结果，用于主观效果检验，加速迭代调试",
+          "children": []
+        },
+        {
+          "id": "t3-8",
+          "title": "封装评测 skill",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": "2026-07-09",
+          "endDate": "2026-07-09",
+          "description": "将评测框架部分功能封装为 agent skill，使 agents 能够快速调用评测模型",
+          "children": []
+        },
+        {
+          "id": "t3-9",
+          "title": "模型参数重新下载",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": "2026-07-09",
+          "endDate": "2026-07-09",
+          "description": "之前下载的模型参数被误覆盖，已重新下载完成，恢复正常使用",
+          "children": []
+        },
+        {
+          "id": "t3-10",
+          "title": "UV 环境管理机制",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": "2026-07-09",
+          "endDate": "2026-07-09",
+          "description": "基于 UV 实现基准环境 + 微调环境双层策略：基准环境(.venv)覆盖大多数模型，依赖冲突的模型创建增量微调环境(.envs/{model})。包含 env-manager skill、manage_env.sh 脚本、四步决策流程（基准测试→调整基准→git回退→创建微调）、模型依赖冲突分析",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "title": "近实时/非实时模型部署与测试",
+      "status": "active",
+      "startDate": "2026-07-01",
+      "endDate": null,
+      "description": "近实时和非实时数字人模型的部署和效果测试",
+      "children": [
+        {
+          "id": "t4-1",
+          "title": "近实时模型部署",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "近实时数字人模型部署与效果测试",
+          "children": []
+        },
+        {
+          "id": "t4-2",
+          "title": "非实时模型部署",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "非实时数字人模型部署与效果测试",
+          "children": []
+        },
+        {
+          "id": "t4-3",
+          "title": "搜集近实时数字人项目（调研）",
+          "status": "active",
+          "startDate": "2026-07-07",
+          "endDate": null,
+          "startTime": "10:30",
+          "endTime": "12:00",
+          "location": "工位",
+          "category": "work",
+          "description": "调研近实时数字人开源项目，整理候选列表",
+          "children": []
+        },
+        {
+          "id": "t4-4",
+          "title": "封装到评测框架",
+          "status": "planned",
+          "startDate": "2026-07-08",
+          "endDate": null,
+          "startTime": "14:00",
+          "endTime": "17:00",
+          "location": "工位",
+          "category": "work",
+          "description": "对候选项目进行适配封装，补充到现有评测框架中",
+          "children": []
+        },
+        {
+          "id": "t-1650",
+          "title": "部署候选方案硬件评估",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": null,
+          "endDate": null,
+          "description": "基于论文精读评估各模型在 A10 上的可行性：LiveAct 需2×H100不可行；LivePortrait/Ditto 有可能（需实测显存）；FlashHead Pro 已验证近实时",
+          "children": []
+        },
+        {
+          "id": "t-1651",
+          "title": "FlexAvatar 适配器接入评测框架",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": "2026-07-09",
+          "endDate": "2026-07-09",
+          "description": "创建 FlexAvatar 模型适配器（adapter.py + worker.py + flexavatar.yaml），支持 pixel3dmm 和 artalk 两种驱动模式，实现七阶段生命周期接口",
+          "children": []
+        },
+        {
+          "id": "t-1652",
+          "title": "3DGS 头部 Avatar 方法调研",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": "2026-07-09",
+          "endDate": "2026-07-09",
+          "description": "调研 FlexAvatar / HyperGaussians / MATCH / AniGS 四个 3DGS 方法，评估接入价值与 A10 可行性，产出对比报告",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "title": "Conversation 评测数据集制作",
+      "status": "active",
+      "startDate": "2026-07-01",
+      "endDate": null,
+      "description": "设计对话场景、评测维度，完成数据集采集与标注",
+      "children": [
+        {
+          "id": "t5-1",
+          "title": "设计对话场景与评测维度",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "",
+          "children": []
+        },
+        {
+          "id": "t5-2",
+          "title": "数据集采集与标注",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "title": "数字人选型方案确认",
+      "status": "planned",
+      "startDate": "2026-07-13",
+      "endDate": null,
+      "description": "基于产品调研结果确认数字人最终选型方案。方案在主观表现和客观指标上不低于竞品，至少不能有明显差距",
+      "children": [
+        {
+          "id": "t6-1",
+          "title": "自研方案与竞品效果对标",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "将自研模型（FlashHead/FlexAvatar等）与竞品在主观效果（画质/唇同步/表情自然度）和客观指标（PSNR/SSIM/LPIPS/SyncNet等）上进行对标分析",
+          "children": []
+        },
+        {
+          "id": "t6-2",
+          "title": "选型决策报告",
+          "status": "planned",
+          "startDate": null,
+          "endDate": null,
+          "description": "综合调研结果和对标数据，输出选型决策报告，包含方案对比矩阵、推荐结论、A10部署可行性和风险分析",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "liveportrait-liveact-ditto",
+      "title": "补充论文精读（LivePortrait/LiveAct/Ditto）",
+      "status": "completed",
+      "assignee": "tangwen",
+      "startDate": null,
+      "endDate": null,
+      "description": "",
+      "children": [
+        {
+          "id": "liveportrait",
+          "title": "LivePortrait 精读（系列十三）",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": null,
+          "endDate": null,
+          "description": "隐式关键点路线的工程化肖像动画框架，arXiv:2407.03168，快手科技",
+          "children": []
+        },
+        {
+          "id": "soulx-liveact",
+          "title": "SoulX-LiveAct 精读（系列三十八）",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": null,
+          "endDate": null,
+          "description": "Neighbor Forcing + ConvKV Memory 实现小时级实时数字人动画，arXiv:2603.11746，Soul AI Lab",
+          "children": []
+        },
+        {
+          "id": "ditto",
+          "title": "Ditto 精读（系列六）",
+          "status": "completed",
+          "assignee": "tangwen",
+          "startDate": null,
+          "endDate": null,
+          "description": "把扩散模型搬进运动空间的实时可控数字人，arXiv:2404.18503",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

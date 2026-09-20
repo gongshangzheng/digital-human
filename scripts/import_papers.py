@@ -1,321 +1,229 @@
 #!/usr/bin/env python3
-"""从博客提取的论文列表导入到本地论文数据库。
+"""从复核后的博客论文清单（papers/data/blog_papers.json）导入 SQLite 论文库。
 
-1. 清空现有论文
-2. 从 arXiv API 批量获取论文元数据
-3. 写入本地 SQLite 数据库（data/papers.db）
+流程：
+1. 读取 extract_blog_papers.py 产出并经人工复核的 JSON（deny=true 跳过）
+2. 对含 arXiv id 的条目分批调用 arXiv API 补全元数据（失败标记，可重试）
+3. upsert 到 data/papers.db（papers + paper_categories），幂等可重跑
+
+用法：
+    python3 scripts/import_papers.py               # 全量导入
+    python3 scripts/import_papers.py --refresh     # 重新补全此前 arXiv 缺失的条目
 """
+import argparse
 import json
 import sqlite3
 import sys
 import time
-import urllib.request
 import urllib.parse
+import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from pathlib import Path
 
-# 确保能 import server 模块
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from server.db import init_db
+from server.db import init_db, upsert_paper  # noqa: E402
 
 DB_PATH = Path(__file__).parent.parent / "data" / "papers.db"
-PAPERS_JSON = Path(__file__).parent.parent / "data" / "extracted_papers.json"
+PAPERS_JSON = Path(__file__).parent.parent / "papers" / "data" / "blog_papers.json"
 ARXIV_API = "http://export.arxiv.org/api/query"
-
-# arXiv API namespace
+BLOG_BASE = "https://gongshangzheng.github.io"
 NS = {"atom": "http://www.w3.org/2005/Atom"}
 
+# 人工核验过的 id（slug token 无法自动匹配但确认正确）
+ARXIV_ALLOWLIST = {
+    "match-2026": "2603.15811",
+    "gfvc-survey-2023": "2403.11641",
+}
 
-def fetch_arxiv_batch(arxiv_ids: list[str]) -> dict:
-    """从 arXiv API 批量获取论文元数据。"""
-    results = {}
-    # arXiv API 限制每次最多 100 个，我们分批
+# 太泛的 token，不作为单独匹配依据
+GENERIC_TOKENS = {
+    "digital", "human", "paper", "survey", "hub", "talk", "talking", "avatar",
+    "face", "video", "live", "real", "time", "realtime", "source", "code",
+    "analysis", "read", "about", "tool", "augmented", "engineering", "benchmark",
+    "comparison", "landscape", "design", "gallery", "brainstorm", "evaluation",
+    "training", "loss", "system", "communication", "media", "pipeline", "server",
+    "network", "basics", "core", "arxiv", "digest", "blog", "notes",
+}
+
+SUFFIX_STRIP = [
+    "-source-code-analysis", "-source-read", "-source", "-read", "-paper", "-review",
+]
+
+
+def _norm(s: str) -> str:
+    return "".join(ch for ch in s.lower() if ch.isalnum())
+
+
+def verify_arxiv_match(slug: str, arxiv_title: str) -> bool:
+    """slug 与 arXiv 标题 token 匹配：digest/hub/概述页首链接不可靠，不匹配则降级为纯博客条目。"""
+    if slug in ARXIV_ALLOWLIST:
+        return True
+    base = slug
+    for suf in SUFFIX_STRIP:
+        if base.endswith(suf):
+            base = base[: -len(suf)]
+    tokens = [t for t in base.split("-") if t and not t.isdigit() and t != "paper"]
+    title = _norm(arxiv_title)
+    joined = _norm("-".join(tokens))
+    if joined and joined in title:
+        return True
+    return any(len(t) >= 3 and t not in GENERIC_TOKENS and _norm(t) in title for t in tokens)
+
+
+def fetch_arxiv_batch(arxiv_ids: list[str]) -> tuple[dict, list[str]]:
+    """批量获取论文元数据。返回 (结果表, 失败 id 列表)。"""
+    results: dict[str, dict] = {}
+    failed: list[str] = []
     batch_size = 50
     for i in range(0, len(arxiv_ids), batch_size):
         batch = arxiv_ids[i:i + batch_size]
-        id_list = ",".join(batch)
-        params = urllib.parse.urlencode({
-            "id_list": id_list,
-            "max_results": len(batch),
-        })
+        params = urllib.parse.urlencode({"id_list": ",".join(batch), "max_results": len(batch)})
         url = f"{ARXIV_API}?{params}"
-        print(f"  Fetching arXiv batch {i//batch_size + 1}: {len(batch)} papers...")
+        print(f"  Fetching arXiv batch {i // batch_size + 1}: {len(batch)} papers...")
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                root = ET.fromstring(resp.read().decode("utf-8"))
+        except Exception as e:  # noqa: BLE001
+            print(f"  WARN batch failed: {e}")
+            failed.extend(batch)
+            continue
 
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            xml_data = resp.read().decode("utf-8")
-
-        root = ET.fromstring(xml_data)
         for entry in root.findall("atom:entry", NS):
-            # 从 entry 的 id URL 提取 arXiv ID
-            entry_id = entry.find("atom:id", NS).text
-            # 格式: http://arxiv.org/abs/2203.12602v1
+            entry_id = entry.find("atom:id", NS).text or ""
             arxiv_id = entry_id.split("/abs/")[-1]
-            # 去除版本号
-            if "v" in arxiv_id:
-                base, _, ver = arxiv_id.rpartition("v")
-                if ver.isdigit():
-                    arxiv_id = base
+            base, _, ver = arxiv_id.rpartition("v")
+            if ver.isdigit():
+                arxiv_id = base
 
-            title = entry.find("atom:title", NS).text.strip().replace("\n", " ")
-            # 清理多余空白
-            title = " ".join(title.split())
+            title = " ".join((entry.find("atom:title", NS).text or "").split())
+            summary = " ".join((entry.find("atom:summary", NS).text or "").split())
+            published = (entry.find("atom:published", NS).text or "").strip()
 
-            summary = entry.find("atom:summary", NS).text.strip().replace("\n", " ")
-            summary = " ".join(summary.split())
-
-            published = entry.find("atom:published", NS).text.strip()
-
-            authors = []
-            for author in entry.findall("atom:author", NS):
-                name = author.find("atom:name", NS)
-                if name is not None:
-                    authors.append(name.text.strip())
-            authors_json = json.dumps(authors, ensure_ascii=False)
-
-            # 获取分类
-            categories = []
-            for cat in entry.findall("atom:category", NS):
-                term = cat.get("term", "")
-                if term:
-                    categories.append(term)
-
-            # PDF URL
+            authors = [a.find("atom:name", NS).text for a in entry.findall("atom:author", NS)
+                       if a.find("atom:name", NS) is not None]
             pdf_url = ""
             for link in entry.findall("atom:link", NS):
                 if link.get("title") == "pdf":
                     pdf_url = link.get("href", "")
                     break
-
             results[arxiv_id] = {
                 "title": title,
                 "abstract": summary,
-                "authors": authors_json,
-                "published_at": published,
+                "authors": json.dumps(authors, ensure_ascii=False),
+                "published_at": published or None,
                 "pdf_url": pdf_url,
                 "url": f"https://arxiv.org/abs/{arxiv_id}",
-                "categories": categories,
+                "arxiv_categories": [c.get("term", "") for c in entry.findall("atom:category", NS)],
             }
-
-        # arXiv API 要求每 3 秒最多一次请求
         if i + batch_size < len(arxiv_ids):
-            time.sleep(3)
-
-    return results
-
-
-def generate_paper_id(arxiv_id: str) -> str:
-    """生成论文 ID。"""
-    return f"arxiv-{arxiv_id}"
+            time.sleep(3)  # arXiv API 礼貌限速
+    return results, failed
 
 
-def insert_paper(conn, paper_data: dict, extracted: dict):
-    """插入一篇论文到数据库。"""
-    arxiv_id = extracted.get("arxiv_id", "")
-    paper_id = generate_paper_id(arxiv_id) if arxiv_id else f"manual-{hash(extracted['title']) % 10**12}"
+def to_iso_date(date_str: str) -> str | None:
+    """博客 frontmatter 日期（2026-06-05T17:55:22 或 2026-06-05）→ ISO 日期。"""
+    if not date_str:
+        return None
+    try:
+        return datetime.fromisoformat(date_str.replace("Z", "+00:00")).date().isoformat()
+    except ValueError:
+        return None
 
-    title = paper_data.get("title", extracted["title"])
-    abstract = paper_data.get("abstract", "")
-    # authors 必须是 JSON 数组格式（db.py row_to_dict 用 json.loads 解析）
-    authors_raw = paper_data.get("authors", "")
-    if authors_raw and isinstance(authors_raw, str) and authors_raw.startswith("["):
-        authors = authors_raw  # 已经是 JSON 数组字符串
-    elif authors_raw:
-        # 逗号分隔的字符串，转为 JSON 数组
-        author_list = [a.strip() for a in authors_raw.split(",") if a.strip()]
-        authors = json.dumps(author_list, ensure_ascii=False)
-    else:
-        authors = json.dumps(["Unknown"])
-    # published_at 必须是有效的 ISO 日期或 None
-    published_at = paper_data.get("published_at", "")
-    if not published_at:
-        published_at = None
-    pdf_url = paper_data.get("pdf_url", "")
-    url = paper_data.get("url", extracted.get("url", ""))
-    categories = paper_data.get("categories", [])
 
-    # 映射 arXiv 分类到我们的分类体系
-    our_categories = map_categories(categories, extracted)
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--refresh", action="store_true", help="重试此前 arXiv 补全失败的条目")
+    args = ap.parse_args()
 
-    external_ids = json.dumps({"arxiv": arxiv_id}) if arxiv_id else "{}"
+    if not PAPERS_JSON.exists():
+        print(f"ERROR: {PAPERS_JSON} 不存在，先运行 extract_blog_papers.py 并完成人工复核", file=sys.stderr)
+        return 1
+
+    records = json.loads(PAPERS_JSON.read_text(encoding="utf-8"))
+    kept = [r for r in records if not r.get("deny")]
+    denied = len(records) - len(kept)
+    print(f"清单：{len(records)} 条（deny {denied}），导入 {len(kept)} 条")
+
+    # 分组：有/无 arxiv id
+    with_arxiv = [r for r in kept if r.get("arxiv_id")]
+    without = [r for r in kept if not r.get("arxiv_id")]
+    ids = list({r["arxiv_id"] for r in with_arxiv})
+    print(f"arXiv 补全：{len(ids)} 个 id（无 id 博客条目 {len(without)} 篇直接落库）")
+
+    arxiv_meta: dict[str, dict] = {}
+    arxiv_failed: set[str] = set()
+    if ids:
+        arxiv_meta, failed = fetch_arxiv_batch(ids)
+        arxiv_failed = set(failed)
+        print(f"  arXiv 成功 {len(arxiv_meta)} / 失败 {len(arxiv_failed)}")
+
+    init_db()
     now = datetime.now().isoformat()
+    imported = arxiv_ok = arxiv_miss = 0
+    upserted: list[dict] = []
 
-    conn.execute(
-        """INSERT OR REPLACE INTO papers
-           (id, title, title_zh, abstract, abstract_zh, authors,
-            published_at, crawled_at, url, pdf_url, source, external_ids,
-            summary_zh, relevance_score, llm_classification, metadata,
-            arxiv_categories, starred, pinned)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0)""",
-        (
-            paper_id,
-            title,
-            extracted.get("title_zh", ""),
-            abstract,
-            "",  # abstract_zh
-            authors,
-            published_at,
-            now,
-            url,
-            pdf_url,
-            "arxiv" if arxiv_id else "manual",
-            external_ids,
-            "",  # summary_zh
-            0.5,  # relevance_score
-            json.dumps(our_categories),  # llm_classification
-            json.dumps({"source_article": extracted.get("source_article", ""), "role": extracted.get("role", "")}),
-            json.dumps(categories),
-        )
-    )
-
-    # 插入分类关联
-    for cat in our_categories:
-        conn.execute(
-            "INSERT OR IGNORE INTO paper_categories (paper_id, category) VALUES (?, ?)",
-            (paper_id, cat),
+    for r in kept:
+        slug = r["slug"]
+        blog_url = f"{BLOG_BASE}/{slug}.html"
+        meta = arxiv_meta.get(r.get("arxiv_id") or "")
+        if meta and not verify_arxiv_match(slug, meta.get("title", "")):
+            # 概述/digest 页首链接不可靠：降级为纯博客条目
+            meta = None
+            r = {**r, "arxiv_id": None}
+        arxiv_status = (
+            "ok" if meta else
+            ("failed" if r.get("arxiv_id") in arxiv_failed else "no_id")
         )
 
-
-def map_categories(arxiv_categories: list, extracted: dict) -> list:
-    """将 arXiv 分类映射到我们的分类体系。"""
-    cats = set()
-
-    # 根据来源文章和角色推断分类
-    source = extracted.get("source_article", "")
-    title_lower = extracted["title"].lower()
-
-    # 动作识别核心
-    cats.add("action_recognition")
-
-    # 宠物/动物相关
-    if any(kw in source or kw in title_lower for kw in
-           ["pet", "animal", "cat", "dog", "behavior", "behaviour", "kingdom", "mammal",
-            "deeplabcut", "superanimal", "pmmnet", "animalk", "apt", "animer", "posebridge"]):
-        cats.add("pet_action_recognition")
-
-    # 骨架动作识别
-    if any(kw in title_lower for kw in ["skeleton", "skeletal", "graph", "st-gcn", "skeletr", "igmn"]):
-        cats.add("skeleton_action_recognition")
-
-    # 视频基础模型
-    if any(kw in title_lower for kw in
-           ["videomae", "videomamba", "internvideo", "v-jepa", "mvit", "timesformer",
-            "vivit", "video swin", "video foundation", "masked autoencoder"]):
-        cats.add("video_foundation_model")
-
-    # 姿态估计
-    if any(kw in title_lower for kw in
-           ["pose", "keypoint", "deeplabcut", "animer", "openpose", "mmpose"]):
-        cats.add("pose_estimation")
-
-    # 时序动作检测
-    if any(kw in title_lower for kw in
-           ["temporal action", "action detection", "action localization", "tad"]):
-        cats.add("temporal_action_detection")
-
-    # 综述
-    if any(kw in title_lower for kw in ["survey", "review", "benchmark"]):
-        cats.add("survey")
-
-    if not cats:
-        cats.add("action_recognition")
-
-    return list(cats)
-
-
-def main():
-    # 1. 读取提取的论文
-    print(f"Reading {PAPERS_JSON}...")
-    with open(PAPERS_JSON) as f:
-        extracted_papers = json.load(f)
-    print(f"  Found {len(extracted_papers)} papers")
-
-    papers_with_arxiv = [p for p in extracted_papers if p.get("arxiv_id")]
-    papers_without_arxiv = [p for p in extracted_papers if not p.get("arxiv_id")]
-    print(f"  With arXiv ID: {len(papers_with_arxiv)}")
-    print(f"  Without arXiv ID: {len(papers_without_arxiv)}")
-
-    # 2. 从 arXiv API 获取元数据
-    arxiv_ids = [p["arxiv_id"] for p in papers_with_arxiv]
-    print(f"\nFetching metadata from arXiv API for {len(arxiv_ids)} papers...")
-    arxiv_metadata = fetch_arxiv_batch(arxiv_ids)
-    print(f"  Got metadata for {len(arxiv_metadata)} papers")
-
-    # 检查哪些没获取到
-    missing = [aid for aid in arxiv_ids if aid not in arxiv_metadata]
-    if missing:
-        print(f"  WARNING: {len(missing)} papers not found on arXiv API:")
-        for aid in missing:
-            print(f"    - {aid}")
-
-    # 3. 初始化并连接数据库
-    init_db()  # 创建表结构（如果不存在）
-    print(f"\nConnecting to {DB_PATH}...")
-    conn = sqlite3.connect(str(DB_PATH))
-
-    # 4. 清空现有论文
-    print("Clearing existing papers...")
-    conn.execute("DELETE FROM paper_categories")
-    conn.execute("DELETE FROM papers")
-    conn.commit()
-    print("  Done")
-
-    # 5. 插入有 arXiv ID 的论文
-    print(f"\nInserting {len(papers_with_arxiv)} papers with arXiv ID...")
-    inserted = 0
-    for extracted in papers_with_arxiv:
-        arxiv_id = extracted["arxiv_id"]
-        metadata = arxiv_metadata.get(arxiv_id, {})
-        if not metadata:
-            print(f"  SKIP (no arXiv metadata): {arxiv_id} - {extracted['title'][:50]}")
-            continue
-        insert_paper(conn, metadata, extracted)
-        inserted += 1
-    conn.commit()
-    print(f"  Inserted: {inserted}")
-
-    # 6. 插入没有 arXiv ID 的论文
-    print(f"\nInserting {len(papers_without_arxiv)} papers without arXiv ID...")
-    for extracted in papers_without_arxiv:
-        # 构造基本元数据
-        # authors 转为 JSON 数组格式
-        raw_authors = extracted.get("authors", "Unknown")
-        if raw_authors and isinstance(raw_authors, str):
-            author_list = [a.strip() for a in raw_authors.split(",") if a.strip()]
-            authors_json = json.dumps(author_list, ensure_ascii=False)
-        else:
-            authors_json = json.dumps(["Unknown"])
-        metadata = {
-            "title": extracted["title"],
-            "abstract": "",
-            "authors": authors_json,
-            "published_at": "",
-            "pdf_url": "",
-            "url": extracted.get("url", ""),
-            "categories": [],
+        paper_id = f"arxiv-{r['arxiv_id']}" if r.get("arxiv_id") else f"blog-{slug}"
+        paper = {
+            "id": paper_id,
+            "title": (meta or {}).get("title") or r.get("title") or slug,
+            "abstract": (meta or {}).get("abstract") or r.get("description") or "",
+            "authors": (meta or {}).get("authors") or json.dumps(["Unknown"]),
+            "published_at": (meta or {}).get("published_at") or to_iso_date(r.get("date", "")),
+            "url": (meta or {}).get("url") or blog_url,
+            "pdf_url": (meta or {}).get("pdf_url", ""),
+            "source": "blog",
+            "categories": [r["category"]] if r.get("category") else [],
+            "arxiv_categories": (meta or {}).get("arxiv_categories", []),
+            "blog_url": blog_url,
+            "metadata": json.dumps({
+                "slug": slug,
+                "rel_path": r.get("rel_path", ""),
+                "hit_reasons": r.get("hit_reasons", []),
+                "arxiv_status": arxiv_status,
+            }, ensure_ascii=False),
+            "crawled_at": now,
         }
-        # 如果有 DOI，构造 DOI URL
-        if extracted.get("doi"):
-            metadata["url"] = f"https://doi.org/{extracted['doi']}"
-        insert_paper(conn, metadata, extracted)
+        upsert_paper(paper)
+        upserted.append(paper)
+        imported += 1
+        if arxiv_status == "ok":
+            arxiv_ok += 1
+        elif arxiv_status == "failed":
+            arxiv_miss += 1
+
+    # 清理本批次之外的旧 blog 条目（重跑后降级/合并产生的脏行）
+    conn = sqlite3.connect(DB_PATH)
+    ids = tuple(p["id"] for p in upserted)
+    stale = conn.execute(
+        "SELECT id FROM papers WHERE source='blog' AND id NOT IN (%s)" % ",".join("?" * len(ids)),
+        ids,
+    ).fetchall()
+    for (pid,) in stale:
+        conn.execute("DELETE FROM paper_categories WHERE paper_id = ?", (pid,))
+        conn.execute("DELETE FROM papers WHERE id = ?", (pid,))
+        print(f"  清理旧行: {pid}")
     conn.commit()
-    print(f"  Inserted: {len(papers_without_arxiv)}")
-
-    # 7. 统计
-    cursor = conn.execute("SELECT COUNT(*) FROM papers")
-    total = cursor.fetchone()[0]
-    cursor = conn.execute("SELECT category, COUNT(*) FROM paper_categories GROUP BY category ORDER BY COUNT(*) DESC")
-    cat_stats = cursor.fetchall()
-
-    print(f"\n=== Import Complete ===")
-    print(f"Total papers in database: {total}")
-    print(f"\nCategory distribution:")
-    for cat, count in cat_stats:
-        print(f"  {cat}: {count}")
-
     conn.close()
+    print(f"导入完成：{imported} 条（arXiv ok={arxiv_ok} failed={arxiv_miss} no_id={imported - arxiv_ok - arxiv_miss}；清理旧行 {len(stale)}）")
+    if arxiv_miss:
+        print(f"提示：{arxiv_miss} 条 arXiv 补全失败已标记，稍后运行 --refresh 重试")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
