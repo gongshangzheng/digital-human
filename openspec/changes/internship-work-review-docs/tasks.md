@@ -11,11 +11,12 @@
 ## 2. 复盘单篇 change（按依赖顺序，逐篇创建与实施）
 
 - [ ] 2.1 创建并实施 `docs-intern-intro`（数字人介绍与技术路线.md）
-- [ ] 2.2 创建并实施 `docs-intern-identity`（数字人身份.md）
-- [ ] 2.3 创建并实施 `docs-intern-motion`（数字人动作.md，分层框架：音唇同步→表情×语言→手部；含微调 Loss（geom/RKD）与注入点消融）
-- [ ] 2.4 创建并实施 `docs-intern-engineering`（工程改进.md，含 PasteBack 与实时性改进）
-- [ ] 2.5 创建并实施 `docs-intern-industry`（数字人行业全景.md，含 papers 库 related-work 扫描与模型横评数据汇总）
-- [ ] 2.6 创建并实施 `docs-intern-summary`（总结.md：总览 + 发文方向）
+- [ ] 2.2 创建并实施 `docs-intern-cyberverse`（CyberVerse框架.md）
+- [ ] 2.3 创建并实施 `docs-intern-identity`（数字人身份.md）
+- [ ] 2.4 创建并实施 `docs-intern-motion`（数字人动作.md，分层框架：音唇同步→表情×语言→手部；含微调 Loss（geom/RKD）与注入点消融）
+- [ ] 2.5 创建并实施 `docs-intern-engineering`（工程改进.md，含 PasteBack 与实时性改进）
+- [ ] 2.6 创建并实施 `docs-intern-industry`（数字人行业全景.md，含 papers 库 related-work 扫描与模型横评数据汇总）
+- [ ] 2.7 创建并实施 `docs-intern-summary`（总结.md：总览 + 发文方向）
 
 ## 2b. 论文笔记单篇 change（可并行推进）
 
@@ -27,6 +28,6 @@
 
 ## 3. 体系级验收
 
-- [ ] 3.1 复盘六篇 + 论文笔记五篇深读齐备且平铺于各自子文件夹，互链正确、无嵌套
+- [ ] 3.1 复盘七篇 + 论文笔记五篇深读齐备且平铺于各自子文件夹，互链正确、无嵌套
 - [ ] 3.2 抽查：量化成果总表每个数字可溯源到单篇文档；【已验证/待验证/已否证】标注齐全
 - [ ] 3.3 openspec validate 全部通过，git 提交
