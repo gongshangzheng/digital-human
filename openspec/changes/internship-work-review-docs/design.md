@@ -131,6 +131,8 @@
 | `liveact.md`（含工程层） | papers 库 paper-liveact + models/SoulX-LiveAct/ | `docs-note-liveact` |
 | `omnimate.md` | papers 库 omnimate-2026 | `docs-note-omnimate` |
 | `talker-t2av.md`（含工程层） | knowledge/《Talker-T2AV 模型精读》《Talker-T2AV 接入与验证》 | `docs-note-talker-t2av` |
+| `liveportrait.md`（含工程层） | papers 库 `arxiv-2407.03168`（LivePortrait）+ 博客 `paper-liveportrait` + models/ 相关 Stitching/Retargeting 控制 | `docs-note-liveportrait` |
+| `lia-x.md`（含工程层） | papers 库 `arxiv-2508.09959`（LIA-X: Interpretable Latent Portrait Animator）+ 博客 `lia-x-2025` | `docs-note-lia-x` |
 | 后续新读论文 | 按统一模板新增，命名挂 papers 库条目 | `docs-note-<slug>` |
 
 ## Decisions

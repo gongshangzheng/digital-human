@@ -31,6 +31,9 @@
   - 参考图或参考视频直接驱动（one-shot 路线）
   - 3D 先验与资产（FLAME canonical space、3DGS/NeRF 专人资产）
   - 论证：表示决定后续能怎么约束——latent 可加法解耦，资产可复用但要训练成本
+  - **简述两个代表（本文只给一段 + 链论文笔记，不展开）**：
+    - **LivePortrait**：隐式关键点表示 + warping renderer，身份就是参考图外观；靠 stitching 与 retargeting 控制把"身份"与"动作"分开搬（`docs-note-liveportrait`）
+    - **LIA-X**：可解释 latent portrait animator，motion 表示为 40D motion code，身份侧走 source identity/features 注入；适合作为"动作表示与身份特征解耦"的对照（`docs-note-lia-x`）
   - 引用：《数字人介绍与技术路线》"动作表示谱系 / 渲染后端谱系"；《数字人动作》表示谱系深挖
 - 2.2 `### 注入与保持的做法`
   - 加法解耦：外观与运动分开，`x = 身份 + 运动`（FLOAT 系显式分解）
@@ -95,6 +98,7 @@
 | knowledge/《Avatar Forcing 模型精读》 | `z_S` / `r_d` 变量定义、FLOAT 显式分解、blockwise 流式与漂移关系 | 待抄录原措辞 |
 | knowledge/《Avatar Forcing Motion Latent AutoEncoder》 | motion latent 空间性质（模长/方向的几何含义是否有原文支撑） | 待核对 |
 | blog `digital-human-identity-consistency.md` | 度量批判与身份保持路线（与 InternWiki 版对勘） | 待对勘 |
+| papers 库 `arxiv-2407.03168` LivePortrait / `arxiv-2508.09959` LIA-X + 博客 `paper-liveportrait`、`lia-x-2025` | 身份表示与注入方式的两个代表（供 2.1/2.2 简述用） | 待抄录要点 |
 | CyberVerse `models/avatarforcing/streaming_avatarforcing.py`（核对基准 @4968280） | 身份编码 `s_r`、方向基准 `r_s`、flow suppression ratio=0.7、`anchor_guide` 挂钩 | ✅ 已核对 |
 | ArcFace / ID loss 微调记录 | 回捞实验记录 | ✅ **已核查：三处均无记录 → 口述待补** |
 

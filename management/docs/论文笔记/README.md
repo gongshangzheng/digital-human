@@ -19,6 +19,8 @@
 | `liveact.md` | 深读 + 工程层（SoulX-LiveAct 接入） | 待写 |
 | `omnimate.md` | 深读 | 待写 |
 | `talker-t2av.md` | 深读 + 工程层（接入与验证） | 待写 |
+| `liveportrait.md` | 深读 + 工程层（隐式关键点表示、stitching/retargeting 控制） | 待写 |
+| `lia-x.md` | 深读 + 工程层（可解释 latent、40D motion code 与身份特征注入） | 待写 |
 
 ## 命名规范
 
