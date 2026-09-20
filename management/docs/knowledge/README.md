@@ -1,6 +1,6 @@
 # 知识库（复制自外部信息源）
 
-> 单层平铺，不嵌套。来源快照与索引规则见下表；外部源登记见 [docs/external-sources.md](../../../docs/external-sources.md)。
+> 单层平铺，不嵌套。现共 52 个文件（InternWiki 复制 29 + 博客精选 22 + 本索引）。外部源登记见 [docs/external-sources.md](../../../docs/external-sources.md)。
 > 复制即声明本仓库为演进主体，上游冻结为历史源。
 
 ## 来源
@@ -8,7 +8,7 @@
 | 前缀/特征 | 来源 | 快照 |
 |-----------|------|------|
 | 中文文件名（专题/精读/5分钟/工程等） | InternWiki `apps/web/content/interns/tangwen/docs/` 及 `projects/digital-human/`（tangwen，26 篇 + junjiawang voice-agent 系列 7 篇） | commit `91b683b`，2026-09-20 复制 |
-| 英文 slug 文件名 | 博客 `src/pages/*.html` 精选 18 篇（survey/工程），html2text 转换，脚本 `scripts/copy_blog_knowledge.py` | commit `3e7da698`，2026-09-20 转换 |
+| 英文 slug 文件名 | 博客 `src/pages/*.html` 精选 22 篇（survey/工程/框架竞品），html2text 转换，脚本 `scripts/copy_blog_knowledge.py` | commit `3e7da698`，2026-09-20 转换 |
 
 ## InternWiki（tangwen / junjiawang）
 
