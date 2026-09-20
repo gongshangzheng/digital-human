@@ -11,8 +11,8 @@
 
 ## 2. 复盘单篇 change（按依赖顺序，逐篇创建与实施）
 
-- [ ] 2.1 创建并实施 `docs-intern-fundamentals`（数字人要点.md，道层导论）
-- [ ] 2.2 创建并实施 `docs-intern-identity`（身份一致性.md）
+- [ ] 2.1 创建并实施 `docs-intern-fundamentals`（数字人要点.md，技术要素总览）
+- [ ] 2.2 创建并实施 `docs-intern-identity`（身份.md）
 - [ ] 2.3 创建并实施 `docs-intern-engineering`（工程改进.md，含 PasteBack）
 - [ ] 2.4 创建并实施 `docs-intern-realtime`（实时性改进.md）
 - [ ] 2.5 创建并实施 `docs-intern-industry`（数字人行业全景.md，含 papers 库 related-work 扫描与模型横评数据汇总）

@@ -13,9 +13,9 @@
 - 另建子文件夹 `management/docs/论文笔记/`（与实习复盘平级）：后续数字人论文精读笔记的写作位置，夹内平铺，命名与 papers 库条目对应（README 定规范）；本 change 只建目录与规范，不写笔记内容
 - 另建子文件夹 `management/docs/模型介绍/`（平级）：六篇——总纲《技术路线》（视频基座模型 / 动作空间扩散 / 3D GS 三路线 + 代表模型 + 优缺点）+ 五篇模型介绍（AvatarForcing、Ditto、LiveAct、OmniMate、Talker-T2AV，**一篇一个模型**），夹内平铺，各由独立单篇 change 实施，同样先整理后动笔
 - 复盘 7 篇文档（各自单独 change 实施）：
-  1. `数字人要点.md`（`docs-intern-fundamentals`）— 道层导论：动作（音唇同步）、身份（一致性+身份资产）、渲染合成、实时性四要素，链各术篇
-  2. `身份一致性.md`（`docs-intern-identity`）— 漂移治理（模长/夹角实验）+ 身份资产与参考提供
-  3. `工程改进.md`（`docs-intern-engineering`）— 工程改进合集：系统级基建 + PasteBack 贴回技术
+  1. `数字人要点.md`（`docs-intern-fundamentals`）— 技术要素总览：动作（音唇同步）、身份（一致性+身份资产）、渲染合成、实时性四要素，链各改进文档
+  2. `身份.md`（`docs-intern-identity`）— 算法上的改进：身份漂移治理（模长/夹角实验）+ 身份资产与参考提供
+  3. `工程改进.md`（`docs-intern-engineering`）— 工程上的改进合集：系统级基建 + PasteBack 贴回技术
   4. `实时性改进.md`（`docs-intern-realtime`）— 用户可感知的交互体验：首帧/开口、打断收声、待机静默、画质粒度权衡
   5. `数字人行业全景.md`（`docs-intern-industry`）— 由调研与测试成果合成：技术路线版图、15+ 模型横评（第一手数据）、竞品对标、选型结论、趋势判断
   6. `发文方向.md`（`docs-intern-paper-directions`）— 从实习工作提炼候选选题（复盘的终极出口：循实习经验做出一篇文章）
