@@ -23,7 +23,7 @@
   6. `发文方向.md`（`docs-intern-paper-directions`）— 从实习工作提炼候选选题（复盘的终极出口：循实习经验做出一篇文章）
   8. `总览.md`（`docs-intern-overview`）— 实习主线、时间轴、核心工作互链、量化成果总表
 - 知识库 knowledge/ 保持复制件不动；本 change 只写第一方复盘文档
-- 引用锚定：涉及 CyberVerse 代码/文档处标注 `~/code/CyberVerse` 路径 + commit `4968280`
+- 正文不写出处：出处/素材来源/代码 commit 只记在 change 的整理环节与登记表，不进正文
 
 ## Capabilities
 
