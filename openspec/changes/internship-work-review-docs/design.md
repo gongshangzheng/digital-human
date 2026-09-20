@@ -74,7 +74,7 @@
 
 - `## 为什么重要`：动作自然度决定可看性；动作是分层递进的能力
 - `## 现行做法（分层）`：①音唇同步（wav2lip→musetalk→vasa1 系）②表情与语言内容交互（语义一致性、听态双向生成）③手部与全身动作（co-speech gesture）；每层主流方法与代表工作（papers 库互链）
-- `## 动作空间谱系`：FLAME / blendshape / 隐式关键点 / latent（引《动作空间专题》）
+- `## 动作空间谱系`（**Blendshape 的深度内容在这里**）：表示谱系按「人能读懂多少」排列——3DMM 系数（BFM/FLAME，语义高）/ **Blendshape 系数（ARKit 52 维等，工业标准接口）** / 隐式关键点（LivePortrait，隐式 blendshape）/ latent（Ditto 265 维、AF 20 维）；讲语义可读性、训练来源、可控制性、跨软件通用性（引《动作空间专题》）
 - `## 我们的工作`：
   - `### 中文音频适配（桥系列）`：蒸馏桥 → geom（单边 hinge，反塌缩）→ georkd（geom+RKD 关系蒸馏），附 LSE-C/LSE-D 与 sync_c/sync_d 指标表
   - `### 微调方法（Loss 与注入点）`：微调形态光谱（全冻结+桥 / LoRA / 单层解冻）与注入点审计方法；loss 设计如何影响音唇同步（引《微调策略专题》）

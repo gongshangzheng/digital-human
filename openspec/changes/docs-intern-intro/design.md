@@ -39,6 +39,7 @@
 | 5 | **3D 资产驱动** | 3DGS 高斯 / NeRF 场 / **mesh + blendshape·FLAME rig** | 5a 学习式：GaussianTalker、UIKA、FlexAvatar；**5b 参数化装配式：FLAME/ARKit blendshape + 游戏引擎渲染（工业实时角色，Audio2Face 类）** | 身份可复用、渲染可控 / 注册难、训练成本高、极端动作风险 |
 | 6 | 掩码局部多人控制 | face mask + localized cross-attention | HunyuanVideo-Avatar | 可指定说话人 / 依赖 mask |
 
+- 注：**Blendshape/FLAME 作为动作表示的深度内容在《数字人动作》**，这里只作为资产接口与后端出现，一句话 + 链接，不展开
 - 补充：**渲染后端视角**（`数字人渲染器专题` §二）——2D warping renderer（Ditto/LivePortrait、LIA-X、FLOAT/AF decoder）、FLAME/3DMM、NeRF/3DGS 专人资产、**ARKit/blendshape/game engine**、视频级后处理（Wav2Lip/LatentSync，非完整 renderer）
 - 论证/结论：路线分野在「中间表示 + 渲染后端」；同一任务可由多条路线完成；**「操控 3D 模型」（参数化/rigged + 引擎渲染）是独立且工业成熟的一条路线**，与 5a 学习式资产区分（5b 资产为手工/标准接口，5a 需训练）
 - 素材：`digital-human-avatar-survey` 表 2、`数字人渲染器专题` §二/§三、`动作空间专题` 表示谱系
