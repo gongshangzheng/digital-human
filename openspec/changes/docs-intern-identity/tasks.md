@@ -2,11 +2,11 @@
 
 ## 1. 资料整理（先于动笔，产物需确认）
 
-- [ ] 1.1 研读《Avatar Forcing 微调实践》§三，抄录模长实验完整数据表（GT/noguide/A1 × 首中末三段 + 斜率）与夹角实验数据
+- [x] 1.1 研读《Avatar Forcing 微调实践》§三/§四/§五，抄录模长表、夹角表、A1 结果与 v1/v2/LAF 三条裁决
 - [ ] 1.2 研读《Avatar Forcing 模型精读》+《Motion Latent AutoEncoder》，提取 z_S/r_d/模长/方向的定义链与原文措辞
 - [ ] 1.3 对勘博客 digital-human-identity-consistency.md 与 InternWiki 版，记录差异与取舍
-- [ ] 1.4 查 CyberVerse @4968280 models/avatarforcing/ 相关代码证据（flow suppression、anchor guidance），列路径
-- [ ] 1.4b 回捞"用 ArcFace/ID loss 提升身份"的微调实验记录（代码分支/日志/报告）；找不到则记为"口述待补"，不得编造数字
+- [x] 1.4 查 CyberVerse @4968280 models/avatarforcing/ 相关代码证据（flow suppression ratio=0.7、anchor_guide、身份编码 s_r / 方向基准 r_s），列路径
+- [x] 1.4b 回捞"用 ArcFace/ID loss 提升身份"的微调实验记录 → **已核查：知识库 / 博客 / CyberVerse 代码三处均无记录，记为"口述待补"，不编造数字**
 - [ ] 1.5 汇总数据表 + 术语表 + 证据强度说明 + 适用边界 + 待补数字清单，**在对话中提交审核，不写入仓库**
 
 ## 2. 动笔写作（1.x 全部确认后启动）
