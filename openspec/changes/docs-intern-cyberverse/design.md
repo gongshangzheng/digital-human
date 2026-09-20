@@ -18,14 +18,14 @@
 ## 【待审核】正文大纲（到二级标题）
 
 ### 一、`## 为什么需要统一框架`
-- 表达内容：模型碎片化（每个 avatar 模型接口/依赖/env 各不同）；实时 Agent 需要 ASR/LLM/TTS/Avatar 全链路编排；会话/媒体/记忆需要统一管理
+- 表达内容：模型碎片化（每个 avatar 模型接口/依赖/env 各不同）；实时 Agent 需要 ASR/LLM/TTS/Avatar 全链路编排；会话与媒体需要统一管理
 - 论证/结论：没有统一框架，每换一个模型就要重搭一遍链路
 - 素材：CyberVerse README 功能特性、`models/` 五模型接口差异
 
 ### 二、`## 现行做法`
 
 #### 2.1 `### 开源框架版图`
-- 表达内容：OpenAvatarChat（模块化对话式）、LiteAvatar（轻量 2D 数字人）、Ultralight（源码阅读类）；各自架构与取舍
+- 表达内容:**一表对照 + 结论**（不逐家展开）——OpenAvatarChat（模块化对话式）、LiteAvatar（轻量 2D 数字人）、Ultralight（源码阅读类）；表列：定位 / 架构形态 / 支持模型 / 实时性 / 与我们的差距
 - 论证/结论：现有框架多在"轻量 2D / 纯对话"或"重型离线"，实时 + 可插拔 3D/扩散模型是缺口
 - 素材：knowledge/《open-avatar-chat-liteavatar》《lite-avatar-source-code-analysis》《ultralight-digital-human-source-read》《cyberverse-realtime-digital-human-agent》
 - 注意：竞品信息来自博客笔记（二手），**正文里用自然语言说明其性质**，不标出处、不写成定论
@@ -44,9 +44,9 @@
 ### 三、`## CyberVerse 架构`
 - `### 三服务`：Python inference gRPC :50051（进程内跑所有插件）/ Go orchestrator :8080 + TURN :8443 / Vue 前端 :5173；附架构图
 - `### 插件体系`：`inference/core`（config/registry/types）+ `inference/plugins/{asr,llm,tts,voice_llm,avatar}` + `proto/*.proto` 七个 gRPC 接口；配置驱动（`cyberverse_config.yaml` + `/settings` UI）
-- `### Avatar 抽象`：`AvatarPlugin`（set_avatar/generate_stream/reset/get_fps/get_output_dimensions）与 `BidirectionalAvatarPlugin`（feed_user_audio/video，支持双向听说）
-- `### Agent 与记忆`：PersonaAgent 前台 + SubAgent 后台异步；角色记忆持久化 + RAG
+- `### Avatar 抽象`：`AvatarPlugin`（set_avatar/generate_stream/reset/get_fps/get_output_dimensions）与 `BidirectionalAvatarPlugin`（feed_user_audio/video，支持双向听说）；gRPC `AvatarService` 含 `SwitchAvatarBackend`（后端热切换）
 - 论证/结论：插件化 + gRPC 边界是"可插拔"的实现基础
+- **不含** `### Agent 与记忆`（PersonaAgent/SubAgent/RAG）：与框架骨架关系偏松，用户决定不写
 - 素材：@4968280 `inference/`、`server/internal/`、`proto/`
 
 ### 四、`## 模型接入`
@@ -70,10 +70,10 @@
 
 ---
 
-## 【待审核】决策点
+## 决策点（已定）
 
-1. 竞品框架写多细？(A) 只做一表对照 + 结论【建议】 / (B) 每家一小节展开 / (C) 删除该节，只写"为什么需要框架"
-2. 第三节 `### Agent 与记忆` 是否保留（PersonaAgent/SubAgent/RAG 与框架介绍关系偏松）
+1. 竞品框架写多细 → **(A) 一表对照 + 结论**（不逐家展开）
+2. 第三节 `### Agent 与记忆` → **删除**（PersonaAgent/SubAgent/RAG 不写进本文）
 
 ## 整理清单（动笔前必须完成）
 
