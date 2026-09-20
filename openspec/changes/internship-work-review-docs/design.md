@@ -65,8 +65,8 @@
   - `## 身份表示与渲染后端`（**合并节，按主要路线叙述**）：开头一句"表示决定渲染器能吃什么、渲染器决定身份怎么落地"；结尾一张跨路线对照表（路线 / 身份表示 / 渲染后端 / 身份怎么被保持 / 换身份代价）；正文按路线分小节点名代表模型——2D 换嘴（MuseTalk、SadTalker）、**动作空间 + 快速渲染器（我们的主线，写最细：隐式关键点 + warping = LivePortrait / Ditto / MegaPortraits 血统；外观特征 + flow-warp = LIA-X；appearance code + 加法解耦 = FLOAT / Avatar Forcing）**、视频基座模型（VASA-1、HunyuanVideo-Avatar、OmniAvatar）、3D 资产学习式（GaussianTalker / GAGAvatar / UIKA / FlexAvatar，非重点）、3D 资产参数化装配式（FLAME / ARKit / Audio2Face）、掩码局部多人控制
   - `## 身份注入与保持`：跨路线清单（加法解耦 → 推理期锚点引导 → 训练期条件化 → 区域抑制）；不重复逐路线描述
   - `## 一致性度量`：主用 CSIM / id-sim 与派生漂移指标；写清尺子出身（从人脸识别借来、无标准化协议）、五种失效场景一张表（照片域依赖 / 时序漂移 / 环境不鲁棒 / 长时演变 / 风格化不可度量）、一把尺子身兼裁判-教练-奖励-球员四职；三条用法结论（只作必要条件、必须配人工检查、跨域场景声明边界）；完整论证归论文笔记
-  - `## 漂移诊断`：模长实验被否证 → 夹角实验仅在单身份上得到支持
-  - `## 治理尝试与裁决`：A1 锚点引导 GO / 参考条件化 v1 失败与 v2 归档失败 / Learned Anchor Force 终止
+  - `## 漂移诊断：Avatar Forcing 上的两个假说先测后治`：**先交代实验载体**（Avatar Forcing 流式路径、被测量的 motion latent、身份侧固定为 appearance code、c1 单身份 300 秒，接入细节链 `docs-note-avatar-forcing`）→ 模长实验被否证 → 夹角实验仅在单身份上得到支持
+  - `## 治理尝试与裁决`：**同一载体（Avatar Forcing）上的三种手段**——A1 锚点引导 GO / 参考条件化 v1 失败与 v2 归档失败 / Learned Anchor Force 终止
   - `## 身份资产与参考提供`：单图/多图/视频参考、anchor banks、注入时机与成本
   - `## 微调类身份提升尝试`：ArcFace 系身份特征/loss 的实验（证据状态：知识库/博客/代码三处均无记录 → 口述待补）
 - `## 可能的改进方向`：多身份夹角验证、治理消融、身份资产协议标准化
