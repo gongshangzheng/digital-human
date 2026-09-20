@@ -14,7 +14,7 @@ from pathlib import Path
 import html2text
 
 BLOG_DEFAULT = Path.home() / "gongshangzheng.github.io"
-OUT_DIR = Path(__file__).parent.parent / "management" / "docs" / "knowledge" / "blog"
+OUT_DIR = Path(__file__).parent.parent / "management" / "docs" / "knowledge"
 
 # slug → (目标文件名, 说明)
 BLOG_SELECTION = {
@@ -36,6 +36,10 @@ BLOG_SELECTION = {
     "realtime-communication-network-basics": "实时网络基础",
     "tool-augmented-digital-human": "工具增强数字人",
     "voice-ai-digital-human-landscape": "语音 AI 数字人全景",
+    "open-avatar-chat-liteavatar": "开源框架：OpenAvatarChat 与 LiteAvatar",
+    "lite-avatar-source-code-analysis": "LiteAvatar 源码分析",
+    "ultralight-digital-human-source-read": "Ultralight 数字人源码阅读",
+    "digital-human-backend-agent-design": "数字人后端 Agent 设计",
 }
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
