@@ -27,6 +27,7 @@
 #### 2.1 `### 开源框架版图`
 - 表达内容:**一表对照 + 结论**（不逐家展开）——OpenAvatarChat（模块化对话式）、LiteAvatar（轻量 2D 数字人）、Ultralight（源码阅读类）；表列：定位 / 架构形态 / 支持模型 / 实时性 / 与我们的差距
 - 论证/结论：现有框架多在"轻量 2D / 纯对话"或"重型离线"，实时 + 可插拔 3D/扩散模型是缺口
+- **必须附一次对话的 mermaid `sequenceDiagram`**（用户 → 前端 → Go 编排 → Python 推理：ASR → LLM → TTS → Avatar 逐段产出），把"分块等待与排队"画在图上
 - 素材：knowledge/《open-avatar-chat-liteavatar》《lite-avatar-source-code-analysis》《ultralight-digital-human-source-read》《cyberverse-realtime-digital-human-agent》
 - 注意：竞品信息来自博客笔记（二手），**正文里用自然语言说明其性质**，不标出处、不写成定论
 
@@ -42,7 +43,7 @@
 - 素材：knowledge/《数字人基础》《5分钟认识数字人》《cyberverse-realtime-digital-human-agent》、CyberVerse README 的链路说明
 
 ### 三、`## CyberVerse 架构`
-- `### 三服务`：Python inference gRPC :50051（进程内跑所有插件）/ Go orchestrator :8080 + TURN :8443 / Vue 前端 :5173；附架构图
+- `### 三服务`：Python inference gRPC :50051（进程内跑所有插件）/ Go orchestrator :8080 + TURN :8443 / Vue 前端 :5173；**必须附 mermaid `flowchart` 架构图**——画浏览器 / 服务器边界，标出三条链路（`/api`、`/ws` 代理，WebRTC 媒体，gRPC）
 - `### 插件体系`：`inference/core`（config/registry/types）+ `inference/plugins/{asr,llm,tts,voice_llm,avatar}` + `proto/*.proto` 七个 gRPC 接口；配置驱动（`cyberverse_config.yaml` + `/settings` UI）
 - `### Avatar 抽象`：`AvatarPlugin`（set_avatar/generate_stream/reset/get_fps/get_output_dimensions）与 `BidirectionalAvatarPlugin`（feed_user_audio/video，支持双向听说）；gRPC `AvatarService` 含 `SwitchAvatarBackend`（后端热切换）
 - 论证/结论：插件化 + gRPC 边界是"可插拔"的实现基础

@@ -43,6 +43,27 @@ summary: 为什么需要统一框架、开源框架版图、系统架构与实�
 | 端到端 | 单模型吃完整链路，延迟低但可控性差、难替换组件 |
 | 混合 | 级联框架 + 端到端局部模块 |
 
+```mermaid
+sequenceDiagram
+    participant U as 用户
+    participant F as 前端 :5173
+    participant G as Go 编排 :8080
+    participant I as Python 推理 :50051
+    U->>F: 说话
+    F->>G: 音频流
+    G->>I: ASR 流式识别
+    I-->>G: 识别文本
+    G->>I: LLM 流式生成
+    I-->>G: 回复文本
+    G->>I: TTS 分块合成
+    I-->>G: 音频块
+    G->>I: Avatar 生成
+    I-->>G: 视频帧流
+    G-->>F: 音视频流
+    F-->>U: 画面与声音
+    Note over G,I: 每段都要等上一段产出，<br/>分块等待与排队就是延迟的主要来源
+```
+
 延迟的差距主要来自**分块等待与组件间排队**，不是单纯模型算得慢。同样的模型，放在不同编排里，用户感受到的等待可以差一个数量级。
 
 由此形成两条工程战线：
@@ -62,6 +83,26 @@ summary: 为什么需要统一框架、开源框架版图、系统架构与实�
 | Orchestrator | Go / HTTP | 8080 | 会话编排、角色配置、媒体协商；同进程还带 TURN 服务 |
 | TURN | Go / TCP | 8443 | WebRTC 直连模式下的媒体中继 |
 | Frontend | Vue 3 / vite | 5173 | 浏览器 UI，仅绑 `127.0.0.1`，把 `/api` 与 `/ws` 代理到 8080 |
+
+```mermaid
+flowchart LR
+    subgraph Browser["浏览器（本地）"]
+        UI["Vue 前端 :5173<br/>仅绑 127.0.0.1"]
+    end
+    subgraph Remote["远端 GPU 服务器"]
+        GO["Go 编排 :8080<br/>会话 / 角色 / 媒体协商"]
+        TURN["TURN :8443<br/>WebRTC 中继"]
+        PY["Python 推理 :50051<br/>单进程加载全部插件"]
+        subgraph PL["插件"]
+            ASR["ASR"] --- LLM["LLM"] --- TTS["TTS"] --- AV["Avatar<br/>AvatarForcing / Ditto / ..."]
+        end
+        PY --- PL
+    end
+    UI -->|"/api 与 /ws"| GO
+    UI <-->|"WebRTC 媒体"| TURN
+    GO -->|"gRPC"| PY
+    GO -.->|"ICE / TURN"| TURN
+```
 
 拆成"Python 跑模型 + Go 管会话"是有意的：模型侧要什么库就给什么库，编排侧只认 gRPC 契约，两边互不污染。
 
