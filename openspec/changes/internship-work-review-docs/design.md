@@ -4,7 +4,7 @@
 
 - 目标读者：**自己**。用途：① 工作汇报底稿；② 为后续继续推进数字人方向的工作提供素材；③ 循实习经验提炼可发表文章的选题依据。写作取向：事实与数字优先，每个结论给证据锚（代码路径/commit/指标表），区分"已验证/待验证/已被否证"。
 - 素材四源：CyberVerse（`~/code/CyberVerse` @ `4968280`）、InternWiki（已复制至 `management/docs/knowledge/`）、博客精选（已复制）、InternWiki 项目树（`projects/digital-human/tasks.json` 已复制为 knowledge/project-tasks.json）。
-- 放置规则（用户明确要求）：子文件夹夹内平铺、禁止再嵌套。现有三个子文件夹：`实习复盘/`（本体系 5 篇）、`论文笔记/`（后续论文精读笔记，只建规范）、`模型介绍/`（五篇模型介绍，见下表）。
+- 放置规则（用户明确要求）：子文件夹夹内平铺、禁止再嵌套。两个子文件夹：`实习复盘/`（复盘 8 篇）、`论文笔记/`（统一笔记库：总纲 + 五篇深读 + 后续新读，见下表）。
 
 ## Goals / Non-Goals
 
@@ -27,16 +27,17 @@
 |---|------|------------------------------|------|-------------|
 | 1 | `数字人要点.md` | 技术要素总览：数字人系统分解——动作（音唇同步）、身份（一致性+身份资产）、渲染合成、实时性；每要素链对应改进文档；不写工作过程细节 | 技术路线篇（软链） | `docs-intern-fundamentals` |
 | 2 | `身份.md` | 只写身份主题：漂移诊断与治理（模长/夹角实验）+ **身份资产与参考提供**（单图/多图/视频/anchor 等方式研究与取舍）；不写音频微调 | — | `docs-intern-identity` |
-| 3 | `工程改进.md` | 工程改进合集：系统级基建（瓶颈定位、音频缺口、僵尸会话、Ditto TRT/RTF、编码链路、silent-avatar、未采纳）+ **PasteBack 贴回技术**（两条路径、接缝/波动修复、历史勘误） | — | `docs-intern-engineering` |
-| 4 | `实时性改进.md` | 只写用户可感知交互体验：首帧/开口、打断收声、待机静默、雪花 badcase、画质粒度权衡 | — | `docs-intern-realtime` |
-| 5 | `数字人行业全景.md` | 只写行业级综合：技术路线版图、模型横评（第一手测试数据）、竞品对标、选型结论、趋势 | 技术路线篇 + 模型介绍五篇 | `docs-intern-industry` |
-| 6 | `发文方向.md` | 只写选题评估：漏斗、候选证据资产负债表、related-work 撞车扫描、决策建议 | 1–5 | `docs-intern-paper-directions` |
-| 7 | `总览.md` | 只写导览与汇总：背景、核心工作互链、方法沉淀、量化成果总表（不新造证据） | 1–6 | `docs-intern-overview` |
+| 3 | `动作.md` | 只写动作主题，按分层框架组织：①音唇同步（基础层）②表情与语言内容的交互（语义/听态）③手部与全身动作（延伸层）；含我们的实验与市面工作总结；不写渲染与实时性 | — | `docs-intern-motion` |
+| 4 | `工程改进.md` | 工程改进合集：系统级基建（瓶颈定位、音频缺口、僵尸会话、Ditto TRT/RTF、编码链路、silent-avatar、未采纳）+ **PasteBack 贴回技术**（两条路径、接缝/波动修复、历史勘误） | — | `docs-intern-engineering` |
+| 5 | `实时性改进.md` | 只写用户可感知交互体验：首帧/开口、打断收声、待机静默、雪花 badcase、画质粒度权衡 | — | `docs-intern-realtime` |
+| 6 | `数字人行业全景.md` | 只写行业级综合：技术路线版图、模型横评（第一手测试数据）、竞品对标、选型结论、趋势 | 论文笔记总纲与五篇深读 | `docs-intern-industry` |
+| 7 | `发文方向.md` | 只写选题评估：漏斗（含身份/动作/工程各线）、候选证据资产负债表、related-work 撞车扫描、决策建议 | 1–6 | `docs-intern-paper-directions` |
+| 8 | `总览.md` | 只写导览与汇总：背景、核心工作互链、方法沉淀、量化成果总表（不新造证据） | 1–7 | `docs-intern-overview` |
 
 ### 1. `数字人要点.md`（结构契约，技术要素总览）
 
 - `## 要素框架`：数字人系统分解——动作、身份、渲染合成、实时性；各要素核心问题、涉及的算法改进与工程改进，及对应文档导览
-- `## 动作与音唇同步`：驱动信号→动作表示→生成链路要点；音唇同步评价口径（sync_c/sync_d）与常见问题
+- `## 动作与音唇同步`：动作分层框架概述（音唇同步→表情×语言交互→手部/全身），链《动作》
 - `## 身份与身份资产`：身份一致性问题概述（链《身份》）+ 身份参考如何提供（单图/多图/视频/anchor 的取舍）
 - `## 渲染与合成`：人脸区域→全帧的合成链路，贴回属于工程改进（链《工程改进》PasteBack 节）
 - `## 实时性`：延迟预算分解、TTFF/FFTT/cadence 口径（链《实时性改进》）
@@ -58,7 +59,16 @@
 - `## 治理方案`：参考条件化 v2（待实现状态如实标注）
 - `## 汇报要点与后续推进`：一页可直取的汇报结论 + 下一步实验（多身份夹角验证、治理消融）
 
-### 3. `工程改进.md`（结构契约，含 PasteBack）
+### 3. `动作.md`（结构契约，分层框架）
+
+- `## 动作问题的分层`：三层框架——①音唇同步（基础）②表情与语言内容交互（语义一致性、听态）③手部与全身动作（延伸）；每层的评价口径与失败模式
+- `## 音唇同步（我们的工作）`：中文音频适配桥系列（蒸馏桥→geom→georkd，sync_c/sync_d 双轨指标表）、t11-1 音唇同步与表情强度优化、阿里云数字人基准锚
+- `## 表情与语言交互（我们的工作）`：表情"太用力"问题、AvatarForcing 双向模型（说话/听态两路条件与独立 CFG）、Ditto 眼嘴四层拆分
+- `## 手部与全身动作`：我们的现状（未做/调研中）与接入成本评估
+- `## 市面动作工作总结`：动作空间谱系（FLAME/blendshape/隐式关键点/latent，引《动作空间专题》）+ 各层代表工作（papers 库互链：wav2lip→musetalk→vasa1→diffsheg→手部生成等）映射到分层框架
+- `## 汇报要点与后续推进`：分层缺口——我们做到哪层、市面到哪层、下一步
+
+### 4. `工程改进.md`（结构契约，含 PasteBack）
 
 - `## 瓶颈定位`：隔离基准 38.5ms/帧 vs 25fps 40ms 预算的测量方法（引《CyberVerse 工程专题》§一）
 - `## 音频缺口修复`：H.264 段尾等待定位 → shortfall 修复 → 绝对播放锚点，两阶段验收数据表（§二）
@@ -69,7 +79,7 @@
 - `## silent-avatar 架构`：feed gate、静默态设计（交互体验问题链《实时性改进》）
 - `## 明确未采纳的方案`：以工程专题 §五 为准，逐条写否证原因（防止后续推进时重走弯路）
 
-### 4. `实时性改进.md`（结构契约，素材：cyberverse 项目 t10/t13–t25）
+### 5. `实时性改进.md`（结构契约，素材：cyberverse 项目 t10/t13–t25）
 - `## 体验问题全景`：badcase 清单（现象→定位→状态），从任务树提取
 - `## 首帧与开口`：首响应 3.5s→2.9s（t15）、开口冻帧消除（t16）、TTFF 排空 idle 存粮（t20）、FFTT 段粒度 1000/400→200ms（t25）
 - `## 打断与收声`：优雅收声 + 尾音自然播完（t18）、丢弃 peer 内排队旧语音的四次尝试与最终否证（t24）
@@ -77,46 +87,49 @@
 - `## 画质与流畅的权衡`：分辨率/编码档位（t21）、speech 预缓冲（t10）
 - `## 汇报要点与后续推进`：体验指标口径（TTFF/FFTT/cadence）+ 遗留 badcase 清单
 
-### 5. `数字人行业全景.md`（结构契约）
+### 6. `数字人行业全景.md`（结构契约）
 
 - `## 技术路线版图`：2D talking-head / 3D 头像（3DGS/NeRF）/ 扩散式生成三路线，代表模型与优劣（引 knowledge/ 各 survey + papers 库）
 - `## 我们测过的模型`：15+ 模型 SpeedRun / Formal Eval 横评总览（RTF、画质、sync_c/sync_d 等指标表）——第一手测试数据是本文差异点
 - `## 竞品与产品调研`：阿里云数字人等主流产品（实现原理/效果/实时通话/延迟），自研 vs 竞品对标结论（引 tasks.json t11 验收锚）
-- `## 选型结论`：GAGAvatar/UIKA 前馈式路线选择依据 → 最终体系（CyberVerse + AvatarForcing/Ditto），链模型介绍五篇
+- `## 选型结论`：GAGAvatar/UIKA 前馈式路线选择依据 → 最终体系（CyberVerse + AvatarForcing/Ditto），链论文笔记五篇深读
 - `## 趋势判断`：从 papers 库 117 篇 + arxiv-digest 时间线提炼的领域动向，标注推断性质
 
-### 6. `发文方向.md`（结构契约）
+### 7. `发文方向.md`（结构契约）
 
-- `## 选题漏斗`：从全部工作 → 有增量证据的候选 → 推荐主攻方向（附淘汰理由）
+- `## 选题漏斗`：从全部工作（身份 / 动作 / 工程 / 评测各线）→ 有增量证据的候选 → 推荐主攻方向（附淘汰理由）
 - `## 候选 A：身份漂移的诊断与治理`：研究问题（LIA 系 latent 动画长时身份漂移的成因与治理）、已有证据（模长否证/夹角单身份支持/参考条件化 v2）、差异点（用 papers 库 related-work 扫描：id-sim、face-consistency-benchmark、avatarforcing 原文等）、需补实验（多身份夹角、治理消融、指标口径）
 - `## 候选 B：流式 Talking-Head 系统论文`：测量→定位→修复的完整工程证据链（音频缺口/僵尸会话/RTF）、与 wan-streamer/opens2v 等系统工作的差异、发表形态（system/benchmark track、workshop）
 - `## 候选 C：PasteBack 合成质量`（并入候选 B 作为一节）：接缝/波动问题的形式化、两条路径对比基准，作为系统论文的质量章节而非独立选题
+- `## 候选 D：动作分层与听态生成`：表情×语言交互层的双向听说（AvatarForcing 听态条件）作为选题的可行性与证据缺口
 - `## 决策建议`：推荐优先级 + 下一步 30 天可执行的补实验清单
 
-### 7. `总览.md`（结构契约，依赖 1–6）
+### 8. `总览.md`（结构契约，依赖 1–7）
 
 - `## 实习背景与主线`：钉钉数字人方向、会议面试官数字人目标、时间轴（2026-06 至今，引 project-tasks.json 里程碑）
-- `## 核心工作导览`：身份一致性 / 工程改进（含 PasteBack）/ 实时性改进 / 行业全景各一段（问题→方法→结果一句话），互链四篇 + 模型介绍六篇（含技术路线）
+- `## 核心工作导览`：身份 / 动作 / 工程改进（含 PasteBack）/ 实时性改进 / 行业全景各一段（问题→方法→结果一句话），互链五篇 + 论文笔记（总纲与五篇深读）
 - `## 工作方法沉淀`：任务树管理、实验记录规范（t24 四次否证作为方法论案例）、[shared] 脚手架协作
 - `## 量化成果总表`：RTF 3→0.9、concealment 3.6%→0.022%、15 模型 SpeedRun 等关键数字汇总表（逐项标注来源文档，不新造数字）
 - `## 与发文方向的关系`：指向《发文方向》
 
-## 模型介绍登记表（`management/docs/模型介绍/`，夹内平铺，双层流程同 D0）
+## 论文笔记登记表（`management/docs/论文笔记/`，夹内平铺，双层流程同 D0；合并原"模型介绍"）
 
-五篇统一结构契约：`## 是什么`（论文/机构/年份/一句话定位，arxiv id，papers 库链接）→ `## 架构核心`（驱动信号→表示→生成→渲染链路 + 与同类差异一表）→ `## 在我们体系中的角色`（CyberVerse 插件路径 @4968280、接入状态、我们的改动/优化/否证记录）→ `## 与复盘三线的关联` → `## 参考与延伸`（knowledge/ 精读链接、papers 库条目）。不重复精读内容，以"我们怎么用的"为主视角。
+统一模板（一篇一个论文/模型）：论文层 `## 是什么`（论文/机构/年份/arxiv id/papers 库链接）→ `## 架构核心`（驱动信号→表示→生成→渲染 + 与同类差异一表）→ **可选工程层** `## 在我们体系中的角色`（CyberVerse 插件路径 @4968280、接入状态、我们的改动/否证记录；仅深度接入过的模型填写）→ `## 与复盘各线的关联` → `## 参考与延伸`（knowledge/ 精读链接、papers 库条目）。不重复 knowledge/ 内容，工程层以"我们怎么用的"为主视角。
 
 | 文件 | 依赖素材 | 单篇 change |
 |------|----------|-------------|
-| `avatar-forcing.md` | knowledge/《Avatar Forcing 模型精读》《Motion Latent AutoEncoder》《微调实践》+ models/avatarforcing/ @4968280 | `docs-model-avatar-forcing` |
-| `ditto.md` | knowledge/《Ditto 模型精读》《Ditto 实时化与 TensorRT 加速复盘》+ models/ditto/ | `docs-model-ditto` |
-| `liveact.md` | papers 库 paper-liveact + models/SoulX-LiveAct/ | `docs-model-liveact` |
-| `omnimate.md` | papers 库 omnimate-2026 | `docs-model-omnimate` |
-| `talker-t2av.md` | knowledge/《Talker-T2AV 模型精读》《Talker-T2AV 接入与验证》 | `docs-model-talker-t2av` |
+| `技术路线.md`（总纲索引） | 三路线：**视频基座模型**（wan-streamer、hallo3 等）/ **动作空间扩散**（Ditto、AvatarForcing 系）/ **3D GS**（UIKA、GAGAvatar、LHM 等）；各路线代表模型清单（papers 库互链）+ 优缺点对比表 + 选型建议；亦为本夹五篇深读的索引 | knowledge/ 各 survey + papers 库 + GAGAvatar/UIKA 选型报告 | `docs-note-routes` |
+| `avatar-forcing.md`（含工程层） | knowledge/《Avatar Forcing 模型精读》《Motion Latent AutoEncoder》《微调实践》+ models/avatarforcing/ @4968280 | `docs-note-avatar-forcing` |
+| `ditto.md`（含工程层） | knowledge/《Ditto 模型精读》《Ditto 实时化与 TensorRT 加速复盘》+ models/ditto/ | `docs-note-ditto` |
+| `liveact.md`（含工程层） | papers 库 paper-liveact + models/SoulX-LiveAct/ | `docs-note-liveact` |
+| `omnimate.md` | papers 库 omnimate-2026 | `docs-note-omnimate` |
+| `talker-t2av.md`（含工程层） | knowledge/《Talker-T2AV 模型精读》《Talker-T2AV 接入与验证》 | `docs-note-talker-t2av` |
+| 后续新读论文 | 按统一模板新增，命名挂 papers 库条目 | `docs-note-<slug>` |
 
 ## Decisions
 
 - **D0 双层流程**：本 change 为体系级总 change（登记表/结构契约/验收）；每篇正文由独立单篇 change 实施，其 tasks 固定为两组——「1. 资料整理」（研读来源、提取证据与数据表，产物先行）与「2. 动笔写作」，整理未完成且未经确认不得启动写作
-- **D1 目录与命名**：子文件夹夹内平铺；单篇 change 命名：复盘系 `docs-intern-<slug>`、模型系 `docs-model-<slug>`（与 ProjFlow docs-system 双层流程同构）
+- **D1 目录与命名**：子文件夹夹内平铺；单篇 change 命名：复盘系 `docs-intern-<slug>`、笔记系 `docs-note-<slug>`（与 ProjFlow docs-system 双层流程同构）
 - **D2 引用规范**：CyberVerse 引用 = 路径 + `@4968280`；知识库引用 = 相对链接 `../knowledge/xxx.md`；不引用博客线上 URL（本地已复制）
 - **D3 事实分级**：每节结论显式标注【已验证】【待验证】【已否证】，与 CyberVerse 任务树进度状态对齐
 
