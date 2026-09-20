@@ -6,6 +6,7 @@
 - [ ] 1.2 研读《Avatar Forcing 模型精读》+《Motion Latent AutoEncoder》，提取 z_S/r_d/模长/方向的定义链与原文措辞
 - [ ] 1.3 对勘博客 digital-human-identity-consistency.md 与 InternWiki 版，记录差异与取舍
 - [ ] 1.4 查 CyberVerse @4968280 models/avatarforcing/ 相关代码证据（flow suppression、anchor guidance），列路径
+- [ ] 1.4b 回捞"用 ArcFace/ID loss 提升身份"的微调实验记录（代码分支/日志/报告）；找不到则记为"口述待补"，不得编造数字
 - [ ] 1.5 汇总为 `整理-数字人身份.md`：数据表 + 术语表 + 事实分级清单（已验证/待验证/已否证）+ 适用边界 + 待补数字清单，交用户确认
 
 ## 2. 动笔写作（1.x 全部确认后启动）

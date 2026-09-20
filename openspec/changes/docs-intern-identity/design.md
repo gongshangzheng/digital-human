@@ -25,6 +25,8 @@
 | knowledge/《Avatar Forcing Motion Latent AutoEncoder》 | motion latent 空间性质（模长/方向的几何含义是否有原文支撑） |
 | 博客复制 digital-human-identity-consistency.md | 博客侧重述的身份一致性内容（与 InternWiki 版对勘，取更准确版本） |
 | CyberVerse @4968280 `models/avatarforcing/` | 相关注释/常量（如 flow suppression 与身份保持的关系，仅作代码证据） |
+| 微调类身份提升尝试（ArcFace / ID loss） | 回捞实验记录（口述线索：用 ArcFace 系特征/loss 提升身份）；**知识库现无记录，须先找证据，找不到则标"口述待补"** |
+| knowledge/《微调策略专题》《digital-human-identity-consistency》 | 身份相关微调结论与度量口径（CSIM/ArcFace 的适用边界） |
 
 ## Decisions
 
