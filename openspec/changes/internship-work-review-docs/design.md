@@ -61,7 +61,11 @@
 ### 3. `数字人身份.md`（结构契约）
 
 - `## 为什么重要`：身份漂移对可用性的影响（长视频、对话场景）
-- `## 现行做法`：身份表示（身份 latent / reference image / 3D prior）、注入方式（加法解耦、anchor、条件化）、一致性度量（id-sim、face-consistency benchmark）
+- `## 现行做法`：
+  - `### 身份表示`：身份 latent / reference image / 3D prior
+  - `### 身份渲染器：常见路线的常见后端`（**专门说明**）：按"身份信号来源 → 身份怎么被保持 → 换身份代价"排表，覆盖隐式关键点+warping（LivePortrait / Ditto / MegaPortraits 血统）、flow-warp decoder（LIA-X）、appearance code 加法解耦（FLOAT / Avatar Forcing）、3DMM/FLAME 参数化（SadTalker）、3DGS/NeRF 资产、ARKit/引擎、视频级修正（Wav2Lip / LatentSync，非完整 renderer）、整帧视频模型自带解码（VASA-1 等，身份在权重/LoRA）
+  - `### 注入与保持的做法`：加法解耦、anchor guidance、条件化、区域抑制
+  - `### 一致性度量`：id-sim / face-consistency benchmark，及其适用边界
 - `## 我们的工作`：
   - `### 漂移诊断与治理`：模长实验被否证 → 夹角实验仅在单身份上得到支持 → 治理方案（参考条件化 v2）
   - `### 身份资产与参考提供`：单图/多图/视频参考、anchor banks、注入时机与成本

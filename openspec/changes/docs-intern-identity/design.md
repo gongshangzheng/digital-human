@@ -35,14 +35,34 @@
     - **LivePortrait**：隐式关键点表示 + warping renderer，身份就是参考图外观；靠 stitching 与 retargeting 控制把"身份"与"动作"分开搬（`docs-note-liveportrait`）
     - **LIA-X**：可解释 latent portrait animator，motion 表示为 40D motion code，身份侧走 source identity/features 注入；适合作为"动作表示与身份特征解耦"的对照（`docs-note-lia-x`）
   - 引用：《数字人介绍与技术路线》"动作表示谱系 / 渲染后端谱系"；《数字人动作》表示谱系深挖
-- 2.2 `### 注入与保持的做法`
+- 2.2 `### 身份渲染器：常见路线的常见后端`（**专门说明**，本文新立的一节）
+  - 写什么：身份最终要靠渲染器落地，"身份能不能稳住、换身份贵不贵"由渲染器决定。按 **身份信号从哪来 → 身份怎么被保持 → 换身份的代价** 排一张表：
+
+    | 渲染器家族 | 代表工作 | 身份信号来源 | 身份怎么被保持 | 换身份代价 |
+    |-----------|---------|-------------|--------------|-----------|
+    | 隐式关键点 + warping renderer | LivePortrait、Ditto renderer、MegaPortraits / Face-vid2vid 血统、FOMM 类 | 参考图（one-shot） | 逐像素 warp 搬运参考图外观，身份不经过模型参数 | 低：换一张参考图 |
+    | flow-warp + 风格调制 decoder | LIA-X | 源肖像身份/多尺度外观特征 | 身份特征单独注入，与 40D motion code 解耦 | 低到中：换源肖像特征 |
+    | appearance code + 加法解耦 decoder | FLOAT / Avatar Forcing decoder | 512D appearance `s`（由参考图编码） | `身份 s` 与 `动作 r=Bα` 加法解耦，身份项每步恒定 | 低：重新编码一张参考图 |
+    | 3DMM / FLAME 参数化渲染 | SadTalker（学 3DMM 系数）、FLAME 系 | 单图回归的显式系数 + 资产 | 显式几何参数，身份在 mesh/纹理资产里 | 中：重建资产或换 mesh |
+    | 3D 资产（学习式） | GaussianTalker、GAGAvatar、UIKA、FlexAvatar | 专人训练资产 | 身份被训练进 3D 表示，与推理输入无关 | 高：换身份 = 重新训练 |
+    | 参数化资产 + 游戏引擎 | ARKit/blendshape 系、Audio2Face 类 | 美术制作的 rig/mesh | 身份在材质与 rig 里 | 中：美术重做或换 rig |
+    | 视频级修正（非完整 renderer） | Wav2Lip、LatentSync、MuseTalk | 输入视频自身 | 不改身份，只改嘴形或同步关系 | 不适用（后处理） |
+    | 整帧视频模型自带解码 | VASA-1、HunyuanVideo-Avatar、OmniAvatar 等 | 参考图 + 适配器/权重 | 身份长在模型权重或 LoRA 里，无独立后端可换 | 高：换身份 = 换适配器/重训 |
+
+  - 三条结论（表下写）：
+    1. **谱系一端是"参考图搬运"、另一端是"身份进权重"**：越靠参考图端，换身份越便宜但身份稳定性靠 warp/latent 解耦；越靠权重与资产端，身份越稳但代价陡增
+    2. **渲染器与动作表示强绑定**：Ditto/LivePortrait 的 motion 喂不进 LIA-X 或 AF decoder（契约不同）——这是"搭配约束"在身份侧的表现
+    3. **视频级修正（Wav2Lip / LatentSync）不是完整渲染器**，只能当预处理/后处理，不能作为身份方案
+  - 边界：**《数字人介绍与技术路线》已给"渲染后端谱系"表（输入契约 + 替换难度）**，本文不重复整表，只从**身份视角**讲"身份信号从哪来、怎么保持、换身份多贵"；动作表示的深度在《数字人动作》
+  - 素材：knowledge/《数字人渲染器专题》§二/§三（Ditto-LivePortrait、LIA-X、FLOAT/AF decoder、FLAME/3DGS、Wav2Lip/LatentSync 的契约分析 + LIA-X 333ms/帧 数据点）；papers 库 `arxiv-2404.10667`(VASA-1)、`arxiv-2211.12194`(SadTalker)、EchoMimic/AniPortrait/JoyVASA 条目
+- 2.3 `### 注入与保持的做法`
   - 加法解耦：外观与运动分开，`x = 身份 + 运动`（FLOAT 系显式分解）
   - 推理期锚点引导（anchor guidance）：用该身份的特征字典约束每一步的走向
   - 训练期条件化：参考条件注入（单层/逐层拼接）、参考库构造
   - 区域抑制：flow suppression 压制下半脸/颈部区域的运动噪声
   - 论证：主流思路是"把身份钉住、把运动放开"，分歧在**在哪一层约束、用什么信号约束**
   - 引用：intro 的"动作生成与身份呈现的绑定关系"（接口契约与资产成本）
-- 2.3 `### 一致性度量`
+- 2.4 `### 一致性度量`
   - CSIM 系（FR embedding，如 ArcFace 特征余弦）、CSIM-drift、LPIPS-drift
   - 度量的固有裂缝：色彩/风格、时序漂移、环境变化、长时演变、指标同时充当 loss/奖励/选帧器（源自身份一致性度量综述的五类痛点）
   - 论证/结论：**CSIM 是借来的尺子**，风格化/长时/跨环境会失效；用单一指标裁决身份治理会误判
@@ -95,6 +115,8 @@
 | 来源 | 提取物 | 状态 |
 |------|--------|------|
 | knowledge/《Avatar Forcing 微调实践》§三/§四/§五 | 模长三段表 + 夹角表 + A1 结果 + v1/v2/LAF 裁决数字 | ✅ 已核对（数字见上文） |
+| knowledge/《数字人渲染器专题》§二/§三 | 各渲染器的输入契约、"身份怎么保持"、替换难度、LIA-X 333ms/帧 | 待核对 |
+| papers 库 VASA-1 / SadTalker / EchoMimic / AniPortrait / JoyVASA | 2.2 节"代表工作"栏的条目核对（其余工作如 MegaPortraits/FOMM 库内无条目，仅点名不展开） | 待核对 |
 | knowledge/《Avatar Forcing 模型精读》 | `z_S` / `r_d` 变量定义、FLOAT 显式分解、blockwise 流式与漂移关系 | 待抄录原措辞 |
 | knowledge/《Avatar Forcing Motion Latent AutoEncoder》 | motion latent 空间性质（模长/方向的几何含义是否有原文支撑） | 待核对 |
 | blog `digital-human-identity-consistency.md` | 度量批判与身份保持路线（与 InternWiki 版对勘） | 待对勘 |
