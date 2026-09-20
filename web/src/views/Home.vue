@@ -34,7 +34,7 @@
     </n-grid>
 
     <n-grid :cols="2" :x-gap="16" :y-gap="16" style="margin-top: 16px">
-      <n-gi v-if="!isMenuHidden('/management/milestones')">
+      <n-gi v-if="!HIDDEN_KEYS.includes('/management/milestones')">
         <n-card title="项目里程碑" size="small">
           <n-spin :show="loadingMilestones">
             <div v-if="milestones.length" class="milestone-preview">
@@ -86,9 +86,9 @@ import {
 import StatusBadge from '../components/common/StatusBadge.vue'
 import EmptyState from '../components/common/EmptyState.vue'
 import { getMilestones, getTasks, getProjects } from '../api/management'
+import { HIDDEN_KEYS } from '../config/hidden'
 import { getPaperStats } from '../api/papers'
 import { getModels } from '../api/evaluation'
-import { isMenuHidden } from '../config/menu'
 
 const router = useRouter()
 
@@ -114,7 +114,7 @@ onMounted(async () => {
     stats.value.modelCount = mdls?.length || 0
   } catch {}
   try {
-    if (!isMenuHidden('/management/milestones')) {
+    if (!HIDDEN_KEYS.includes('/management/milestones')) {
       const ms = await getMilestones().catch(() => [])
       milestones.value = ms || []
     }

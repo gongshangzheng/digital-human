@@ -1,9 +1,14 @@
 <template>
   <div class="doc-page">
     <!-- Left sidebar: doc list -->
-    <aside class="doc-sidebar">
-      <div class="doc-sidebar-inner">
-        <div class="doc-sidebar-title">文档</div>
+    <aside class="doc-sidebar" :class="{ collapsed: sidebarCollapsed }">
+      <div v-if="!sidebarCollapsed" class="doc-sidebar-inner">
+        <div class="panel-head">
+          <span class="doc-sidebar-title">文档</span>
+          <button class="panel-toggle" title="收起文档列表" @click="toggleSidebar">
+            <n-icon size="14"><chevron-back-outline /></n-icon>
+          </button>
+        </div>
         <nav class="doc-sidebar-nav">
           <template v-for="item in sidebarItems" :key="item.type === 'folder' ? item.path : item.slug">
             <a
@@ -27,6 +32,12 @@
           </template>
         </nav>
         <div v-if="!docsList.length && !listLoading" class="doc-sidebar-empty">暂无文档</div>
+      </div>
+      <div v-else class="panel-strip">
+        <button class="panel-expand" title="展开文档列表" @click="toggleSidebar">
+          <n-icon size="14"><chevron-forward-outline /></n-icon>
+        </button>
+        <span class="panel-strip-label">文档</span>
       </div>
     </aside>
 
@@ -58,10 +69,30 @@
               >{{ tag }}</n-tag>
             </div>
             <p v-if="currentDoc.summary" class="doc-summary">{{ currentDoc.summary }}</p>
+            <div v-if="hasSidecarUI" class="doc-side-btns">
+              <n-button v-if="sidecar?.changelog?.length" size="tiny" secondary @click="showChangelog = true">演进记录</n-button>
+              <n-button v-if="sidecar?.progress" size="tiny" secondary @click="showProgress = true">进度</n-button>
+            </div>
           </header>
           <div class="doc-body">
             <MarkdownRenderer :content="bodyContent" />
           </div>
+          <section v-if="sidecar?.related?.length" class="doc-related">
+            <h3>相关文档</h3>
+            <ul>
+              <li v-for="r in sidecar.related" :key="r.slug">
+                <router-link :to="`/management/docs/${r.slug}`">{{ r.title }}</router-link>
+                <span v-if="r.desc" class="rel-desc">—— {{ r.desc }}</span>
+              </li>
+            </ul>
+          </section>
+          <section v-if="sidecar?.appendix?.length" class="doc-appendix">
+            <h3>附录</h3>
+            <div v-for="(a, i) in sidecar.appendix" :key="i" class="appendix-item">
+              <h4>{{ a.title }}</h4>
+              <MarkdownRenderer :content="a.body || ''" />
+            </div>
+          </section>
         </div>
         <div v-else-if="!loading" class="doc-empty">
           <EmptyState description="请从左侧选择一篇文档" />
@@ -70,9 +101,14 @@
     </article>
 
     <!-- Right TOC -->
-    <aside v-if="tocItems.length" class="doc-toc">
-      <div class="doc-toc-inner">
-        <div class="doc-toc-title">目录</div>
+    <aside v-if="tocItems.length" class="doc-toc" :class="{ collapsed: tocCollapsed }">
+      <div v-if="!tocCollapsed" class="doc-toc-inner">
+        <div class="panel-head">
+          <span class="doc-toc-title">目录</span>
+          <button class="panel-toggle" title="收起目录" @click="toggleToc">
+            <n-icon size="14"><chevron-forward-outline /></n-icon>
+          </button>
+        </div>
         <nav>
           <a
             v-for="item in tocItems"
@@ -85,14 +121,46 @@
           </a>
         </nav>
       </div>
+      <div v-else class="panel-strip">
+        <button class="panel-expand" title="展开目录" @click="toggleToc">
+          <n-icon size="14"><chevron-back-outline /></n-icon>
+        </button>
+        <span class="panel-strip-label">目录</span>
+      </div>
     </aside>
+
+    <!-- Sidecar modals -->
+    <n-modal v-model:show="showChangelog" preset="card" title="演进记录" style="max-width: 600px;">
+      <n-timeline v-if="sidecar?.changelog?.length">
+        <n-timeline-item
+          v-for="(c, i) in sidecar.changelog"
+          :key="i"
+          :title="c.date"
+          :content="c.note + (c.commit ? '　·　' + c.commit : '')"
+        />
+      </n-timeline>
+    </n-modal>
+    <n-modal v-model:show="showProgress" preset="card" title="进度" style="max-width: 600px;">
+      <template v-if="sidecar?.progress">
+        <ul class="progress-list">
+          <li v-for="(p, i) in (sidecar.progress.roadmap || [])" :key="i">
+            <strong>{{ p.id }} {{ p.change }}</strong> — {{ p.status }}
+          </li>
+        </ul>
+        <h4 v-if="sidecar.progress.gates?.length" class="progress-gates-title">当前闸门</h4>
+        <ul class="progress-list">
+          <li v-for="(g, i) in (sidecar.progress.gates || [])" :key="'g' + i">{{ g }}</li>
+        </ul>
+      </template>
+    </n-modal>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { NSpin, NTag, NSelect } from 'naive-ui'
+import { NSpin, NTag, NSelect, NButton, NModal, NTimeline, NTimelineItem, NIcon } from 'naive-ui'
+import { ChevronBackOutline, ChevronForwardOutline } from '@vicons/ionicons5'
 import MarkdownRenderer from '../../components/common/MarkdownRenderer.vue'
 import EmptyState from '../../components/common/EmptyState.vue'
 import { getDocList, getDocDetail } from '../../api/management'
@@ -105,6 +173,35 @@ const docsList = ref([])
 const currentDoc = ref(null)
 const loading = ref(false)
 const listLoading = ref(false)
+const showChangelog = ref(false)
+const showProgress = ref(false)
+
+const SIDEBAR_COLLAPSED_KEY = 'doc-page.sidebar-collapsed'
+const TOC_COLLAPSED_KEY = 'doc-page.toc-collapsed'
+
+function readStoredBool(key) {
+  try { return localStorage.getItem(key) === '1' } catch { return false }
+}
+
+function writeStoredBool(key, value) {
+  try { localStorage.setItem(key, value ? '1' : '0') } catch { /* ignore */ }
+}
+
+const sidebarCollapsed = ref(readStoredBool(SIDEBAR_COLLAPSED_KEY))
+const tocCollapsed = ref(readStoredBool(TOC_COLLAPSED_KEY))
+
+function toggleSidebar() {
+  sidebarCollapsed.value = !sidebarCollapsed.value
+  writeStoredBool(SIDEBAR_COLLAPSED_KEY, sidebarCollapsed.value)
+}
+
+function toggleToc() {
+  tocCollapsed.value = !tocCollapsed.value
+  writeStoredBool(TOC_COLLAPSED_KEY, tocCollapsed.value)
+}
+
+const sidecar = computed(() => currentDoc.value?.sidecar || null)
+const hasSidecarUI = computed(() => !!(sidecar.value?.changelog?.length || sidecar.value?.progress))
 
 const currentSlug = computed(() => route.params.slug || '')
 const tocItems = computed(() => currentDoc.value ? extractToc(currentDoc.value.content) : [])
@@ -248,13 +345,81 @@ watch(currentSlug, (slug) => {
   padding-right: 8px;
 }
 
+.doc-sidebar.collapsed {
+  width: 28px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 4px 2px 4px 10px;
+  margin-bottom: 4px;
+}
+
+.panel-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 3px;
+  cursor: pointer;
+  color: var(--color-text-dim);
+  border-radius: 4px;
+  transition: all 0.15s;
+
+  &:hover {
+    background: var(--color-hover);
+    color: var(--color-text);
+  }
+}
+
+.panel-strip {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-expand {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 6px 0;
+  cursor: pointer;
+  color: var(--color-text-dim);
+  transition: all 0.15s;
+
+  &:hover {
+    background: var(--color-hover);
+    color: var(--color-text);
+  }
+}
+
+.panel-strip-label {
+  writing-mode: vertical-rl;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-dim);
+  user-select: none;
+}
+
 .doc-sidebar-title {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text-dim);
-  padding: 8px 10px 4px;
 }
 
 .doc-sidebar-empty {
@@ -374,6 +539,66 @@ watch(currentSlug, (slug) => {
   line-height: 1.7;
 }
 
+.doc-side-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.doc-related,
+.doc-appendix {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  li {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+}
+
+.rel-desc {
+  color: var(--color-text-dim);
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.appendix-item {
+  margin-bottom: 16px;
+
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+}
+
+.progress-list {
+  margin: 0;
+  padding-left: 18px;
+
+  li {
+    font-size: 13px;
+    line-height: 2;
+  }
+}
+
+.progress-gates-title {
+  margin: 14px 0 6px;
+  font-size: 13px;
+}
+
 .doc-empty {
   display: flex;
   align-items: center;
@@ -399,13 +624,16 @@ watch(currentSlug, (slug) => {
   overflow-y: auto;
 }
 
+.doc-toc.collapsed {
+  width: 28px;
+}
+
 .doc-toc-title {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text-dim);
-  padding: 8px 10px 4px;
 }
 
 .doc-toc-link {

@@ -31,6 +31,13 @@
 
 **服务架构**：inference gRPC :50051 / Go orchestrator :8080 / TURN :8443 / 前端 :5173，运行于远程 GPU 服务器，本地仅编辑（详见其 AGENTS.md）
 
+## 上游回灌待办（[shared] → ProjFlow）
+
+| 项 | 来源 | 状态 |
+|----|------|------|
+| 文档详情接口支持 Unicode/中文 slug（放宽 `_SLUG_RE` + 拒绝 `..`） | 本仓库 `sync-projflow-shared-updates` | 待回灌（上游 `eb331fc` 同样存在此 bug） |
+| HIDDEN_KEYS 采用与 menu.js→hidden.js 迁移经验 | 本仓库同上 | 待回灌（上游已有 hidden.js，经验性补充） |
+
 ## 维护规则
 
 - 外部源引入方式：独立 clone（推荐）/ git submodule / vendored（附 commit），统一存专用目录，禁止与自有代码混层

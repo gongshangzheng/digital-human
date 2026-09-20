@@ -21,7 +21,7 @@
 
 - **D1 逐文件对照移植，不用 git cherry-pick**：我们已改名/改端口/自定义菜单逻辑，cherry-pick 必冲突；改为按上游文件内容逐段移植（`diff` 定位后手工合并），保留我们的定制点。
 - **D2 menu.js → hidden.js 迁移而非并存**：删除 `web/src/config/menu.js`，新增上游 `hidden.js`，把我们的隐藏集合（`/management/team`、`/management/reports`、`/management/milestones`、`/management/meetings`）迁入 `HIDDEN_KEYS`；`MainLayout.vue` 改用上游过滤逻辑；`Home.vue` 的 `isMenuHidden` 引用同步改到新模块。
-- **D3 中文 slug 修复方式**：`_SLUG_RE` 放宽为"允许 Unicode 字母数字、空格与 `_ / -`"，同时保留 `..` 与路径穿越防护（继续走 `safe_resolve`），并在取 slug 前做 `unquote`。拒绝 `..` 单独校验。
+- **D3 中文 slug 修复方式**：`_SLUG_RE` 放宽为允许 Unicode 单词字符（`\w` 含中文）+ 空格 + `_ / -`；新增 `_valid_doc_slug()` 显式拒绝空值与 `..` 路径段，继续走 `safe_resolve` 根约束。（实测 FastAPI/Starlette 已对路径参数解码，**无需额外 unquote**；额外解码反而会引入二次解码风险。）
 - **D4 sidecar 只落机制不补内容**：本 change 实现 sidecar 读取与渲染；是否给现有文档加 `<slug>.json` 由文档类 change 决定。
 - **D5 上游回灌**：中文 slug 修复与 hidden.js 采用经验按 `[shared]` 回灌 ProjFlow（作为本 change 的后续任务记录，不在本仓库实现上游改动）。
 

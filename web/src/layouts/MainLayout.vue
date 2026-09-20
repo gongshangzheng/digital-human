@@ -19,7 +19,7 @@
         :collapsed="collapsed"
         :collapsed-width="64"
         :collapsed-icon-size="22"
-        :options="menuOptions"
+        :options="visibleMenuOptions"
         :value="activeKey"
         :expanded-keys="expandedKeys"
         @update:value="handleMenuSelect"
@@ -80,6 +80,7 @@ import {
   FlashOutline, SunnyOutline, MoonOutline,
 } from '@vicons/ionicons5'
 import { useThemeStore } from '../stores/theme'
+import { HIDDEN_KEYS, filterHidden } from '../config/hidden'
 
 const route = useRoute()
 const router = useRouter()
@@ -105,9 +106,7 @@ function renderIcon(icon) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
-import { filterMenuOptions } from '../config/menu'
-
-const menuOptions = filterMenuOptions([
+const menuOptions = [
   {
     label: '首页',
     key: '/',
@@ -167,7 +166,10 @@ const menuOptions = filterMenuOptions([
       { label: '评测配置', key: '/evaluation/configs', icon: renderIcon(SettingsOutline) },
     ],
   },
-])
+]
+
+// 按 HIDDEN_KEYS 过滤后的菜单（叶子命中 path 摘除；分组命中摘整组；组内叶子全部隐藏时整组摘除）
+const visibleMenuOptions = computed(() => filterHidden(menuOptions, HIDDEN_KEYS))
 
 const activeKey = computed(() => {
   const path = route.path

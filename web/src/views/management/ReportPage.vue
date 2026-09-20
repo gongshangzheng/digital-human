@@ -1,12 +1,17 @@
 <template>
   <div class="wiki-page">
+    <!-- 全部类型被隐藏（配置错误）时给空态，不崩溃 -->
+    <div v-if="!visibleTypes.length" class="reports-all-hidden">
+      <EmptyState description="报告类型已全部隐藏（HIDDEN_KEYS 含 reports:daily/weekly/monthly），请检查 web/src/config/hidden.js 配置" />
+    </div>
+    <template v-else>
     <!-- Left sidebar -->
     <aside class="wiki-sidebar">
       <div class="wiki-sidebar-inner">
         <!-- Type tabs -->
         <div class="report-type-tabs">
           <button
-            v-for="t in types"
+            v-for="t in visibleTypes"
             :key="t.key"
             class="report-type-tab"
             :class="{ active: activeType === t.key }"
@@ -52,7 +57,7 @@
     <div class="wiki-mobile-select">
       <div class="report-type-tabs" style="margin-bottom: 8px;">
         <button
-          v-for="t in types"
+          v-for="t in visibleTypes"
           :key="t.key"
           class="report-type-tab"
           :class="{ active: activeType === t.key }"
@@ -105,6 +110,7 @@
         </nav>
       </div>
     </aside>
+    </template>
   </div>
 </template>
 
@@ -116,6 +122,7 @@ import MarkdownRenderer from '../../components/common/MarkdownRenderer.vue'
 import EmptyState from '../../components/common/EmptyState.vue'
 import { getDailyList, getDailyDetail, getWeeklyList, getWeeklyDetail, getMonthlyList, getMonthlyDetail } from '../../api/management'
 import { extractToc } from '../../utils/markdown'
+import { HIDDEN_KEYS } from '../../config/hidden'
 
 const route = useRoute()
 const router = useRouter()
@@ -126,8 +133,19 @@ const types = [
   { key: 'monthly', label: '月报' },
 ]
 
+// 按 HIDDEN_KEYS 的 reports:<type> 过滤后的可见类型
+const visibleTypes = computed(() => types.filter(t => !HIDDEN_KEYS.includes(`reports:${t.key}`)))
+if (!visibleTypes.value.length) {
+  console.warn('[hidden] reports:daily/weekly/monthly 全部被隐藏——报告页无内容，请检查 web/src/config/hidden.js')
+}
+
 const activeType = computed(() => {
-  return route.params.type || route.query.tab || 'daily'
+  const raw = route.params.type || route.query.tab || visibleTypes.value[0]?.key || 'daily'
+  // 当前类型被隐藏时回落到第一个可见类型；全部隐藏时保持原值（页面渲染空态）
+  if (visibleTypes.value.length && !visibleTypes.value.some(t => t.key === raw)) {
+    return visibleTypes.value[0].key
+  }
+  return raw
 })
 
 const reports = ref([])
@@ -469,5 +487,13 @@ watch(() => route.params, async () => {
     border-left-color: var(--color-primary);
   }
   &.level-3 { padding-left: 20px; }
+}
+
+.reports-all-hidden {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 16px;
 }
 </style>
