@@ -237,7 +237,7 @@ SmartAvatar：VLM Agent 验证循环
 
 在所有已调研的系统中，SmartAvatar（HKUST + Dartmouth, arXiv 2506.04606）是最完整的"数字人 Agent 使用工具"的学术实例 #Huang-Menders et al., 2025#。它展示了一个 VLM Agent 如何通过验证循环自主使用 6 种工具生成 3D Avatar。
 
-![SmartAvatar 四模块流水线](media/images/tool-augmented-digital-human/smartavatar-pipeline.webp)
+SmartAvatar 四模块流水线（图片资源未随副本复制）
 
 图 1：SmartAvatar 的四模块流水线架构。Descriptor 从多模态输入提取语义属性，Generator 生成 Blender 兼容的 Python 代码，Evaluator 评估渲染结果与输入的对齐度，Refiner 基于反馈迭代改进。（来源：SmartAvatar, Fig. pipeline）
 
@@ -285,7 +285,7 @@ Full pipeline| 0.52| 0.809| —
 
 在图像输入对比中，SmartAvatar 达到 ArcFace 0.65、CLIP 0.903，虽然是唯一同时支持可编辑、可绑定骨骼输出的方法，但 ArcFace 分数低于 PSHuman (0.79) 和 CharacterGen (0.66)——这是因为 SmartAvatar 依赖参数化生成器（HumGen3D），真实感上限受限于引擎能力 #Huang-Menders et al., 2025#。
 
-![SmartAvatar 多模态输入处理](media/images/tool-augmented-digital-human/smartavatar-multimodal-input.webp)
+SmartAvatar 多模态输入处理（图片资源未随副本复制）
 
 图 2：SmartAvatar 的多模态输入处理。系统支持图像输入、文本输入、图像+文本融合以及生成后编辑指令四种输入类型，文本覆盖优先于图像属性。（来源：SmartAvatar, Fig. multimodal_input）
 
@@ -325,7 +325,7 @@ Human Tool：人作为可调用工具
 
 如果说前面的系统都在讨论数字人调用软件工具，那么 Human Tool（清华大学等, arXiv 2602.12953）提出了一个更激进的想法：==人本身也可以是数字人调用的"工具"== #Tang et al., 2026#。
 
-![Human Tool 框架](media/images/tool-augmented-digital-human/human-tool-framework.webp)
+Human Tool 框架（图片资源未随副本复制）
 
 图 3：Human Tool 框架。将人类贡献者表示为 AI Agent 可按需调用的结构化工具，通过 Capabilities、Information、Authority 三维建模。Agent 拥有工作流编排权，在需要时自主"调用"人类获取判断、创意或授权。（来源：Human Tool, Fig. framework）
 
@@ -372,7 +372,7 @@ AvaTaR：工具使用优化
 
 前面的系统都在讨论"如何调用工具"，但 Agent 的工具使用策略本身也可以被优化。AvaTaR（NeurIPS 2024, arXiv 2406.11200）提出了对比推理方法，通过 Actor-Comparator 双 LLM 架构自动优化 Agent 的工具使用 #Wu et al., 2024#。
 
-![AvaTaR 对比推理架构](media/images/tool-augmented-digital-human/avatar-overview.webp)
+AvaTaR 对比推理架构（图片资源未随副本复制）
 
 图 4：AvaTaR 的 Actor-Comparator 架构。Actor 是主 LLM Agent，负责使用工具完成任务；Comparator 是独立 LLM，通过对比正负样本的行动序列识别工具使用差异，生成改进指令。（来源：AvaTaR, Fig. overview）
 

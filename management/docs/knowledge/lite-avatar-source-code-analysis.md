@@ -105,7 +105,7 @@ LiteAvatar 的推理流程是一个典型的**三阶段 Pipeline** ：音频 →
 
 面部生成由两个 TorchScript 模型组成：`net_encode.pt` 和 `net_decode.pt`。Encoder 将参考帧编码为隐向量，Decoder 接收隐向量 + 32维参数，输出嘴部区域图像。这种解耦设计使得同一套参数可以适配不同风格的 Avatar。
 
-![](media/images/lite-avatar-source-code-analysis/paraformer_struct.webp)
+图片（图片资源未随副本复制）
 
 Paraformer ASR 模型结构图（来源：LiteAvatar 仓库 weights 目录）
 

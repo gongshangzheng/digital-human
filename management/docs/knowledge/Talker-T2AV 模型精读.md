@@ -6,7 +6,7 @@ tags: [数字人, Talker-T2AV, T2AV, LIA-X, 音视频生成]
 id: 14
 ---
 
-> 本文固定阅读本地缓存的上游版本 `6712f62`。本地 adapter、FaceCropper 和性能冒烟见 [Talker-T2AV 接入与验证](../工程与评测/Talker-T2AV%20接入与验证.md)。音画同步模块边界见 [音画同步专题](../工程与评测/音画同步专题.md)。项目全景见 [[project:digital-human]]。
+> 本文固定阅读本地缓存的上游版本 `6712f62`。本地 adapter、FaceCropper 和性能冒烟见 [[knowledge/Talker-T2AV 接入与验证|Talker-T2AV 接入与验证]]。音画同步模块边界见 [[knowledge/音画同步专题|音画同步专题]]。项目全景见 [[project:digital-human]]。
 
 ## 一、它到底生成什么
 
@@ -81,7 +81,7 @@ flowchart LR
 
 这也是它慢的原因之一。当前 Talker-T2AV 的 A10 profile 中，512²、bf16、batch=1 的 LIA-X decoder 约 **333ms/帧**。这个数不能外推到所有硬件，但足以说明：逐帧高分辨率 warp、mask、grid_sample 和大量 StyleGAN2 风格调制卷积，会成为 T2AV 视频侧的主要成本。
 
-因此后续的 LIA-X decoder 蒸馏目标不是“换个现代网络就画得更好”，而是用一个轻量学生 renderer 尽量逼近现有 LIA-X teacher，同时降低延迟和显存。这个方向目前是设计候选，尚未实现与验收；详见 [视频生成训练与推理加速专题](../工程与评测/视频生成训练与推理加速专题.md)。
+因此后续的 LIA-X decoder 蒸馏目标不是“换个现代网络就画得更好”，而是用一个轻量学生 renderer 尽量逼近现有 LIA-X teacher，同时降低延迟和显存。这个方向目前是设计候选，尚未实现与验收；详见 [[knowledge/视频生成训练与推理加速专题|视频生成训练与推理加速专题]]。
 
 ## 三、两种参考前缀模式
 

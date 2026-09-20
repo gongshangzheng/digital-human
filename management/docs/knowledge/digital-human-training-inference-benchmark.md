@@ -109,7 +109,7 @@ FVD 的最大陷阱是 **clip length 敏感性** 。16 帧和 32 帧算出的 FV
 
 **SyncNet** 是唇音同步评测的核心工具。它用双流 CNN 分别处理嘴部 ROI 视频片段和音频梅尔频谱，输出两组 embedding 后算余弦相似度（Sync-C，越高越好）和欧氏距离（Sync-D，越低越好）。SyncNet 在 VoxCeleb2 上训练，主要覆盖英语、正面人脸。#Chung-et-al.-2017#
 
-![SyncNet dual-stream architecture used for lip-sync evaluation](media/images/digital-human-training-inference-benchmark/wav2lip-syncnet.webp)
+SyncNet dual-stream architecture used for lip-sync evaluation（图片资源未随副本复制）
 
 图 2：SyncNet/唇形同步专家的双流结构——音频流与视频流各自编码后比对，是 Sync-C/Sync-D 与 LSE-C/LSE-D 指标的基础（来源：Prajwal et al., Wav2Lip, ACM MM 2020, SyncNet）。
 
@@ -222,7 +222,7 @@ Part 4
 
 运动空间路线先把脸部、头部或身体动作压到更低维的表示里，再由渲染器把运动转成视频。SadTalker 使用 3DMM 运动系数，把表情和姿态拆给 ExpNet 与 PoseVAE。#SadTalker# LivePortrait 用隐式关键点、stitching 和 retargeting 做快速肖像动画；Stage I 在 8 张 A100 上从零训练约 10 天，Stage II 约 2 天，推理在 RTX 4090 + PyTorch 上约 12.8ms。#LivePortrait# VASA-1 把面部潜在空间和 diffusion transformer 分开：面部潜在空间模型用 4 张 RTX A6000 训练 7 天，扩散 Transformer 训练 3 天；推理在单 RTX 4090 上达到 512×512 在线 40 FPS、启动延迟约 170ms。VASA-1 评估 SC、SD、FVD25、CAPP、ΔP。#VASA1# Ditto 和 Teller 更直接面向流式系统。Ditto 用 8 张 A100、batch size 1024、500 epochs 训练 motion-space diffusion，推理报告 RTF 与 FFD；Teller 则把 motion 进一步 token 化，Stage 1 / SFT / ETM 使用 8×8 A800 量级训练，推理在 4 张 H800 上按 200ms chunk 运行。#Ditto# #Teller# 
 
-![SadTalker modular pipeline with ExpNet and PoseVAE](media/images/digital-human-training-inference-benchmark/sadtalker-pipeline.webp)
+SadTalker modular pipeline with ExpNet and PoseVAE（图片资源未随副本复制）
 
 图 3：SadTalker 的模块化管线——ExpNet 预测表情系数、PoseVAE 生成头姿、Face Render 合成图像，是运动空间路线训练资源与指标拆解的典型（来源：Zhang et al., SadTalker, CVPR 2023, main pipeline）。
 
@@ -239,7 +239,7 @@ NeRF 与 3DGS：专人资产的训练成本和渲染效率
 
 3D/显式可渲染表示路线的 benchmark 和通用视频生成很不一样：它通常是 person-specific，先用某个目标人物的几分钟到几小时视频训练一个资产，再用新音频或新 motion 驱动它。AD-NeRF 把头和躯干建成 NeRF，在 RTX 3090 上训练约 36 小时、推理仅 0.04 FPS；ER-NeRF 通过区域感知和高效表示在 RTX 3080Ti 上把训练降到 2 小时、推理到 34 FPS。#ADNeRF# #ERNeRF# #DigitalHuman3DGS# 3D Gaussian Splatting 把渲染瓶颈从体渲染的 ray marching 转成显式 Gaussian rasterization。TalkingGaussian 的训练约 1.5 小时、推理 70.42 FPS；GaussianTalker 训练 4.5 小时、59.24 FPS；GSTalker 训练 40 分钟、实时 125 FPS；EGSTalker 训练 3.7 小时、68.51 FPS。#TalkingGaussian# #GaussianTalker# #GSTalker# #EGSTalker# 通用前馈模型（LAM、UIKA）与 person-specific 方法有本质区别：它们训练一次大模型，推理时从任意输入图像一次前馈生成 3DGS 资产，无需逐身份训练。LAM 在 A100 上达 280.96 FPS、iPhone 16 上通过 WebGL 达 35 FPS；UIKA 在 A100 上达 220 FPS，训练用 32×H20 约 2 周。#He-et-al.-2025# #UIKA-2026# 
 
-![UIKA feed-forward universal head avatar pipeline](media/images/digital-human-training-inference-benchmark/uika-pipeline.webp)
+UIKA feed-forward universal head avatar pipeline（图片资源未随副本复制）
 
 图 4：UIKA 的前馈式通用头部头像管线，从任意数量 pose-free 图像一次前馈生成可动画 3DGS 资产（来源：Wu et al., UIKA, CVPR 2026 Highlight, pipeline）。
 

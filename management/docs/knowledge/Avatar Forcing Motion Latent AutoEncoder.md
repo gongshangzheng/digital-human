@@ -6,7 +6,7 @@ tags: [数字人, Avatar Forcing, Motion AutoEncoder, FLOAT, reenactment]
 id: 16
 ---
 
-> 本文是 [Avatar Forcing 模型精读](Avatar%20Forcing%20模型精读.md) 的 Motion AutoEncoder 深读。它解释模型为何“训练用视频、推理能用单图”，以及 20 维窄运动通道为何适合 reenactment。我们曾担心它限制细粒度音素/viseme，但真实视频 GT-alpha 重建更支持“容量够用，问题在音频到 α 的预测”。音画同步链见 [音画同步专题](../工程与评测/音画同步专题.md)，本地微调与分层 probe 见 [Avatar Forcing 微调实践](../微调与实践/Avatar%20Forcing%20微调实践.md)。项目全景见 [[project:digital-human]]。
+> 本文是 [[knowledge/Avatar Forcing 模型精读|Avatar Forcing 模型精读]] 的 Motion AutoEncoder 深读。它解释模型为何“训练用视频、推理能用单图”，以及 20 维窄运动通道为何适合 reenactment。我们曾担心它限制细粒度音素/viseme，但真实视频 GT-alpha 重建更支持“容量够用，问题在音频到 α 的预测”。音画同步链见 [[knowledge/音画同步专题|音画同步专题]]，本地微调与分层 probe 见 [[knowledge/Avatar Forcing 微调实践|Avatar Forcing 微调实践]]。项目全景见 [[project:digital-human]]。
 
 ## 一、先纠正一个最容易误读的维度
 

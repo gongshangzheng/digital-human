@@ -6,7 +6,7 @@ summary: 把 1476 行单文件 index.html 拆成 12 个功能模块（主文件�
 tags: [VoiceAgent, 前端, 架构重构, 模块化, 配置管理]
 ---
 
-> 本文是 [VoiceAgent 项目总览](docs/voice-agent-overview.md) 的**前端亮点二**。服务端有一个**同名方法** `buildStartAgentBody`，两者的关系见 [前后端契约与协同设计](docs/voice-agent-frontend-backend-contract.md)。
+> 本文是 VoiceAgent 项目总览 的**前端亮点二**。服务端有一个**同名方法** `buildStartAgentBody`，两者的关系见 前后端契约与协同设计。
 
 ## 一、两个纠缠在一起的问题
 
@@ -108,7 +108,7 @@ asrConfig / llmConfig / ttsConfig / s2sConfig / ragConfig / mcpServers
 
 这里必须严格遵循网关的**字段级浅覆盖契约**：不下发某字段 ≠ 下发空值。
 
-> **为什么这个区别很致命？** 服务端的三级配置继承里，**字段缺失表示「回退上一级默认值」**，而下发空值表示「显式设成空」。前端如果图省事把所有字段都填上（该缺的填 `null`），服务端的继承链就全部失效了。这个契约细节见 [服务端配置继承](docs/voice-agent-config-inheritance.md) 和 [前后端契约](docs/voice-agent-frontend-backend-contract.md)。
+> **为什么这个区别很致命？** 服务端的三级配置继承里，**字段缺失表示「回退上一级默认值」**，而下发空值表示「显式设成空」。前端如果图省事把所有字段都填上（该缺的填 `null`），服务端的继承链就全部失效了。这个契约细节见 服务端配置继承 和 前后端契约。
 
 ### 2.3 TTS 双提供方模式
 
@@ -184,7 +184,7 @@ graph LR
 - 前端版：把**用户界面上的选择**翻译成请求体（关心枚举校验、开关状态、脏数据）
 - 服务端版：把**三级继承后的配置**翻译成网关调用参数（关心继承、哨兵值、vendor 反推）
 
-同名是因为它们在各自层面扮演相同角色。详见 [前后端契约与协同设计](docs/voice-agent-frontend-backend-contract.md)。
+同名是因为它们在各自层面扮演相同角色。详见 前后端契约与协同设计。
 
 **Q：脏数据问题为什么不用给 localStorage 加版本号、升级时整体清空来解决？**
 
@@ -194,7 +194,7 @@ graph LR
 
 ## 相关文档
 
-- [VoiceAgent 项目总览](docs/voice-agent-overview.md)
-- [前后端契约与协同设计](docs/voice-agent-frontend-backend-contract.md) — 浅覆盖契约的完整说明
-- [服务端 · 三级配置继承体系](docs/voice-agent-config-inheritance.md) — 契约的服务端侧
-- [MCP 工具可视化与 RAG 前端集成](docs/voice-agent-web-mcp-rag.md) — 配置层的具体应用
+- VoiceAgent 项目总览
+- 前后端契约与协同设计 — 浅覆盖契约的完整说明
+- 服务端 · 三级配置继承体系 — 契约的服务端侧
+- [[knowledge/voice-agent-web-mcp-rag|MCP 工具可视化与 RAG 前端集成]] — 配置层的具体应用

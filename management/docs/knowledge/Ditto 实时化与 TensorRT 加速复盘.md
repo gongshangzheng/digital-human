@@ -6,7 +6,7 @@ tags: [数字人, Ditto, TensorRT, 实时推理, 性能优化]
 id: 12
 ---
 
-> 本文只讨论 Ditto 的实时化与 TensorRT 工程链，不讨论视频源嘴动泄露与闭嘴化方案，后者见 [Ditto 改动实践](../微调与实践/Ditto%20改动实践.md)。模型原理见 [Ditto 模型精读](../模型精读/Ditto%20模型精读.md)，发布链与浏览器侧节奏见 [CyberVerse 工程专题](CyberVerse%20工程专题.md)。项目全景见 [[project:digital-human]]。
+> 本文只讨论 Ditto 的实时化与 TensorRT 工程链，不讨论视频源嘴动泄露与闭嘴化方案，后者见 [[knowledge/Ditto 改动实践|Ditto 改动实践]]。模型原理见 [[knowledge/Ditto 模型精读|Ditto 模型精读]]，发布链与浏览器侧节奏见 [[knowledge/CyberVerse 工程专题|CyberVerse 工程专题]]。项目全景见 [[project:digital-human]]。
 
 ## 一、先给结论：Ditto 当前已经能在生产链实时运行
 
@@ -113,7 +113,7 @@ Warp 输出保持 GPU tensor，通过 CUDA Event 交给 Decoder，避免 GPU→C
 = RTF≈1、约25fps、stalls=0
 ```
 
-其中发布侧同样关键：编码器 tail grace 修复后 cadence 从 `1.056–1.070` 降到 `1.018–1.020`，绝对播放锚点进一步使 240 秒会话稳态 cadence 达到 **1.000**。详见 [CyberVerse 工程专题](CyberVerse%20工程专题.md)。
+其中发布侧同样关键：编码器 tail grace 修复后 cadence 从 `1.056–1.070` 降到 `1.018–1.020`，绝对播放锚点进一步使 240 秒会话稳态 cadence 达到 **1.000**。详见 [[knowledge/CyberVerse 工程专题|CyberVerse 工程专题]]。
 
 ## 五、未采纳或未完成的尝试
 

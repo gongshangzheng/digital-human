@@ -6,7 +6,7 @@ summary: 实现 MCP 配置解析管线、工具级白名单选择与 RAG/MCP 双
 tags: [VoiceAgent, 前端, MCP, RAG, 知识库, Function Call]
 ---
 
-> 本文是 [VoiceAgent 项目总览](docs/voice-agent-overview.md) 的**前端亮点四**。服务端的 MCP 挂载位置与 `/agent/mcp-tools` 接口见 [三级配置继承体系](docs/voice-agent-config-inheritance.md)。
+> 本文是 VoiceAgent 项目总览 的**前端亮点四**。服务端的 MCP 挂载位置与 `/agent/mcp-tools` 接口见 三级配置继承体系。
 
 ## 一、先扫盲：MCP 和 RAG 是什么
 
@@ -111,7 +111,7 @@ graph LR
 下发 {}   → 显式表达「一个服务都不要」
 ```
 
-> 这个对比很能说明浅覆盖契约的重要性：**同一个「关闭」意图，在不同字段上要用不同的表达方式**，取决于该字段是否存在上级默认值。详见 [前后端契约与协同设计](docs/voice-agent-frontend-backend-contract.md)。
+> 这个对比很能说明浅覆盖契约的重要性：**同一个「关闭」意图，在不同字段上要用不同的表达方式**，取决于该字段是否存在上级默认值。详见 前后端契约与协同设计。
 
 ### 3.4 监听 RTM 原始消息实现可视化
 
@@ -128,7 +128,7 @@ SDK 封装好的回调里**没有** Function Call 和延迟指标——这两类
 
 > **为什么拆这四段？** 因为「感觉很慢」是没法优化的，必须知道慢在哪一环。ASR 慢是识别问题，LLM 首 Token 慢是模型或 prompt 问题，TTS 慢是合成问题。分段之后，每一轮对话都能立刻定位瓶颈环节。
 >
-> 这些指标同时被 [Bad Case 反馈系统](docs/voice-agent-web-badcase.md) 旁路记录进 `convLog`，所以点踩上报时也带着完整的时延数据。
+> 这些指标同时被 [[knowledge/voice-agent-web-badcase|Bad Case 反馈系统]] 旁路记录进 `convLog`，所以点踩上报时也带着完整的时延数据。
 
 ## 四、Result：结果
 
@@ -154,7 +154,7 @@ SDK 封装好的回调里**没有** Function Call 和延迟指标——这两类
 - MCP 在 Agent 级**可能配了默认服务**，所以省略字段会导致「关不掉」，必须用 `{}` 显式清空
 - `ragConfig` 是请求级构造的字段，没有上级默认值，省略即不生效
 
-判断依据是**该字段是否存在上级配置**，而不是「关闭就统一用某种写法」。这也是为什么服务端还额外设计了哨兵值 `-` 来表达「显式清除」——见 [三级配置继承](docs/voice-agent-config-inheritance.md)。
+判断依据是**该字段是否存在上级配置**，而不是「关闭就统一用某种写法」。这也是为什么服务端还额外设计了哨兵值 `-` 来表达「显式清除」——见 三级配置继承。
 
 **Q：直接解析 RTM 原始消息、依赖 `type=10/11` 这种魔法数字，SDK 升级会不会挂？**
 
@@ -174,8 +174,8 @@ SDK 封装好的回调里**没有** Function Call 和延迟指标——这两类
 
 ## 相关文档
 
-- [VoiceAgent 项目总览](docs/voice-agent-overview.md)
-- [前后端契约与协同设计](docs/voice-agent-frontend-backend-contract.md)
-- [服务端 · 三级配置继承体系](docs/voice-agent-config-inheritance.md) — MCP / RAG 在服务端的挂载逻辑
-- [Bad Case 收集与反馈系统](docs/voice-agent-web-badcase.md) — 时延指标的下游消费方
-- [前端模块化重构与配置适配层](docs/voice-agent-web-architecture.md)
+- VoiceAgent 项目总览
+- 前后端契约与协同设计
+- 服务端 · 三级配置继承体系 — MCP / RAG 在服务端的挂载逻辑
+- [[knowledge/voice-agent-web-badcase|Bad Case 收集与反馈系统]] — 时延指标的下游消费方
+- [[knowledge/voice-agent-web-architecture|前端模块化重构与配置适配层]]

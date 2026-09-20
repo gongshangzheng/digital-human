@@ -77,7 +77,7 @@ GFVC 的 analysis-synthesis 骨架与 6 类 facial representation
 
 输入的人脸视频被分成两路。Key-reference frame 用传统 codec（HEVC/VVC）压成 I picture——因为它承担身份、外观、纹理信息，生成模型不擅长稳定保持这些，交给成熟的 VVC intra 编码更可靠。Inter frame 则走生成通道：用 analysis model 提取 compact facial symbols（具体形式见下方 taxonomy），经 context-adaptive arithmetic coder 进 bitstream。
 
-![GFVC general framework](media/images/gfvc-survey-2023/GFVC.webp)
+GFVC general framework（图片资源未随副本复制）
 
 图 1(a)：GFVC 通用框架。编码端 key-reference frame 走传统 VVC，inter frame 用 analysis model 提取 compact facial symbols 进 bitstream；解码端把 key-frame 与 facial information 联合送入 synthesis model 重建视频（来源：Chen et al., 2023, Fig.1）。
 
@@ -101,7 +101,7 @@ arithmetic coder"] C --> G["bitstream"] F --> G G --> H["arithmetic decoder"] H 
 
 综述的分类维度是单一的、显式定义的：==facial representation==，即 encoder 提取出来、传输、decoder 用来重建的中间表示形式。Figure 1(b) 给出 6 种 representation 的示意，Table 1 则把 16 个方法按此归类（其中 RDAC 引入第 7 个混合类"2D Keypoints + Residual Map"）。
 
-![Facial representations](media/images/gfvc-survey-2023/representation2.webp)
+Facial representations（图片资源未随副本复制）
 
 图 1(b)：6 种 facial representation——2D landmarks、2D keypoints、3D keypoints、segmentation map、facial semantics、compact feature（来源：Chen et al., 2023, Fig.1）。
 
@@ -198,11 +198,11 @@ GFVC 的 hybrid 设计（key frame 走 VVC、inter 帧走 facial parameters）�
 
 解决方案是在 decoder 前插一个 **TranslatorNN()** （parameter translator 或 flow translator），把 encoder 侧的 parameter/flow"翻译"成 decoder 侧 synthesis model 能吃的格式；而 **GeneratorNN()** 就是那个 synthesis model 本身。综述借 Figure 2 说明了处理流程 #JVET-AF0234#。
 
-![GFV SEI for Face Generation](media/images/gfvc-survey-2023/GFV1.webp)
+GFV SEI for Face Generation（图片资源未随副本复制）
 
 图 2(a)：GFV SEI for Face Generation 的处理顺序。TranslatorNN() 在 encoder/decoder matched 时可旁路，mismatched 时启用翻译保兼容（来源：JVET-AF0234, Fig.）。
 
-![GFV SEI for Face Fusion](media/images/gfvc-survey-2023/GFV2.webp)
+GFV SEI for Face Fusion（图片资源未随副本复制）
 
 图 2(b)：GFV SEI for Face Fusion 路径，GeneratorNN() 作为 synthesis model 把翻译后的 facial parameters 与 key-reference 合成重建视频（来源：JVET-AF0234, Fig.）。
 
@@ -220,11 +220,11 @@ RD 曲线说了什么、没说什么
 
 综述 §2.2 在 50 个 VoxCeleb 序列上对比了 VVC、FOMM、MRAA、Face_vid2vid、CFTE、IFVC 六条曲线，分别用 Rate-DISTS 和 Rate-LPIPS 呈现。
 
-![Rate-DISTS performance](media/images/gfvc-survey-2023/rd1.webp)
+Rate-DISTS performance（图片资源未随副本复制）
 
 图 3(a)：Rate-DISTS 性能对比。所有生成式压缩方法显著优于 VVC，并能工作在传统 codec 难以触及的超低码率区（来源：Chen et al., 2023, Fig.4）。
 
-![Rate-LPIPS performance](media/images/gfvc-survey-2023/rd2.webp)
+Rate-LPIPS performance（图片资源未随副本复制）
 
 图 3(b)：Rate-LPIPS 性能对比。IFVC（作者最新方法）在曲线上表现最优（来源：Chen et al., 2023, Fig.4）。
 

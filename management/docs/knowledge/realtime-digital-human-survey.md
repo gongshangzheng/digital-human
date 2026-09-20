@@ -73,7 +73,7 @@ Task Taxonomy
 
 数字人 survey 最容易犯的错误，是把 video dubbing、talking head、portrait animation、3D avatar 和上半身交互体都叫成“数字人生成”。它们共享口型同步、身份保持和实时性约束，但输入条件、输出自由度和失败模式完全不同。MuseTalk 图 1 可以用来说明这个边界：talking head generation 通常从单图和音频生成整段说话视频，模型需要负责头动、眼动和表情；video dubbing 是 Video-to-Video 任务，目标是在保留原视频头动、眼动和场景动态的前提下重绘嘴部。#Zhang-et-al.-2024-MuseTalk# 
 
-![MuseTalk task taxonomy](media/images/realtime-digital-human-survey/musetalk-task-taxonomy.webp)
+MuseTalk task taxonomy（图片资源未随副本复制）
 
 图 2：MuseTalk 用图示区分 talking head generation 与 video dubbing。前者生成整段说话头动态，后者保留原视频头动和眼动，只改写嘴部区域（来源：Zhang et al., 2024, Fig.1）。
 
@@ -133,7 +133,7 @@ EMO、AnimateAnyone 说明视频扩散可以显著提升表现力。EMO 直接�
 
 VASA-1 证明 face latent dynamics 可以在单图语音驱动中兼顾口型、表情和头动，并报告 512×512 up to 40 FPS；MuseTalk 选择更窄的 video dubbing 任务，在 VAE latent 中做单步生成，报告 256×256 30 FPS on V100；LivePortrait 反其道而行，不追多步扩散，而是扩大 implicit-keypoint 框架，在约 69M frames 上训练并报告 12.8ms on RTX 4090。这个阶段的关键词不是“谁统一一切”，而是“不同路线为实时性牺牲不同东西”。#Xu-et-al.-2024# #Zhang-et-al.-2024-MuseTalk# #Guo-et-al.-2024-LivePortrait# 
 
-![VASA-1 pipeline](media/images/realtime-digital-human-survey/vasa1-pipeline.webp)
+VASA-1 pipeline（图片资源未随副本复制）
 
 图 3：VASA-1 在 face latent space 中建模整体脸部动态，是单图语音驱动高质量实时 talking face 的重要标杆（来源：Xu et al., 2024, Fig.2）。
 
@@ -170,7 +170,7 @@ NeRF / 3DGS 专人渲染| radiance field、Gaussian deformation、专人训练�
 
 这是最容易产品化的路线，也是最容易被低估的路线。它不追求从零生成一个完整人，而是在已有人脸视频或人脸区域上重绘嘴部。Wav2Lip 的优势是口型约束强，MuseTalk 进一步把任务放到 latent inpainting 和 one-shot video dubbing 中，报告 256×256 30 FPS on V100。RealTalk 则把 3D facial prior 与身份对齐网络结合，报告 30 FPS on V100。局限是嘴以外的表情、眼动、身体动作大多来自原视频或额外模块。#Prajwal-et-al.-2020# #Zhang-et-al.-2024-MuseTalk# #Ji-et-al.-2024-RealTalk# 
 
-![Wav2Lip architecture](media/images/realtime-digital-human-survey/wav2lip-arch.webp)
+Wav2Lip architecture（图片资源未随副本复制）
 
 图 4：Wav2Lip 用 lip-sync expert 约束生成器，是后续配音、换嘴和口型评测的重要基线（来源：Prajwal et al., 2020, Fig.3）。
 
@@ -190,7 +190,7 @@ VASA-1 的启发是：不要直接在像素空间预测每一帧，而是在表�
 
 EMO、AnimateAnyone 代表的是表现力上限。EMO 用 Audio2Video diffusion 从单图和音频生成说话/唱歌肖像，训练数据超过 250 小时并覆盖中文、英文、演讲、影视和唱歌；AnimateAnyone 用 ReferenceNet 与 Pose Guider 保持身份和姿态控制，适合全身角色动画。这条路线回答“自然度可以到哪里”，但不直接回答“能否低延迟交互”。#Tian-et-al.-2024# #Hu-et-al.-2023# 
 
-![EMO pipeline](media/images/realtime-digital-human-survey/emo-pipeline.webp)
+EMO pipeline（图片资源未随副本复制）
 
 图 5：EMO 展示了 Audio2Video diffusion 的表现力上限，但多步生成天然带来实时性压力（来源：Tian et al., 2024, Fig.2）。
 

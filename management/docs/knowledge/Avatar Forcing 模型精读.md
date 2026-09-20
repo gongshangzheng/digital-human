@@ -6,7 +6,7 @@ tags: [数字人, 论文精读, Avatar Forcing, Diffusion Forcing, 实时交互]
 id: 3
 ---
 
-> 本文只讲模型本身（以博客精读文章为底稿压缩改写）。我们的微调与改造见 [Avatar Forcing 微调实践](../微调与实践/Avatar%20Forcing%20微调实践.md)，背景知识见 [数字人基础](../基础/数字人基础.md)。
+> 本文只讲模型本身（以博客精读文章为底稿压缩改写）。我们的微调与改造见 [[knowledge/Avatar Forcing 微调实践|Avatar Forcing 微调实践]]，背景知识见 [[knowledge/数字人基础|数字人基础]]。
 
 ## 一、任务设定：交互式数字人
 
@@ -16,7 +16,7 @@ Avatar Forcing 面向的是**双向对话**。可以把一轮交互理解成：�
 
 ## 二、三模块架构
 
-![Avatar Forcing 整体架构](/InternWiki/interns/tangwen/docs/af-architecture.webp)
+Avatar Forcing 整体架构（图片资源未随副本复制）
 
 ### 2.1 Motion Latent Encoding：显式 identity-motion 分解
 
@@ -29,7 +29,7 @@ $$z = z_S + \mathbf{m}_S \in \mathbb{R}^{512}$$
 
 直觉类比：一张照片拆成"底片"和"滤镜"两张透明片——换表情只换滤镜，底片不动。直接在像素空间建模的问题：512×512×3 每帧计算量巨大，且身份与运动信息高度耦合。这个分解让生成任务收缩到"预测 512 维运动增量"。
 
-![Motion Latent Autoencoder](/InternWiki/interns/tangwen/docs/af-motion-latent-ae.webp)
+Motion Latent Autoencoder（图片资源未随副本复制）
 
 ### 2.2 Dual Motion Encoder：先把“听到什么”和“要说什么”整理好
 
@@ -37,7 +37,7 @@ $$z = z_S + \mathbf{m}_S \in \mathbb{R}^{512}$$
 
 ### 2.3 Causal DFoT Motion Generator：按 block 向前滚动生成
 
-![双向 vs 因果结构](/InternWiki/interns/tangwen/docs/af-bidirectional-vs-causal.webp)
+双向 vs 因果结构（图片资源未随副本复制）
 
 普通视频扩散常一次把整段视频一起生成，后面的帧也会影响前面的帧，画面整体性较好，却必须等整段完成。Avatar Forcing 采用的是**以 block 为粒度的因果生成**：block 之间按时间向前滚动。它并非严格的“每一帧只看过去”——训练时的 look-ahead mask 允许每个 block 额外看 $l=2$ 帧来减轻边界抖动；推理时真实未来帧不可用，就用上一个 block 最后两帧的历史 offset 替代。因此它能低延迟输出，同时需要靠 offset 维持跨 block 连续性。
 

@@ -6,7 +6,7 @@ tags: [数字人, 论文精读, Ditto, 扩散模型, 运动空间]
 id: 4
 ---
 
-> 本文只讲模型本身（以博客精读为底稿压缩改写）。我们的改动（唇动隔离等）见 [Ditto 改动实践](../微调与实践/Ditto%20改动实践.md)，motion space 表示细节见 [动作空间专题](../基础/动作空间专题.md)。
+> 本文只讲模型本身（以博客精读为底稿压缩改写）。我们的改动（唇动隔离等）见 [[knowledge/Ditto 改动实践|Ditto 改动实践]]，motion space 表示细节见 [[knowledge/动作空间专题|动作空间专题]]。
 
 ## 一、任务分解："生成空间"比"生成模型"更重要
 
@@ -40,11 +40,11 @@ $$\hat{\mathbf{x}}=\mathbf{c}_{ref}\hat{\mathbf{R}}+\hat{\boldsymbol{\delta}}+\h
 
 $\mathbf{c}_{ref}$ 来自参考身份（身份保留），生成的运动叠加在参考骨架上。
 
-![Ditto 整体框架](/InternWiki/interns/tangwen/docs/ditto-framework.webp)
+Ditto 整体框架（图片资源未随副本复制）
 
 ## 三、Conditional DiT（LMDM）与双条件系统
 
-![Conditional DiT 架构](/InternWiki/interns/tangwen/docs/ditto-dit.webp)
+Conditional DiT 架构（图片资源未随副本复制）
 
 LMDM 是 **Latent Motion Diffusion Model**（潜在运动扩散模型），即 Ditto 的音频到运动生成模型；Conditional DiT 是它执行扩散去噪的核心网络，Transformer 则是 DiT 所采用的架构。因此三者不是并列模型，也不能把 LMDM 泛化为项目中所有的 Transformer。
 
@@ -98,7 +98,7 @@ flowchart TD
 - **可控性**（motion space 的直接红利）：gaze correction（改眼部条件重渲染）、眨眼控制、emotion label 切换——这些在像素空间路线里几乎无法干预
 - 265 维运动表示 + 渲染器解耦，也让我们后来能在渲染层做区域级操作（见改动实践篇）
 
-Ditto 的 motion space、分段流式推理和 10 步去噪构成实时性的模型基础；Decoder TensorRT、GPU 直传、发布节奏等工程优化及其生产证据见 [Ditto 实时化与 TensorRT 加速复盘](../工程与评测/Ditto%20实时化与%20TensorRT%20加速复盘.md)。论文 RTF、单模块基准和生产 RTF/FPS 的测试口径不同，不能合并成一个“整体加速倍数”。
+Ditto 的 motion space、分段流式推理和 10 步去噪构成实时性的模型基础；Decoder TensorRT、GPU 直传、发布节奏等工程优化及其生产证据见 [[knowledge/Ditto 实时化与 TensorRT 加速复盘|Ditto 实时化与 TensorRT 加速复盘]]。论文 RTF、单模块基准和生产 RTF/FPS 的测试口径不同，不能合并成一个“整体加速倍数”。
 
 ## 面试追问预案
 
@@ -108,7 +108,7 @@ Ditto 的 motion space、分段流式推理和 10 步去噪构成实时性的模
 
 **Q：为什么用 lipsync score 选 checkpoint 而不是常规 val loss？**
 
-任务的评价目标是"音频-运动对齐"，但 val loss 混合了所有区域的回归误差（包括与说话无关的头姿预测）。用渲染验证集 + lipsync score 直接优化最终关心的能力。这也是我们在评测框架里坚持"指标要对应问题"的同一逻辑（见 [评测指标专题](../工程与评测/评测指标专题.md)）——代理指标和最终目标错位时，checkpoint 选择就会被带偏。
+任务的评价目标是"音频-运动对齐"，但 val loss 混合了所有区域的回归误差（包括与说话无关的头姿预测）。用渲染验证集 + lipsync score 直接优化最终关心的能力。这也是我们在评测框架里坚持"指标要对应问题"的同一逻辑（见 [[knowledge/评测指标专题|评测指标专题]]）——代理指标和最终目标错位时，checkpoint 选择就会被带偏。
 
 **Q：horizontal flip 为什么必要？听起来只是数据增强。**
 

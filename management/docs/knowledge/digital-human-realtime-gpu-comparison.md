@@ -113,11 +113,11 @@ Part 2
   
 运动空间路线的实时性跨度很大。SadTalker 作为早期 baseline 在消费级 GPU 上仅 5–15 FPS，而 LivePortrait 通过 warping 路线在 RTX 4090 上达到 67 FPS，Ditto 用 motion-space diffusion + TensorRT 在 A100 上实现 RTF < 1。UniLS 以 421M 参数的 chunk-based 自回归架构在 RTX 5090 上达到 560.6 FPS，性能余量极大。
 
-![LivePortrait first-stage training pipeline](media/images/digital-human-realtime-gpu-comparison/liveportrait-pipeline.webp)
+LivePortrait first-stage training pipeline（图片资源未随副本复制）
 
 图 2：LivePortrait 的隐式关键点 warping 管线，纯前馈渲染使其在 RTX 4090 上达到约 67 FPS（来源：Guo et al., LivePortrait, arXiv:2406.02880, pipeline）。
 
-![Ditto motion-space diffusion framework](media/images/digital-human-realtime-gpu-comparison/ditto-framework.webp)
+Ditto motion-space diffusion framework（图片资源未随副本复制）
 
 图 3：Ditto 在低维 motion latent 上做扩散并配合 TensorRT，在单张 A100 上实现 RTF 0.895、首帧 385ms 的流式生成（来源：Li et al., Ditto, ACM MM 2025, framework）。
 
@@ -137,7 +137,7 @@ Part 2
   
 3DGS/NeRF 路线的实时性分化极为明显。早期 NeRF 方案（AD-NeRF）FPS 仅 0.04，完全不能实时；ER-NeRF 在 RTX 3080Ti 上达 34 FPS，刚过实时门槛。3DGS 方案（EGSTalker、LAM、UIKA）因光栅化渲染天然高效，FPS 可达 68–280，且 LAM 和 UIKA 的渲染步骤不含神经网络，可直接移植到 WebGL 实现移动端实时。[ARTalk](artalk-2025.html) 的 3D FLAME 动画生成速度达 220 FPS，训练只需 ~13 GPU-hours（单 A100 一天内完成），是 3D talking head 中训练成本最低的方案之一。
 
-![LAM one-shot animatable Gaussian head avatar](media/images/digital-human-realtime-gpu-comparison/lam-teaser.webp)
+LAM one-shot animatable Gaussian head avatar（图片资源未随副本复制）
 
 图 4：LAM 从单图前馈生成可动画 Gaussian 头像，渲染步骤不含神经网络，在 A100 上达 280 FPS，并可在 iPhone 上以 WebGL 实时渲染（来源：He et al., LAM, CVPR 2026 Highlight, teaser）。
 

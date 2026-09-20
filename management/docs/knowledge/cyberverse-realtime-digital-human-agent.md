@@ -24,7 +24,7 @@ GPLv3开源协议
 
 **本篇定位** ：这是数字人系列的第六篇，也是从“论文”转向“工程”的一篇。前五篇我们拆解了实时数字人的生成算法（[Wav2Lip](paper-wav2lip.html)、[SadTalker](paper-sadtalker.html)、[VASA-1](paper-vasa1.html)、流式蒸馏）和算力选型。但一个真正能用的数字人，光有生成模型远远不够——你还需要把语音识别、大模型、语音合成、口型驱动、WebRTC 推流、记忆、工具调用全部串起来。**CyberVerse 就是这样一套“把论文拼成产品”的开源框架** 。本文不只看架构，还会给出一条实用阅读路径：先用纯语音模式跑通，再理解三进程边界，最后再打开 Avatar 视频后端。#CyberVerse-GitHub#
 
-![CyberVerse digital human agent](media/images/cyberverse-realtime-digital-human-agent/digital-human-agent.webp)
+CyberVerse digital human agent（图片资源未随副本复制）
 
 图 1：CyberVerse 的核心理念——"一张照片，一个活的数字人"。它不是单个生成模型，而是把语音对话、实时通话、可选数字人形象打包成可自托管的 Agent 平台。（来源：CyberVerse 官方 README, docs/assets/digital-human-agent.jpeg）
 
@@ -40,7 +40,7 @@ CyberVerse 在 README 里的自我定位是一句话： _"一个开源的实时�
 
 如果你的目标是**落地一个能看、能听、能实时对话的数字人客服/数字分身/虚拟主播** ，而不是研究生成算法本身，那么 CyberVerse 是一份极好的工程参考。它把"实时数字人系统"该有的模块边界划得很清楚，而且每个模块都做成可替换的插件——这正是工程落地最关心的东西。 
 
-![CyberVerse character gallery](media/images/cyberverse-realtime-digital-human-agent/character-gallery-1.webp)
+CyberVerse character gallery（图片资源未随副本复制）
 
 图 2：CyberVerse 的角色选择界面。每个角色可以有独立的音色、欢迎语、人设配置，并支持声音克隆。（来源：CyberVerse 官方 README, docs/assets/character1.png；注：演示角色仅为示例，不随项目分发，不提供商用）
 
@@ -677,7 +677,7 @@ README 里有一句话概括了 CyberVerse 的可扩展性哲学： _"大脑、�
 
 当 `inference.avatar.enabled: false` 时，平台退化为**纯语音 Agent** ，只推音频流，不需要本地 Avatar GPU，但同样的人设和角色配置继续生效。这对没有 GPU 或还不需要视频形象的场景非常友好——你可以先跑通语音对话，再决定要不要加上"脸"。 CyberVerse 目前内置支持两个数字人视频后端：**FlashHead** （SoulX-FlashHead-1.3B）和 **LiveAct** （[SoulX-LiveAct](paper-liveact.html) 18B），都通过统一的 `AvatarService.GenerateStream`（音频流 → 视频帧流）接口接入。#CyberVerse-GitHub# #SoulX-FlashHead# #SoulX-LiveAct# 
 
-![CyberVerse demo Alice](media/images/cyberverse-realtime-digital-human-agent/demo-alice.webp)
+CyberVerse demo Alice（图片资源未随副本复制）
 
 图 3：CyberVerse 驱动的数字人 demo 之一。单张参考图即可驱动实时面部动画、唇形同步和缓存的待机视频。（来源：CyberVerse 官方 README, docs/assets，对应 YouTube demo；演示角色仅为示例，不提供商用）
 

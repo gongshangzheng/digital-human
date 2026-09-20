@@ -6,7 +6,7 @@ tags: [数字人, Talker-T2AV, 模型接入, Speed Run, FaceCropper]
 id: 15
 ---
 
-> 模型机制见 [Talker-T2AV 模型精读](../模型精读/Talker-T2AV%20模型精读.md)。本文只记录本地接入状态，**不把“能跑”写成“质量已验证”**。模型探索中的统一证据状态见 [模型探索与未采纳实验复盘](模型探索与未采纳实验复盘.md)。项目全景见 [[project:digital-human]]。
+> 模型机制见 [[knowledge/Talker-T2AV 模型精读|Talker-T2AV 模型精读]]。本文只记录本地接入状态，**不把“能跑”写成“质量已验证”**。模型探索中的统一证据状态见 [[knowledge/模型探索与未采纳实验复盘|模型探索与未采纳实验复盘]]。项目全景见 [[project:digital-human]]。
 
 ## 一、接入目标
 

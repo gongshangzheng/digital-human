@@ -1,6 +1,6 @@
 # 知识库（复制自外部信息源）
 
-> 单层平铺，不嵌套。现共 52 个文件（InternWiki 复制 29 + 博客精选 22 + 本索引）。外部源登记见 [docs/external-sources.md](../../../docs/external-sources.md)。
+> 单层平铺，不嵌套。现共 52 个文件（InternWiki 复制 29 + 博客精选 22 + 本索引）。外部源登记见仓库根目录 `docs/external-sources.md`。
 > 复制即声明本仓库为演进主体，上游冻结为历史源。
 
 ## 来源

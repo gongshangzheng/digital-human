@@ -81,7 +81,7 @@ Part 3
 
 ChatAnyone 的关键不是再做一个 talking head，而是把脸、身体和手部拆成层级运动控制，再用 fast renderer 输出上半身视频。它代表“motion diffusion + fast renderer”路线：把扩散留在紧凑运动空间，把实时性留给渲染系统。论文报告的 30 FPS 级结果说明，这条路线更接近互动主播和客服 avatar，而不是离线高质量视频生成。#Qi-et-al.-2025-ChatAnyone#
 
-![ChatAnyone hierarchical motion diffusion overview](media/images/digital-human-avatar-survey/chatanyone-overview.webp)
+ChatAnyone hierarchical motion diffusion overview（图片资源未随副本复制）
 
 图 1：ChatAnyone 把音频到动作、层级运动控制和快速渲染拆成可控 pipeline，是实时上半身 avatar 路线的代表结构。（来源：ChatAnyone 论文原图）
 
@@ -89,7 +89,7 @@ ChatAnyone 的关键不是再做一个 talking head，而是把脸、身体和�
 
 EMO2 的判断是：上半身 avatar 的难点不只是嘴，而是手势。它先预测 MANO hand end-effector，再让 ReferenceNet 视频扩散补全脸、身体和手势。这个结构把“手势是否自然”从附属问题变成核心变量，也提醒我们：upper-body avatar 的评估不能只看同步和 FID。#EMO2-2025#
 
-![EMO2 hand motion generation pipeline](media/images/digital-human-avatar-survey/emo2-hand-motion-pipeline.webp)
+EMO2 hand motion generation pipeline（图片资源未随副本复制）
 
 图 2：EMO2 先生成手部 end-effector 运动，再用视频扩散补全上半身画面，说明手势不是附属装饰，而是上半身 avatar 的独立建模对象。（来源：EMO2 论文原图）
 
@@ -97,7 +97,7 @@ EMO2 的判断是：上半身 avatar 的难点不只是嘴，而是手势。它�
 
 OmniAvatar 基于 Wan2.1，把音频打包后以逐像素、多层方式注入视频 DiT，并用 LoRA 保留文本 prompt 控制。它代表 full-frame avatar video generation：模型在同一视频生成空间里决定脸、身体、背景和文本风格。代价也明确：25 denoising steps 和大视频基座意味着它不是实时交互的默认方案，而是质量优先的 full-frame baseline。#Gan-et-al.-2025-OmniAvatar#
 
-![OmniAvatar audio pack and video DiT pipeline](media/images/digital-human-avatar-survey/omniavatar-pipeline.webp)
+OmniAvatar audio pack and video DiT pipeline（图片资源未随副本复制）
 
 图 3：OmniAvatar 的 Audio Pack 与 LoRA 注入 video DiT，体现 full-frame 路线直接在视频生成空间里处理音频、人物、背景和 prompt 控制。（来源：OmniAvatar 论文原图）
 
@@ -105,7 +105,7 @@ OmniAvatar 基于 Wan2.1，把音频打包后以逐像素、多层方式注入�
 
 One Shot, One Talk 选择的是 asset 路线：从单张全身图出发，结合 SMPL-X、3D Gaussian 和 2D 视频扩散伪标签，训练一个可复用、可驱动的 full-body talking avatar。它不是一次性生成 RGB 视频，而是在构建可反复渲染的身份资产。这条路线适合 AR/VR、远程会议和需要长期复用角色的产品，但单图恢复完整可动人体仍然不适定。#One-Shot-One-Talk-2024#
 
-![One Shot One Talk renderable full-body avatar pipeline](media/images/digital-human-avatar-survey/one-shot-one-talk-pipeline.webp)
+One Shot One Talk renderable full-body avatar pipeline（图片资源未随副本复制）
 
 图 4：One Shot, One Talk 用单图、SMPL-X、3D Gaussian 与伪视频监督构造可复用全身 avatar asset，代表与一次性 RGB 视频不同的资产化路线。（来源：One Shot, One Talk 论文原图）
 

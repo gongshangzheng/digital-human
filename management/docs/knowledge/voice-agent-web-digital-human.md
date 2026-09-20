@@ -6,7 +6,7 @@ summary: 用「事件驱动 + 500ms 轮询兜底」双路机制解决 SDK 不补
 tags: [VoiceAgent, 前端, DingRTC, 数字人, WebRTC, 音视频]
 ---
 
-> 本文是 [VoiceAgent 项目总览](docs/voice-agent-overview.md) 的**前端亮点一**。服务端侧的对应实现见 [编排引擎与多通路路由](docs/voice-agent-orchestration.md)，两边是一套设计的两个半场。
+> 本文是 VoiceAgent 项目总览 的**前端亮点一**。服务端侧的对应实现见 编排引擎与多通路路由，两边是一套设计的两个半场。
 
 ## 一、问题：视频轨「明明在那，但发现不了」
 
@@ -64,7 +64,7 @@ graph TB
 
 > **为什么是 500ms？** 太密（如 50ms）会造成无意义的 CPU 开销，因为数字人推流本身有秒级的准备时间；太疏（如 2s）会明显拉长首帧延迟。500ms 是「用户感知不到延迟」和「开销可忽略」的平衡点。
 >
-> 这里体现的通用原则：**事件驱动优雅但不可全信，涉及关键路径时要有轮询兜底。** 这和服务端 [三层超时兜底](docs/voice-agent-session-lifecycle.md) 里「实时事件负责快、定时扫描负责不漏」是完全同一个思路——只是一个在前端，一个在后端。
+> 这里体现的通用原则：**事件驱动优雅但不可全信，涉及关键路径时要有轮询兜底。** 这和服务端 三层超时兜底 里「实时事件负责快、定时扫描负责不漏」是完全同一个思路——只是一个在前端，一个在后端。
 
 ### 2.2 服务端确认位机制（前后端协同的关键设计）
 
@@ -88,7 +88,7 @@ graph LR
 
 **彻底消除前端硬编码 appId 导致的 token 不匹配问题。**
 
-> 这正是服务端 [`ai-dh-` 前缀设计](docs/voice-agent-orchestration.md) 的另一半：服务端用 `agentUserId` 前缀记住「这次用的是数字人 appId」以便后续 stop，前端则完全不碰 appId 决策。**同一个问题在前后端各自的正确解法。**
+> 这正是服务端 `ai-dh-` 前缀设计 的另一半：服务端用 `agentUserId` 前缀记住「这次用的是数字人 appId」以便后续 stop，前端则完全不碰 appId 决策。**同一个问题在前后端各自的正确解法。**
 
 ### 2.3 用 MutationObserver 掐掉双声
 
@@ -157,7 +157,7 @@ observer.observe(container, { childList: true, subtree: true })
 
 ## 相关文档
 
-- [VoiceAgent 项目总览](docs/voice-agent-overview.md)
-- [前后端契约与协同设计](docs/voice-agent-frontend-backend-contract.md) — 确认位机制的完整协议
-- [服务端 · Agent 全生命周期编排引擎](docs/voice-agent-orchestration.md) — appId 决策与 `ai-dh-` 前缀的服务端侧
-- [前端模块化重构与配置适配层](docs/voice-agent-web-architecture.md)
+- VoiceAgent 项目总览
+- 前后端契约与协同设计 — 确认位机制的完整协议
+- 服务端 · Agent 全生命周期编排引擎 — appId 决策与 `ai-dh-` 前缀的服务端侧
+- [[knowledge/voice-agent-web-architecture|前端模块化重构与配置适配层]]

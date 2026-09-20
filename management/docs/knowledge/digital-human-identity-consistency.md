@@ -145,13 +145,13 @@ E. Benchmark 构建 | 生成模型集合 + prompt 套件 | 分维度排名 + 协
 
 Arc2Face 把生成方向反了过来。常规的身份保持生成是"参考图 → 生成图"，Arc2Face 却是"FR embedding → 生成图"：取冻结 ArcFace 网络前向输出的 512 维身份向量 $w = \phi(x)$，零填充到 768 维后替换伪提示 "photo of a <id> person" 中 <id> 位置的 token，再经微调的 CLIP 文本编码器扩散到整个条件序列，以此驱动 Stable Diffusion 生成人脸——全程不用任何文本描述，也不用 ArcFace 的任何中间层 #Paraperas-Papantoniou et al., 2024#。 这个方向的翻转本身就是论证：如果 ArcFace embedding 里没有足够的身份信息，那么任何生成器都不可能仅凭这个向量重建出该人的脸。信息不可能无中生有。而实验结果是，仅以纯 ID 向量为条件，Arc2Face 在 Synth-500（500 个从未见过的合成身份）上生成 500 组图像，输入-输出 ArcFace 相似度分布的峰值达到约 0.85；作为对照，以关键点做空间约束的 InstantID 峰值约 0.7，依赖 CLIP 图像特征的 PhotoMaker、FastComposer 只在 0.3–0.5 档徘徊 #Paraperas-Papantoniou et al., 2024# #Li et al., 2024# #Wang et al., 2024#。这一档差距同时也是三族谱系的定量注脚：FR embedding 作条件（结构/生成类的用法）显著强于 CLIP 特征作条件（感知类的用法）——在身份信息密度上，判别式向量确实压过通用感知特征。 
 
-![Synth-500 输入-输出 ArcFace 相似度分布](media/images/arc2face-2024/id_sim_synth-500.webp)
+Synth-500 输入-输出 ArcFace 相似度分布（图片资源未随副本复制）
 
 图 2-1：Synth-500 上各方法输入-输出 ArcFace 相似度分布：Arc2Face（纯 ID 条件）峰值约 0.85，InstantID 约 0.7，CLIP 系方法（PhotoMaker、FastComposer）0.3–0.5（来源：Paraperas-Papantoniou et al., 2024, Fig. 4a）
 
 人评补上了独立于 CSIM 的证据。50 名用户对 30 个随机身份做并排盲选——只问"哪边更像输入的脸"，不问质量——Arc2Face 拿下 71.0% 的偏好，次优的 InstantID 只有 29.0% #Paraperas-Papantoniou et al., 2024#。也就是说，embedding 里那份身份信息不仅是 CSIM 能读出的，人类裁判也认。 
 
-![Arc2Face 用户研究盲选结果](media/images/arc2face-2024/user_study.webp)
+Arc2Face 用户研究盲选结果（图片资源未随副本复制）
 
 图 2-2：用户研究：50 名用户、30 个随机身份、并排盲选"更像输入脸"的一方，Arc2Face 71.0% vs InstantID 29.0%（来源：Paraperas-Papantoniou et al., 2024, Fig. 4c）
 
@@ -209,7 +209,7 @@ SigLIP2| 0.1736| 0.3245| 0.1431| 0.5010
   
 表中 TPR 均在 FPR=1e-2 工作点、StyleBench-H 三 split 上报告 #Yun et al., 2026#。三个读数值得逐一品味。第一，**人类判别与 ArcFace 判别的差距** ：Cross-Method split（未见风格化方法 × 未见风格）上，人类被试能以 90% 以上识别率稳定判定"还是本人"的样本对，ArcFace 的判定准确率恰好落在 0.5000——字面意义的抛硬币；作为对照，同一个 ArcFace 在 LFW 自然照片验证上的准确率是 0.9975。同一个模型，换一个分布，从"工业标准"跌成"噪声发生器" #Yun et al., 2026#。第二，换编码器救不了：AdaFace 同样崩到 0.3170，SigLIP2 在更简单的 Cross-ID split 上 TPR 就只有 0.1736——感知类编码器也不具备风格化域的身份判别力。第三，差距可以被域内训练补上（StyleID 同 split 0.7444、SKSF-A 艺术家手绘集 TPR 0.8891 / AUROC 0.9922），但代价是域特化：StyleID 在 LFW 上 TPR 0.9526，仍低于 ArcFace 的 0.9970——它是风格化域的专用尺，不是通用替代品，这个边界留给第 6 章展开 #Yun et al., 2026#。
 
-![风格化强度从弱到强的示例：IP-Adapter 与 InfiniteYou 两行输出，强度递增时身份保持单调劣化](media/images/styleid-2026/fig1.webp)
+风格化强度从弱到强的示例：IP-Adapter 与 InfiniteYou 两行输出，强度递增时身份保持单调劣化（图片资源未随副本复制）
 
 图 3-1：风格化强度递增的示例数据。上行为 IP-Adapter、下行为 InfiniteYou 输出：随着强度增大，身份保持单调劣化——风格化程度本身就是一个连续实验变量，而照片域度量对这条曲线的读数在强风格化端失真（来源：Yun et al., 2026, Fig. 2）。
 
@@ -238,7 +238,7 @@ Runway Gen-3| 0.1511| 0.2319| 第一 → 第三
 
 更值得玩味的是 Vchitect-2.0 的身份：它是按"写作时 VBench 榜单顶尖"遴选的模型、出自 VBench 作者团队，却在 FCB 的 Mode 1 下六列全部垫底（ArcFace 列 0.4843、GhostFaceNet 列 0.5215），Mode 2 在四列仍垫底（0.4798–0.5266）、多数读数落在 0.48–0.53 区间——**"通用榜单排名 ≠ 面部一致性"的活证据** #Podstawski et al., 2025#。
 
-![FCB 主结果：Mode 1 与 Mode 2 双联柱状图，6 个 FR 模型对真实视频与 4 个生成模型的余弦距离](media/images/face-consistency-benchmark-2025/plot.webp)
+FCB 主结果：Mode 1 与 Mode 2 双联柱状图，6 个 FR 模型对真实视频与 4 个生成模型的余弦距离（图片资源未随副本复制）
 
 图 3-2：FCB 主结果。左 Mode 1、右 Mode 2；每个 FR 分组内蓝色 Real Video 柱一致最矮，红色 Vchitect-2.0 与紫色 CogVideoX 柱普遍最高且高低随协议互换——同一批视频，换个协议就换个排名（来源：Podstawski et al., 2025, Fig. 1）。
 
@@ -264,7 +264,7 @@ VBench-2.0 侧的时序协议则是另一种"未定义"：Human Identity 的锚�
 
 最后替被批评者说句公道话：FCB 对 VBench 的批评——"DINO 全帧特征不裁脸、语义空间不对"——站得住，语义差异真实存在；但其"每帧 vs 首帧"的批评与 FCB 自己的 Mode 1（全部帧 vs 代表帧）在结构上同构。**评测者在批评别人协议时，也要接受同样的审查** 。
 
-![各 FR 模型视角下最优生成模型相对真实视频的差距倍数（Mode 1 与 Mode 2）](media/images/face-consistency-benchmark-2025/gap-ratio.webp)
+各 FR 模型视角下最优生成模型相对真实视频的差距倍数（Mode 1 与 Mode 2）（图片资源未随副本复制）
 
 图 3-3：最优生成模型 ÷ 真实视频的余弦距离倍数（左 Mode 1、右 Mode 2，虚线 1.0× 为真实水平）。整体差距 1.25–4 倍，且"差距看起来多大"随 FR 裁判改变：SFace 列差距最小（1.25×）不是模型更好，而是 SFace 的真实 baseline 本身最高——换尺子会换结论（数据来源：Podstawski et al., 2025, Table 1–2；本图据原表数值绘制）。
 
@@ -284,7 +284,7 @@ ID-Sim 在 7 个评测集、49 个评测 setup 上取得 48 个超越此前最�
 
 两点如实呈现。其一，环境不变性可以被**显式训练** 而非祈祷获得：把生成式上下文编辑（只换背景/光照、前景不动）作为正样本掺入训练，验证 ROC AUC 从 0.89 升到 0.937，完整数据配方呈五级台阶 0.693→0.752→0.890→0.937→0.965 #Chae et al., 2026#。其二，ID-Sim 自己也有代价：其光照鲁棒性略弱于 DINOv3——作者承认这是为保留身份相关的细粒度颜色线索而做的 tradeoff，即"选择性鲁棒"而非无条件鲁棒；另外 49 胜并非全胜，未赢的 setup 之一是 DreamBench++ 的 Spearman 相关（DreamSim 0.716 vs ID-Sim 0.6856——与人类感知对齐目标一致的对手在该 setup 仍占优）#Chae et al., 2026#。
 
-![ID-Sim teaser：选择性敏感概念与人类投票对比实验](media/images/id-sim-2026/teaser_FINAL.webp)
+ID-Sim teaser：选择性敏感概念与人类投票对比实验（图片资源未随副本复制）
 
 图 3-4：ID-Sim 的动机图。左侧：身份度量应当对上下文变化（背景、姿态、光照）不变、对身份修改敏感——这正是 P3 的形式化；右侧：人类投票与各模型投票的对比，通用嵌入模型各有系统性误判（来源：Chae et al., 2026, Fig. 1）。
 
@@ -390,7 +390,7 @@ P1–P5 说的是"尺子不准"；本节补上最后一刀："尺子的高分"�
 
 既然瓶颈在共享投影，那就解耦——文本与图像各自保有独立的 K/V 投影，查询 Q 共享（因为两条路查询的是同一组空间位置），输出加性融合。融合公式为： $$Z^{new} = \underbrace{\mathrm{Softmax}\Bigl(\frac{QK^{T}}{\sqrt{d}}\Bigr)V}_{\text{文本路（冻结）}} + \underbrace{\mathrm{Softmax}\Bigl(\frac{Q(K')^{T}}{\sqrt{d}}\Bigr)V'}_{\text{图像路（可训练）}}$$ 其中 $Q=ZW_q$ 由共享投影生成；$K=c_tW_k$、$V=c_tW_v$ 服务于文本特征 $c_t$（冻结）；$K'=c_iW'_k$、$V'=c_iW'_v$ 服务于图像特征 $c_i$（可训练，从 $W_k/W_v$ 初始化以加速收敛）。在 SD v1.5 全部 16 个 cross-attention 层旁各加一个这样的图像层；$c_i$ 来自冻结的 OpenCLIP ViT-H/14 全局图像嵌入，经投影网络压成 $N=4$ 个 token。训练只动这 22M 参数，损失与 SD 同型的去噪损失，无任何身份损失；推理时图像路可加权 $\lambda$，$\lambda=0$ 时严格退化为原模型。 
 
-![IP-Adapter 解耦交叉注意力架构](media/images/ip-adapter-2023/fig1.webp)
+IP-Adapter 解耦交叉注意力架构（图片资源未随副本复制）
 
 图 4-1：IP-Adapter 的解耦交叉注意力架构——红色新模块是全部可训练部分（22M 参数），文本路与图像路各自保有独立的 K/V 投影，Q 共享、输出加性融合（来源：Ye et al., IP-Adapter, 2023, Fig.2）。
 
@@ -416,7 +416,7 @@ P1–P5 说的是"尺子不准"；本节补上最后一刀："尺子的高分"�
   2. **Image Adapter** （语义路，细）：IP-Adapter 式解耦交叉注意力，image prompt 换成投影后的 ID 嵌入——范式一的接口被原样继承，换的只是信号源。
   3. **IdentityNet** （空间路，粗）：ControlNet 变体，两处关键改造——空间条件从 OpenPose 的全套关键点缩减到**仅 5 个面部关键点** （双眼、鼻尖、双嘴角），构成弱空间约束：锚定位置但不锁脸型与表情（完全无约束则人脸自由度过大）；**删去文本条件** ，cross-attention 条件改为纯 ID 嵌入——让残差路只管身份，不被泛化文本描述干扰。
 
-![InstantID IdentityNet 管线](media/images/instantid-2024/pipeline.webp)
+InstantID IdentityNet 管线（图片资源未随副本复制）
 
 图 4-2：InstantID 双路 pipeline——Image Adapter 分支以解耦交叉注意力消费投影后的 antelopev2 ID 嵌入（细粒度语义），IdentityNet 分支以 5 个面部关键点做弱空间约束、以纯 ID 嵌入为条件（粗粒度空间）（来源：Wang et al., InstantID, 2024, Fig.2）。
 
@@ -440,7 +440,7 @@ InstantID 自认的局限是 ID 嵌入的**属性高度耦合** ：性别、年�
 
 设计直觉：个性化生成的老毛病是"一个身份"与"一张图"绑定过紧。如果身份的表示不是单张图的嵌入、而是一组图的嵌入序列，模型被迫去学跨图不变量——单图里的表情、视角、配饰各不相同，唯一共同的正是身份本身。堆叠操作为： $$s^* = \mathrm{Concat}\bigl([e'^{1}, \ldots, e'^{N}]\bigr) \in \mathbb{R}^{N\times D}$$ 其中 $N$ 张 ID 图（背景填随机噪声）经 CLIP ViT-L/14（微调部分 Transformer 层）与投影得嵌入 $e^i$；每个 $e^i$ 与文本中的类词（man/woman）特征经 2 层 MLP 融合得 $e'^i$；$s^*$ 即堆叠 ID embedding。最后把文本嵌入 $t$ 中**类词位置的向量替换为 $s^*$** ，得到长度 $L+N-1$ 的扩展嵌入，交给冻结 SDXL 的**原生** cross-attention 融合（另训练注意力层矩阵的 LoRA 残差）。与范式一的根本区别在此：不加新注意力层——身份走文本的既有通道，占据了"一个男人"这个词的槽位。训练仅去噪损失 + masked diffusion loss（50% 概率只对 ID 区域计损）+ 10% null-text CFG，无 identity loss；每迭代随机采 1–4 张同 ID 图。 
 
-![PhotoMaker 堆叠 ID 嵌入框架](media/images/photomaker-2024/framework.webp)
+PhotoMaker 堆叠 ID 嵌入框架（图片资源未随副本复制）
 
 图 4-3：PhotoMaker 框架——(a) 堆叠 ID embedding：N 张 ID 图的 CLIP 嵌入与类词融合后沿长度维拼接，替换文本嵌入中的类词槽位，经 SDXL 原生 cross-attention（+注意力 LoRA）融合；(b) ID-oriented 数据构造管线（来源：Li et al., PhotoMaker, CVPR 2024, Fig.2）。
 
@@ -470,7 +470,7 @@ PhotoMaker| 26.1| **73.6**| **51.5**|  61.8| 57.7| 10
 
 前三个范式共享一个隐含假设：只要注入机制与身份表示选对了，跷跷板自然缓解。#Guo et al., 2024# 的诊断推翻了它——问题出在训练目标。常规训练中，ID 条件从目标图裁出，训练本质是"重建那张图"；模型会把 ID 嵌入中 ID 无关的信息用尽，参数也被拉向真实人像分布；测试时 prompt 与 ID 冲突（换个风格、换个场景），失败立刻显形——**训练与测试的设定鸿沟** 。作者还把领域经验规律挑明："ID 保真越高的方法污染越严重"——跷跷板不是工程失误，而是重建式训练范式的必然产物。PuLID 同时首创了污染的代理度量 CLIP-I（ID 插入前后的 CLIP 图像相似度），第一次让"污染"可以进表格。 
 
-![PuLID 保真-可编辑性对比](media/images/pulid-2024/teaser.webp)
+PuLID 保真-可编辑性对比（图片资源未随副本复制）
 
 图 4-4：PuLID 的动机图——ID 保真越高的方法，插入 ID 后的风格退化/污染越严重：图像明显偏离原模型（无 ID 插入）时的行为（来源：Guo et al., PuLID, NeurIPS 2024, Fig.1）。
 
@@ -478,7 +478,7 @@ PhotoMaker| 26.1| **73.6**| **51.5**|  61.8| 57.7| 10
 
 设计直觉：既然失败发生在"带 ID 条件从噪声生成"的测试设定下，就把这个设定搬进训练。这需要一个能在训练循环内快速产出逼真生成结果的引擎——SDXL-Lightning 4 步采样分支，从纯噪声迭代去噪到逼真的 $x_0$。在这个分支上，同 prompt、同初始 latent 地跑两条路径（有/无 ID 条件），两者输出的全部差异就是"插入这个 ID 带来的影响"——其中只有脸该变，其余都该不变。**对齐损失约束"不变"，ID loss 约束"脸变对"** 。PuLID 消费范式一的注入件（IP-Adapter 式并联注意力；ID 编码 = antelopev2 末层与 EVA-CLIP CLS 拼接经 MLP 成 5 个全局 token，加 ELITE 式多层 CLIP 成 5 个局部 token），替换的是训练目标，共三项： 其一，常规去噪损失。其二，**对比对齐** ：对齐两条路径在所有层、所有 timestep 上的 UNet cross-attention 特征。语义对齐 $\mathcal{L}_{\mathrm{sem}}$（论文记 L_align-sem，$\lambda=0.6$）用文本键查询 UNet 特征，要求语义响应在两条路径上一致： $$\mathcal{L}_{\mathrm{sem}} = \Bigl\|\mathrm{Softmax}\Bigl(\frac{KQ_{t+id}^{T}}{\sqrt{d}}\Bigr)Q_{t+id} - \mathrm{Softmax}\Bigl(\frac{KQ_{t}^{T}}{\sqrt{d}}\Bigr)Q_{t}\Bigr\|_{2}$$ 其中 $Q_{t+id}$ 与 $Q_t$ 分别是带/不带 ID 条件路径的查询特征，$K$ 是文本键——同一文本查询在两条路径上的注意力响应应当相同。布局对齐 $\mathcal{L}_{\mathrm{layout}}$（$\lambda=0.1$，权重刻意压小——压大了会伤 ID 保真）则直接以 L2 对齐查询特征以锁定布局。其三，**精确 ID loss** ——在 Lightning 分支生成的 $x_0$ 上计算身份余弦（$\lambda_{id}=1.0$，prompt 固定为 "portrait, color, cinematic"）： $$\mathcal{L}_{id} = 1 - \mathrm{CosSim}\Bigl(\psi(C_{id}),\ \psi\bigl(\mathrm{LT2I}(x_T, C_{id}, C_{txt})\bigr)\Bigr)$$ 其中 $\psi$ 是 ArcFace 编码器，$C_{id}$ 为参考图 ID 嵌入，$\mathrm{LT2I}(\cdot)$ 表示 Lightning T2I 分支从纯噪声 $x_T$ 出发的 4 步生成。与常规 ID loss 谱系的关键区别在于损失作用的对象：前者作用于单步或低噪声近似的 $x_0$，PuLID 的 $x_0$ 与测试设定同构（都是从噪声带 ID 条件生成）——仅此一项改动，Face Sim 从 0.652 提到 0.761。训练按三阶段课程推进：Stage1 纯扩散 → Stage2 加 ID loss（保真最大化、容忍污染）→ Stage3 加对齐（完整目标）。 
 
-![PuLID 零初始化注意力与对齐损失框架](media/images/pulid-2024/framework.webp)
+PuLID 零初始化注意力与对齐损失框架（图片资源未随副本复制）
 
 图 4-5：PuLID 双分支训练框架——上半为常规扩散训练（ID 条件从目标图裁出，即污染根源），下半为 Lightning T2I 分支：从纯噪声 4 步生成逼真 $x_0$，在其上构造有/无 ID 的对比路径，施加对齐损失与精确 ID loss（来源：Guo et al., PuLID, NeurIPS 2024, Fig.2）。
 
@@ -551,7 +551,7 @@ PuLID 三项全能。但换底座必须重新读数：SDXL-base（非加速）�
 
 ConsisID 的出发点不是"视频身份保持"这个任务，而是两个架构诊断 #Yuan et al., 2024#。作者发现，以 CogVideoX #Yang et al., 2024# 为代表的 DiT 视频底座有两处先天不足：**其一** ，U-Net 靠长跳连接把浅层低频特征聚合到解码器以助收敛，DiT 没有这一结构——人脸轮廓、比例这类低频信号在深层"悟不出来"，训练难以收敛（Finding 1）；**其二** ，Transformer 对高频感知弱——眼唇纹理这类细粒度身份特征喂进去也会被稀释（Finding 2）。这个诊断的价值在于把"身份注入"从一个黑盒工程问题改写成"频谱分配"问题：DiT 缺什么频率，就补什么频率，且要补在它该在的位置。 
 
-![ConsisID 全局-局部频率分解管线](media/images/consisid-2024/model_pipeline.webp)
+ConsisID 全局-局部频率分解管线（图片资源未随副本复制）
 
 图 5-1：ConsisID 整体架构——GFE 低频路与 LFE 高频路分别补 DiT 的两个先天缺陷：低频与噪声 latent 浅层拼接，高频经 Q-Former 融合后在每个注意力块内部注入（来源：Yuan et al., ConsisID, 2024, Fig.2）。
 
@@ -559,7 +559,7 @@ ConsisID 的出发点不是"视频身份保持"这个任务，而是两个架构
 
 低频路（Global Facial Extractor, GFE）：参考图与关键点 RGB 图拼接后经 VAE 编码，与输入噪声 latent 在**最浅层直接拼接** ——等于人为给 DiT 接一条 U-Net 式的低频旁路。高频路（Local Facial Extractor, LFE）：ArcFace #Deng et al., 2019#（倒数第二层 + 浅层多尺度特征）与 CLIP 图像编码器双塔提取、Q-Former 融合，得到的内禀身份特征 $F$ 在**每个注意力块内部** （Attention 与 FFN 之间）做 cross-attention。注入公式为： $$Z_i^{\prime} = Z_i + \text{Attention}(Q_i^v, K_i^f, V_i^f)$$ 其中 $i$ 是注意力块编号，$Q_i^v = Z_i W_i^q$ 来自视觉 token，$K_i^f$ 与 $V_i^f$ 来自身份特征 $F$——**视觉 token 主动查询身份信息** ，与文本 cross-attention（Q 来自视觉、K/V 来自文本）同构，因此可与文本条件共存；$W^q/W^k/W^v$ 是仅有的可训练投影，残差形式保证注入是"增强"而非"替换"。作者用七种注入位置的系统消融证明这个位置不是工程巧合：注入太浅（输入端）会梯度爆炸，注入在块外（输出端）FaceSim-Arc 只有 0.62——只有块内注入让注意力权重直接参与对高频 token 的选择，拿到 0.73。训练账本同样轻：底座 CogVideoX-5B，仅 1.8k steps × batch 80，总参数 5.2B→5.7B（+0.5B），推理只多约 2GB 显存、约 4 秒。粗到细的课程（先 GFE 后 LFE）则是为了解决两路竞争——同时训练时"GFE 和 LFE 相互竞争，模型收敛到次优点"（去掉课程 0.54，完整 0.73）。 
 
-![ConsisID 频率特征注入机制](media/images/consisid-2024/injection_of_frequency.webp)
+ConsisID 频率特征注入机制（图片资源未随副本复制）
 
 图 5-2：频率注入的 Fourier 谱证据——注入低频信号后生成人脸的低频成分确实增强，为 Finding 1 的补丁提供频域验证（来源：Yuan et al., ConsisID, 2024, Fig.4）。
 
@@ -585,7 +585,7 @@ ConsisID 给 DiT 焊了两个新模块；Concat-ID 反其道而行——它怀�
 
 机制一句话讲完：参考图经 VAE 编码成 latent，与视频噪声 latent 直接拼接，训练目标是纯 MSE 去噪损失——没有新模块、没有 cross-attention、没有 FR 嵌入、没有 ID loss： $$Z' = \mathrm{Concat}(Z, c_1, \cdots, c_M)$$ 其中 $Z$ 是视频噪声 latent，$c_1, \cdots, c_M$ 是 $M$ 张参考图的 VAE latent（多身份任务下 $M>1$，拼接式天然支持多人）。零新参数——架构极简主义的最极端形态。 
 
-![Concat-ID 原生拼接管线](media/images/concat-id-2025/framework1.webp)
+Concat-ID 原生拼接管线（图片资源未随副本复制）
 
 图 5-3：Concat-ID 框架——参考图 latent 与噪声 latent 直接拼接，零新参数、纯 MSE；机制重心全部在三阶段数据课程（来源：Zhong et al., Concat-ID, 2025, Fig.2）。
 
@@ -613,7 +613,7 @@ CoFE（v1 名 MoFE）的动机是一次崩溃现场 #Wang et al., 2025#。作者
 
 解法是信号冗余。三个专家各管一段：ArcFace 专家管细粒度身份（但姿态敏感、缺眼型等细节）、CLIP 专家管语义与风格（但肤色不稳）、DINOv2 专家管结构轮廓（但大姿态下反而模糊）——单看各有短板，门控按内容动态配平： $$\mathbf{w}^i = \text{Softmax}\left( \mathcal{G}(\mathbf{e}^i_{\text{c}}) \right), \quad \mathbf{e}^i_{\text{c}} = [\mathbf{e}^i_{\text{id}}, \mathbf{e}^i_{\text{sem}}, \mathbf{e}^i_{\text{det}}]$$ 其中 $\mathbf{e}^i_{\text{c}}$ 是第 $i$ 个 DiT block 上三个专家精炼后特征的拼接，$\mathcal{G}$ 是可学习线性投影——**门控权重由内容本身决定** ：不同姿态、不同深度的 block 自动得到不同的专家配比，这就是"动态融合"的数学本体。融合特征 $\mathbf{f}^i_{\text{fused}} = \mathbf{w}^i \cdot \mathbf{e}^i_{\text{c}}$ 作为第三路 cross-attention 注入（与 context 流、image 流输出相加），只注入偶数层 DiT block，参数增量 +18.5%。 
 
-![MoFE 协作人脸专家架构](media/images/collaborative-face-experts-2025/overview_1114.webp)
+MoFE 协作人脸专家架构（图片资源未随副本复制）
 
 图 5-4：CoFE 三专家协作架构——ArcFace/CLIP/DINOv2 三个专家层逐 block 精炼特征，门控 Softmax 动态配平后作为第三路 cross-attention 注入偶数层 DiT block（来源：Wang et al., CoFE, 2025, Fig.3）。
 
@@ -633,7 +633,7 @@ VIP-Test 上的崩溃链本身就是论文最好的广告：ConsisID 0.269 → �
 
 核心直觉是**时序分离** ：生成阶段完全不注入身份（草稿的全部容量给 prompt 遵循与时序一致性），身份阶段完全不生成（专用换脸模型只管把关键帧的脸换对）——用流程分离替代 PuLID 的目标分离与 Concat-ID 的数据分离，三种"分离轴"殊途同归。三段流水线：其一 RAVG 起草：GPT-5.4 识别主体并增强 prompt → ERNIE-Image-Turbo 生成首帧 → Qwen-Image-Edit 注入非人物体 → Wan2.2 + Prompt Relay（推理时时间路由，把每个时间段路由到对应动作描述）生成 81 帧身份无关草稿；其二 IPKE 关键帧编辑：K=5 个名义关键帧、搜索窗半径 w=8，窗内每帧先 FaceSwap 再打分，选 ArcFace 相似度最高者： $$k_i = \arg\max_{j \in W_i} s_j, \quad s_j = \mathrm{ArcFaceSim}(\mathrm{FaceSwap}(I_j, I_{ref}), I_{ref})$$ 其中 $W_i = [k_i - w, k_i + w] \cap [1, N]$ 是搜索窗，$I_{ref}$ 是参考人脸，$s_j$ 是换脸后候选帧与参考的 ArcFace 相似度；选定后按 $t_i = \frac{M}{N} k_i$ 线性映射到输出时间轴；其三 LTX-2.3 运动插值：5 张身份修正后的关键帧一次前向，运动补偿插值出 121 帧成片。 
 
-![KeyID 语义桥接框架](media/images/keyid-2026/framework.webp)
+KeyID 语义桥接框架（图片资源未随副本复制）
 
 图 5-5：KeyID 三段式流水线——RAVG 生成身份无关草稿，IPKE 选帧并做换脸修正，LTX-2 运动插值成片；身份与生成在时间轴上完全解耦（来源：Luo et al., KeyID, 2026, Fig.2）。
 
@@ -651,7 +651,7 @@ VIP-200K 上的读数：Face-Cur 0.633、Face-Arc 0.630、CLIPScore 30.9，对�
 
 裁判资格考试：在 500 个人类标注的偏好对上测各候选奖励模型的预测准确率——ArcFace 仅 0.772，低于论文自设的 0.8 可用性门槛，结论明确："与人类感知对齐差，不适合当奖励信号"；未微调的 VLM 全军覆没（Qwen2.5-VL-3B 0.430、72B 0.657、InternVL3.5-38B 0.685）。解法是自训：Qwen2.5-VL-3B + LoRA（vision encoder 也参与优化以捕捉身份细粒度），用带平局出口的 BTT 偏好模型（平局概率由 $\theta=5$ 控制）在 1.5 万偏好对（1 万自动 + 5 千人工）上训练，配合从自动数据到人工数据的平滑采样调度，测得 0.890。 
 
-![Identity-GRPO 奖励曲线](media/images/identity-grpo-2025/curve.webp)
+Identity-GRPO 奖励曲线（图片资源未随副本复制）
 
 图 5-6：Identity-GRPO 在 VACE 与 Phantom 两个底座上的 GRPO 训练曲线——身份指标与质量指标同步上升，RL 没有牺牲自然度换身份（来源：Meng et al., Identity-GRPO, 2025, Fig.1）。
 
@@ -719,13 +719,13 @@ StyleID（KAIST VML，SIGGRAPH 2026）面对的困境 #Yun et al., 2026#（精�
 
 **StyleBench-H（评测层，人类判断基准）** ：70 名被试做 same/different 判定（68 人通过质控），双过滤器剔除敷衍数据——延迟过滤（快于图片加载或超 100 秒的作答丢弃）与一致性甄别（末两题完全相同、答不一致者全部数据剔除）。6088 份有效响应最终筛出 3551 个平衡数据点，切成 Cross-ID / Cross-Style / Cross-Method 三个泛化层级的 split，其中 Cross-Method 由额外的 28 名被试标注 #Yun et al., 2026#。被试还被明确告知第二张图是风格化渲染，以抑制"风格不匹配"的表面判断——这套心理测量纪律，本身就是对"拿 FR 或 LLM 随手打分"的方法论批评。
 
-![StyleID 度量总览](media/images/styleid-2026/styleid-h.webp)
+StyleID 度量总览（图片资源未随副本复制）
 
 图 6-1：StyleBench-H 数据筛选流程。全量人类响应经延迟过滤、一致性过滤、真值筛选与正负平衡，最终汇入 3551 个数据点——基准不是"收集"出来的，是"过滤"出来的（来源：Yun et al., 2026, Fig. 5）。
 
 **StyleBench-S（训练层，合成监督）** ：直接人工标注 22 万对不现实，StyleID 的解法是**用心理测量曲线放大** 。对每个（方法 × 风格）组合做 2AFC 实验（源图 + 2 张风格化选项，1 真 1 干扰项），拟合"识别率-强度"曲线；以**90% 识别率阈值** 筛选人类大概率判 same 的强度级，且只保留最高与次高级——因为 2AFC 中被试可以靠性别这类粗语义线索在低识别率下仍答对二选一，阈值放宽到 70% 会出现明显身份劣化。由此得到 4073 个身份 × 55 张 ≈ 224k 的训练样本，即"约 22 万（224k）"对 #Yun et al., 2026#。
 
-![StyleID 阈值分析](media/images/styleid-2026/ids-threshold.webp)
+StyleID 阈值分析（图片资源未随副本复制）
 
 图 6-2：90% 与 70% 识别率阈值的选样对比。90% 阈值（StyleBench-S 实际采用）在保留身份特征的同时允许风格变化；70% 阈值的样本出现肉眼可见的身份劣化——阈值即数据质量门（来源：Yun et al., 2026, Fig. 6）。
 
@@ -737,7 +737,7 @@ $$ \mathcal{L} = \mathcal{L}_{\text{ang}} + 0.6\,\mathcal{L}_{\text{scon}} + 0.1
 
 其中 $\mathcal{L}_{\text{ang}}$ 是 ArcFace 式角度间隔损失（间隔 $m=0.5$、缩放 $\alpha=32$）管类级判别边界；$\mathcal{L}_{\text{scon}}$ 是监督对比损失，同一身份的不同风格样本互为正对——跨风格不变性直接编码进成对几何；$\mathcal{L}_{\text{reg}}$ 把适配后的 embedding 拴在冻结 CLIP 表征附近，防灾难漂移 #Yun et al., 2026#。训练经济性值得记账：单卡 A6000、30,000 迭代、batch 112（56 身份 × 2 样本，保证对比损失每个锚点至少一个正样本）——对照 Stylized-Face 的百万级数据清洗管线 #Peng et al., 2025#，这是"感知校准优先于数据规模"的路线声明。
 
-![StyleID 训练策略](media/images/styleid-2026/train.webp)
+StyleID 训练策略（图片资源未随副本复制）
 
 图 6-3：StyleID 训练总览。输入图同时经过 LoRA 适配的 StyleID 分支与冻结 CLIP 分支：前者接角度间隔头产生 $\mathcal{L}_{ang}$，embedding 直接产生 $\mathcal{L}_{scon}$，两条分支的 embedding 距离产生 $\mathcal{L}_{reg}$——参数空间（LoRA 低秩）与表征空间（锚定正则）双重约束（来源：Yun et al., 2026, Fig. 7）。
 
@@ -787,7 +787,7 @@ $$ D(x, y; f_\theta) = 1 - \mathrm{sim}\bigl(f_\theta(x),\, f_\theta(y)\bigr) $$
 
 CLS 表示做全局相似度，patch 表示可下探到分割级下游——这个设计后面还有回报。训练数据是 10k 三元组（30k 图、约 10k 实例、10 个数据集），按 S1/S2a/S2b 三类 1:1:1 均分：S1 是策展后的真实实例对；S2a 是生成式上下文编辑（只换背景/光照）作正样本；S2b 是生成式身份修改（FLUX.1-Fill 以类别级 prompt 重绘前景——保类别语义、改细粒度外观）作硬负样本，硬负样本另用 DINOv3 嵌入最近邻挖掘补强。还有一处防捷径的宝藏细节：三元组里掺了身份编辑负样本时，给 anchor 与 positive 加 strength 0.1 的轻度生成噪声——防止模型靠"生成伪影"而非"身份差异"识别负样本 #Chae et al., 2026#。
 
-![ID-Sim 方法总览](media/images/id-sim-2026/method_final.webp)
+ID-Sim 方法总览（图片资源未随副本复制）
 
 图 6-4：ID-Sim 训练管线。anchor/positive/negative 三路各自过 ViT 得到 CLS token 与 patch tokens，双头 MLP 投影后分别进入全局 CLS 损失（InfoNCE）与局部 patch 损失（Sinkhorn 距离），绿箭头拉近、红箭头推远（来源：Chae et al., 2026, Fig. 3）。
 
@@ -805,7 +805,7 @@ CLS 表示做全局相似度，patch 表示可下探到分割级下游——这�
   
 规模也不是越大越好：30k triplets 时 Identity Validation 掉到 0.91——数据质量对数量的胜利，10k 是稳定工作点 #Chae et al., 2026#。外部验证是本章最重的数字：**7 个评测集、49 个评测 setup 上 48 胜** ——但比"刷榜"更重要的是其元评测方法论：用 MVImgNet 的 100 个 held-out 实例构造 identity × background × viewpoint × lighting 联合编辑网格，逐实例拟合线性回归 $\mathrm{sim}_i=\beta_0+\beta_1\,\Delta_{\text{factor}}+\beta_2\,\Delta_{\text{id}}+\varepsilon$，以斜率读出度量对四个变化轴的敏感度，1000 次 bootstrap 给 95% 置信区间——**度量本身被当作被测对象** #Chae et al., 2026#。
 
-![ID-Sim 光照网格分析](media/images/id-sim-2026/lighting_grid_annotated.webp)
+ID-Sim 光照网格分析（图片资源未随副本复制）
 
 图 6-5：光照 × 身份编辑网格。行方向为逐步加大的身份编辑强度，列方向为多组光照 prompt；上两行参照组分别固定光照、固定身份。理想度量的相似度只应沿行方向下降、不随列方向漂移——ID-Sim 在此网格上呈现"高身份敏感 + 中等光照不变"的取舍（来源：Chae et al., 2026, 补充材料）。
 
@@ -825,7 +825,7 @@ CLS 表示做全局相似度，patch 表示可下探到分割级下游——这�
 
 身份信号不是任何 embedding，而是**源视频全片像素** ：relit face video（主信号，逐帧人脸像素）、face normal maps（几何辅助，治光照-形状歧义导致的漂移）、edited first frame（编辑接口）、depth sequence（运动/布局），四路经共享的 VACE context block 融合注入 Wan2.1 DiT #Xu et al., 2026#。训练数据是自造的：真实"同表演两风格"配对稀缺，就对训练视频脸区逐帧跑自训重光照模型——OLAT 光场数据（67 人）× PolyHeaven 随机 HDR 构造约 33 万对、SVD 单帧化 + HDR 条件微调 200K 步。一处关键的不对称设计：训练时人脸控制信号是 relit 到常规顶光的脸（顶光而非平光，保留更多几何阴影信息），推理时直接用源视频原始脸像素——relit 是在**模拟推理时源视频的光照分布** ，模型学的是"常规光 → 风格化光"的映射 #Xu et al., 2026#。
 
-![ID-V2V 视频重光照管线](media/images/id-v2v-2026/pipeline.webp)
+ID-V2V 视频重光照管线（图片资源未随副本复制）
 
 图 6-6：ID-V2V 架构。模型以 relit 面部区域与面部法线图保持面部外观与表演，以深度序列与编辑首帧引导编辑条件下的视频合成；relit face、face normal、depth 三路控制共享同一 ControlNet 参数（VACE 初始化），特征求和融合后注入主 DiT（来源：Xu et al., 2026, Fig. 3）。
 
@@ -848,7 +848,7 @@ SteadyDancer| 0.479| —| —
 
 但"光照是唯一合法变化"的假设，约束的不只是编辑端，还有**输入端** 。论文自认的失败模式：源视频带强绿色光或硬阴影时，即使编辑首帧已经去掉了绿色光，后续生成帧仍会复现绿色色偏——残光照线索逐帧泄漏，色偏与时序不一致同时出现 #Xu et al., 2026#。作者的建议朴素得近乎坦白：用常规光照的源视频拍摄。这个失败案例值得放大看：它说明窄化路线的可用性依赖一条**双向** 的契约——输出端的编辑必须可被"重光照"解释，输入端的源光照也必须落在训练分布内。契约任何一侧破裂，不变量假设就失效。
 
-![ID-V2V 极端光照失败案例](media/images/id-v2v-2026/Failure_extremeLight.webp)
+ID-V2V 极端光照失败案例（图片资源未随副本复制）
 
 图 6-7：极端源光照下的失败案例。编辑首帧已移除源视频的强绿色光，但后续生成帧中绿色色偏重新出现——残光照线索逐帧泄漏，光照不变量假设在输入端失效（来源：Xu et al., 2026, Fig. 5）。
 
@@ -916,7 +916,7 @@ $$ S_{\text{identity}}(V)=\frac{1}{|\mathcal{S}|}\sum_{t\in\mathcal{S}}\mathbb{1
 
 这个公式值得逐项审问，因为每一项背后都藏着一个协议决策。$\varphi$ 的输入不是生成帧本身，而是 RetinaFace 裁出、resize 到 128×128、**转灰度** 、与水平翻转堆叠成双通道后送入 resnet_face18 的人脸 patch——这些细节论文正文一个字没写，全部在代码库里（`human_identity.py`）#Zheng et al., 2025#。锚 $I_0$ 是视频自身的首帧：首帧检不出人脸则整条视频剔除，有效帧不足 20 帧同样剔除，最终按视频级平均聚合。阈值 0.4 把余弦相似度二值化，且**无任何消融** ——第 3 章已引 StyleID 的教训说明固定阈值 Acc 的读数陷阱。prompt 套件则是 46 条单人动作 prompt（"A man is doing yoga."式），全部单人、无任何参考身份描述；论文正文笼统写"每维约 70 条 prompt"，而代码实数各维 10–120 条不等、Identity 恰为 46 条——**协议细节以代码库为准** ，论文数字当约数看。
 
-![VBench-2.0 prompt 套件统计：左侧词云，右侧各维度 prompt 数量柱状图](media/images/vbench2-2025/fig_paper_prompt_stats.webp)
+VBench-2.0 prompt 套件统计：左侧词云，右侧各维度 prompt 数量柱状图（图片资源未随副本复制）
 
 图 7-1：VBench-2.0 prompt 套件统计。右图各维度 prompt 数从 10 到 120 不等——Human Identity 一目了然地停在 ~46 档，是全表最"薄"的维度之一；论文正文"每维约 70 条"的表述与代码实数不符，协议口径以代码库为准（来源：Zheng et al., 2025, Fig. 9）。
 
@@ -924,7 +924,7 @@ $$ S_{\text{identity}}(V)=\frac{1}{|\mathcal{S}|}\sum_{t\in\mathcal{S}}\mathbb{1
 
 现在可以精确说出这套协议测的到底是什么：**"生成过程是否漂移"** ，而不是"是否生成了指定身份"。46 条 prompt 没有参考人脸，锚是视频自己的首帧——哪怕模型生成的是一个从头到尾稳定、但与任何目标人物无关的路人，分数照样可以很高。对数字人场景（给定参考图生成"这个人"的视频）而言，用户要的恰恰是后一种度量，那得靠 OpenS2V/IPVG 类参考协议。这是"自一致性 vs 参考一致性"的操作化区分，不是 bug 而是边界——但榜单使用者常常不知道这条边界存在。
 
-![四个 SOTA 模型在 VBench-2.0 各维度上的雷达图](media/images/vbench2-2025/radar_big.webp)
+四个 SOTA 模型在 VBench-2.0 各维度上的雷达图（图片资源未随副本复制）
 
 图 7-2：VBench-2.0 上四个 SOTA 模型的维度雷达图（逐维归一化）。Sora 在 Human Identity 类维度领先、Kling 在相机类断层领先、HunyuanVideo 在人体结构类占优——没有全能冠军，身份保持与解剖正确性、可控性是可分离的能力（来源：Zheng et al., 2025, Fig. 2）。
 
@@ -949,7 +949,7 @@ OpenS2V-Nexus（2025.05，北大 Yuan 组，即 ConsisID 团队）想回答的�
 
 这一拆分与 VBench-2.0 的 DINO/ArcFace 分维同向（都是把"主体一致"与"人脸身份"分开），却是从相反方向抵达的：VBench-2.0 在通用 T2V 里给身份**补上** 一个 FR 维度，OpenS2V 在 S2V 里把 FR 从主指标中**撤下** 、降级为单列子项。两家都承认"FR 不能包打天下"，但一家选择 ArcFace、一家选择 CurricularFace 且均无"FR 选择对结论影响"的消融——这对口径分歧是活证据，本文将其并列呈现、不做裁决（裁决问题留给第 8 章 OQ7）。六维评测的其余成员：NaturalScore 用 GPT-4o（版本锁定 gpt-4o-2024-11-20）按五点量表打分 #OpenAI, 2024#，GmeScore 评文本相关，加 AestheticScore、MotionScore 构成总分——open-domain 权重为 Nexus 0.20 / Natural 0.24 / Gme 0.12 / **FaceSim 0.20** / Aesthetic 0.12 / Motion 0.12，人脸身份占总分两成。
 
-![OpenS2V-Eval 构建管线：左侧测试样本构建，右侧六维评测体系](media/images/opens2v-nexus-2025/pipeline_benchmark.webp)
+OpenS2V-Eval 构建管线：左侧测试样本构建，右侧六维评测体系（图片资源未随副本复制）
 
 图 7-3：OpenS2V-Eval 构建管线。左侧为测试样本构建（真实图 + GPT 合成图经 GPT-4o 写 caption、聚合出七类实体任务），右侧为六维评测——三个新建指标（NexusScore / NaturalScore / GmeScore）加三个借用指标，其中 FaceSim-Cur 继承 ConsisID 协议（来源：Yuan et al., 2025, Fig. 2）。
 
@@ -957,7 +957,7 @@ OpenS2V-Nexus（2025.05，北大 Yuan 组，即 ConsisID 团队）想回答的�
 
 三域排名表给出的第一批事实：open-domain 是 Kling 1.6 的 Total 54.46% 第一；human-domain 换了冠军，Hailuo 以 60.20% 登顶；而全场最刺眼的读数属于 VideoMaker——FaceSim **76.45% 全场最高** 、Natural **47.08% 全场最低** 、GmeScore 45.28% 同为垫底 #Yuan et al., 2025#。把参考脸"贴"得最死的模型拿了身份最高分，却生成了最不自然的视频——FR 分数与感知质量脱节的最极端实证（第 3 章 P5 已引，此处补充其协议语境：这正是 NaturalScore 被发明出来的理由，也是"高分掩盖失败"批判的定量注脚）。同表的失败现象学还包括 copy-paste、侧脸轮廓全灭、consistency fade（视频后半段主体细节逐渐消失）、首帧模糊——以及"人类身份保持系统性弱于非人实体"这一所有模型（含闭源）的通病。
 
-![OpenS2V-Eval 三域全部定量结果的雷达图可视化](media/images/opens2v-nexus-2025/leida.webp)
+OpenS2V-Eval 三域全部定量结果的雷达图可视化（图片资源未随副本复制）
 
 图 7-4：OpenS2V-Eval 全部定量结果的可视化（open / human / single 三域）。轴为模型、多边形为指标——把 FaceSim 与 NaturalScore 两个多边形叠在同一张图上看，VideoMaker 的形状失衡一望即知：一个维度冲到最外圈、相邻维度缩在最内圈（来源：Yuan et al., 2025, Fig. 14）。
 

@@ -99,7 +99,7 @@ A2-LLM #Hu-et-al.-2026# 提出了一种根本不同的方案：将文本、音�
 
 结果令人印象深刻：优化后的 A2-LLM 达到 TTFT = **50ms** ，TTFA = **535ms** ，RTF = **0.7x** （比实时快）#Hu-et-al.-2026#。相比之下，流式级联的 TTFA 是 3232ms——A2-LLM 快了 **6 倍** 。
 
-![A2-LLM 端到端框架架构](media/images/digital-human-backend-agent-design/a2llm-framework.webp)
+A2-LLM 端到端框架架构（图片资源未随副本复制）
 
 图 1：A2-LLM 框架——文本、音频和面部运动统一到同一 LLM token 空间。面部动态通过 RVQ-VAE 离散化为分层 token，Motion Connector 从 LLM 隐藏状态提取运动 token，消除级联管道的 Semantic-Emotion Gap #Hu-et-al.-2026#。
 
@@ -109,7 +109,7 @@ A2-LLM #Hu-et-al.-2026# 提出了一种根本不同的方案：将文本、音�
 
 Mio #Cai-et-al.-2025# 提出了一种折中方案：将"想"和"说"分离。Thinker 是一个专为 NPC 设计的 LLM，负责语义推理和对话管理；Talker 是一个语音合成引擎（Kodama-TTS），将 Thinker 的文本输出转为自然语音。此外还有独立的 Face Animator（[UniLS](unils-2024.html)）和 Body Animator 模块。
 
-![Mio Thinker-Talker 架构](media/images/digital-human-backend-agent-design/mio-architecture.webp)
+Mio Thinker-Talker 架构（图片资源未随副本复制）
 
 图 2：Mio 网络架构——Thinker（LLM 语义推理）+ Talker（Kodama-TTS 语音合成）+ Face Animator（UniLS 面部运动）+ Body Animator + Renderer。各模块通过清晰接口协作，兼具级联的可优化性和端到端的一致性 #Cai-et-al.-2025#。
 
@@ -217,7 +217,7 @@ InteractiveAvatar #Song-et-al.-2026# 解决了流式生成的另一个问题：*
 
 其 Long-Short Visual Memory（LSVM）机制维护两类记忆：**短期记忆** 保存最近生成的帧以确保局部连续性，**长期记忆** 通过 Dynamic Key-Frame Selection 策略从短期记忆中提取代表性视觉状态，保留全局信息防止时间漂移 #Song-et-al.-2026#。
 
-![InteractiveAvatar 架构总览](media/images/digital-human-backend-agent-design/interactiveavatar-architecture.webp)
+InteractiveAvatar 架构总览（图片资源未随副本复制）
 
 图 3：InteractiveAvatar 架构——(a) Reasoning-Reaction Module 进行意图感知交互；(b) 带 Long-Short Visual Memory 的流式推理增强视觉一致性；(c) DMD 训练实现实时流式生成 #Song-et-al.-2026#。
 

@@ -43,3 +43,6 @@ server/__pycache__/
 server/**/__pycache__/
 server/.venv/
 *.egg-info/
+
+# pi subagent runtime artifacts
+.pi/subagents/

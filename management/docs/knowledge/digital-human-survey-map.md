@@ -52,7 +52,7 @@ v8 把 talking head generation 分为五个家族#Gowda2026FPSP#：
 3D / NeRF / Gaussian| 3DMM 网格、NeRF 隐式场、3DGS、视角一致渲染| GaussianAvatars、LAM、GaussianSpeech、VASA-3D  
 文本/语义/编辑控制| 文本驱动、表情情绪控制、retalking、交互 avatar 控制| Write-a-speaker、TalkCLIP、EditYourself  
   
-![FPSP v8 的 taxonomy 与方法时间线图](media/images/digital-human-survey-map/fpsp-taxonomy.webp)
+FPSP v8 的 taxonomy 与方法时间线图（图片资源未随副本复制）
 
 FPSP v8 配图：方法 taxonomy 与时间线（图源：原论文 arXiv 2308.16041）
 
@@ -102,7 +102,7 @@ Human Motion Video Generation: A Survey：全身视角与三段管线
 
 这篇综述的组织方式不是按方法罗列，而是按**生成管线的三个阶段** #Xue2025MotionSurvey#：
 
-![视觉驱动 talking head 方法时间线](media/images/digital-human-survey-map/fpsp-visual-timeline.webp)
+视觉驱动 talking head 方法时间线（图片资源未随副本复制）
 
 FPSP v8 配图：2D 视觉/视频驱动族的方法时间线（图源：原论文 arXiv 2308.16041）
 
@@ -128,7 +128,7 @@ Optical Flow| 运动连续性| 抑制背景不稳定
   
 生成框架则归为 VAE、GAN、扩散（含 latent diffusion）三类，audio-driven 章节细分为唇同步、头部驱动、全身驱动、细粒度风格情绪、多语言配音五个子任务#Xue2025MotionSurvey#。
 
-![音频驱动 talking head 方法时间线](media/images/digital-human-survey-map/fpsp-audio-timeline.webp)
+音频驱动 talking head 方法时间线（图片资源未随副本复制）
 
 FPSP v8 配图：音频驱动族的方法时间线，Wav2Lip 到 Teller/READ 一线（图源：原论文 arXiv 2308.16041）
 

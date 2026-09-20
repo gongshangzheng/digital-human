@@ -116,7 +116,7 @@ DMD 蒸馏：把多步扩散压到少步
 
 扩散模型质量高，但多步采样天然慢。Distribution Matching Distillation 的核心目标是让学生生成器的分布直接匹配教师扩散模型的分布，从而把多步教师蒸馏成少步甚至一步学生。DMD2 进一步改进了 distribution matching 目标和训练稳定性，被广泛用于少步图像/视频扩散蒸馏讨论。#Yin-et-al.-2024-DMD# #Yin-et-al.-2024-DMD2#
 
-![](media/images/digital-human-streaming-distillation/dmd-overview.webp)
+图片（图片资源未随副本复制）
 
 图 3：DMD（Distribution Matching Distillation）的总体框架。学生生成器的输出分布同时被"真实分布"与"教师分布"两个 score 网络约束，从而把多步教师蒸馏成一步学生（来源：Yin et al., 2024, DMD overview）。
 
@@ -130,7 +130,7 @@ DMD 蒸馏：把多步扩散压到少步
 
 一个容易被忽略的反直觉结论是：少步蒸馏不必然以画质为代价。初代 DMD 依赖一个昂贵的 LPIPS 回归损失来稳定训练（需要预计算大量噪声-图像对，构建成本高达数百 A100 天），且学生质量被绑定在教师的采样路径上，难以超越教师。DMD2 移除了回归损失，改用双时间尺度更新（fake score 多更新几次再更新一次生成器）稳定训练，并在判别器上加入 GAN 损失让学生可以直接利用真实数据。结果是学生不仅追平、甚至超越了教师：在 ImageNet 64×64 上，DMD2 的一步学生达到约 1.28 FID，反而优于需要数百步的 EDM 教师（约 2.32 FID）。对工程团队的启示是，把“蒸馏”默认理解为“降质换速度”是过时的——选对蒸馏方案，少步模型可以同时拿到低延迟和高画质。#Yin-et-al.-2024-DMD# #Yin-et-al.-2024-DMD2# 
 
-![](media/images/digital-human-streaming-distillation/dmd2-gan-pipeline.webp)
+图片（图片资源未随副本复制）
 
 图 4：DMD2 引入的 GAN 损失分支。在判别器上加入对真实数据的对抗损失，让少步学生可以直接利用真实样本，从而追平甚至超越教师画质（来源：Yin et al., 2024, DMD2 pipeline）。
 
@@ -211,7 +211,7 @@ Self-Forcing：修复训练与推理的时间鸿沟
 
 Self-Forcing 关注自回归视频生成中的 training-inference gap。训练时模型常常看见更“干净”的历史帧，推理时却必须依赖自己生成过的帧；误差会沿时间积累，造成闪烁、身份漂移和动作崩坏。Self-Forcing 将模型自己的生成轨迹纳入训练，使模型学会处理推理时真实会遇到的历史状态。#Zhou-et-al.-2025-Self-Forcing#
 
-![](media/images/digital-human-streaming-distillation/self-forcing-overview.webp)
+图片（图片资源未随副本复制）
 
 图 5：Self-Forcing 的训练机制。与让学生匹配 teacher forcing 分布的 CausVid 不同，Self-Forcing 在训练时走自己的自回归 rollout，匹配推理时真正会遇到的历史帧分布，从根本上抑制误差累积（来源：Zhou et al., 2025, Fig.2）。
 

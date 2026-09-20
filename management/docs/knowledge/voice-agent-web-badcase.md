@@ -6,7 +6,7 @@ summary: 用独立 AudioContext 混音录制实现「会话进行中随时可取
 tags: [VoiceAgent, 前端, Web Audio API, MediaRecorder, 可观测性]
 ---
 
-> 本文是 [VoiceAgent 项目总览](docs/voice-agent-overview.md) 的**前端亮点三**。服务端的 `feedback` + `feedback_audio` 两表分离存储与本文的上传协议一一对应，见 [前后端契约与协同设计](docs/voice-agent-frontend-backend-contract.md)。
+> 本文是 VoiceAgent 项目总览 的**前端亮点三**。服务端的 `feedback` + `feedback_audio` 两表分离存储与本文的上传协议一一对应，见 前后端契约与协同设计。
 
 ## 一、问题：AI 出错了，但没人知道为什么
 
@@ -140,7 +140,7 @@ Safari 上会出现最后一个分片丢失的问题——因为 `AudioContext` 
 
 **Q：`MediaRecorder.start(1000)` 每秒一个分片，长会话会不会内存爆掉？**
 
-会话本身有硬性时长上限（服务端有 [600s 硬顶](docs/voice-agent-session-lifecycle.md)），所以分片数量有界。按实测平均 200-500KB 的量级，即使跑满上限也在浏览器内存的舒适区内。
+会话本身有硬性时长上限（服务端有 600s 硬顶），所以分片数量有界。按实测平均 200-500KB 的量级，即使跑满上限也在浏览器内存的舒适区内。
 
 如果要支持超长会话，可以改成滑动窗口（只保留最近 N 分钟）或分段上传，但那会牺牲「从会话开始的完整录音」这个特性——当前场景下完整性更重要。
 
@@ -164,7 +164,7 @@ Safari 那个坑本质上就是**丢了尾部分片**，虽然文件仍可播，
 
 ## 相关文档
 
-- [VoiceAgent 项目总览](docs/voice-agent-overview.md)
-- [前后端契约与协同设计](docs/voice-agent-frontend-backend-contract.md) — 上传协议与两表存储的对应关系
-- [服务端 · 会话生命周期状态机](docs/voice-agent-session-lifecycle.md) — 会话时长上限的来源
-- [MCP 工具可视化与 RAG 前端集成](docs/voice-agent-web-mcp-rag.md) — `renderFunctionCall` / `renderDelayMetrics` 的实现
+- VoiceAgent 项目总览
+- 前后端契约与协同设计 — 上传协议与两表存储的对应关系
+- 服务端 · 会话生命周期状态机 — 会话时长上限的来源
+- [[knowledge/voice-agent-web-mcp-rag|MCP 工具可视化与 RAG 前端集成]] — `renderFunctionCall` / `renderDelayMetrics` 的实现
