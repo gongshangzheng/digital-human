@@ -4,7 +4,7 @@
 
 - 伞 change：`internship-work-review-docs`（登记表 #1，结构契约六节：问题/定位方法/模长实验/夹角实验/治理方案/汇报要点与后续推进）。
 - 目标读者与用途：自己；工作汇报 + 后续推进素材 + 发文候选 A 证据源。
-- 双层流程（D0）：先「资料整理」产出 `整理-身份.md`（本 change 目录内），用户确认后才进入「动笔写作」。
+- 双层流程（D0）：先「资料整理」产出 `整理-数字人身份.md`（本 change 目录内），用户确认后才进入「动笔写作」。
 
 ## Goals / Non-Goals
 
@@ -28,7 +28,7 @@
 
 ## Decisions
 
-- **D1 整理产物放 change 目录**：`openspec/changes/docs-intern-identity/整理-身份.md`——正文写完后它是证据附件，不进 management/docs/
+- **D1 整理产物放 change 目录**：`openspec/changes/docs-intern-identity/整理-数字人身份.md`——正文写完后它是证据附件，不进 management/docs/
 - **D2 数字以 InternWiki 表格为准**：两源冲突时以更接近实验记录的版本为准，冲突记录进整理产物的"对勘"节
 
 ## Risks / Trade-offs

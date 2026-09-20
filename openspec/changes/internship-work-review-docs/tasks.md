@@ -11,8 +11,8 @@
 ## 2. 复盘单篇 change（按依赖顺序，逐篇创建与实施）
 
 - [ ] 2.1 创建并实施 `docs-intern-intro`（数字人介绍与技术路线.md）
-- [ ] 2.2 创建并实施 `docs-intern-identity`（身份.md）
-- [ ] 2.3 创建并实施 `docs-intern-motion`（动作.md，分层框架：音唇同步→表情×语言→手部）
+- [ ] 2.2 创建并实施 `docs-intern-identity`（数字人身份.md）
+- [ ] 2.3 创建并实施 `docs-intern-motion`（数字人动作.md，分层框架：音唇同步→表情×语言→手部）
 - [ ] 2.4 创建并实施 `docs-intern-engineering`（工程改进.md，含 PasteBack）
 - [ ] 2.4 创建并实施 `docs-intern-realtime`（实时性改进.md）
 - [ ] 2.5 创建并实施 `docs-intern-industry`（数字人行业全景.md，含 papers 库 related-work 扫描与模型横评数据汇总）

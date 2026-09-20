@@ -1,4 +1,4 @@
-# Proposal: docs-intern-identity（身份.md 单篇 change）
+# Proposal: docs-intern-identity（数字人身份.md 单篇 change）
 
 ## Why
 
@@ -6,8 +6,8 @@
 
 ## What Changes
 
-- 产出整理产物 `openspec/changes/docs-intern-identity/整理-身份.md`（证据与数据表汇总，先于正文）
-- 经确认后写正文 `management/docs/实习复盘/身份.md`（按伞 change 结构契约六节，平铺不嵌套）
+- 产出整理产物 `openspec/changes/docs-intern-identity/整理-数字人身份.md`（证据与数据表汇总，先于正文）
+- 经确认后写正文 `management/docs/实习复盘/数字人身份.md`（按伞 change 结构契约六节，平铺不嵌套）
 
 ## Capabilities
 
