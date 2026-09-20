@@ -26,7 +26,7 @@
 - 表达内容：开源框架对照——OpenAvatarChat（模块化对话式）、LiteAvatar（轻量 2D 数字人）、Ultralight（源码阅读类）；各自架构与取舍
 - 论证/结论：现有框架多在"轻量 2D / 纯对话"或"重型离线"，实时 + 可插拔 3D/扩散模型是缺口
 - 素材：knowledge/《open-avatar-chat-liteavatar》《lite-avatar-source-code-analysis》《ultralight-digital-human-source-read》《cyberverse-realtime-digital-human-agent》
-- 注意：竞品信息来自博客笔记（二手），标【待验证】+ 来源日期，不写成定论
+- 注意：竞品信息来自博客笔记（二手），标注来源与日期，用文字说明其为二手信息，不写成定论
 
 ### 三、`## CyberVerse 架构`
 - `### 三服务`：Python inference gRPC :50051（进程内跑所有插件）/ Go orchestrator :8080 + TURN :8443 / Vue 前端 :5173；附架构图
@@ -72,13 +72,13 @@
 | knowledge/ 竞品三篇 + cyberverse-realtime | 框架版图对勘 | ✅ 待整理成文 |
 | management/projects/cyberverse/tasks.json | t1–t25 改造归类 | ✅ 待整理成文 |
 
-> 说明：以上素材已具备，但按闸门需先审本大纲；通过后再产出 `整理-CyberVerse框架.md`（素材留 change 目录）。
+> 说明：以上素材已具备，但按闸门需先审本大纲；通过后在对话中提交整理结果供审核（不写入仓库），再动笔。
 
 ## Decisions
 
 - **D1 架构以代码为准**：README 面向用户，架构部分以 @4968280 目录/接口确认
-- **D2 竞品对勘标注来源**：竞品信息来自博客笔记，标【待验证】与日期
-- **D3 素材留 change、正文进 docs**
+- **D2 竞品对勘标注来源**：竞品信息来自博客笔记，标注来源与日期，用文字说明是二手信息
+- **D3 只有正文进仓库**：素材在对话中审核；正文进 `management/docs/实习复盘/CyberVerse框架.md`
 
 ## Risks / Trade-offs
 

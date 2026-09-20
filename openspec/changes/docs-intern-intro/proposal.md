@@ -6,7 +6,7 @@
 
 ## What Changes
 
-- 产出整理产物 `openspec/changes/docs-intern-intro/整理-数字人介绍与技术路线.md`（信息汇总 + 对勘 + 事实分级）
+- 整理路线信息与对勘结果，在对话中提交审核（不写入仓库）
 - 经确认后写正文 `management/docs/实习复盘/数字人介绍与技术路线.md`（按伞 change 结构契约，统一写作骨架：为什么重要 → 现行做法 → 我们的选择 → 改进方向）
 
 ## Capabilities

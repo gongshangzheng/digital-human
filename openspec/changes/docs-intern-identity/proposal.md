@@ -6,7 +6,7 @@
 
 ## What Changes
 
-- 产出整理产物 `openspec/changes/docs-intern-identity/整理-数字人身份.md`（证据与数据表汇总，先于正文）
+- 整理证据与数据表汇总，在对话中提交审核（不写入仓库）
 - 经确认后写正文 `management/docs/实习复盘/数字人身份.md`（按伞 change 结构契约六节，平铺不嵌套）
 
 ## Capabilities

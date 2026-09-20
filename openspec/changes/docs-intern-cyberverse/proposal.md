@@ -6,7 +6,7 @@
 
 ## What Changes
 
-- 产出整理产物 `openspec/changes/docs-intern-cyberverse/整理-CyberVerse框架.md`
+- 整理架构/插件/模型/部署结果，在对话中提交审核（不写入仓库）
 - 经确认后写正文 `management/docs/实习复盘/CyberVerse框架.md`（统一骨架：为什么需要框架 → 现行做法 → CyberVerse 架构/模型接入/部署 → 我们的改造 → 改进方向）
 
 ## Capabilities
