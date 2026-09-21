@@ -78,12 +78,12 @@
 ### 4. `数字人动作.md`（结构契约）
 
 - `## 为什么重要`：动作自然度决定可看性；动作是分层递进的能力
-- `## 现行做法（分层）`：①音唇同步（wav2lip→musetalk→vasa1 系）②表情与语言内容交互（语义一致性、听态双向生成）③手部与全身动作（co-speech gesture）；每层主流方法与代表工作（papers 库互链）
+- `## 现行做法（分层）`：①音唇同步（wav2lip→musetalk→vasa1 系）②**情绪与听态**（轴是情绪：音频不决定情绪、情绪怎么作为条件进来、expression_nr·expression_cls·THEval 等指标与 MEAD/RAVDESS/EMTD 数据集、听态双向生成）③手部与全身动作（co-speech gesture）；每层主流方法与代表工作（papers 库互链）
 - `## 动作空间谱系`（**Blendshape 的深度内容在这里**）：表示谱系按「人能读懂多少」排列——3DMM 系数（BFM/FLAME，语义高）/ **Blendshape 系数（ARKit 52 维等，工业标准接口）** / **显式这一族要单独讲透（landmarks：68 点 iBUG 300-W / MediaPipe Face Mesh 468·478 / BlazeFace / 3DDFA 类 3D 关键点；参数化模型 FLAME、3DMM/BFM；标准接口 ARKit 52 blendshape；专门身份编码器 BlendFace；人工定义、可直接编辑、协议互不兼容）** / 部署运动向量（Ditto 265 维）/ 隐式关键点（LivePortrait，隐式 blendshape，无标注语义）/ latent（AF 20 维）；**必须写清显式与隐式关键点是两类表示**（有隐式就有显式）：显式语义明确但覆盖有限，隐式表达强但无天然语义、需靠扰动观察反推控制；讲语义可读性、训练来源、可控制性、跨软件通用性（引《动作空间专题》）
 - `## 我们的工作`：
   - `### 中文音频适配（桥系列）`：蒸馏桥 → geom（单边 hinge，反塌缩）→ georkd（geom+RKD 关系蒸馏），附 LSE-C/LSE-D 与 sync_c/sync_d 指标表
   - `### 微调方法（Loss 与注入点）`：微调形态谱系（全冻结+桥 / LoRA / 单层解冻）与注入点审计方法；loss 设计如何影响音唇同步（引《微调策略专题》）
-  - `### 表情与听态`：表情"太用力"问题、AvatarForcing 双向听说、Ditto 眼嘴四层拆分
+  - `### 情绪与听态`：以情绪为轴——情绪标签/情绪参考/语义与文本三条信号来源、情绪指标与数据集、AvatarForcing 的 Dual Motion Encoder 双向听态；Ditto 眼嘴四层拆分单列
 - `## 可能的改进方向`：我们做到哪层、市面到哪层、下一步（听态质量、手部接入成本）
 
 ### 5. `工程改进.md`（结构契约）
