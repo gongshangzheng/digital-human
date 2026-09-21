@@ -103,6 +103,7 @@
 ### 6. `数字人行业全景.md`（结构契约）
 
 - `## 为什么重要`：选型与产品对标决定方向
+- `## 生成侧加速`（**本次新增**）：视频推理加速作为实时性的另一层——四类成本来源（配图）+ **四个加速方向各成三级标题**（内核与稀疏 / 步数变少 / 缓存复用 / 并行与推理引擎，方向里点名 FPSAttention / BLADE / NAR / FlashAR / Latent Spatial Memory / WorldAttention / ZipAR / DAX / Inferix / TurboDiffusion）、两条结论（协同设计是唯一的免费午餐；训练费与即插即用光谱）、能落到我们管线的候选（LIA-X decoder 蒸馏）
 - `## 我们测过的模型`：15+ 模型 SpeedRun / Formal Eval 横评（RTF、画质、sync_c/sync_d 指标表）——第一手数据
 - `## 竞品与产品调研`：阿里云数字人等主流产品（原理/效果/实时通话/延迟），自研 vs 竞品对标
 - `## 选型结论`：GAGAvatar/UIKA → 最终体系（CyberVerse + AvatarForcing/Ditto）
