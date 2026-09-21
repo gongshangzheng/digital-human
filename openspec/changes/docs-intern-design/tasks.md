@@ -16,5 +16,5 @@
 ## 3. 补写 PasteBack 小节（本轮新增）
 
 - [x] 3.1 explore 贴回代码与修复笔记：`pasteback_utils.py`、`model.py` 的矩阵构造与裁剪入口、Ditto 的 `putback`/`source2info`/`avatar_registrar`、`avatarforcing-pasteback-fluctuation.md`
-- [ ] 3.2 按 design 第七节改写《工程改进》的 PasteBack 小节：完整链路六阶段 + 三轮修复 + 与 Ditto 的对照 + 参数 + 指标；配一张链路图
-- [ ] 3.3 自查：无出处路径（代码路径只留 change）、数字溯源、与《数字人加速》边界不重叠（贴回属画质/正确性，速度数字只保留 p95 与前后的性能路径描述）
+- [x] 3.2 按 design 第七节改写《工程改进》的 PasteBack 小节：完整链路六阶段 + 三轮修复 + 与 Ditto 的对照 + 参数 + 指标；配一张链路图
+- [x] 3.3 自查：无出处路径（代码路径只留 change）、数字溯源、与《数字人加速》边界不重叠（贴回属画质/正确性，速度数字只保留 p95 与前后的性能路径描述）
