@@ -35,9 +35,17 @@
 
 | 项 | 来源 | 状态 |
 |----|------|------|
-| 文档详情接口支持 Unicode/中文 slug（放宽 `_SLUG_RE` + 拒绝 `..`） | 本仓库 `sync-projflow-shared-updates` | 待回灌（上游 `eb331fc` 同样存在此 bug） |
+| 文档详情接口支持 Unicode/中文 slug（放宽 `_SLUG_RE` + 拒绝 `..`） | 本仓库 `sync-projflow-shared-updates` | ✅ **已回灌**（上游 `c47d588` pick 自本仓库 `486c925`） |
 | HIDDEN_KEYS 采用与 menu.js→hidden.js 迁移经验 | 本仓库同上 | 待回灌（上游已有 hidden.js，经验性补充） |
 | 文档列表排序：`order` 字段 + 文件夹优先级 + slug 兜底（不依赖文件系统顺序） | 本仓库 `docs-list-ordering` | 待回灌（上游排序链同样缺最后一级兜底） |
+| **文内锚点接管**：正文 `[文字](#slug)` 由前端拦截（`preventDefault` + `getElementById` + 平滑滚动，不改 URL） | 本仓库 `docs-inline-anchor-links` | 待回灌（上游 `MarkdownRenderer` 无此分支，锚点会改 URL 且不平滑） |
+
+### 本轮从上游 pick（`sync-projflow-round2`）
+
+| 项 | 上游提交 | 状态 |
+|----|---------|------|
+| 文档页滚动位置恢复（`scrollMemory.js` + `DocPage` 接入） | `afea6a3` | ✅ 已移植并浏览器实测通过（刷新恢复 / 逐文档记忆 / 锚点不受影响） |
+| skill 真实目录迁至 `.agents/skills`、`.claude/skills` 改符号链接 | `db9fdf8` | ⛔ **不采纳**：本仓库没有仓库级技能目录（写作规范在用户级 `~/.pi/agent/skills`），迁移无收益 |
 
 ## 维护规则
 
