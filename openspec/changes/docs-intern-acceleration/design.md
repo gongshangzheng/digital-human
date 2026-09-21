@@ -75,7 +75,8 @@
 ### 六、`## 硬件档位与可行性`
 
 - 四个档位：零 GPU / CPU / 移动端 → 单张消费级 → 单张数据中心（A10 / A100 / H100）→ 多卡；**配图 3**：`flowchart TB` 四档与可达能力
-- A10 结论表：LiveAct 不适用（官方口径依赖多卡 + FP8）· LivePortrait 需实测 · Ditto 需实测（担心显存）· FlashHead Pro 已验证
+- A10 结论表：LiveAct 不适用（官方口径依赖多卡 + FP8）· **LivePortrait 可在 A10 上跑** · **Ditto 经加速后堪堪可在 A10 上跑（余量很小，属边界可行）** · FlashHead Pro 已验证
+  - **状态更新（我们的实测经验，口述）**：早期评估表把 LivePortrait 与 Ditto 标为"⚠️ 需实测"，现在两者的开放项都结掉了——**LivePortrait 可以；Ditto 加速之后堪堪可以**。写作时把"需实测"改成"已可运行"，并注明余量小（Ditto 属边界可行，不要再写成"担心显存"）
 - `### LiveAct 18B 的结论修正`（**值得单独写的一段，因为我们的结论被自己的复测推翻过**）：
   - 早期记"不可用（OOM / 超时）" → 两次完整跑通推翻
   - **显存不是瓶颈**：峰值只有 **10.4 GiB（512²）/ 11.7 GiB（416×720）**，22.5 GiB 的 A10 还剩一半
@@ -116,7 +117,7 @@
 | knowledge/《CyberVerse 工程专题》§一/§四/§五 | 瓶颈基线表、性能尝试表、未采纳表 | 待抄录 |
 | knowledge/《Ditto 实时化与 TensorRT 加速复盘》§一/§三/§四 | 优化全景三档、模块级事实（Warp / LMDM 未默认）、为什么不是单点胜利 | 待抄录 |
 | CyberVerse `management/projects/cyberverse/tasks.json` | 首帧与开口（t15 / t16 / t20 / t25）的数字与结论 | 待提取 |
-| knowledge/《digital-human-engineering-benchmark》《hardware-assessment》 | A10 结论表、LiveAct 主机内存瓶颈与 FP8 约束 | 待抄录 |
+| knowledge/《digital-human-engineering-benchmark》《hardware-assessment》 | A10 结论表、LiveAct 主机内存瓶颈与 FP8 约束；**注意 A10 行需按最新事实修正**（LivePortrait 可跑；Ditto 加速后堪堪可跑） | 待抄录 |
 | digital_human 平台 SpeedRun / Formal Eval 结果 | 15+ 模型第一手横评 | **本机未找到，待确认** |
 
 ## Decisions
