@@ -12,3 +12,9 @@
 
 - [x] 2.1 写 `management/docs/实习复盘/工程改进.md`（见 design 的 11 节大纲 + 3 张 mermaid 图），数字全部溯源整理产物
 - [x] 2.2 自查：结构契约对齐、无编造数字、无越界（系统通论归《CyberVerse框架》）、无出处标注、无死链；openspec validate 通过并提交
+
+## 3. 补写 PasteBack 小节（本轮新增）
+
+- [x] 3.1 explore 贴回代码与修复笔记：`pasteback_utils.py`、`model.py` 的矩阵构造与裁剪入口、Ditto 的 `putback`/`source2info`/`avatar_registrar`、`avatarforcing-pasteback-fluctuation.md`
+- [ ] 3.2 按 design 第七节改写《工程改进》的 PasteBack 小节：完整链路六阶段 + 三轮修复 + 与 Ditto 的对照 + 参数 + 指标；配一张链路图
+- [ ] 3.3 自查：无出处路径（代码路径只留 change）、数字溯源、与《数字人加速》边界不重叠（贴回属画质/正确性，速度数字只保留 p95 与前后的性能路径描述）
