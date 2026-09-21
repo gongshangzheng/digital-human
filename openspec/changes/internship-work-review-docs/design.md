@@ -150,6 +150,8 @@
 
 ## 论文笔记登记表（`management/docs/论文笔记/`，夹内平铺，双层流程同 D0）
 
+> **生成侧加速十篇**（fpsattention / blade / nar / flashar / latent-spatial-memory / worldattention / zipar / dax / turbodiffusion / inferix）：素材来自 knowledge/《视频生成训练与推理加速专题》与博客 `video-gen-acceleration`；**《数字人加速》里已点名这十个工作但未加链接**——笔记写完后回该篇补链接。
+>
 > **技术路线不在此夹**：三路线总览只存在于《数字人介绍与技术路线》（复盘 #1），本夹不再设路线篇，避免重复。
 
 统一模板（一篇一个论文/模型）：论文层 `## 是什么` → `## 架构核心`（驱动信号→表示→生成→渲染 + 与同类差异一表）→ **可选工程层** `## 在我们体系中的角色`（插件路径、接入状态、我们的改动/否证；仅深度接入过的模型填写）→ `## 与复盘各线的关联` → `## 参考与延伸`。
@@ -163,6 +165,16 @@
 | `talker-t2av.md`（含工程层） | knowledge/《Talker-T2AV 模型精读》《Talker-T2AV 接入与验证》 | `docs-note-talker-t2av` |
 | `liveportrait.md`（含工程层） | papers 库 `arxiv-2407.03168`（LivePortrait）+ 博客 `paper-liveportrait` + models/ 相关 Stitching/Retargeting 控制 | `docs-note-liveportrait` |
 | `lia-x.md`（含工程层） | papers 库 `arxiv-2508.09959`（LIA-X: Interpretable Latent Portrait Animator）+ 博客 `lia-x-2025` | `docs-note-lia-x` |
+| `fpsattention.md` | 《数字人加速》生成侧加速·内核与稀疏 | `docs-note-fpsattention` |
+| `blade.md` | 生成侧加速·步数蒸馏 | `docs-note-blade` |
+| `nar.md` | 生成侧加速·邻域自回归 | `docs-note-nar` |
+| `flashar.md` | 生成侧加速·自回归后训练加速 | `docs-note-flashar` |
+| `latent-spatial-memory.md` | 生成侧加速·隐空间空间记忆 | `docs-note-latent-spatial-memory` |
+| `worldattention.md` | 生成侧加速·缓存与计算协同 | `docs-note-worldattention` |
+| `zipar.md` | 生成侧加速·空间局部性并行解码 | `docs-note-zipar` |
+| `dax.md` | 生成侧加速·推理基础设施 | `docs-note-dax` |
+| `turbodiffusion.md` | 生成侧加速·模型与系统协同设计 | `docs-note-turbodiffusion` |
+| `inferix.md` | 生成侧加速·自回归扩散推理引擎 | `docs-note-inferix` |
 | 后续新读论文 | 按统一模板新增，命名挂 papers 库条目 | `docs-note-<slug>` |
 
 ## Decisions

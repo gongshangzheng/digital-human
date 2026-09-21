@@ -21,6 +21,20 @@
 | `talker-t2av.md` | 深读 + 工程层（接入与验证） | 待写 |
 | `liveportrait.md` | 深读 + 工程层（隐式关键点表示、stitching/retargeting 控制） | 待写 |
 | `lia-x.md` | 深读 + 工程层（可解释 latent、40D motion code 与身份特征注入） | 待写 |
+| `fpsattention.md` | 深读（FP8 量化 × 稀疏注意力协同） | 待写 |
+| `blade.md` | 深读（块稀疏 × 步数蒸馏） | 待写 |
+| `nar.md` | 深读（邻域自回归建模） | 待写 |
+| `flashar.md` | 深读（自回归生成的后训练加速） | 待写 |
+| `latent-spatial-memory.md` | 深读（隐空间空间记忆） | 待写 |
+| `worldattention.md` | 深读（缓存与计算系统协同） | 待写 |
+| `zipar.md` | 深读（空间局部性并行解码） | 待写 |
+| `dax.md` | 深读（VideoGen 推理基础设施） | 待写 |
+| `turbodiffusion.md` | 深读（模型与系统协同设计） | 待写 |
+| `inferix.md` | 深读（自回归扩散推理引擎） | 待写 |
+
+## 生成侧加速十篇（素材已备）
+
+上表最后十篇来自**视频推理加速**方向，素材已经在知识库与博客里（《视频生成训练与推理加速专题》与 `video-gen-acceleration`），**《数字人加速》里已点名这十个工作但还没加链接**——笔记写成后回该篇补链接。
 
 ## 命名规范
 

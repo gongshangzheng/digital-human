@@ -26,6 +26,7 @@
 - [ ] 2.11 创建并实施 `docs-note-liveact`
 - [ ] 2.12 创建并实施 `docs-note-omnimate`
 - [ ] 2.13 创建并实施 `docs-note-talker-t2av`
+- [ ] 2.14 批量创建生成侧加速十篇笔记（fpsattention / blade / nar / flashar / latent-spatial-memory / worldattention / zipar / dax / turbodiffusion / inferix）；**建成后回到《数字人加速》的《生成侧加速》补链接**
 
 ## 3. 体系级验收
 
