@@ -56,7 +56,8 @@
 - `## CyberVerse 架构`：三服务（Python inference gRPC :50051 / Go orchestrator :8080 + TURN :8443 / Vue 前端 :5173）、插件体系（`inference/plugins/{asr,llm,tts,voice_llm,avatar}` + `proto/*.proto`）、AvatarPlugin / BidirectionalAvatarPlugin 抽象、RAG 与 PersonaAgent+SubAgent
 - `## 模型接入`：models/ 下 AvatarForcing、Ditto、FlashHead、MuseTalk、SoulX-LiveAct 的接入形态（链论文笔记五篇）
 - `## 部署形态`：远程 GPU 服务器 + SSH 隧道（5173/8080/8443）、本地只编辑/远端只部署的协作纪律（引其 AGENTS.md）
-- `## 我们的改造与扩展`：工程改进与实时性改进的落点（链《工程改进》）、管理模块迁移、[shared] 脚手架协作
+- `## 我们的改造与扩展`：改造落点（链《工程改进》）、管理模块迁移、[shared] 脚手架协作
+- **边界**：本篇只写架构与实时性的**通论**（组件划分、延迟从哪来、传输层与推理层的通用做法）；**具体加速手段与实测数字归《数字人加速》**，不在此展开
 - `## 可能的改进方向`
 
 ### 3. `数字人身份.md`（结构契约）
