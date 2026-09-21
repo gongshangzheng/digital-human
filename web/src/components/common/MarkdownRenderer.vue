@@ -23,7 +23,15 @@ function handleClick(e) {
   const anchor = e.target.closest('a')
   if (!anchor) return
   const href = anchor.getAttribute('href')
-  if (href && href.startsWith('/management/')) {
+  if (!href) return
+  // 文内锚点：按 id 找到标题并平滑滚动，与右侧 TOC 行为一致（不改 URL）
+  if (href.startsWith('#')) {
+    e.preventDefault()
+    const el = document.getElementById(decodeURIComponent(href.slice(1)))
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    return
+  }
+  if (href.startsWith('/management/')) {
     e.preventDefault()
     router.push(href)
   }
