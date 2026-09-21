@@ -10,5 +10,5 @@
 
 ## 2. 动笔写作（1.x 全部确认后启动）
 
-- [ ] 2.1 写 `management/docs/实习复盘/工程改进.md`（见 design 的 11 节大纲 + 3 张 mermaid 图），数字全部溯源整理产物
-- [ ] 2.2 自查：结构契约对齐、无编造数字、无越界（系统通论归《CyberVerse框架》）、无出处标注、无死链；openspec validate 通过并提交
+- [x] 2.1 写 `management/docs/实习复盘/工程改进.md`（见 design 的 11 节大纲 + 3 张 mermaid 图），数字全部溯源整理产物
+- [x] 2.2 自查：结构契约对齐、无编造数字、无越界（系统通论归《CyberVerse框架》）、无出处标注、无死链；openspec validate 通过并提交
