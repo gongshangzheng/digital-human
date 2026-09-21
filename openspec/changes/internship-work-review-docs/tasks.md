@@ -21,11 +21,11 @@
 
 ## 2b. 论文笔记单篇 change（可并行推进）
 
-- [ ] 2.13 创建并实施 `docs-note-avatar-forcing`
-- [ ] 2.13 创建并实施 `docs-note-ditto`
-- [ ] 2.13 创建并实施 `docs-note-liveact`
-- [ ] 2.13 创建并实施 `docs-note-omnimate`
-- [ ] 2.13 创建并实施 `docs-note-talker-t2av`
+- [ ] 2.9 创建并实施 `docs-note-avatar-forcing`
+- [ ] 3.9 创建并实施 `docs-note-ditto`
+- [ ] 4.9 创建并实施 `docs-note-liveact`
+- [ ] 5.9 创建并实施 `docs-note-omnimate`
+- [ ] 6.9 创建并实施 `docs-note-talker-t2av`
 
 ## 3. 体系级验收
 
