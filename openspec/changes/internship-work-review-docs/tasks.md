@@ -14,17 +14,18 @@
 - [ ] 2.2 创建并实施 `docs-intern-cyberverse`（CyberVerse框架.md）
 - [ ] 2.3 创建并实施 `docs-intern-identity`（数字人身份.md）
 - [ ] 2.4 创建并实施 `docs-intern-motion`（数字人动作.md，分层框架：音唇同步→表情×语言→手部；含微调 Loss（geom/RKD）与注入点消融）
-- [ ] 2.5 创建并实施 `docs-intern-engineering`（工程改进.md，含 PasteBack 与实时性改进）
-- [ ] 2.6 创建并实施 `docs-intern-industry`（数字人行业全景.md，含 papers 库 related-work 扫描与模型横评数据汇总）
-- [ ] 2.7 创建并实施 `docs-intern-summary`（总结.md：总览 + 发文方向）
+- [ ] 2.5 创建并实施 `docs-intern-engineering`（工程改进.md，只写"稳与对"：PasteBack、音频缺口、会话与内存、体验类缺陷）
+- [ ] 2.6 创建并实施 `docs-intern-acceleration`（数字人加速.md：只写"快"——实时性指标与延迟链、生成侧加速、系统侧加速、模型实时性横评、硬件档位与可行性、未采纳方案；按 D7 从《工程改进》《数字人行业全景》搬迁相关章节）
+- [ ] 2.7 创建并实施 `docs-intern-industry`（数字人行业全景.md：模型横评（第一手待补）、竞品与产品调研、选型结论、未采纳与待复跑、趋势判断）
+- [ ] 2.8 创建并实施 `docs-intern-summary`（总结.md：总览 + 发文方向，数字从 1–7 汇总）
 
 ## 2b. 论文笔记单篇 change（可并行推进）
 
-- [ ] 2.8 创建并实施 `docs-note-avatar-forcing`
-- [ ] 2.9 创建并实施 `docs-note-ditto`
-- [ ] 2.10 创建并实施 `docs-note-liveact`
-- [ ] 2.11 创建并实施 `docs-note-omnimate`
-- [ ] 2.12 创建并实施 `docs-note-talker-t2av`
+- [ ] 2.13 创建并实施 `docs-note-avatar-forcing`
+- [ ] 2.13 创建并实施 `docs-note-ditto`
+- [ ] 2.13 创建并实施 `docs-note-liveact`
+- [ ] 2.13 创建并实施 `docs-note-omnimate`
+- [ ] 2.13 创建并实施 `docs-note-talker-t2av`
 
 ## 3. 体系级验收
 
