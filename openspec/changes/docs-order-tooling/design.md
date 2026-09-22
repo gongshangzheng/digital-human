@@ -36,7 +36,7 @@ PyYAML 把 frontmatter 解析后再 `dump`，会重排字段顺序、改引号�
 
 因此：**正则定位 `order:` 那一行改值**；字段不存在时插到 `title:` 之后（否则追加到 frontmatter 末尾）。其余字节一律不动。
 
-- 代价：不校验 frontmatter 是否合法 YAML（那是后端的事）；`order` 行有奇异写法时按行内 `#` 注释保留后半段。
+- 写盘前后仅做内置的 frontmatter 结构与 `order` 字段校验：首尾分隔符完整、`order` 行唯一且值为数字；不引入 PyYAML 做完整 YAML 语义解析。`order` 行有奇异写法时按行内 `#` 注释保留后半段。
 - 备选：`ruamel.yaml` 保序 dump —— 需要新依赖，收益与 D2 相同，不采用。
 
 ### D3：默认 dry-run，`--apply` 才写盘
@@ -91,7 +91,7 @@ summary:
 | 风险 | 缓解 |
 |---|---|
 | 改错值导致顺序变化 | 默认 dry-run；`renumber` 的输出是「原值 → 新值」全量清单；改完用 `list` 与后端 `/api/management/docs` 双向核对 |
-| 行级编辑写坏 frontmatter | 只改 `order:` 一行；写完立即用 `yaml.safe_load` **带异常捕获地校验**该文件（校验失败则回滚该文件并报错） |
+| 行级编辑写坏 frontmatter | 只改 `order:` 一行；写完立即以内置规则校验 frontmatter 分隔符、唯一 `order:` 行及数值格式（失败则回滚该文件并报错） |
 | 与后端排序链漂移 | D5 的注释指引 + 一条验收项（脚本顺序 == API 顺序） |
 | 位移把人工安排的语义编号抹掉 | 位移只发生在「无空位」或显式 `--shift` 时，且 dry-run 会完整列出 |
 | 脚本变成又一处需要维护的代码 | 规模控制在单文件、stdlib、三个子命令；不做成通用工具 |
