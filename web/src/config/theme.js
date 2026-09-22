@@ -11,7 +11,8 @@
 // 新增一个颜色只需在 ACCENTS 里加一行。
 // ============================================================
 
-export const DEFAULT_ACCENT = 'indigo'
+// 默认强调色：无本地偏好时使用（枪灰）
+export const DEFAULT_ACCENT = 'gray'
 
 // 浅色模式用较深的色值（在白底上对比度足够），深色模式用较亮的变体。
 export const ACCENTS = [
@@ -23,6 +24,7 @@ export const ACCENTS = [
   { key: 'amber', label: '琥珀', light: '#d97706', dark: '#fbbf24' },
   { key: 'rose', label: '玫红', light: '#e11d48', dark: '#fb7185' },
   { key: 'violet', label: '紫罗兰', light: '#7c3aed', dark: '#a78bfa' },
+  { key: 'gray', label: '枪灰', light: '#4a4f57', dark: '#a8aeb6' },
 ]
 
 // soft / selected 变量在明暗模式下的透明度（沿用改造前的取值）

@@ -6,7 +6,7 @@
   --color-card: #{$bg-card};
   --color-elevated: #{$border-light};
   --color-hover: rgba(0, 0, 0, 0.04);
-  --color-selected: rgba(79, 70, 229, 0.08);
+  --color-selected: rgba(74, 79, 87, 0.08);
   --color-border: #{$border-color};
   --color-border-light: #{$border-light};
   --color-text: #{$text-primary};
@@ -14,7 +14,7 @@
   --color-text-dim: #{$text-light};
   --color-text-heading: #{$text-primary};
   --color-primary: #{$primary-color};
-  --color-primary-soft: rgba(79, 70, 229, 0.12);
+  --color-primary-soft: rgba(74, 79, 87, 0.12);
   --color-code-bg: #f0f0f0;
   --color-shadow: rgba(0, 0, 0, 0.08);
   --scrollbar-thumb: #c1c1c1;
@@ -26,15 +26,15 @@
   --color-card: #1f1f23;
   --color-elevated: #27272a;
   --color-hover: rgba(255, 255, 255, 0.05);
-  --color-selected: rgba(99, 179, 237, 0.12);
+  --color-selected: rgba(168, 174, 182, 0.12);
   --color-border: #3f3f46;
   --color-border-light: #2a2a2e;
   --color-text: #e4e4e7;
   --color-text-secondary: #a1a1aa;
   --color-text-dim: #71717a;
   --color-text-heading: #fafafa;
-  --color-primary: #818cf8;
-  --color-primary-soft: rgba(129, 140, 248, 0.15);
+  --color-primary: #a8aeb6;
+  --color-primary-soft: rgba(168, 174, 182, 0.15);
   --color-code-bg: #2a2a2e;
   --color-shadow: rgba(0, 0, 0, 0.4);
   --scrollbar-thumb: #3f3f46;
@@ -190,7 +190,7 @@ a {
   }
 
   blockquote {
-    border-left: 4px solid $primary-color;
+    border-left: 4px solid var(--color-primary);
     padding-left: 16px;
     margin-bottom: 16px;
     color: var(--color-text-secondary);

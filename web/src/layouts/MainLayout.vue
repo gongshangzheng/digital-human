@@ -48,7 +48,7 @@
           <span class="header-date">{{ today }}</span>
           <n-popover trigger="click" placement="bottom-end" :show-arrow="false">
             <template #trigger>
-              <n-button quaternary circle class="theme-toggle" title="主题色">
+              <n-button quaternary circle class="theme-toggle" title="主题与图标">
                 <template #icon>
                   <n-icon size="18">
                     <color-palette-outline />
@@ -56,8 +56,8 @@
                 </template>
               </n-button>
             </template>
-            <div class="accent-panel">
-              <div class="accent-panel-title">主题色</div>
+            <div class="theme-panel">
+              <div class="theme-panel-title">主题色</div>
               <div class="accent-grid">
                 <button
                   v-for="accent in ACCENTS"
@@ -70,6 +70,18 @@
                 >
                   <n-icon v-if="themeStore.accent === accent.key" size="14"><checkmark-outline /></n-icon>
                 </button>
+              </div>
+              <div class="theme-panel-title">图标</div>
+              <div class="favicon-grid">
+                <button
+                  v-for="favicon in FAVICONS"
+                  :key="favicon.key"
+                  class="favicon-option"
+                  :class="{ active: themeStore.favicon === favicon.key }"
+                  :title="favicon.label"
+                  @click="themeStore.setFavicon(favicon.key)"
+                  v-html="faviconSvg(favicon.key, themeStore.accentPrimary)"
+                ></button>
               </div>
             </div>
           </n-popover>
@@ -110,6 +122,7 @@ import { useThemeStore } from '../stores/theme'
 import { HIDDEN_KEYS, filterHidden } from '../config/hidden'
 import { SIDEBAR_DEFAULT_COLLAPSED } from '../config/layout'
 import { ACCENTS, readableOn } from '../config/theme'
+import { FAVICONS, faviconSvg } from '../config/favicon'
 
 const route = useRoute()
 const router = useRouter()
@@ -331,14 +344,19 @@ const today = computed(() => {
   color: var(--color-text-secondary);
 }
 
-.accent-panel {
-  width: 168px;
+.theme-panel {
+  width: 172px;
 }
 
-.accent-panel-title {
+.theme-panel-title {
   font-size: 12px;
   color: var(--color-text-dim);
   margin-bottom: 8px;
+
+  & + .accent-grid,
+  & + .favicon-grid {
+    margin-bottom: 14px;
+  }
 }
 
 .accent-grid {
@@ -359,6 +377,38 @@ const today = computed(() => {
   align-items: center;
   justify-content: center;
   transition: transform 0.15s, border-color 0.15s;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+
+  &.active {
+    border-color: var(--color-text);
+  }
+}
+
+.favicon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.favicon-option {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.15s, border-color 0.15s;
+
+  :deep(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 
   &:hover {
     transform: scale(1.08);
