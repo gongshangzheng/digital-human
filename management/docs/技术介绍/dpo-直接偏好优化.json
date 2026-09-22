@@ -1,0 +1,16 @@
+{
+  "changelog": [
+    {
+      "date": "2026-09-22",
+      "note": "初版：通用 DPO 技术介绍（动机、目标函数、免奖励模型的推导、扩散模型扩展、常见变体与边界）",
+      "commit": ""
+    }
+  ],
+  "related": [
+    {
+      "slug": "论文笔记/avatar-forcing",
+      "title": "Avatar Forcing 模型笔记",
+      "desc": "把 DPO 落到运动隐变量上的实例：偏好对构造、逐帧向量场损失与消融取舍"
+    }
+  ]
+}

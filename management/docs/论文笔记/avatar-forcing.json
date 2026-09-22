@@ -29,11 +29,30 @@
     }
   ],
   "related": [
-    "arxiv-2601.00664",
-    "knowledge/Avatar Forcing 模型精读",
-    "knowledge/Avatar Forcing Motion Latent AutoEncoder",
-    "knowledge/Avatar Forcing 微调实践",
-    "数字人概述/数字人身份",
-    "数字人概述/数字人动作"
+    {
+      "slug": "技术介绍/dpo-直接偏好优化",
+      "title": "直接偏好优化（DPO）",
+      "desc": "通用 DPO 的动机、目标函数与扩散模型扩展；本篇只保留该论文的应用细节"
+    },
+    {
+      "slug": "knowledge/Avatar Forcing 模型精读",
+      "title": "Avatar Forcing 模型精读"
+    },
+    {
+      "slug": "knowledge/Avatar Forcing Motion Latent AutoEncoder",
+      "title": "Avatar Forcing Motion Latent AutoEncoder"
+    },
+    {
+      "slug": "knowledge/Avatar Forcing 微调实践",
+      "title": "Avatar Forcing 微调实践"
+    },
+    {
+      "slug": "数字人概述/数字人身份",
+      "title": "数字人身份"
+    },
+    {
+      "slug": "数字人概述/数字人动作",
+      "title": "数字人动作"
+    }
   ]
 }
