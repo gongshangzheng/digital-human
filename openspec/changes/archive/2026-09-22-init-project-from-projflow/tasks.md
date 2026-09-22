@@ -3,9 +3,9 @@
 ## 1. 脚手架拷贝与改名（project-scaffold）
 
 - [x] 1.1 rsync 拷贝 ProjFlow 的 `management/ papers/ evaluation/ server/ scripts/ web/ start_services.sh .gitignore AGENTS.md`，排除 `.git/ data/*.db node_modules/ __pycache__/ openspec/`
-- [ ] 1.2 端口改为 8812/3212：`start_services.sh`（含头部注释 `端口分配：后端=8812 前端=3212`）、`web/vite.config.js`、`server/config.py`、前端 API base、README 中所有出现处
-- [ ] 1.3 身份改名：README 标题/描述改为 digital-human（数字人研发管理平台），全局搜索清除 ProjFlow demo 字样（保留架构性引用如"基于 ProjFlow 脚手架"）
-- [ ] 1.4 清理 demo 数据：`management/team|daily|weekly|monthly`、`evaluation/models|datasets|results` 中的 ProjFlow 示例内容清空（保留 template 与 README）
+- [x] 1.2 端口改为 8812/3212：`start_services.sh`（含头部注释 `端口分配：后端=8812 前端=3212`）、`web/vite.config.js`、`server/config.py`、前端 API base、README 中所有出现处
+- [x] 1.3 身份改名：README 标题/描述改为 digital-human（数字人研发管理平台），全局搜索清除 ProjFlow demo 字样（保留架构性引用如"基于 ProjFlow 脚手架"）
+- [x] 1.4 清理 demo 数据：`management/team|daily|weekly|monthly`、`evaluation/models|datasets|results` 中的 ProjFlow 示例内容清空（保留 template 与 README）
 - [x] 1.5 新增 `web/src/config/menu.js` hidden 列表（默认隐藏团队成员/报告/里程碑/会议纪要），MainLayout 菜单按其过滤，首页模块入口同步过滤；验证隐藏模块 URL 直达可用、从列表移除后菜单恢复
 - [x] 1.6 `git init` + 首个 `.gitignore` 校验（覆盖 db/node_modules/__pycache__）+ 首次提交
 
