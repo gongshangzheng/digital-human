@@ -2,7 +2,7 @@
 
 - 上游 ProjFlow 三条 `[shared]` 改动尚未进入本仓库：`e505269` 文档图片支持、`4a3b964` 文档根目录唯一、`644fed0` 文档页文内锚点接管 + 文档列表排序链。
 - 本仓库与上游共享层存在**已分叉的定制**，不能直接 cherry-pick：
-  - `server/main.py`：本仓库与上游的 import 行与路由注册顺序已不同（上游多了静态挂载与 `MANAGEMENT_DIR`）。
+  - `server/main.py`：路由注册与其余内容与上游一致，仅 import 行不同（上游多 `StaticFiles` 与 `MANAGEMENT_DIR`），平台名/端口不同（本仓库 8812）。
   - `web/src/components/common/MarkdownRenderer.vue`：**文内锚点接管**本仓库已有，且与上游 `644fed0` 落地内容一致；`[[proj#task]]` / `[[slug]]` 链接改写本就双方共有。剩余唯一差异是上游 `e505269` 的 image / figure 规则。
   - `server/routers/management.py` 的 `get_docs()`：本仓库把文件夹优先级硬编码为 router 内的 `_DOCS_FOLDER_ORDER = ['实习复盘', '论文笔记', 'knowledge']`；上游 `644fed0` 已把同一机制泛化到 `server/config.py` 的 `DOCS_FOLDER_ORDER`（默认空）。**同一逻辑、常量位置不同 = 分叉**，本变更需收敛。
 - 本仓库文档目录已重构为 `management/docs/{knowledge,论文笔记,实习复盘}`，`docs/external-sources.md` 已删除（`d99af94`）。
@@ -64,7 +64,7 @@
 1. `server/config.py` 新增 `DOCS_FOLDER_ORDER = ['实习复盘', '论文笔记', 'knowledge']`，并沿用本仓库 config 既有的「下游库可覆盖」注释惯例（同 `OUTPUTS_DIR` / `TRAINING_DIR`）。
 2. `server/routers/management.py` 删除本地 `_DOCS_FOLDER_ORDER`，改从 `server.config` 导入 `DOCS_FOLDER_ORDER`，`_doc_sort_key` 引用公开常量。
 
-- 理由：上游是通用脚手架，默认只能为空；本仓库的目录顺序是**领域知识**，应由下游 config 注入。收敛后 router 内实现与上游逐字一致，上游后续再改排序链可干净 cherry-pick。
+- 理由：上游是通用脚手架，默认只能为空；本仓库的目录顺序是**领域知识**，应由下游 config 注入。收敛后 `_doc_sort_key` 逻辑与上游一致，残余差异仅两处无害项（`import json` 行位置、一行本地 sidecar 注释），上游后续再改排序链可干净 cherry-pick。
 - 备选：保持 router 内硬编码 —— 每次上游改动都要手工合并且长期分叉，不采用。
 - 边界：三个内容目录（`实习复盘` / `论文笔记` / `knowledge`）之外新增目录时，改 config 一行即可，无需动 router。
 

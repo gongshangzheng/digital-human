@@ -22,12 +22,18 @@
 
 - [ ] 4.1 `server/config.py` 新增 `DOCS_FOLDER_ORDER = ['实习复盘', '论文笔记', 'knowledge']`，沿用本仓库 config 既有的「下游库可覆盖」注释惯例
 - [ ] 4.2 `server/routers/management.py`：删除本地 `_DOCS_FOLDER_ORDER`，改从 `server.config` 导入 `DOCS_FOLDER_ORDER`，`_doc_sort_key` 引用公开常量
-- [ ] 4.3 与上游逐行核对：`_doc_number` / `_doc_date_ordinal` / `_doc_sort_key` 与上游 `644fed0` 一致（差异应仅剩导入与常量来源）
+- [ ] 4.3 与上游逐行核对：`_doc_number` / `_doc_date_ordinal` / `_doc_sort_key` 与上游 `644fed0` 一致（收敛后残余差异应仅为 `import json` 行位置与一行本地 sidecar 注释，不再有常量来源差异）
 - [ ] 4.4 文内锚点接管：确认本仓库 `MarkdownRenderer.vue` 的 `#` 分支与上游 `644fed0` 一致（仅核对，不改代码）
 - [ ] 4.5 冒烟：重启后端，`GET /api/management/docs` 顺序为 实习复盘 → 论文笔记 → knowledge，且连续请求一致
 
 ## 5. 登记与校验
 
 - [ ] 5.1 上游同步记录写入本 change（本轮含 `e505269` 图片能力 / `4a3b964` 文档根目录唯一 / `644fed0` 锚点 + 排序链）
-- [ ] 5.2 `openspec validate sync-projflow-round3 --strict` 通过
-- [ ] 5.3 提交（`[shared] feat: pick 上游文档图片能力 + 排序常量收敛到 config`）
+- [ ] 5.2 硬验收：与上游 HEAD 逐字节比对，`MarkdownRenderer.vue` 与 `index.scss` 的 diff 必须为空（此项比冒烟更强）
+  ```bash
+  U=~/code/ProjFlow
+  diff <(git -C $U show HEAD:web/src/components/common/MarkdownRenderer.vue) web/src/components/common/MarkdownRenderer.vue
+  diff <(git -C $U show HEAD:web/src/styles/index.scss) web/src/styles/index.scss
+  ```
+- [ ] 5.3 `openspec validate sync-projflow-round3 --strict` 通过
+- [ ] 5.4 提交（`[shared] feat: pick 上游文档图片能力 + 排序常量收敛到 config`）

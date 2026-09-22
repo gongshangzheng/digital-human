@@ -1,4 +1,4 @@
-# Proposal: sync-projflow-round3（pick 上游文档图片能力 + 文档根目录约定）
+# Proposal: sync-projflow-round3（pick 上游文档图片能力 + 文档根目录约定 + 排序常量收敛）
 
 ## Why
 
