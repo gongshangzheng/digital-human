@@ -27,5 +27,5 @@
 
 ## 5. 提交与归档
 
-- [ ] 5.1 提交 `[shared] feat: sync ProjFlow 枪灰默认主题与主题 favicon`，注明来源 `2fbb3a6 → 888ef3f → 1341f31`
-- [ ] 5.2 同步 `theme-accent` 和 `theme-favicon` 主 specs 并归档 change
+- [x] 5.1 提交 `[shared] feat: sync ProjFlow 枪灰默认主题与主题 favicon`，注明来源 `2fbb3a6 → 888ef3f → 1341f31`
+- [x] 5.2 同步 `theme-accent` 和 `theme-favicon` 主 specs 并归档 change
