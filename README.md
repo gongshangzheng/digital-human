@@ -9,7 +9,7 @@
 - **ProjFlow**（`~/code/ProjFlow`）：共享脚手架上游（management / papers / evaluation 三模块）
 - **博客**（`~/gongshangzheng.github.io`）：数字人论文精读、工程解读、survey（~156 篇，导入论文库）
 - **InternWiki**（`~/code/InternWiki`）：数字人知识库（基础 / 模型精读 / 工程与评测，复制到 `management/docs/knowledge/`）
-- **CyberVerse**（`~/code/CyberVerse`）：实时数字人 Agent 框架优化 fork（avatarforcing / ditto 等模型插件），独立 clone + 登记锚定，见 `docs/external-sources.md`
+- **CyberVerse**（`~/code/CyberVerse`）：实时数字人 Agent 框架优化 fork（avatarforcing / ditto 等模型插件），独立 clone + commit 锚定；四源溯源登记见 `management/docs/knowledge/README.md`
 
 ## 项目结构
 
@@ -23,7 +23,6 @@ digital-human/
 ├── scripts/         # 工具脚本（博客论文提取、arXiv 导入）
 ├── server/          # FastAPI 后端（端口 8812）
 ├── web/             # Vue 3 前端（端口 3212）
-├── docs/            # 项目文档（external-sources.md 外部源登记表）
 └── start_services.sh # 一键启动
 ```
 

@@ -4,7 +4,7 @@
 
 ## 项目概述
 
-Digital Human 是数字人方向的研发管理平台，从 ProjFlow 共享脚手架派生（信息源登记见 `docs/external-sources.md`），包含三大模块：**项目管理**（项目树、任务看板、文档；团队/报告/里程碑/会议纪要已隐藏，见 `web/src/config/menu.js`）、**论文搜集**（数字人论文元数据、分类、笔记）、**评测体系**（模型管理、评测运行、结果对比）。前后端分离架构，后端读写本地 Markdown 文件和 SQLite 数据库。
+Digital Human 是数字人方向的研发管理平台，从 ProjFlow 共享脚手架派生（四源溯源登记见 `management/docs/knowledge/README.md`），包含三大模块：**项目管理**（项目树、任务看板、文档；团队/报告/里程碑/会议纪要已隐藏，见 `web/src/config/menu.js`）、**论文搜集**（数字人论文元数据、分类、笔记）、**评测体系**（模型管理、评测运行、结果对比）。前后端分离架构，后端读写本地 Markdown 文件和 SQLite 数据库。
 
 ## 技术栈
 
@@ -113,9 +113,10 @@ digital-human/
 ├── data/                    # 数据目录
 │   └── papers.db            # SQLite 论文数据库（.gitignore）
 ├── scripts/                 # 工具脚本
-│   └── import_papers.py     # 论文导入脚本
-└── docs/                    # 其他文档
+    └── import_papers.py     # 论文导入脚本
 ```
+
+> 说明性文档（含 wiki）统一置于 `management/docs/`；仓库根目录不设 `docs/`。
 
 ## 仓库级 Agent Skill
 
@@ -131,7 +132,7 @@ pi 的项目级 skill 发现路径包含 `.pi/skills/` 与 `.agents/skills/`（c
 
 ### 外部源引入方式
 
-外部代码源（ProjFlow / CyberVerse 等）的登记、锚定 commit 与回灌待办见 [`docs/external-sources.md`](docs/external-sources.md)。
+被引用/索引的外部源（ProjFlow / CyberVerse 等）的来源、引入方式与锚定 commit 见 [`management/docs/knowledge/README.md`](management/docs/knowledge/README.md)。
 
 ## 三大模块架构
 

@@ -1,6 +1,6 @@
 # 知识库（复制自外部信息源）
 
-> 单层平铺，不嵌套。现共 52 个文件（InternWiki 复制 29 + 博客精选 22 + 本索引）。外部源登记见仓库根目录 `docs/external-sources.md`。
+> 单层平铺，不嵌套。现共 52 个文件（InternWiki 复制 29 + 博客精选 22 + 本索引）。外部源登记见下方「来源」与「外部代码源」两节。
 > 复制即声明本仓库为演进主体，上游冻结为历史源。
 
 ## 来源
@@ -28,3 +28,18 @@ cyberverse-realtime-digital-human-agent · cyberverse-flashhead-lite-experiment 
 realtime-communication 系列 5 篇 · tool-augmented-digital-human · voice-ai-digital-human-landscape
 
 （论文单篇精读不入知识库——已在 papers 库索引，带 blog_url）
+
+## 外部代码源（未复制，独立 clone 锚定）
+
+> 只登记与锚定，不 vendoring 代码。锚定 commit 保证外部源演进后引用仍可复现（`git -C <本机路径> show <hash>:<path>`）。
+
+| 源 | 远端 | 本机路径 | 用途 | 引入方式 | 锚定 commit |
+|----|------|----------|------|----------|-------------|
+| CyberVerse | github.com/gongshangzheng/CyberVerse | `~/code/CyberVerse` | 实时数字人 Agent 框架优化 fork（avatarforcing / ditto / flash_head / MuseTalk / SoulX-LiveAct 模型插件、流式管线、设计文档） | 独立 clone | `4968280b109aa2e31d463bc7cfae1959d3dfa215`（2026-08-04） |
+| ProjFlow | —（本地上游脚手架） | `~/code/ProjFlow` | 共享脚手架上游：management / papers / evaluation 三模块 + FastAPI + Vue3 | rsync 派生（本仓库即下游） | 拷贝时工作树快照 |
+
+### CyberVerse 被索引的关键路径（锚定 `4968280`）
+
+- `models/avatarforcing/`、`models/ditto/`、`models/flash_head/`、`models/MuseTalk/`、`models/SoulX-LiveAct/`
+- `management/docs/`：avatarforcing-design、ditto-design、streaming-pipeline、paste-back-compositing、silent-avatar-feed-gate、avatar-rtf-latency-over-time
+- `management/projects/digital-human/`：dh-eval 评测框架任务树

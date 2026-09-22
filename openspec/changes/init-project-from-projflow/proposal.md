@@ -10,7 +10,7 @@
 - **git init + 首次提交**：当前目录无版本控制
 - **导入博客论文资产**：从 `~/gongshangzheng.github.io/src/pages/` 筛选数字人相关页面（论文精读 paper-*、工程解读 digital-human-*、源码分析、survey、arxiv-digest），提取元数据（title/tags/日期）转 Markdown 存入 `papers/data/`，经 `scripts/import_papers.py` 走 arXiv API 补全元数据入 SQLite
 - **复制 InternWiki 数字人文档**：tangwen 的基础/模型精读/工程与评测/快速导读/微调与实践共 26 篇 + junjiawang 的 voice-agent-web 数字人相关文档，存入 `management/docs/digital-human/`（或知识库目录，design 定）
-- **登记外部代码源**：以登记表方式锚定 CyberVerse（`~/code/CyberVerse` 独立 clone，记录远端 URL 与 commit），其 `models/`（avatarforcing / ditto / flash_head / MuseTalk / SoulX-LiveAct）、`management/docs/`（avatarforcing-design、ditto-design、streaming-pipeline、rtf 基准）与 `management/projects/digital-human/` 作为重要参考源纳入知识库索引；不在本仓库内重复 vendoring 代码
+- **外部源溯源（不单设登记表）**：CyberVerse（`~/code/CyberVerse` 独立 clone）的来源、引入方式与锚定 commit（`4968280`）连同 ProjFlow / 博客 / InternWiki 一并记录在知识库索引 `management/docs/knowledge/README.md` 的来源表或对应条目中；其 `models/`（avatarforcing / ditto / flash_head / MuseTalk / SoulX-LiveAct）、`management/docs/`（avatarforcing-design、ditto-design、streaming-pipeline、rtf 基准）与 `management/projects/digital-human/` 作为重要参考源纳入知识库索引；不在本仓库内重复 vendoring 代码，也不在仓库根目录另建 `docs/`
 - **清理 ProjFlow 残留 demo 数据**：management/ 中与数字人无关的示例内容不引入
 - **隐藏协作类管理模块**：团队成员、报告（日报/周报/月报）、里程碑、会议纪要等在前端菜单中隐藏（配置化 hidden 列表，路由保留，可随时恢复）；项目树、任务看板、文档保持可见
 
@@ -19,7 +19,7 @@
 ### New Capabilities
 - `project-scaffold`: 仓库目录结构、服务启动（FastAPI + Vue3）、git 版本控制与 README，从 ProjFlow 脚手架派生
 - `paper-knowledge-base`: 数字人论文/笔记库——从博客与 InternWiki 导入的元数据驱动的论文库，含分类、检索、笔记
-- `external-code-sources`: 外部代码源（CyberVerse / Avatar Forcing / Ditto）的登记、引入与版本记录规范
+- `external-code-sources`: 外部代码源（CyberVerse / Avatar Forcing / Ditto）的溯源记录、引入方式与版本锚定规范（记录并入知识库索引，不单设根目录登记表）
 
 ### Modified Capabilities
 （无——全新仓库，无既有 spec）

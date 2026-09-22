@@ -9,10 +9,17 @@
 - [x] 1.5 新增 `web/src/config/menu.js` hidden 列表（默认隐藏团队成员/报告/里程碑/会议纪要），MainLayout 菜单按其过滤，首页模块入口同步过滤；验证隐藏模块 URL 直达可用、从列表移除后菜单恢复
 - [x] 1.6 `git init` + 首个 `.gitignore` 校验（覆盖 db/node_modules/__pycache__）+ 首次提交
 
-## 2. 外部源登记（external-code-sources）
+## 2. 外部源溯源（external-code-sources）
 
-- [x] 2.1 创建 `docs/external-sources.md` 登记表：CyberVerse（远端 github.com/gongshangzheng/CyberVerse、本机 ~/code/CyberVerse、锚定 commit、被索引关键路径 models/ management/docs/ management/projects/digital-human/）、ProjFlow、博客、InternWiki 四源
-- [x] 2.2 在登记表中登记知识库索引所依赖的 CyberVerse `management/docs/` 6 篇设计文档与 `management/projects/digital-human/tasks.json` 的 commit 锚定
+> 修订（2026-09-22）：原设计在仓库根目录建 `docs/external-sources.md` 独立登记表；后确认与上游 ProjFlow 废弃根目录 `docs/` 的既定约定冲突（`83c78fb`），且信息与知识库索引重复。改为溯源信息并入 `management/docs/knowledge/README.md`，删除该文件与根目录 `docs/`。
+
+- [x] 2.1 建立外部源溯源：四源（CyberVerse、ProjFlow、博客、InternWiki）的来源、引入方式与快照/锚定 commit —— 记录位置由 `docs/external-sources.md` 改为知识库索引 `management/docs/knowledge/README.md`
+- [x] 2.2 CyberVerse 的 `management/docs/` 6 篇设计文档与 `management/projects/digital-human/tasks.json` 的 commit 锚定
+- [x] 2.3 把 CyberVerse 锚定 commit（`4968280`）与关键索引路径（`models/*`、`management/docs/*`、`management/projects/digital-human/`）并入 `management/docs/knowledge/README.md` 的来源表
+- [x] 2.4 删除 `docs/external-sources.md` 与仓库根目录 `docs/`（`git rm` + 确认 `test ! -d docs`）
+- [x] 2.5 更新引用：`README.md`（第 12、26 行）、`AGENTS.md`（第 7、134 行）、`management/docs/knowledge/README.md`（第 3 行）
+- [x] 2.6 删除 `AGENTS.md` 目录树中过时的根目录 `docs/` 条目（与上游 `[shared]` change `fix-agents-docs-tree` 同款修订）
+- [x] 2.7 删除废弃 change `openspec/changes/docs-external-sources-slim`（登记表既已移除，瘦身提案作废）
 
 ## 3. 博客论文资产导入（paper-knowledge-base）
 

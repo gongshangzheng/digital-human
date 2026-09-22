@@ -57,10 +57,11 @@
 理由：management/docs 是 ProjFlow 体系文档的自然位置（CyberVerse 同款用法）；不进 papers/（那是论文元数据库）。
 备选：独立 `knowledge/` 顶层目录——破坏 ProjFlow 结构同构性，不采用。
 
-### D5: 外部源 = 登记表 + commit 锚定，CyberVerse 保持独立 clone
+### D5: 外部源 = 溯源记录（并入知识库索引，不单设文件）+ commit 锚定，CyberVerse 保持独立 clone
 
-`docs/external-sources.md`（仓库顶层 docs/，非 management）：每源记录远端 URL、本机路径、用途、锚定 commit、引入方式。CyberVerse 条目锚定当前 HEAD（4968280），并列出被知识库索引的关键路径（models/*、management/docs/*、management/projects/digital-human/）。
-理由：CyberVerse 是活跃开发库（perf 系列提交持续推进），vendoring/submodule 都会把同步成本引入本仓库；它已在 `~/code/CyberVerse` 独立存在，登记 + 锚定即可复现。
+被引用/索引的外部源（CyberVerse / ProjFlow / 博客 / InternWiki）的来源、引入方式与锚定 commit，统一记录在 `management/docs/knowledge/README.md` 的来源表或对应索引条目中。CyberVerse 条目锚定 HEAD（`4968280`），并列出被知识库索引的关键路径（`models/*`、`management/docs/*` 6 篇、`management/projects/digital-human/`）。
+理由：CyberVerse 是活跃开发库（perf 系列提交持续推进），vendoring/submodule 都会把同步成本引入本仓库；它已在 `~/code/CyberVerse` 独立存在，登记 + 锚定即可复现。博客与 InternWiki 的快照 commit 本就记在知识库索引的来源表中，单独再维护一份根目录登记表只会重复且易陈旧；ProjFlow 只是派生来源，一句话即可。
+备选：仓库根目录 `docs/external-sources.md` 独立登记表——与上游 ProjFlow 已废弃根目录 `docs/`（`83c78fb chore: 删除项目根目录空 docs/，文档统一放 management/docs/`）的既定约定冲突，且信息与知识库索引重复，不采用。
 
 ### D6: 分类体系六类（paper-knowledge-base spec）
 
