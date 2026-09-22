@@ -11,6 +11,11 @@ venv/
 .cache/
 papers/data/
 papers/cache/
+
+# 构建期生成的文档静态数据（web/scripts/build-docs-data.mjs 产出）
+web/public/docs-data.json
+web/public/docs-assets/
+
 *.db
 *.db-shm
 *.db-wal

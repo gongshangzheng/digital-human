@@ -35,6 +35,15 @@ bash start_services.sh
 
 启动后访问 http://localhost:3212
 
+## GitHub Pages
+
+线上文档站点：<https://gongshangzheng.github.io/digital-human/>
+
+- 推送到 `master` 后，`.github/workflows/deploy.yml` 会在 `web/` 中执行 `npm install` 和 `npm run build`，再发布 `web/dist`。
+- **完整构建只能使用 `npm run build`**：它会生成文档静态数据、复制文档图片，并创建深链接所需的 `404.html`。
+- 开发基路径为 `/`（本地地址不变）；构建和预览基路径为 `/digital-human/`。
+- Pages 不运行 FastAPI：线上仅保障管理文档列表、详情、正文图片和深链接；论文、评测、项目树等依赖后端的模块不保证数据可用。
+
 ## 技术栈
 
 | 层 | 技术 | 端口 |

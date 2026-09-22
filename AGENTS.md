@@ -53,6 +53,26 @@ nohup npx vite --port 3212 --strict-port </dev/null > /tmp/frontend.log 2>&1 & d
 >
 > 建议：新项目选定端口后先 `lsof -i :<新端口>` 确认空闲，再全局搜索替换旧端口号。
 
+## 部署（GitHub Pages）
+
+线上文档站点：<https://gongshangzheng.github.io/digital-human/>
+
+```text
+push master → .github/workflows/deploy.yml
+  → web/ 下 npm install + npm run build
+      prebuild  build-docs-data.mjs  management/docs/ → web/public/docs-data.json（含 _assets 复制）
+      vite build
+      postbuild copy-404.mjs         dist/index.html → dist/404.html
+  → 上传 web/dist 到 GitHub Pages
+```
+
+关键约定：
+
+1. **基路径条件式**：`web/vite.config.js` 在 build / preview 时使用 `/digital-human/`，开发时使用 `/`；本地开发地址仍为 `http://localhost:3212/`。
+2. **完整构建只使用 `npm run build`**：直接运行 `vite build` 会跳过静态文档、图片和 `404.html` 的生成。
+3. **线上文档读静态数据**：`web/src/api/docs.js` 在生产模式读取构建产物；开发模式仍经 FastAPI。源 Markdown 保持 `/api/management/docs-assets/...`，生产读取时改写至 `/digital-human/docs-assets/`。
+4. **Pages 只保障文档页**：无 FastAPI 时，文档列表、详情、正文图片和深链接可用；论文、评测、项目树等后端数据模块不保证可用。
+
 ## 目录结构
 
 ```

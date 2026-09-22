@@ -5,44 +5,8 @@ status: active
 startDate: 2026-06-01
 endDate: null
 category: work
-tags:
-  - 数字人
-  - 生成式AI
-  - 实时推理
+tags: [数字人, 生成式AI, 实时推理]
 summary: 钉钉数字人方向。当前目标为会议面试官数字人，围绕实时数字人、音视频交互与生成式模型落地，参与算法方案调研、工程实现和效果优化。已完成 20+ 篇技术调研、评测框架设计与实现（含 speed run 快速验证、agent skill 封装），当前推进评测框架优化与模型部署测试。
-timeline:
-  - date: 2026-06-01
-    title: 入职钉钉
-    type: milestone
-    description: 第一天入职，数字人方向实习生，完成环境配置与团队对接。
-  - date: 2026-06-08
-    title: 技术方案调研启动
-    type: progress
-    description: 开始调研实时数字人主流方案，覆盖 2D talking-head、3D Gaussian Splatting 头像、扩散式生成三条路线。
-  - date: 2026-06-22
-    title: 调研阶段完成
-    type: milestone
-    description: 完成技术选型报告，确定以 GAGAvatar / UIKA 系前馈式方案为主要探索方向。
-  - date: 2026-06-22
-    title: 评测框架设计与实现
-    type: milestone
-    description: 完成评测框架设计文档，11 步实现脚手架、核心接口、指标、Pipeline、CLI、HTML 报告，177 项单元测试通过。
-  - date: 2026-06-24
-    title: FlashHead 接入与推理管线
-    type: progress
-    description: 接入 FlashHead 适配器，TalkVid 数据格式适配，推理输出重构，GT 标准化。
-  - date: 2026-07-06
-    title: 当前任务梳理
-    type: progress
-    description: 整理出五大并行任务方向：卡通数字人、数字人产品调研、评测框架优化、模型部署测试、conversation 评测数据集制作。
-  - date: 2026-07-09
-    title: 评测框架能力扩展 + FlexAvatar 接入
-    type: progress
-    description: 新增 speed run 快速验证线路，支持端到端跑通并主观检验效果；将评测功能封装为 agent skill，便于快速调用；端到端跑通评测代码全流程，验证各环节可用；修复模型参数覆盖问题并重新下载。基于 UV 实现基准环境 + 微调环境双层管理策略。接入 FlexAvatar（CVPR 2026）模型适配器，支持 pixel3dmm 和 artalk 两种驱动模式；调研 FlexAvatar / HyperGaussians / MATCH / AniGS 四个 3DGS 方法。
-  - date: 2026-07-13
-    title: 下周重点：竞品调研 + 选型确认
-    type: progress
-    description: 启动主流数字人产品调研（实现原理/效果/实时通话/延迟），同步推进选型方案确认，要求自研方案在主观表现和客观指标上不低于竞品。
 ---
 
 ## 项目背景
