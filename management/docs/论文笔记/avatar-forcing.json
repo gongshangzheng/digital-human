@@ -1,0 +1,39 @@
+{
+  "changelog": [
+    {
+      "date": "2026-09-22",
+      "summary": "按 article-note 流程重写：论文身份从 2603.14331 纠正为 2601.00664（KAIST, CVPR 2026），补 6 张原图、10 节骨架、sidecar；工程层压缩进「局限与启发」",
+      "commit": ""
+    },
+    {
+      "date": "2026-09-20",
+      "summary": "初版（已废弃）：frontmatter 误引 arXiv:2603.14331（浙大+快手），正文技术内容与指标实为 2601.00664，两篇同名论文被缝合；无配图、无 sidecar"
+    }
+  ],
+  "progress": {
+    "status": "draft",
+    "next": "若要继续：补论文未披露项的交叉核对（训练总机时、数据规模），并把 6.8× 加速口径回论文表格确认"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/avatar-forcing/"
+    },
+    {
+      "title": "原图清单",
+      "path": ".cache/article-note/avatar-forcing/raw/figures/figures-manifest.md"
+    },
+    {
+      "title": "论文源码表文件",
+      "path": ".cache/article-note/avatar-forcing/raw/source-tar/table/"
+    }
+  ],
+  "related": [
+    "arxiv-2601.00664",
+    "knowledge/Avatar Forcing 模型精读",
+    "knowledge/Avatar Forcing Motion Latent AutoEncoder",
+    "knowledge/Avatar Forcing 微调实践",
+    "实习复盘/数字人身份",
+    "实习复盘/数字人动作"
+  ]
+}
