@@ -8,6 +8,7 @@ build/
 venv/
 
 # Data & Cache (generated / runtime)
+.cache/
 papers/data/
 papers/cache/
 *.db

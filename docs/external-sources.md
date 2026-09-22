@@ -45,7 +45,29 @@
 | 项 | 上游提交 | 状态 |
 |----|---------|------|
 | 文档页滚动位置恢复（`scrollMemory.js` + `DocPage` 接入） | `afea6a3` | ✅ 已移植并浏览器实测通过（刷新恢复 / 逐文档记忆 / 锚点不受影响） |
-| skill 真实目录迁至 `.agents/skills`、`.claude/skills` 改符号链接 | `db9fdf8` | ⛔ **不采纳**：本仓库没有仓库级技能目录（写作规范在用户级 `~/.pi/agent/skills`），迁移无收益 |
+| skill 真实目录迁至 `.agents/skills`、`.claude/skills` 改符号链接 | `db9fdf8` | ✅ **已采纳**（原「不采纳」结论作废，见 `move-skills-to-agents`）：`.pi/skills/openspec-*` 迁至 `.agents/skills/`，新增 `.claude/skills -> ../.agents/skills` |
+
+### 本轮从上游 pick（`move-skills-to-agents`）
+
+| 项 | 上游提交 | 状态 |
+|----|---------|------|
+| `article-note` skill（论文精读流水线） | `4ff70a0` | ✅ 已接入 `.agents/skills/article-note/`，并按本仓库适配：产出目录改 `management/docs/论文笔记/`、change 命名改 `docs-note-<slug>`、frontmatter 支持 `arxiv_id/papers_id`；图片发布依赖文档图片端点，未就绪时仅登记 raw |
+| `.gitignore` 增加 `.cache/` | `4ff70a0` | ✅ 已采纳（article-note 工作区 `.cache/article-note/`） |
+
+### 仓库级 skill 迁移映射（`move-skills-to-agents`）
+
+| 旧路径（`.pi/skills/`） | 新路径（`.agents/skills/`） |
+|----|----|
+| `openspec-apply-change` | `openspec-apply-change` |
+| `openspec-archive-change` | `openspec-archive-change` |
+| `openspec-explore` | `openspec-explore` |
+| `openspec-propose` | `openspec-propose` |
+| `openspec-sync-specs` | `openspec-sync-specs` |
+| `openspec-update-change` | `openspec-update-change` |
+| —（新增） | `article-note` |
+
+- `.pi/` 仍保留 pi 专属 `prompts/`、`subagents/`，不再持有通用 skill 真实文件。
+- pi 对项目级 skill 的收集顺序为「项目 `.agents/skills` → 用户 `~/.pi/agent/skills`」，同名时先发现者胜，因此仓库级 skill 为权威；用户级同名链接仅产生一条 collision 告警。
 
 ## 维护规则
 

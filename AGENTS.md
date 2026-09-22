@@ -59,6 +59,9 @@ nohup npx vite --port 3212 --strict-port </dev/null > /tmp/frontend.log 2>&1 & d
 digital-human/
 ├── AGENTS.md                # 本文件
 ├── .gitignore
+├── .agents/skills/          # 仓库级 Agent Skill（跨 Agent 共用，随 Git 版本化）
+├── .pi/                     # pi 专属配置（prompts / subagents；无通用 skill 真实文件）
+├── .claude/skills           # 符号链接 → ../.agents/skills（兼容 Claude Code）
 ├── start_services.sh        # 一键启动脚本
 ├── server/                  # FastAPI 后端
 │   ├── config.py            # 配置（端口、CORS、各模块路径）
@@ -113,6 +116,22 @@ digital-human/
 │   └── import_papers.py     # 论文导入脚本
 └── docs/                    # 其他文档
 ```
+
+## 仓库级 Agent Skill
+
+与具体 Agent 实现无关的仓库级 skill SHALL 以 **`.agents/skills/<skill-name>/`** 作为唯一事实来源（随 Git 版本化）：
+
+- `.agents/skills/openspec-*`：OpenSpec 工作流（propose / apply / archive / explore / sync-specs / update-change）
+- `.agents/skills/article-note/`：论文精读笔记流水线
+- 兼容入口：`.claude/skills` 为相对符号链接 `../.agents/skills`，供读取 `.claude/skills` 的 Agent 复用同一份内容
+
+pi 的项目级 skill 发现路径包含 `.pi/skills/` 与 `.agents/skills/`（cwd 及祖先目录），且 `.agents/skills` 会被优先收集，因此无需在 `.pi/skills` 保留副本。`.pi/` 仅保留 pi 专属的 `prompts/`、`subagents/`。
+
+> 注：`.agents/skills/` 中只识别含 `SKILL.md` 的子目录，根级 `.md` 不会被当作 skill。
+
+### 外部源引入方式
+
+外部代码源（ProjFlow / CyberVerse 等）的登记、锚定 commit 与回灌待办见 [`docs/external-sources.md`](docs/external-sources.md)。
 
 ## 三大模块架构
 
