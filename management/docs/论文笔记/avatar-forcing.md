@@ -159,7 +159,7 @@ sequenceDiagram
 
 ![图 5 · 三种注意力掩码：逐帧因果 / 块因果 / 块因果 + look-ahead（本文）](/api/management/docs-assets/avatar-forcing/fig-5-attention-masks.webp)
 
-工程侧落点：我们把这条链路接成生产者/消费者结构（逐块喂音频、连续出帧、缓存窗口有界），并接入静默运行时（倾听态画面）。细节见 [[实习复盘/工程设计|工程设计]]。
+工程侧落点：我们把这条链路接成生产者/消费者结构（逐块喂音频、连续出帧、缓存窗口有界），并接入静默运行时（倾听态画面）。细节见 [[数字人概述/工程设计|工程设计]]。
 
 ## 实验与结果
 
@@ -291,7 +291,7 @@ sequenceDiagram
 
 - 论文层深读：[[knowledge/Avatar Forcing 模型精读|Avatar Forcing 模型精读]]、[[knowledge/Avatar Forcing Motion Latent AutoEncoder|Avatar Forcing Motion Latent AutoEncoder]]
 - 工程与微调：[[knowledge/Avatar Forcing 微调实践|Avatar Forcing 微调实践]]、[[knowledge/微调策略专题|微调策略专题]]
-- 背景与定位：[[knowledge/数字人基础|数字人基础]]、[[实习复盘/数字人介绍与技术路线|数字人介绍与技术路线]]
-- 我们这条线上的复盘：[[实习复盘/数字人身份|数字人身份]]、[[实习复盘/数字人动作|数字人动作]]、[[实习复盘/工程设计|工程设计]]
+- 背景与定位：[[knowledge/数字人基础|数字人基础]]、[[数字人概述/数字人介绍与技术路线|数字人介绍与技术路线]]
+- 我们这条线上的复盘：[[数字人概述/数字人身份|数字人身份]]、[[数字人概述/数字人动作|数字人动作]]、[[数字人概述/工程设计|工程设计]]
 - papers 库条目：`arxiv-2601.00664`
 - 易混对照：`arXiv:2603.14331`「AvatarForcing: One-Step Streaming Talking Avatars via Local-Future Sliding-Window Denoising」（浙大 + 快手 Kling），博客精读见 `avatarforcing-2026.html`

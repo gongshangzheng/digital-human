@@ -38,8 +38,8 @@ SPEEDRUN_OUTPUTS_DIR = os.path.join(SPEEDRUN_DIR, "outputs")
 SPEEDRUN_RESULTS_JSON = os.path.join(SPEEDRUN_DIR, "results.json")
 
 # 文档列表中文件夹的先后（未列出的排在已知之后）
-# 下游库可覆盖：本仓库为数字人文档体系，固定 实习复盘 → 论文笔记 → knowledge；上游脚手架默认空
-DOCS_FOLDER_ORDER = ['实习复盘', '论文笔记', 'knowledge']
+# 下游库可覆盖：本仓库为数字人文档体系，固定 数字人概述 → 论文笔记 → knowledge；上游脚手架默认空
+DOCS_FOLDER_ORDER = ['数字人概述', '论文笔记', 'knowledge']
 
 # CORS 配置
 CORS_ORIGINS = [

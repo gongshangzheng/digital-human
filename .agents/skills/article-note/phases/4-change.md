@@ -17,7 +17,7 @@ openspec new change docs-note-<slug>
 3. 笔记结构大纲：每节要点、素材来源、必备表/公式/图/代码/Mermaid、字数、缺料替代。
 4. 口径与取舍：省略章节和理由。
 5. 图表公式清单：表格列、公式与符号表、Mermaid、拟使用图片。
-6. 引用关系：已有 wiki 的 `[[...]]` 链接（本仓库使用 `[[knowledge/xxx|label]]`、`[[实习复盘/xxx|label]]`、`[[project:<项目>]]` 等命名空间写法）与 sidecar related 计划。
+6. 引用关系：已有 wiki 的 `[[...]]` 链接（本仓库使用 `[[knowledge/xxx|label]]`、`[[数字人概述/xxx|label]]`、`[[project:<项目>]]` 等命名空间写法）与 sidecar related 计划。
 7. 风险与待确认项：缺料、存疑结论和需用户裁决的问题。
 
 结构大纲必须依据实际素材，不可写空泛承诺。
