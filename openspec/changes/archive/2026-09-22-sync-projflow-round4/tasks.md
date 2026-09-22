@@ -28,5 +28,5 @@
 
 ## 5. 提交与归档
 
-- [ ] 5.1 提交（`[shared] feat: sync ProjFlow 侧边栏折叠、紧凑尺寸与强调色切换`），正文注明来源 `8b54bab → 0799f7e`
-- [ ] 5.2 归档 change，同步 `sidebar-collapse`、`theme-accent` 和 `docs-page-layout` delta 到主 specs
+- [x] 5.1 提交（`[shared] feat: sync ProjFlow 侧边栏折叠、紧凑尺寸与强调色切换`），正文注明来源 `8b54bab → 0799f7e`
+- [x] 5.2 归档 change，同步 `sidebar-collapse`、`theme-accent` 和 `docs-page-layout` delta 到主 specs
