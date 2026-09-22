@@ -372,7 +372,7 @@ watch(currentSlug, (slug) => {
 }
 
 .doc-sidebar.collapsed {
-  width: 28px;
+  width: 20px;
 }
 
 .panel-head {
@@ -433,8 +433,8 @@ watch(currentSlug, (slug) => {
 
 .panel-strip-label {
   writing-mode: vertical-rl;
-  letter-spacing: 2px;
-  font-size: 11px;
+  letter-spacing: 1px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--color-text-dim);
   user-select: none;
@@ -651,7 +651,7 @@ watch(currentSlug, (slug) => {
 }
 
 .doc-toc.collapsed {
-  width: 28px;
+  width: 20px;
 }
 
 .doc-toc-title {
