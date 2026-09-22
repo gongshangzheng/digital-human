@@ -7,7 +7,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from server.config import CORS_ORIGINS
+from fastapi.staticfiles import StaticFiles
+from server.config import CORS_ORIGINS, MANAGEMENT_DIR
 from server.routers import management, papers, evaluation, training, datasets, speedrun
 
 app = FastAPI(
@@ -31,6 +32,17 @@ app.include_router(evaluation.router)
 app.include_router(training.router)
 app.include_router(datasets.router)
 app.include_router(speedrun.router)
+
+# 文档图片资产：management/docs/_assets/ 以只读静态目录暴露给 wiki 文档引用
+# 引用约定：`![图 N · 说明](/api/management/docs-assets/<slug>/<file>)`
+# 目录不存在时自动创建（check_dir=False 保证空仓库也能启动）
+DOC_ASSETS_DIR = os.path.join(MANAGEMENT_DIR, "docs", "_assets")
+os.makedirs(DOC_ASSETS_DIR, exist_ok=True)
+app.mount(
+    "/api/management/docs-assets",
+    StaticFiles(directory=DOC_ASSETS_DIR, check_dir=False),
+    name="doc-assets",
+)
 
 
 @app.get("/")

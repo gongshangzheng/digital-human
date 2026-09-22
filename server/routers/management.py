@@ -5,7 +5,7 @@ import os
 import re
 import yaml
 from fastapi import APIRouter, HTTPException
-from server.config import MANAGEMENT_DIR
+from server.config import MANAGEMENT_DIR, DOCS_FOLDER_ORDER
 from server.utils.file_utils import read_file, safe_resolve, scan_directory
 from server.parsers.team_parser import parse_team_list, parse_member_profile
 from server.parsers.report_parser import get_report_list, get_report_detail
@@ -210,8 +210,6 @@ async def get_meeting_detail(date: str):
 # ========== 文档 (wiki) ==========
 
 _DOCS_DIR = os.path.join(MANAGEMENT_DIR, 'docs')
-# 文档列表中文件夹的先后（未列出的排在已知之后）
-_DOCS_FOLDER_ORDER = ['实习复盘', '论文笔记', 'knowledge']
 # slug 允许 Unicode 单词字符（含中文）、空格、下划线、连字符与斜杠；
 # 路径穿越由 _valid_doc_slug 显式拒绝 + safe_resolve 根目录约束双重防护。
 _SLUG_RE = re.compile(r'^[\w][\w \-/]*$', re.UNICODE)
@@ -254,11 +252,13 @@ def _normalize_date(value):
 
 @router.get("/docs")
 async def get_docs():
-    """获取文档列表（management/docs/ 递归扫描所有 .md 文件）"""
+    """获取文档列表（management/docs/ 递归扫描所有 .md 文件，跳过 _assets 等下划线资产目录）"""
     if not os.path.isdir(_DOCS_DIR):
         return []
     docs = []
-    for root, _dirs, files in os.walk(_DOCS_DIR):
+    for root, dirs, files in os.walk(_DOCS_DIR):
+        # 下划线前缀目录（如 _assets/）存放资产，不是文档
+        dirs[:] = [d for d in dirs if not d.startswith('_')]
         for f in sorted(files):
             if not f.endswith('.md'):
                 continue
@@ -309,7 +309,7 @@ def _doc_sort_key(doc):
     """
     slug = doc.get('slug') or ''
     top = slug.split('/')[0] if '/' in slug else ''
-    folder_rank = _DOCS_FOLDER_ORDER.index(top) if top in _DOCS_FOLDER_ORDER else len(_DOCS_FOLDER_ORDER)
+    folder_rank = DOCS_FOLDER_ORDER.index(top) if top in DOCS_FOLDER_ORDER else len(DOCS_FOLDER_ORDER)
     return (
         folder_rank,
         _doc_number(doc.get('order')),

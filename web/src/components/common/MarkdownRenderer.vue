@@ -82,6 +82,51 @@ md.renderer.rules.fence = function (tokens, idx, options, env, self) {
   return defaultFence(tokens, idx, options, env, self)
 }
 
+// Image: 统一输出 <img loading="lazy">；图题由所在段落的 figure 包装负责（见下）
+md.renderer.rules.image = function (tokens, idx, options, env, self) {
+  const token = tokens[idx]
+  const src = md.utils.escapeHtml(token.attrGet('src') || '')
+  const alt = md.utils.escapeHtml(token.content || '')
+  const title = token.attrGet('title')
+  const titleAttr = title ? ` title="${md.utils.escapeHtml(title)}"` : ''
+  return `<img src="${src}" alt="${alt}" loading="lazy"${titleAttr}>`
+}
+
+// 整段只有一张带 alt 的图 → 包装为语义化 figure，alt 兼作图题
+const defaultParagraphOpen = md.renderer.rules.paragraph_open ||
+  function (tokens, idx, options, env, self) { return self.renderToken(tokens, idx, options) }
+const defaultParagraphClose = md.renderer.rules.paragraph_close ||
+  function (tokens, idx, options, env, self) { return self.renderToken(tokens, idx, options) }
+
+function loneFigureImage(tokens, idx) {
+  const inline = tokens[idx + 1]
+  if (!inline || inline.type !== 'inline' || !Array.isArray(inline.children)) return null
+  // 忽略纯空白文本节点（breaks:true 下可能残留）
+  const kids = inline.children.filter(t => !(t.type === 'text' && !t.content.trim()))
+  if (kids.length !== 1) return null
+  const only = kids[0]
+  if (only.type !== 'image' || !only.content) return null
+  return only
+}
+
+md.renderer.rules.paragraph_open = function (tokens, idx, options, env, self) {
+  const img = loneFigureImage(tokens, idx)
+  if (img) {
+    env.__figureAlt = img.content
+    return '<figure>'
+  }
+  return defaultParagraphOpen(tokens, idx, options, env, self)
+}
+
+md.renderer.rules.paragraph_close = function (tokens, idx, options, env, self) {
+  if (env && env.__figureAlt) {
+    const alt = md.utils.escapeHtml(env.__figureAlt)
+    delete env.__figureAlt
+    return `<figcaption>${alt}</figcaption></figure>`
+  }
+  return defaultParagraphClose(tokens, idx, options, env, self)
+}
+
 const rendered = computed(() => {
   if (!props.content) return '<p class="text-light">暂无内容</p>'
   let src = props.content

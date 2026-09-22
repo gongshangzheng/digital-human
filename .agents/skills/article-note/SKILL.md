@@ -65,7 +65,7 @@ management/docs/_assets/<slug>/             # 用户确认后发布的图片（�
 ## 前置条件
 
 - **OpenSpec**：笔记结构变更走本仓库 `openspec/changes/docs-note-<slug>`，流程为 propose → 用户审核 design 结构 → apply。
-- **图片发布**：`figures.py publish` 与 `/api/management/docs-assets/...` 依赖「文档图片支持」（`management/docs/_assets/` 静态端点）。本仓库尚未接入该能力，因此在接入前：图片只保留在 `.cache/article-note/<slug>/raw/figures/`，在 sidecar `appendix` 登记，**不得**写入会 404 的 docs-assets 链接；接入后再按标准流程发布。
+- **图片发布**：文档图片端点已就绪（`sync-projflow-round3` 引入 `management/docs/_assets/` + `/api/management/docs-assets/`）。按标准流程用 `figures.py inspect/convert/publish` 发布；仅当端点不可用时，才把图片留在 `.cache/article-note/<slug>/raw/figures/` 并在 sidecar `appendix` 登记，不得写会 404 的 docs-assets 链接。
 
 ## Subagent 边界
 
@@ -77,14 +77,14 @@ subagent 只读取素材、提取事实、标注来源、指出矛盾/缺口和�
 - 未披露配置写“未披露”，不得猜测。
 - 标题只使用 `##` 与 `###`。
 - 公式使用代码块、符号表和中文解释，不写裸 LaTeX 期待渲染。
-- 图片使用绝对 `/api/management/docs-assets/<slug>/...` URL（**仅在该端点就绪时**；未就绪见「前置条件」改用 sidecar 登记）；优先 WebP，最长边 ≤1600px、单图 ≤500KB、单篇 ≤5MB。
+- 图片使用绝对 `/api/management/docs-assets/<slug>/...` URL；优先 WebP，最长边 ≤1600px、单图 ≤500KB、单篇 ≤5MB。
 - 常规论文尽量保留至少 3 张能替代文字的原图，每图必须有图题和正文解读。
 - `[[slug]]` 链接必须指向真实存在的文档或任务。
 - Mermaid、sidecar JSON、OpenSpec change 和 Git diff 均须可验证。
 
 ## 故障处理
 
-source、HTML、PDF 全部失败时停止，不凭标题写作；把失败原因写入 extraction-log 并报告。缺少 Pillow/PyMuPDF 时保留原图并提示。文档图片端点未就绪时，图片转存 raw 并在 sidecar 登记，不写 docs-assets 链接。发现大纲与正文不一致时，先用 `openspec-update-change` 更新 design，不能静默偏离。
+source、HTML、PDF 全部失败时停止，不凭标题写作；把失败原因写入 extraction-log 并报告。缺少 Pillow/PyMuPDF 时保留原图并提示。文档图片端点不可用时，图片转存 raw 并在 sidecar 登记，不写 docs-assets 链接。发现大纲与正文不一致时，先用 `openspec-update-change` 更新 design，不能静默偏离。
 
 ## 参考资料
 

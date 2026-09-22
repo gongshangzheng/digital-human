@@ -195,4 +195,32 @@ a {
     margin-bottom: 16px;
     color: var(--color-text-secondary);
   }
+
+  // 图片：整段单图会被渲染器包成 figure（alt 兼作图题）
+  figure {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+  }
+
+  figcaption {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-text-dim);
+    text-align: center;
+  }
+
+  // 行内/无图题的图片（无 alt）保持自适应
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
