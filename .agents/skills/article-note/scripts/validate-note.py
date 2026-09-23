@@ -56,8 +56,12 @@ def main():
     missing_sections = [title for title in required_sections if title not in present_titles]
     if missing_sections:
         warnings.append("standard sections missing or intentionally skipped: %s" % ", ".join(missing_sections))
-    if re.search(r"\\\(|\\\[|\\begin\{equation", body):
-        warnings.append("possible raw LaTeX found; ensure formulas are fenced code blocks")
+    # The renderer supports $...$ and $$...$$. Markdown consumes the backslashes
+    # in \(...\) / \[...\], so warn about unsupported delimiters instead.
+    if re.search(r"\\\(|\\\[", body):
+        warnings.append("found \\(...\\) or \\[...\\] delimiters; this repository supports only $...$ and $$...$$")
+    if "\\begin{equation" in body:
+        warnings.append("found \\begin{equation}; use a $$...$$ display formula instead")
     images = IMAGE_RE.findall(body)
     for index, (alt, url) in enumerate(images, 1):
         if not url.startswith("/api/management/docs-assets/"):

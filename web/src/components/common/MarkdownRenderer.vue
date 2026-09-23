@@ -9,6 +9,8 @@ import MarkdownIt from 'markdown-it'
 import checkbox from 'markdown-it-task-checkbox'
 import { slugify } from '../../utils/markdown'
 import mermaid from 'mermaid'
+import * as katexPluginModule from '@vscode/markdown-it-katex'
+import 'katex/dist/katex.min.css'
 import { useThemeStore } from '../../stores/theme'
 
 const props = defineProps({
@@ -48,6 +50,45 @@ const md = new MarkdownIt({
     divWrap: false,
     liClass: 'task-list-item',
   })
+
+// The plugin is CJS: Vite dev prebundling and production builds expose its
+// default export differently, so normalize it before registering the rule.
+const katexPlugin = typeof katexPluginModule.default === 'function'
+  ? katexPluginModule.default
+  : katexPluginModule.default?.default
+
+if (typeof katexPlugin === 'function') {
+  // `$...$` and `$$...$$` render through KaTeX. The imported stylesheet also
+  // supplies Mermaid's existing KaTeX output with its required font metrics.
+  md.use(katexPlugin, { throwOnError: false })
+  guardInlineMathDelimiter()
+} else {
+  console.error('[MarkdownRenderer] KaTeX plugin failed to load; formulas remain visible as source text')
+}
+
+// The plugin accepts math content with leading/trailing whitespace. Rejecting
+// those tokens avoids treating money text such as "$5 到 $10 不等" as a formula.
+function guardInlineMathDelimiter() {
+  const rules = md.inline.ruler.__rules__
+  const original = rules?.find((rule) => rule.name === 'math_inline')?.fn
+  if (typeof original !== 'function') {
+    console.warn('[MarkdownRenderer] math_inline rule unavailable; skipped dollar delimiter guard')
+    return
+  }
+  md.inline.ruler.at('math_inline', (state, silent) => {
+    const startPos = state.pos
+    const tokensBefore = state.tokens.length
+    if (!original(state, silent)) return false
+    if (silent) return true
+    const token = state.tokens[state.tokens.length - 1]
+    if (token?.type === 'math_inline' && /^\s|\s$/.test(token.content)) {
+      state.tokens.length = tokensBefore
+      state.pos = startPos
+      return false
+    }
+    return true
+  })
+}
 
 // Heading auto-ID
 const defaultHeadingRender = md.renderer.rules.heading_open ||

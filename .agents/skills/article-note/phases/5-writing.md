@@ -13,7 +13,8 @@
 
 - frontmatter 含 `title/author/date/tags/summary`，论文类笔记另加 `arxiv_id/papers_id`，可选 `id`。
 - 顶层用 `##`，次级用 `###`，不使用 `####`。
-- 公式放 fenced code block，随后给符号表和中文解释。
+- 公式用 LaTeX：行内 `$...$`、块级 `$$...$$`（渲染为 KaTeX）；随后给符号表和中文解释。
+- 源论文记号需要保真时，可额外附 fenced code block 保留原式（可选）。
 - 图片用 `![图 N · 说明](/api/management/docs-assets/<slug>/<file>)`；图号连续，每图在正文有解读。
 - 流程和模块关系用 Mermaid；表格过宽时拆表或转纵向表。
 - 内部文档使用 `[[slug]]` 或 `[[slug|label]]`；本仓库带命名空间的链接写成 `[[knowledge/xxx|label]]`、`[[project:<项目>]]`。
