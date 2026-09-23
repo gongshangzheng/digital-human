@@ -3,7 +3,7 @@ title: CyberVerse框架
 author: 汤问
 date: 2026-09-20
 tags: [数字人, CyberVerse, 实时框架, 插件化, WebRTC, 部署]
-order: 40
+order: 50
 summary: 为什么需要统一框架、开源框架版图、系统架构与实时性、CyberVerse 三服务与插件体系、模型接入、部署形态、我们的改造与开放问题
 ---
 
