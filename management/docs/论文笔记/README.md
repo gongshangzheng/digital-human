@@ -5,7 +5,7 @@
 
 ## 统一模板（10 节骨架，口径同 `article-note` skill 的 `references/note-structure-template.md`）
 
-标题只用 `##` 与 `###`；公式一律用 fenced code block + 符号表，不写裸 LaTeX；图片用绝对 URL `/api/management/docs-assets/<slug>/<file>`，图题写成 `![图 N · 说明](url)`。
+标题只用 `##` 与 `###`；公式用 `$...$`（行内）或 `$$...$$`（块级）写 LaTeX，渲染走 KaTeX，每个公式后配符号表与中文解释；需要保留未解析的原始 TeX 时可另附代码块（代码块内的 `$` 不参与解析）；图片用绝对 URL `/api/management/docs-assets/<slug>/<file>`，图题写成 `![图 N · 说明](url)`。
 
 | 节 | 标题 | 职责 | 必备元素 |
 |---|---|---|---|
