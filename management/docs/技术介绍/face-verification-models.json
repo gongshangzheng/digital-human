@@ -1,0 +1,26 @@
+{
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "note": "初版：人脸身份验证的任务定义与评测协议、从归一化 softmax 到 ArcFace 与自适应 margin 的损失谱系、数据与骨干对上限的影响、作为数字人度量与损失时的边界、场景选型对照",
+      "commit": ""
+    }
+  ],
+  "related": [
+    {
+      "slug": "数字人概述/数字人身份",
+      "title": "数字人身份",
+      "desc": "把本文的失效边界接到项目实测：长时漂移的方向游走诊断、推理期锚点引导、Learned Anchor Force 反例"
+    },
+    {
+      "slug": "knowledge/digital-human-identity-consistency",
+      "title": "身份一致性：CSIM 的黄昏与度量的新生",
+      "desc": "五类失效的量化证据与跨 benchmark 读数，本文第六节只做机理归纳并转引其结论"
+    },
+    {
+      "slug": "技术介绍/dpo-直接偏好优化",
+      "title": "直接偏好优化（DPO）",
+      "desc": "同目录技术介绍：偏好优化如何落到扩散模型与运动隐变量上"
+    }
+  ]
+}
