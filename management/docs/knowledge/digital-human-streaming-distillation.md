@@ -47,7 +47,9 @@ Part 1
 
 ### 端到端延迟分解
 
-\\[ T_{e2e}=T_{audio}+T_{model}+T_{encode}+T_{network}+T_{buffer} \\] 
+$$
+T_{e2e}=T_{audio}+T_{model}+T_{encode}+T_{network}+T_{buffer}
+$$
 
 其中 $T_{model}$ 只是系统延迟的一部分，流式设计要同时压缩音频窗口、模型采样步数和播放缓冲。
 
@@ -124,7 +126,9 @@ DMD 蒸馏：把多步扩散压到少步
 
 ### DMD 的直觉目标
 
-\\[ G_\theta(z,c) \sim p_{teacher}(x\mid c) \\] 
+$$
+G_\theta(z,c) \sim p_{teacher}(x\mid c)
+$$
 
 学生生成器 $G_\theta$ 直接学习条件 $c$ 下教师扩散模型的生成分布，而不是在推理时重复完整去噪链。
 

@@ -68,7 +68,9 @@ Part 1
 
 **FID（Frechet Inception Distance）** 把生成图像和真实图像分别送入 Inception-v3，取 pool3 层 2048 维特征，假设两组特征都服从多元高斯分布，然后算两个分布之间的 Frechet 距离：
 
-\\[ \text{FID} = \|\mu_r - \mu_g\|^2 + \text{Tr}\left(\Sigma_r + \Sigma_g - 2(\Sigma_r \Sigma_g)^{1/2}\right) \\] 
+$$
+\text{FID} = \|\mu_r - \mu_g\|^2 + \text{Tr}\left(\Sigma_r + \Sigma_g - 2(\Sigma_r \Sigma_g)^{1/2}\right)
+$$
 
 直觉上，FID 同时比较均值（"平均长什么样"）和协方差（"多样性如何"）。FID 越低，生成分布越接近真实分布。
 

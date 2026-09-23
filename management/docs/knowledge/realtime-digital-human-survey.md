@@ -94,9 +94,11 @@ Problem Definition
 
 ### 核心任务
 
-给定身份外观条件 \\(I\\)、驱动条件 \\(D\\) 和实时系统状态 \\(S_t\\)，生成视频帧序列 \\(\hat{X}_{1:T}\\)，使其在身份、口型、表情、头动、时间一致性和端到端延迟上同时满足约束。
+给定身份外观条件 $I$、驱动条件 $D$ 和实时系统状态 $S_t$，生成视频帧序列 $\hat{X}_{1:T}$，使其在身份、口型、表情、头动、时间一致性和端到端延迟上同时满足约束。
 
-\\[ \hat{X}_{1:T}=G(I, D, S_t),\quad D \in \\{audio, text, pose, driving\ video, emotion\\} \\] 
+$$
+\hat{X}_{1:T}=G(I, D, S_t),\quad D \in \{audio, text, pose, driving\ video, emotion\}
+$$
 
 术语| 核心含义| 典型输入| 典型输出| 容易误判的地方  
 ---|---|---|---|---  
@@ -107,7 +109,7 @@ Portrait animation| 把驱动运动迁移到目标肖像| 源图 + driving video
 3D avatar| 围绕绑定资产生成动作、表情和交互行为| 角色资产 + 文本/语音/动作标签/上下文| 3D 身体、手势、面部表情和多轮互动| 它不是纯视觉生成模型，而是资产、动作和系统的组合  
 实时数字人系统| 把生成模型放进在线交互链路| ASR/LLM/TTS/音视频流/用户状态| 可持续、低延迟、可部署的视频人物| 论文 FPS 不等于端到端产品 SLA  
   
-这个公式看似简单，但它把很多被混在一起的任务拆开了。Wav2Lip 的 \\(I\\) 通常来自已有视频帧，\\(D\\) 是新音频，目标是嘴部区域同步；SadTalker 的 \\(I\\) 是单张图，\\(D\\) 是音频，先生成 3DMM motion coefficients；LivePortrait 的 \\(D\\) 更常见是驱动视频或运动信号；MuseTalk 的任务是 video dubbing，重点是保持原视频头动和眼动，只改嘴部；VASA-1、Ditto、READ 则试图在 latent 或 motion space 中生成更完整的脸部动态。#Prajwal-et-al.-2020# #Zhang-et-al.-2023# #Guo-et-al.-2024-LivePortrait# #Zhang-et-al.-2024-MuseTalk# #Xu-et-al.-2024# #Li-et-al.-2025-Ditto# #Wang-et-al.-2025-READ# 实时性也必须拆成模型实时和系统实时。论文里的 FPS 往往只覆盖渲染或生成模型的一段；真实业务还包括音频采集、VAD/ASR/TTS、特征提取、motion prediction、video generation、后处理、编码、WebRTC 传输和客户端播放缓冲。VASA-1 报告 512×512 up to 40 FPS，MuseTalk 报告 256×256 30 FPS on NVIDIA V100，LivePortrait 报告 12.8ms on RTX 4090，RealTalk 报告 30 FPS on V100，ChatAnyone 报告 512×768 up to 30 FPS on 4090。这些数字只能证明“路线有实时潜力”，不能直接等于产品 SLA。#Xu-et-al.-2024# #Zhang-et-al.-2024-MuseTalk# #Guo-et-al.-2024-LivePortrait# #Ji-et-al.-2024-RealTalk# #Qi-et-al.-2025-ChatAnyone# 
+这个公式看似简单，但它把很多被混在一起的任务拆开了。Wav2Lip 的 $I$ 通常来自已有视频帧，$D$ 是新音频，目标是嘴部区域同步；SadTalker 的 $I$ 是单张图，$D$ 是音频，先生成 3DMM motion coefficients；LivePortrait 的 $D$ 更常见是驱动视频或运动信号；MuseTalk 的任务是 video dubbing，重点是保持原视频头动和眼动，只改嘴部；VASA-1、Ditto、READ 则试图在 latent 或 motion space 中生成更完整的脸部动态。#Prajwal-et-al.-2020# #Zhang-et-al.-2023# #Guo-et-al.-2024-LivePortrait# #Zhang-et-al.-2024-MuseTalk# #Xu-et-al.-2024# #Li-et-al.-2025-Ditto# #Wang-et-al.-2025-READ# 实时性也必须拆成模型实时和系统实时。论文里的 FPS 往往只覆盖渲染或生成模型的一段；真实业务还包括音频采集、VAD/ASR/TTS、特征提取、motion prediction、video generation、后处理、编码、WebRTC 传输和客户端播放缓冲。VASA-1 报告 512×512 up to 40 FPS，MuseTalk 报告 256×256 30 FPS on NVIDIA V100，LivePortrait 报告 12.8ms on RTX 4090，RealTalk 报告 30 FPS on V100，ChatAnyone 报告 512×768 up to 30 FPS on 4090。这些数字只能证明“路线有实时潜力”，不能直接等于产品 SLA。#Xu-et-al.-2024# #Zhang-et-al.-2024-MuseTalk# #Guo-et-al.-2024-LivePortrait# #Ji-et-al.-2024-RealTalk# #Qi-et-al.-2025-ChatAnyone# 
 
 最常见误判 
 

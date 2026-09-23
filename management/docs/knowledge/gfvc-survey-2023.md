@@ -87,7 +87,9 @@ GFVC general framework（图片资源未随副本复制）
 
 用数学符号把这套路 form 化：设 key-reference frame 为 $I_{\mathrm{ref}}$，第 $t$ 个 inter 帧为 $I_t$，encoder 的 analysis model 为 $A(\cdot)$，decoder 的 synthesis model 为 $S(\cdot)$，则整条链路可写成：
 
-\\[ z_t = A(I_t),\qquad \hat{I}_t = S\\!\left(I_{\mathrm{ref}},\, z_t\right) \\] 
+$$
+z_t = A(I_t),\qquad \hat{I}_t = S\!\left(I_{\mathrm{ref}},\, z_t\right)
+$$
 
 其中 $z_t$ 就是 compact facial representation（keypoints / landmarks / semantics / compact feature 等，随方法而变）。注意 $z_t$ 的维度远小于 $I_t$ 的像素数——这正是"超低码率"的来源；而 $S$ 不做像素级反变换，而是用生成模型的强推理能力从 $(I_{\mathrm{ref}}, z_t)$ 合成人脸。这一步决定了 ==GFVC 不优化像素保真==，所以后面的评测协议才弃用 PSNR/SSIM。
 
@@ -208,7 +210,9 @@ GFV SEI for Face Fusion（图片资源未随副本复制）
 
 关键设计：TranslatorNN() 在 encoder 与 decoder ==matched==（端到端联合训练）时可旁路省算力，==mismatched== 时启用翻译保兼容。设重建质量为 $Q$，AF0048 的实验给出明确的两档对比：
 
-\\[ Q_{\mathrm{matched}} \;>\; Q_{\mathrm{mismatched\,+\,translator}},\quad \text{后者 still acceptable} \\] 
+$$
+Q_{\mathrm{matched}} \;>\; Q_{\mathrm{mismatched\,+\,translator}},\quad \text{后者 still acceptable}
+$$
 
 即 mismatched 配合 translator 的质量虽略低于 matched，但仍可接受；若不启用 translator 则质量进一步下降（此为综述隐含的工程推断，非显式实验档位）#Chen B. et al., 2023#。形式化地，TranslatorNN $T(\cdot)$ 把 encoder 侧参数翻译到 decoder 侧 synthesis model 的语义空间：当 matched 时 $z_t$ 与 $S$ 同源，$T$ 可为单位映射（旁路）；当 mismatched 时需 $T(z_t) \neq z_t$ 做分布/维度对齐，$\hat{I}_t = S(I_{\mathrm{ref}},\, T(z_t))$。
 

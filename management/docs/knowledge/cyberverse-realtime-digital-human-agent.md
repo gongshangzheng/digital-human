@@ -689,7 +689,9 @@ CyberVerse demo Alice（图片资源未随副本复制）
 
 ### RTP 的定义
 
-\\[ \text{RTP} = \frac{\text{elapsed}}{\text{frames} / \text{fps}} \\] 
+$$
+\text{RTP} = \frac{\text{elapsed}}{\text{frames} / \text{fps}}
+$$
 
 其中 `elapsed` 是生成这批帧实际花的时间，`frames / fps` 是这批帧按目标帧率播放需要的时长。
 
