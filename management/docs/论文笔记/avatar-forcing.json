@@ -1,6 +1,11 @@
 {
   "changelog": [
     {
+      "date": "2026-09-23",
+      "summary": "补「后续工作」小节：Semantic Scholar 口径 16 篇引用按继承的优点分六组（流式架构、失效分析、双向交互、偏好/强化学习、长时身份一致、外推），并标注两条仍空着的方向；「局限与启发」补 DynaForcing 对 dynamic collapse 的形式化对照（已标注 DMD 蒸馏 vs diffusion forcing 的设定差异）；修正 arXiv 版本日期（v1 2026-01-02 / v2 2026-05-30）与代码仓库行（补 AVTR-1 开放替代），新增被引行",
+      "commit": ""
+    },
+    {
       "date": "2026-09-22",
       "summary": "按 article-note 流程重写：论文身份从 2603.14331 纠正为 2601.00664（KAIST, CVPR 2026），补 6 张原图、10 节骨架、sidecar；工程层压缩进「局限与启发」",
       "commit": ""

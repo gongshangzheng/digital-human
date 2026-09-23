@@ -19,10 +19,11 @@ order: 10
 | 作者 | Taekyung Ki\*、Sangwon Jang\*、Jaehyeong Jo、Jaehong Yoon、Sung Ju Hwang |
 | 单位 | KAIST、NTU Singapore、DeepAuto.ai |
 | venue / 年份 | CVPR 2026 |
-| arXiv | `2601.00664`（v2，2026-01-02） |
+| arXiv | `2601.00664`（v1 2026-01-02；v2 2026-05-30） |
 | 项目页 | https://taekyungki.github.io/AvatarForcing |
-| 代码仓库 | 未公开；我们接入的是 CyberVerse `models/avatarforcing/`（核对基准 `4968280`） |
+| 代码仓库 | 未公开；我们接入的是 CyberVerse `models/avatarforcing/`（核对基准 `4968280`）。开放替代可参考 `AVTR-1`（arXiv:2609.22913，实时交互头像开放栈） |
 | papers 库 | `arxiv-2601.00664` |
+| 被引 | 16（Semantic Scholar，2026-09-23 查询；influential 4）；分布见「相关工作与定位」的后续工作表 |
 
 > **易混提示**：另有一篇 `arXiv:2603.14331`「AvatarForcing: One-Step Streaming Talking Avatars via Local-Future Sliding-Window Denoising」（浙江大学 + 快手 Kling，DiT + 双有界前瞻 + 双锚 KV Cache），与本篇**同名易混但完全是两个模型**。本笔记只写 `2601.00664`；本仓库早期版本的笔记曾把两者的信息缝在一起，已在本篇修正（见 sidecar changelog）。
 
@@ -286,6 +287,26 @@ sequenceDiagram
 
 论文把工作落在第三条线「dyadic conversational avatar」：不再靠显式控制信号或人工角色切换，而是让两端的多模态信号在同一个因果生成模型里持续互相影响。
 
+### 后续工作（16 篇引用，截至 2026-09）
+
+Semantic Scholar 记录本篇（`2601.00664`）**16 篇引用**、influential 4（查询于 2026-09-23）。OpenAlex 同期显示 0，属引文回溯滞后，对新论文不可用。下表按「继承了哪个优点」分组；「推进」一栏只写已读过摘要的条目，其余条目只到定位层。
+
+| 继承的优点 | 工作 | 相对本篇的推进 |
+|---|---|---|
+| 流式 / 实时架构 | Causal Forcing（`2602.02214`，被引 134）、Causal Forcing++（`2605.15141`，被引 30） | 指出把双向教师蒸馏成因果学生时，用 ODE 蒸馏初始化需要「帧级单射性」；自回归学生从双向教师蒸馏违反该条件，只能收敛到条件期望解并使性能退化。给出修正，并进一步推进到逐帧自回归 + 仅 1–2 步采样 |
+| 流式架构的失效分析 | DynaForcing（`2608.17707`）、Decoupled Self-Forcing Distillation（`2609.10317`）、Q-ARVD（`2605.21072`） | DynaForcing 把 self-forcing 蒸馏的失效命名为 **dynamic collapse**：学生收敛到感知质量高、但时间动力学被压制的近静态解，归因于 DMD 的反向 KL 偏好低运动模式叠加无锚自条件形成的正反馈。另两篇分别从解耦蒸馏与量化入手 |
+| 双向交互 + 实时 | InterDyad（`2603.23132`）、ECHO（`2603.17427`）、Listener Nodding（`2607.12329`） | 把「会回应」细化到情绪恰当性与听者非语言动作的实时生成 |
+| 偏好 / 强化学习提表达力 | GDPO-Listener（`2603.25020`）、Facial Expression Generation Aligned with Human Preference（`2603.07093`） | 前者针对听者动作的 Regression-to-the-Mean（塌成静态脸），用 Group reward-Decoupled Policy Optimization 在不同参数子空间上分别做奖励归一化；后者把表情生成当作 action learning 并刻意做成 identity-independent，使人类反馈不受视觉与身份偏见干扰 |
+| 长时身份一致 | AsymTalker（`2605.02948`）、TaoMate（`2607.24359`） | AsymTalker 点名两个失败：静态身份参考与动态音频的时空错位、**跨块自生成连续性参考造成的级联身份漂移**（与本篇长时漂移的机制描述一致），用时序参考编码与非对称知识蒸馏应对；TaoMate 用 anchor-guided memory |
+| 外推 | CausalCine（`2605.12496`）、LPM 1.0（`2604.07823`）、Wan-Streamer（`2606.25041`）、AVTR-1（`2609.22913`） | 因果流式外推到多镜头叙事、角色表现基座、实时交互基座与开放栈 |
+
+**仍然空着的两点**（截至上述 16 篇的范围内未见）：
+
+- **低维运动隐变量上的显式控制接口**：没有一篇回到「给运动自由度挂关键点 / 系数指令」。可控性仍是 Ditto、LivePortrait 那类显式表示方法的强项（见 [[数字人概述/数字人身份|数字人身份]] 的跨路线对照）。
+- **低维运动子空间上的偏好优化**：偏好与强化学习都发生在 FLAME 参数空间或像素 / 整帧层，没有人像本篇这样在约 20 维运动子空间里做。
+
+附注：同名易混的另一篇 `2603.14331`（浙大 + 快手）另有 7 篇引用，其中 `TaoMate`、`Avatar-Forever`、`Vidu S2` 等更贴近它的一步流式设定，引用归属时需区分。
+
 ## 局限与启发
 
 ### 论文自己承认的局限
@@ -294,6 +315,12 @@ sequenceDiagram
 - 用户线索虽经运动隐变量进入模型，但**缺少更显式的可控性**（如指定注视方向、强调情绪变化）。论文认为可加入眼动/情绪追踪等新条件，且框架对此没有架构限制。
 - **Diffusion forcing 并不能完全解决 exposure bias**，论文把在运动隐空间里彻底解决它留作未来工作。
 - 伦理风险：更逼真的交互头像加剧身份伪造与深度伪造风险，论文建议水印、限制性许可，并鼓励用生成数据训练伪造检测器。
+
+### 后续文献的补充：运动塌陷被形式化
+
+DynaForcing（`2608.17707`）把这类失效形式化为 **dynamic collapse**——学生收敛到感知质量高、但时间动力学被压制的近静态解。需要标注设定差异：它研究的是 **self-forcing + DMD 蒸馏**，本篇用的是 **diffusion forcing**，两者不是同一套蒸馏目标；共同点只在于「自条件反馈环会持续压低运动」。
+
+这条对照的用处是提示读法：本篇用 DPO 换来的反应性与动作丰富度，本质上是在**对抗自己递归链路的内生塌陷**，而不是一个可以单独摘出来的增益。这也解释了为什么 DPO 的收益集中在反应性（rPCC-Exp / rPCC-Pose）与丰富度（SID / Var），而身份与唇同步反而小幅回落。
 
 ### 长时身份漂移：历史递归、方向游走与静音放大
 
