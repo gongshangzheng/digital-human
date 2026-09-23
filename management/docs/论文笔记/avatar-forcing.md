@@ -64,33 +64,40 @@ flowchart LR
 
 沿用 FLOAT 的 motion latent auto-encoder，把图像映射成可加分解的隐变量：
 
-```text
-z = z_S + m_S,   z ∈ R^d,  d = 512
-```
+$$
+z = z_S + m_S, \qquad z \in \mathbb{R}^d, \qquad d = 512
+$$
 
-`z_S` 编码身份/外观，整段对话中**保持固定**；`m_S` 编码口头与非口头运动（表情、头动）。模型只预测运动项，身份项不参与生成——这既是「把身份钉住」的实现，也是**训练用视频、推理用单图**得以成立的原因。
+$z_S$ 编码身份/外观，整段对话中**保持固定**；$m_S$ 编码口头与非口头运动（表情、头动）。模型只预测运动项，身份项不参与生成——这既是「把身份钉住」的实现，也是**训练用视频、推理用单图**得以成立的原因。
 
 ### 生成：块因果 Diffusion Forcing
 
 条件三元组与自回归分解：
 
-```text
-p_θ(m^{1:N}) = Π_i p_θ(m^i | m^{<i}, c^i)
-c^i = (a_u^i, m_u^i, a^i)     # 用户音频、用户动作、avatar 音频
-```
+$$
+p_\theta\!\left(m^{1:N}\right)
+= \prod_i p_\theta\!\left(m^i \mid m^{<i}, c^i\right),
+\qquad
+c^i = \left(a_u^i, m_u^i, a^i\right)
+$$
+
+其中 $a_u^i$、$m_u^i$ 与 $a^i$ 分别表示第 $i$ 个位置的用户音频、用户动作与 avatar 音频。
 
 生成器是带块因果结构的 diffusion forcing transformer（DFoT）：**一个 block 内所有帧共享同一个噪声时间步**，block 之间严格因果（当前块不能看未来块）。但严格因果会在块边界产生逐帧抖动，因此给 mask 加**有界前瞻（look-ahead）**：
 
-```text
-M_{i,j} = 1   若 floor(j / B) ≤ floor(i / B) + l
-        = 0   否则
-```
+$$
+M_{i,j} =
+\begin{cases}
+1, & \left\lfloor j / B \right\rfloor \le \left\lfloor i / B \right\rfloor + l, \\
+0, & \text{否则}.
+\end{cases}
+$$
 
-`B` 是块大小、`l` 是前瞻帧数。训练时允许看未来 `l` 帧；推理时真实未来帧不存在，改用上一块末尾 `l` 帧作为历史 offset 替代。
+$B$ 是块大小、$l$ 是前瞻帧数。训练时允许看未来 $l$ 帧；推理时真实未来帧不存在，改用上一块末尾 $l$ 帧作为历史 offset 替代。
 
 ### 条件：Dual Motion Encoder
 
-用户侧信号（`m_u`、`a_u`）先经一层 cross-attention 对齐出整体用户运动表征，再与 avatar 音频 `a` 经第二层 cross-attention 融合，得到统一条件。**用户动作 `m_u` 是必需的**——论文消融显示，去掉它之后用户在静音时头像完全不动，也看不到微笑这类非语言线索。
+用户侧信号（$m_u$、$a_u$）先经一层 cross-attention 对齐出整体用户运动表征，再与 avatar 音频 $a$ 经第二层 cross-attention 融合，得到统一条件。**用户动作 $m_u$ 是必需的**——论文消融显示，去掉它之后用户在静音时头像完全不动，也看不到微笑这类非语言线索。
 
 ![图 3 · `v_θ` 的结构：块因果 + look-ahead 注意力掩码负责跨块平滑衔接](/api/management/docs-assets/avatar-forcing/fig-2-motion-generator.webp)
 
@@ -100,34 +107,44 @@ M_{i,j} = 1   若 floor(j / B) ≤ floor(i / B) + l
 
 **两阶段训练**。Stage 1 先用扩散强制目标把运动生成训到收敛；Stage 2 才做偏好微调，并把 Stage 1 的权重复制一份、冻结为参考向量场 `v_ref`：
 
-```text
-L_ft(θ) = L_DF(θ) + λ · L_DPO(θ)
-```
+$$
+\mathcal{L}_{\mathrm{ft}}(\theta)
+= \mathcal{L}_{\mathrm{DF}}(\theta)
++ \lambda\,\mathcal{L}_{\mathrm{DPO}}(\theta)
+$$
 
-保留 `L_DF` 意味着偏好项只调整倾向，不替换原本的条件生成能力。
+保留 $\mathcal{L}_{\mathrm{DF}}$ 意味着偏好项只调整倾向，不替换原本的条件生成能力。
 
 **偏好判别从哪来**。论文既不收集人工偏好标注，也不训练奖励模型，而是用同一段双人对话构造一对运动隐变量：
 
 | 角色 | 来源 | 生成时看到的条件 |
 |---|---|---|
-| preferred `m^w` | 真实视频编码出的运动隐变量 | 完整互动条件 `c = (a_u, m_u, a)` |
-| less-preferred `m^l` | 单独训练的 FLOAT talking-avatar 模型生成 | **只有 avatar 音频**，用户音频与用户动作被丢弃 |
+| preferred $m^w$ | 真实视频编码出的运动隐变量 | 完整互动条件 $c = (a_u, m_u, a)$ |
+| less-preferred $m^l$ | 单独训练的 FLOAT talking-avatar 模型生成 | **只有 avatar 音频**，用户音频与用户动作被丢弃 |
 
 关键在「丢弃用户条件」发生在**造负样本**这一步：`m^l` 是一个会说、但不回应你的反面例子。到了 DPO 训练，两侧都按完整条件评估，模型要学的是「有用户线索时应该怎么动」，而不是去模仿一段没有用户线索的独白。
 
 **损失怎么落到每一帧**。附录把目标逐帧展开：winner 与 loser 共用同一个噪声序列，按帧各自取流时间 `t_n` 加噪后，当前模型 `v_θ` 与冻结的 `v_ref` 分别对两侧预测向量场，再比较预测误差的相对变化：
 
-```text
-L_DPO(θ) = − E log σ( −β [
-      ‖v^w_{t_n} − v_θ(m^w_{t_n}, t_n, c^n)‖
-    − ‖v^w_{t_n} − v_ref(m^w_{t_n}, t_n, c^n)‖
-    − ( ‖v^l_{t_n} − v_θ(m^l_{t_n}, t_n, c^n)‖
-      − ‖v^l_{t_n} − v_ref(m^l_{t_n}, t_n, c^n)‖ ) ] )
-```
+$$
+\mathcal{L}_{\mathrm{DPO}}(\theta)
+= - \mathbb{E}\!\left[
+  \log \sigma \!\left(
+    -\beta \left[
+      \left\lVert v^w_{t_n} - v_\theta(m^w_{t_n}, t_n, c^n) \right\rVert_1
+      - \left\lVert v^w_{t_n} - v_{\mathrm{ref}}(m^w_{t_n}, t_n, c^n) \right\rVert_1
+      - \left(
+        \left\lVert v^l_{t_n} - v_\theta(m^l_{t_n}, t_n, c^n) \right\rVert_1
+        - \left\lVert v^l_{t_n} - v_{\mathrm{ref}}(m^l_{t_n}, t_n, c^n) \right\rVert_1
+      \right)
+    \right]
+  \right)
+\right]
+$$
 
-`c^n` 是第 n 帧的统一条件，`m_{t_n}` 是加噪后的运动隐变量，`v_{t_n} = m − m_0` 是目标向量场。方括号内是「当前模型比参考模型在真实运动上改善了多少」减去「在仅音频样本上改善了多少」；最小化它，就是要求模型相对参考模型更拟合真实互动，同时相对更不迁就那个不回应用户的反例。论文这里用的是 L1 距离，也没有引入扩散 DPO 中的时间权重项——机制相同，损失形式按流匹配的加噪约定实例化。
+$c^n$ 是第 $n$ 帧的统一条件，$m_{t_n}$ 是加噪后的运动隐变量，$v_{t_n} = m - m_0$ 是目标向量场。方括号内是「当前模型比参考模型在真实运动上改善了多少」减去「在仅音频样本上改善了多少」；最小化它，就是要求模型相对参考模型更拟合真实互动，同时相对更不迁就那个不回应用户的反例。论文这里用的是 $L_1$ 距离，也没有引入扩散 DPO 中的时间权重项——机制相同，损失形式按流匹配的加噪约定实例化。
 
-**效果**。`λ=0.1`、`β=1000`，只微调 5k 步，继续训练未见额外增益。消融中固定「有用户运动 `m_u`」、只切换 DPO 时（数值见 [消融](#消融)）：反应性 rPCC-Exp 0.042→0.003、rPCC-Pose 0.146→0.036，动作丰富度 SID 2.236→2.442、Var 1.408→1.734，FID/FVD 同步改善；代价是身份相似度 CSIM 0.854→0.833、唇同步 LSE-C 6.803→6.723 的小幅回落。所以这不是「全指标提升」，收益集中在反应性与动作丰富度上。可视化结论一致：去掉 DPO 后表情与头动明显更单调、也不再回应用户的微笑；启用后头动更自然，会跟着用户微笑而笑得更开。
+**效果**。$\lambda = 0.1$、$\beta = 1000$，只微调 5k 步，继续训练未见额外增益。消融中固定「有用户运动 $m_u$」、只切换 DPO 时（数值见 [消融](#消融)）：反应性 rPCC-Exp 0.042→0.003、rPCC-Pose 0.146→0.036，动作丰富度 SID 2.236→2.442、Var 1.408→1.734，FID/FVD 同步改善；代价是身份相似度 CSIM 0.854→0.833、唇同步 LSE-C 6.803→6.723 的小幅回落。所以这不是「全指标提升」，收益集中在反应性与动作丰富度上。可视化结论一致：去掉 DPO 后表情与头动明显更单调、也不再回应用户的微笑；启用后头动更自然，会跟着用户微笑而笑得更开。
 
 ## 训练与实现细节
 
@@ -136,9 +153,9 @@ L_DPO(θ) = − E log σ( −β [
 | 数据集 | RealTalk + ViCo（双人对话）；另从 HDTF 随机取 50 条评 talking head |
 | 数据规模 | 未披露（论文未给片段数/小时数） |
 | 预处理 | PySceneDetect 切场景 → Face-Alignment 检测追踪并裁到 512×512 → IIANet 视觉引导语音分离（区分说话人/倾听方）→ 统一 25 fps / 16 kHz |
-| 模型初始化 | motion latent auto-encoder 从 FLOAT 权重出发，**在本数据集上重训**；latent 维度 `d=512` |
-| 生成器配置 | 8 个注意力头、hidden `h=1024`、1D RoPE |
-| 训练窗口 | `N=50` 帧、`B=5` 个 block（**10 帧/块**）、look-ahead `l=2` |
+| 模型初始化 | motion latent auto-encoder 从 FLOAT 权重出发，**在本数据集上重训**；latent 维度 $d = 512$ |
+| 生成器配置 | 8 个注意力头、hidden $h = 1024$、1D RoPE |
+| 训练窗口 | $N = 50$ 帧、$B = 5$ 个 block（**10 帧/块**）、look-ahead $l = 2$ |
 | 音频编码 | Wav2Vec2.0 提取 **12 个多尺度特征** |
 | batch size | 8 |
 | 学习率 / 调度 | Adam，`1e-4`（调度未披露） |
@@ -147,7 +164,7 @@ L_DPO(θ) = − E log σ( −β [
 | 硬件 / 成本 | 单张 NVIDIA H100（总机时未披露） |
 | 随机种子 / 复现设置 | 未披露 |
 | 采样 | 10 NFE（Euler 求解器）+ classifier-free guidance |
-| DPO 超参 | 平衡系数 `λ=0.1`、偏离参数 `β=1000`，参考模型 `v_ref` 用 Stage 1 权重初始化 |
+| DPO 超参 | 平衡系数 $\lambda = 0.1$、偏离参数 $\beta = 1000$，参考模型 $v_{\mathrm{ref}}$ 用 Stage 1 权重初始化 |
 
 ## 推理与系统链路
 
@@ -171,8 +188,14 @@ sequenceDiagram
 
 三个关键机制：
 
-1. **Offset 替代未来帧**。第 `i+1` 块的 offset 由上一块末尾 `l` 帧的运动隐变量与对应条件组成（`O^{i+1} = (m_1^i[-l:], c^i([-l:]))`）。因为这些帧已经是「干净」的，可以给它们单独的流时间步（`t=1`），与当前噪声块（`t=t_j`）拼接后一起送入。
-2. **独立 CFG 三路缓存**。CFG 并行比较「无条件」「只有 avatar 音频」「avatar 音频 + 用户条件」三种预测再合成。三路分别缓存 KV，避免重复计算；由于用了 look-ahead 与 offset，最后 `l` 帧不进缓存，因此**最大缓存长度为 `M = L − B − l = 38`**。
+1. **Offset 替代未来帧**。第 $i+1$ 块的 offset 由上一块末尾 $l$ 帧的运动隐变量与对应条件组成：
+
+   $$
+   O^{i+1} = \left(m_1^i[-l:],\; c^i([-l:])\right).
+   $$
+
+   因为这些帧已经是「干净」的，可以给它们单独的流时间步（$t = 1$），与当前噪声块（$t = t_j$）拼接后一起送入。
+2. **独立 CFG 三路缓存**。CFG 并行比较「无条件」「只有 avatar 音频」「avatar 音频 + 用户条件」三种预测再合成。三路分别缓存 KV，避免重复计算；由于用了 look-ahead 与 offset，最后 $l$ 帧不进缓存，因此**最大缓存长度为 $M = L - B - l = 38$**。
 3. **块因果 vs 双向**。与 INFP 的双向 DiT 需要整段时序窗口不同，块因果结构只看历史 + 有限前瞻，天然支持 KV 缓存与恒定延迟。
 
 ![图 4 · 双向 DiT（需完整时序窗口）与块因果 DFoT（可 KV 缓存）的结构对比](/api/management/docs-assets/avatar-forcing/fig-4-causal-vs-bidirectional.webp)
@@ -291,21 +314,21 @@ sequenceDiagram
 | 有界前瞻 | look-ahead | 允许每个块额外看到 `l` 帧未来以平滑块边界 |
 | 块因果掩码 | blockwise causal mask | 块内双向、块间因果的注意力掩码 |
 | 双路运动编码器 | Dual Motion Encoder | 把用户侧信号与 avatar 音频编码成统一条件的模块 |
-| 身份-运动分解 | identity-motion decomposition | `z = z_S + m_S`，身份项全程固定 |
+| 身份-运动分解 | identity-motion decomposition | $z = z_S + m_S$，身份项全程固定 |
 | 运动丰富度 | Motion Richness | 用 SID 与 Var 衡量的动作多样性 |
 | 反应性 | Reactiveness | 用户与头像动作的同步程度（rPCC） |
 
 | 符号 | 含义 |
 |---|---|
 | `S` | 输入参考图像 |
-| `z`, `z_S`, `m_S` | 总隐变量、身份项、运动项 |
-| `d` | 运动隐变量维度（512） |
-| `v_θ` | 预测向量场的模型（Dual Motion Encoder + Causal DFoT） |
-| `c^i = (a_u^i, m_u^i, a^i)` | 第 i 帧条件三元组（用户音频、用户动作、avatar 音频） |
-| `N`, `B`, `l` | 训练帧数 50、块数 5（10 帧/块）、前瞻 2 帧 |
-| `O^i` | 第 i 块生成时拼接的历史 offset |
-| `M` | KV cache 上限，`L − B − l = 38` |
-| `λ`, `β` | DPO 的平衡系数 0.1 与偏离参数 1000 |
+| $z$, $z_S$, $m_S$ | 总隐变量、身份项、运动项 |
+| $d$ | 运动隐变量维度（512） |
+| $v_\theta$ | 预测向量场的模型（Dual Motion Encoder + Causal DFoT） |
+| $c^i = (a_u^i, m_u^i, a^i)$ | 第 $i$ 帧条件三元组（用户音频、用户动作、avatar 音频） |
+| $N$, $B$, $l$ | 训练帧数 50、块数 5（10 帧/块）、前瞻 2 帧 |
+| $O^i$ | 第 $i$ 块生成时拼接的历史 offset |
+| $M$ | KV cache 上限，$L - B - l = 38$ |
+| $\lambda$, $\beta$ | DPO 的平衡系数 0.1 与偏离参数 1000 |
 
 ## 相关文档
 

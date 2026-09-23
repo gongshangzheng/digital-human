@@ -33,29 +33,34 @@ flowchart LR
 
 | 术语 | 含义 |
 |---|---|
-| 条件 `c` | 采样时的输入（问题、提示、对话上下文或驱动信号） |
-| winner `x^w` | 一对样本中更受偏好的那个 |
-| loser `x^l` | 一对样本中次之的那个 |
-| 当前模型 `π_θ` | 正在被优化的策略 |
-| 参考模型 `π_ref` | 冻结的基准策略，通常是优化前的权重 |
-| `β` | 偏离参数，控制允许偏离参考模型的程度 |
+| 条件 $c$ | 采样时的输入（问题、提示、对话上下文或驱动信号） |
+| winner $x^w$ | 一对样本中更受偏好的那个 |
+| loser $x^l$ | 一对样本中次之的那个 |
+| 当前模型 $\pi_\theta$ | 正在被优化的策略 |
+| 参考模型 $\pi_{\mathrm{ref}}$ | 冻结的基准策略，通常是优化前的权重 |
+| $\beta$ | 偏离参数，控制允许偏离参考模型的程度 |
 
 ## 通用 DPO 目标如何比较偏好对
 
 原始 DPO 的训练目标是：
 
-```text
-L_DPO(θ) = − E_{(c, x^w, x^l) ~ D} [
-             log σ( β · log( π_θ(x^w | c) / π_ref(x^w | c) )
-                  − β · log( π_θ(x^l | c) / π_ref(x^l | c) ) ) ]
-```
+$$
+\mathcal{L}_{\mathrm{DPO}}(\theta)
+= - \mathbb{E}_{(c, x^w, x^l) \sim \mathcal{D}}
+\left[
+  \log \sigma \left(
+    \beta \log \frac{\pi_\theta(x^w \mid c)}{\pi_{\mathrm{ref}}(x^w \mid c)}
+    - \beta \log \frac{\pi_\theta(x^l \mid c)}{\pi_{\mathrm{ref}}(x^l \mid c)}
+  \right)
+\right]
+$$
 
 逐个看它的构成：
 
-- `π_θ(·|c) / π_ref(·|c)` 是**当前模型相对参考模型在同一条件下的对数概率变化**；
-- 括号里是"winner 的相对变化"减去"loser 的相对变化"，因此被优化的是**相对参考模型的偏移**，而不是任何绝对概率；
-- 外层 `log σ(·)` 把"winner 的相对提升是否大于 loser"转成一个可微的损失：只要前者更大，括号内为正，损失下降；
-- `β` 控制允许偏离参考模型的程度。`β` 越大，偏离参考分布被惩罚得越重，优化越保守；`β` 越小，模型越敢离开参考分布。
+- $\pi_\theta(\cdot \mid c) / \pi_{\mathrm{ref}}(\cdot \mid c)$ 是**当前模型相对参考模型在同一条件下的对数概率变化**；
+- 括号里是“winner 的相对变化”减去“loser 的相对变化”，因此被优化的是**相对参考模型的偏移**，而不是任何绝对概率；
+- 外层 $\log \sigma(\cdot)$ 把“winner 的相对提升是否大于 loser”转成一个可微的损失：只要前者更大，括号内为正，损失下降；
+- $\beta$ 控制允许偏离参考模型的程度。$\beta$ 越大，偏离参考分布被惩罚得越重，优化越保守；$\beta$ 越小，模型越敢离开参考分布。
 
 ```mermaid
 flowchart TB
@@ -76,31 +81,39 @@ flowchart TB
 
 **第一步**，RLHF 的目标是 KL 约束下的奖励最大化：
 
-```text
-max_π  E[ r(c, x) ]  −  β · D_KL[ π(x | c) ‖ π_ref(x | c) ]
-```
+$$
+\max_{\pi}\;
+\mathbb{E}\bigl[r(c, x)\bigr]
+- \beta\, D_{\mathrm{KL}}\!\left[\pi(x \mid c) \mathbin{\|} \pi_{\mathrm{ref}}(x \mid c)\right]
+$$
 
 **第二步**，这个目标存在闭式最优解——偏离参考分布的代价是 `β` 倍的 KL，因此最优策略是在参考分布上按奖励指数加权：
 
-```text
-π_r(x | c) = (1 / Z(c)) · π_ref(x | c) · exp( r(c, x) / β )
-```
+$$
+\pi_r(x \mid c)
+= \frac{1}{Z(c)}\,\pi_{\mathrm{ref}}(x \mid c)
+  \exp\!\left(\frac{r(c, x)}{\beta}\right)
+$$
 
 **第三步**，把上式反解，用策略表达奖励：
 
-```text
-r(c, x) = β · log( π_r(x | c) / π_ref(x | c) ) + β · log Z(c)
-```
+$$
+r(c, x)
+= \beta \log \frac{\pi_r(x \mid c)}{\pi_{\mathrm{ref}}(x \mid c)}
++ \beta \log Z(c)
+$$
 
 **第四步**，把该奖励代回 Bradley-Terry 偏好模型——它把成对偏好概率写成两个奖励的指数比：
 
-```text
-p(c, x^w ≻ x^l) = exp(r(c, x^w)) / ( exp(r(c, x^w)) + exp(r(c, x^l)) )
-```
+$$
+p(c, x^w \succ x^l)
+= \frac{\exp\!\bigl(r(c, x^w)\bigr)}
+       {\exp\!\bigl(r(c, x^w)\bigr) + \exp\!\bigl(r(c, x^l)\bigr)}
+$$
 
 代入后 `exp(β · log Z(c))` 在分子分母中被约掉，只剩策略本身的对数比，于是偏好概率变成 `σ(β·log(π/π_ref) 的 winner 项减 loser 项)`——正是上一节的损失。
 
-**结论**：策略网络同时扮演了"生成模型"和"隐式奖励"两个角色；`β · log(π_θ / π_ref)` 就是那个不再单独存在的奖励。理解这一点之后，"DPO 免奖励模型"和"DPO 仍然在优化一个奖励"就不矛盾了。
+**结论**：策略网络同时扮演了“生成模型”和“隐式奖励”两个角色；$\beta \log(\pi_\theta / \pi_{\mathrm{ref}})$ 就是那个不再单独存在的奖励。理解这一点之后，“DPO 免奖励模型”和“DPO 仍然在优化一个奖励”就不矛盾了。
 
 它没有解决的问题同样重要：
 
@@ -124,13 +137,24 @@ DiffusionDPO 的改写分几步：
 4. 用前向过程近似反向过程并化简；
 5. 最终落到**去噪预测误差**的比较：
 
-```text
-L(θ) = − E log σ( −β T ω(λ_t) [
-        ‖ε^w − ε_θ(x_t^w, t)‖² − ‖ε^w − ε_ref(x_t^w, t)‖²
-      − ( ‖ε^l − ε_θ(x_t^l, t)‖² − ‖ε^l − ε_ref(x_t^l, t)‖² ) ] )
-```
+$$
+\mathcal{L}(\theta)
+= - \mathbb{E}\!\left[
+  \log \sigma \!\left(
+    -\beta T\,\omega(\lambda_t)
+    \left[
+      \lVert \epsilon^w - \epsilon_\theta(x_t^w, t) \rVert^2
+      - \lVert \epsilon^w - \epsilon_{\mathrm{ref}}(x_t^w, t) \rVert^2
+      - \left(
+        \lVert \epsilon^l - \epsilon_\theta(x_t^l, t) \rVert^2
+        - \lVert \epsilon^l - \epsilon_{\mathrm{ref}}(x_t^l, t) \rVert^2
+      \right)
+    \right]
+  \right)
+\right]
+$$
 
-其中 `x_t = α_t x_0 + σ_t ε` 是前向过程加噪后的样本，`ε_θ` 与 `ε_ref` 分别是当前模型与参考模型预测的噪声（等价于去噪向量场），`λ_t = α_t² / σ_t²` 是信噪比，`ω(λ_t)` 是为去噪误差加权的时间函数，实践中常取常数。
+其中 $x_t = \alpha_t x_0 + \sigma_t \epsilon$ 是前向过程加噪后的样本，$\epsilon_\theta$ 与 $\epsilon_{\mathrm{ref}}$ 分别是当前模型与参考模型预测的噪声（等价于去噪向量场），$\lambda_t = \alpha_t^2 / \sigma_t^2$ 是信噪比，$\omega(\lambda_t)$ 是为去噪误差加权的时间函数，实践中常取常数。
 
 方括号内的两项含义与文本版完全对应：
 
