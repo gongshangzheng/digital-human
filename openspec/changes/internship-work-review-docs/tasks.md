@@ -29,8 +29,8 @@
 - [ ] 2.12 创建并实施 `docs-note-omnimate`（omnimate.md）
 - [ ] 2.13 创建并实施 `docs-note-talker-t2av`（talker-t2av.md）
 - [ ] 2.14 批量创建生成侧加速十篇笔记（fpsattention / blade / nar / flashar / latent-spatial-memory / worldattention / zipar / dax / turbodiffusion / inferix）— 由 `docs-intern-acceleration` 3.1 收口：建成后回《数字人加速》补链接
-- [ ] 2.15 创建并实施 `docs-note-liveportrait`（liveportrait.md）
-- [ ] 2.16 创建并实施 `docs-note-lia-x`（lia-x.md）
+- [x] 2.15 创建并实施 `docs-note-liveportrait`（liveportrait.md）— 含 5 张论文原图，未接入故按定位层写（change 待归档）
+- [x] 2.16 创建并实施 `docs-note-lia-x`（lia-x.md）— 含 5 张论文原图（含三面板拼接），未接入故按定位层写（change 待归档）
 
 ## 3. 体系级验收
 

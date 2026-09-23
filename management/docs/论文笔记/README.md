@@ -42,8 +42,8 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `liveact.md` | 深读 + 工程层（SoulX-LiveAct 接入） | ✅ 已完成（10 节骨架 + 7 图 + sidecar） |
 | `omnimate.md` | 深读 | 待写 |
 | `talker-t2av.md` | 深读 + 工程层（接入与验证）｜论文 [arXiv:2604.23586](https://arxiv.org/abs/2604.23586) Talker-T2AV: Joint Talking Audio-Video Generation with Autoregressive Diffusion Modeling | 待写 |
-| `liveportrait.md` | 深读 + 工程层（隐式关键点表示、stitching/retargeting 控制） | 待写 |
-| `lia-x.md` | 深读 + 工程层（可解释 latent、40D motion code 与身份特征注入） | 待写 |
+| `liveportrait.md` | 深读 + 定位层（未接入：隐式关键点表示、stitching/retargeting 控制） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
+| `lia-x.md` | 深读 + 定位层（未接入：可解释 latent、40D motion code 与身份特征注入） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
 | `fpsattention.md` | 深读（FP8 量化 × 稀疏注意力协同） | 待写 |
 | `blade.md` | 深读（块稀疏 × 步数蒸馏） | 待写 |
 | `nar.md` | 深读（邻域自回归建模） | 待写 |

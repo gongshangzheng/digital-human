@@ -1,0 +1,81 @@
+{
+  "slug": "论文笔记/liveportrait",
+  "title": "LivePortrait 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "change": "docs-note-liveportrait",
+      "summary": "首次创建：按 article-note 流水线产出 10 节骨架笔记，含 5 张论文原图、两阶段冻结边界、Eq. 1/2/4/5/6/7 的符号表、掩码方向冲突与 K=21 推断的事实核对注，以及 Table 3 落后项与消融仅定性两处照录标注。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2407.03168v2（HTML + PDF 16 页 + 14 张原图；source tarball 406 失败、已降级）",
+    "analysis": "methodology / experiment / terminology / image-collection 四份已通过 validate-analysis；synthesis 作为事实位置索引",
+    "writing": "正文与 sidecar 已完成并校验",
+    "next": "未接入：若后续在 CyberVerse/models 下引入 LivePortrait，第 8 节将补第一手实测（12.8ms 口径复核、stitching 抖动条件、condition 提取算法重建）"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/liveportrait/"
+    },
+    {
+      "title": "分析产物（methodology / experiment / terminology / image-collection）",
+      "path": ".cache/article-note/liveportrait/analysis/"
+    },
+    {
+      "title": "采用图的 WebP 发布件",
+      "path": "management/docs/_assets/liveportrait/"
+    }
+  ],
+  "related": [
+    {
+      "slug": "论文笔记/ditto",
+      "title": "Ditto 模型笔记",
+      "desc": "复用 LivePortrait 的运动空间（265 维中的 exp 63 维）与渲染入口，是本篇表示层结论的下游落点"
+    },
+    {
+      "slug": "数字人概述/数字人身份",
+      "title": "数字人身份",
+      "desc": "隐式关键点 + warping renderer 一档的代表实现"
+    },
+    {
+      "slug": "数字人概述/数字人动作",
+      "title": "数字人动作",
+      "desc": "21×3 位移表与逐维扰动控制映射的工程来源"
+    },
+    {
+      "slug": "数字人概述/数字人加速",
+      "title": "数字人加速",
+      "desc": "含 LivePortrait 的 67 FPS / 12.8ms 口径登记，与论文 naive PyTorch 口径不同"
+    },
+    {
+      "slug": "knowledge/动作空间专题",
+      "title": "动作空间专题",
+      "desc": "隐式关键点（implicit blendshapes）在动作表示谱系中的位置"
+    },
+    {
+      "slug": "knowledge/数字人渲染器专题",
+      "title": "数字人渲染器专题",
+      "desc": "warp / 贴回原图空间与 stitching 的渲染侧背景"
+    },
+    {
+      "slug": "knowledge/gfvc-survey-2023",
+      "title": "GFVC 综述",
+      "desc": "隐式关键点一脉（FOMM / Face Vid2vid / TPSM / DaGAN）的综述定位"
+    },
+    {
+      "slug": "knowledge/digital-human-realtime-gpu-comparison",
+      "title": "实时数字人 GPU 对比",
+      "desc": "把 LivePortrait 记为 torch.compile 口径约 67 FPS 的来源，与本篇口径核对注对应"
+    }
+  ],
+  "notes": [
+    "未接入：CyberVerse/models 下无 LivePortrait 目录，第 8 节「我们的实测」按设计只写表示谱系定位，无第一手结论。",
+    "事实核对注三处：掩码 M 的保留/去掉方向论文自相矛盾（本篇按损失语义取推断解释）；K=21 仅由 MLP 层宽推断且 stitching 输出维 65 与 R^{K×3}=63 不符；消融 Fig. 7–10 全部定性、无定量指标。",
+    "口径提示：论文 12.8ms（RTX 4090 + naive PyTorch）与本仓库资料里的「67 FPS / torch.compile」「A10 可运行」不是同一口径，正文已逐处标注。",
+    "Table 3 的落后项（TalkingHead-1KH FID 输给 AniPortrait、两数据集 CSIM 输给 X-Portrait）照录原值并加注，禁止写成「全面超越扩散类方法」。",
+    "venue 论文首页无会议标注，正文只写 arXiv 预印本。"
+  ]
+}

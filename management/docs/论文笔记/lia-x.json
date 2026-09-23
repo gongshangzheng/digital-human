@@ -1,0 +1,55 @@
+{
+  "slug": "论文笔记/lia-x",
+  "title": "LIA-X 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "change": "docs-note-lia-x",
+      "summary": "首次创建：按 article-note 流水线产出 10 节骨架笔记，含 5 张论文原图、3 个块级公式（线性导航 / 稀疏目标 / 编辑-变形-渲染）、1 张 mermaid 链路图；照录 Table 1/2/3/4 原值并加两条事实核对注（VoxCelebHQ-256 FID 10.74 > DaGAN 9.13；Table 4 Large 0.9B LPIPS 0.115 > Middle 0.3B 0.113）。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2508.09959v1（HTML 全文 + PDF 12 页 + 10 张原图；source tarball 406 失败，Fig 4a 从 PDF 补并三面板拼接为单图）",
+    "analysis": "methodology / experiment / terminology / image-collection 四份，synthesis.md 事实位置索引；validate-analysis 通过",
+    "writing": "正文与 sidecar 已完成，validate-note 通过（图 5、块级公式 3、mermaid 1）"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/lia-x/"
+    },
+    {
+      "title": "分析产物",
+      "path": ".cache/article-note/lia-x/analysis/"
+    },
+    {
+      "title": "发布用 WebP",
+      "path": ".cache/article-note/lia-x/publish-webp/"
+    },
+    {
+      "title": "笔记配图",
+      "path": "management/docs/_assets/lia-x/"
+    }
+  ],
+  "related": [
+    { "slug": "论文笔记/liveportrait", "title": "LivePortrait 模型笔记" },
+    { "slug": "论文笔记/ditto", "title": "Ditto 模型笔记" },
+    { "slug": "论文笔记/avatar-forcing", "title": "Avatar Forcing 模型笔记" },
+    { "slug": "数字人概述/数字人身份", "title": "数字人身份" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" },
+    { "slug": "数字人概述/数字人介绍与技术路线", "title": "数字人介绍与技术路线" },
+    { "slug": "knowledge/音画同步专题", "title": "音画同步专题" },
+    { "slug": "knowledge/数字人基础", "title": "数字人基础" }
+  ],
+  "notes": [
+    "论文未声明会议，本稿不代标 venue；亦未见代码仓库/权重开源声明。",
+    "核心卖点（稀疏约束有效、运动向量语义可解释可控）只有 Fig. 3/4/6 的定性证据，无定量 disentanglement 指标；论文只做了模型规模一类消融。",
+    "未披露项：优化器、学习率、调度、训练步数、batch、lambda_1/lambda_2、字典规模 M、三档模型结构差异、数据划分与预处理、训练时长。",
+    "Table 1 的 VoxCelebHQ-256 FID：LIA-X 10.74 > DaGAN 9.13，与论文「所有指标最优」表述不一致，正文按原值照录并加事实核对注。",
+    "Table 4 的 Large(0.9B) LPIPS 0.115 略差于 Middle(0.3B) 0.113，正文照录并加事实核对注。",
+    "论文 Fig. 3 与 §5.1 使用 A_{r→s}，但 Eq. (2) 只定义 A_{r→d}，全文未定义 A_{r→s}，属原文符号不一致，正文照录。",
+    "333ms/帧（512²、bf16、batch=1）是我们的二手整理口径，不是论文披露数字，正文已标注。",
+    "我方状态：未接入 LIA-X；第 8 节对照表我方一栏按「未接入，无第一手结论」处理。"
+  ]
+}
