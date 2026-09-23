@@ -248,7 +248,7 @@ Mode 2 还有第二重问题：即使协议本身被执行得完美，它对**�
 
 ### 例：$\mathbb{E}\,|i-j|$——随机帧对的期望间隔
 
-**设：** 视频共 $T$ 帧，帧对下标 $i,j$ 独立均匀取自 $\\{1,\dots,T\\}$（即 FCB Mode 2 的随机帧对协议，帧允许跨对重复）。 **求：** 帧对时间间隔的期望。 **推导：** 间隔为 $k$ 的帧对恰有 $2(T-k)$ 个（$i$ 在前或 $j$ 在前），于是 $$ \mathbb{E}\,|i-j|=\frac{2}{T^2}\sum_{k=1}^{T-1}k\,(T-k)=\frac{T^2-1}{3T}\approx\frac{T}{3}\qquad(T\gg 1) $$ **含义：** 若身份沿视频线性漂移（每帧 embedding 增量恒为 $\Delta$），端到端漂移为 $(T-1)\Delta$，而 Mode 2 的期望采样间隔只有约 $T/3$——随机帧对平均只能"看到"约三分之一的端到端漂移，对慢漂移**系统性低估约 3 倍** 。作为对照，锚在首帧的协议期望间隔为 $(T-1)/2$，且序列末帧捕捉到全部漂移——对长程漂移更敏感，代价是锚点选择偏置。 
+**设：** 视频共 $T$ 帧，帧对下标 $i,j$ 独立均匀取自 $\{1,\dots,T\}$（即 FCB Mode 2 的随机帧对协议，帧允许跨对重复）。 **求：** 帧对时间间隔的期望。 **推导：** 间隔为 $k$ 的帧对恰有 $2(T-k)$ 个（$i$ 在前或 $j$ 在前），于是 $$ \mathbb{E}\,|i-j|=\frac{2}{T^2}\sum_{k=1}^{T-1}k\,(T-k)=\frac{T^2-1}{3T}\approx\frac{T}{3}\qquad(T\gg 1) $$ **含义：** 若身份沿视频线性漂移（每帧 embedding 增量恒为 $\Delta$），端到端漂移为 $(T-1)\Delta$，而 Mode 2 的期望采样间隔只有约 $T/3$——随机帧对平均只能"看到"约三分之一的端到端漂移，对慢漂移**系统性低估约 3 倍** 。作为对照，锚在首帧的协议期望间隔为 $(T-1)/2$，且序列末帧捕捉到全部漂移——对长程漂移更敏感，代价是锚点选择偏置。 
 
 **易错点** ：把 Mode 2 的"帧间相干分"当作"端到端漂移量"报告——两者相差约 3 倍。另外，200 对带重复采样相当于自助式（bootstrap）估计：引入采样噪声，但不引入偏置。
 
@@ -655,7 +655,7 @@ Identity-GRPO 奖励曲线（图片资源未随副本复制）
 
 图 5-6：Identity-GRPO 在 VACE 与 Phantom 两个底座上的 GRPO 训练曲线——身份指标与质量指标同步上升，RL 没有牺牲自然度换身份（来源：Meng et al., Identity-GRPO, 2025, Fig.1）。
 
-然后是 GRPO 本体：组内相对优势，无 critic。同一 prompt 采样一组 $G$ 个视频，奖励做组内 z 分数标准化后作为优势： $$\hat{A}_t^i = \frac{r_i - \mathrm{mean}(\\{r_j\\}_{j=1}^{G})}{\mathrm{std}(\\{r_j\\}_{j=1}^{G})}$$ 其中 $r_i$ 是自训奖励模型给第 $i$ 个视频的分数——基线由同组样本免费提供，策略只学"这组里哪个更好"，省掉了 critic 网络。策略更新用 PPO-clip，$\varepsilon = 10^{-3}$（极小，策略步长被严格约束）。规模换分辨率：16 组 × G=8 = 128 视频/次更新，代价是训练视频降到 33 帧、416×240。数据侧还有一个抗作弊设计：用 Flux.1 Kontext 为每个主体合成多视角参考图（产出率 >80%），强制模型学"与单一姿态无关的鲁棒身份表示"——数据层面对抗复制粘贴。 
+然后是 GRPO 本体：组内相对优势，无 critic。同一 prompt 采样一组 $G$ 个视频，奖励做组内 z 分数标准化后作为优势： $$\hat{A}_t^i = \frac{r_i - \mathrm{mean}(\{r_j\}_{j=1}^{G})}{\mathrm{std}(\{r_j\}_{j=1}^{G})}$$ 其中 $r_i$ 是自训奖励模型给第 $i$ 个视频的分数——基线由同组样本免费提供，策略只学"这组里哪个更好"，省掉了 critic 网络。策略更新用 PPO-clip，$\varepsilon = 10^{-3}$（极小，策略步长被严格约束）。规模换分辨率：16 组 × G=8 = 128 视频/次更新，代价是训练视频降到 33 帧、416×240。数据侧还有一个抗作弊设计：用 Flux.1 Kontext 为每个主体合成多视角参考图（产出率 >80%），强制模型学"与单一姿态无关的鲁棒身份表示"——数据层面对抗复制粘贴。 
 
 #### 读数与陷阱：+18.9% 的另一面
 
@@ -733,8 +733,9 @@ StyleID 阈值分析（图片资源未随副本复制）
 
 度量模型的选型逻辑直白：不用 FR 骨干（IResNet 依赖被艺术渲染破坏的照片域线索），而用见过开放词表外观多样性的 CLIP-L vision encoder，主干冻结、LoRA（rank 8）轻量适配。训练目标是三个损失的互补组合：
 
-$$ \mathcal{L} = \mathcal{L}_{\text{ang}} + 0.6\,\mathcal{L}_{\text{scon}} + 0.1\,\mathcal{L}_{\text{reg}} $$ 
-
+$$
+\mathcal{L} = \mathcal{L}_{\text{ang}} + 0.6\,\mathcal{L}_{\text{scon}} + 0.1\,\mathcal{L}_{\text{reg}}
+$$
 其中 $\mathcal{L}_{\text{ang}}$ 是 ArcFace 式角度间隔损失（间隔 $m=0.5$、缩放 $\alpha=32$）管类级判别边界；$\mathcal{L}_{\text{scon}}$ 是监督对比损失，同一身份的不同风格样本互为正对——跨风格不变性直接编码进成对几何；$\mathcal{L}_{\text{reg}}$ 把适配后的 embedding 拴在冻结 CLIP 表征附近，防灾难漂移 #Yun et al., 2026#。训练经济性值得记账：单卡 A6000、30,000 迭代、batch 112（56 身份 × 2 样本，保证对比损失每个锚点至少一个正样本）——对照 Stylized-Face 的百万级数据清洗管线 #Peng et al., 2025#，这是"感知校准优先于数据规模"的路线声明。
 
 StyleID 训练策略（图片资源未随副本复制）
@@ -775,16 +776,19 @@ ID-Sim 的定义是属性化的：**visual identity = 一个物体的固有视�
 
 架构极简：冻结的 DINOv3 ViT-L/16（448×448 输入）+ LoRA（rank 16）+ 双头 MLP 投影——CLS 头出全局表征、patch 头出局部描述符，联合目标
 
-$$ \mathcal{L}_{\text{total}} = \mathcal{L}_{\text{CLS}}(c) + \lambda\,\mathcal{L}_{\text{Patch}}(Z) $$ 
-
+$$
+\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{CLS}}(c) + \lambda\,\mathcal{L}_{\text{Patch}}(Z)
+$$
 两个头各配一种相似度。CLS 头用标准 InfoNCE（温度缩放余弦）。patch 头的相似度不逐位置比较——两图的实例空间布局常因视角错位，逐位置直接比较不可靠——而是把两图的 patch tokens 当作**无序的局部描述符集合** ，用熵正则最优传输做软对齐：
 
-$$ \mathrm{sim}_{\text{patch}}(A, B) = -\mathcal{S}_\varepsilon(A, B) $$ 
-
+$$
+\mathrm{sim}_{\text{patch}}(A, B) = -\mathcal{S}_\varepsilon(A, B)
+$$
 其中 $\mathcal{S}_\varepsilon$ 为 Sinkhorn 距离。推理时度量就是一次前馈：
 
-$$ D(x, y; f_\theta) = 1 - \mathrm{sim}\bigl(f_\theta(x),\, f_\theta(y)\bigr) $$ 
-
+$$
+D(x, y; f_\theta) = 1 - \mathrm{sim}\bigl(f_\theta(x),\, f_\theta(y)\bigr)
+$$
 CLS 表示做全局相似度，patch 表示可下探到分割级下游——这个设计后面还有回报。训练数据是 10k 三元组（30k 图、约 10k 实例、10 个数据集），按 S1/S2a/S2b 三类 1:1:1 均分：S1 是策展后的真实实例对；S2a 是生成式上下文编辑（只换背景/光照）作正样本；S2b 是生成式身份修改（FLUX.1-Fill 以类别级 prompt 重绘前景——保类别语义、改细粒度外观）作硬负样本，硬负样本另用 DINOv3 嵌入最近邻挖掘补强。还有一处防捷径的宝藏细节：三元组里掺了身份编辑负样本时，给 anchor 与 positive 加 strength 0.1 的轻度生成噪声——防止模型靠"生成伪影"而非"身份差异"识别负样本 #Chae et al., 2026#。
 
 ID-Sim 方法总览（图片资源未随副本复制）
@@ -912,8 +916,9 @@ VBench-2.0（2025.03）出自同一团队，主张从"表面忠实性"（superfi
 
 Human Identity 的得分定义把连续的 CSIM 阈值化成了"一致帧命中率"：
 
-$$ S_{\text{identity}}(V)=\frac{1}{|\mathcal{S}|}\sum_{t\in\mathcal{S}}\mathbb{1}\bigl[\cos\bigl(\varphi(I_t),\,\varphi(I_0)\bigr)\ge 0.4\bigr] $$ 
-
+$$
+S_{\text{identity}}(V)=\frac{1}{|\mathcal{S}|}\sum_{t\in\mathcal{S}}\mathbb{1}\bigl[\cos\bigl(\varphi(I_t),\,\varphi(I_0)\bigr)\ge 0.4\bigr]
+$$
 这个公式值得逐项审问，因为每一项背后都藏着一个协议决策。$\varphi$ 的输入不是生成帧本身，而是 RetinaFace 裁出、resize 到 128×128、**转灰度** 、与水平翻转堆叠成双通道后送入 resnet_face18 的人脸 patch——这些细节论文正文一个字没写，全部在代码库里（`human_identity.py`）#Zheng et al., 2025#。锚 $I_0$ 是视频自身的首帧：首帧检不出人脸则整条视频剔除，有效帧不足 20 帧同样剔除，最终按视频级平均聚合。阈值 0.4 把余弦相似度二值化，且**无任何消融** ——第 3 章已引 StyleID 的教训说明固定阈值 Acc 的读数陷阱。prompt 套件则是 46 条单人动作 prompt（"A man is doing yoga."式），全部单人、无任何参考身份描述；论文正文笼统写"每维约 70 条 prompt"，而代码实数各维 10–120 条不等、Identity 恰为 46 条——**协议细节以代码库为准** ，论文数字当约数看。
 
 VBench-2.0 prompt 套件统计：左侧词云，右侧各维度 prompt 数量柱状图（图片资源未随副本复制）
