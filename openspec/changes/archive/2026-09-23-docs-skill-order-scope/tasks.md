@@ -14,4 +14,4 @@
 - [x] 3.1 重跑 `docs_order.py list` 于三个第一方目录，输出与既有阅读顺序一致
 - [x] 3.2 `openspec validate docs-skill-order-scope --strict` 通过
 - [x] 3.3 提交（`docs(skill): 排序键规则限定第一方文件夹，knowledge 复制件豁免`），只包含 skill 与 openspec 相关文件
-- [ ] 3.4 归档：sync 本 change 的 delta 到主 spec 后移入 `openspec/changes/archive/`
+- [x] 3.4 归档：sync 本 change 的 delta 到主 spec 后移入 `openspec/changes/archive/`
