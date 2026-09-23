@@ -6,7 +6,7 @@ import re
 import sys
 from pathlib import Path
 
-ALLOWED_META = {"title", "author", "date", "tags", "summary", "id", "arxiv_id", "papers_id"}
+ALLOWED_META = {"title", "author", "date", "tags", "summary", "id", "order", "arxiv_id", "papers_id"}
 IMAGE_RE = re.compile(r"!\[([^]]*)\]\(([^)]+)\)")
 LINK_RE = re.compile(r"\[\[([^]|]+)(?:\|[^]]+)?\]\]")
 

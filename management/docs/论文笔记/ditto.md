@@ -6,6 +6,7 @@ tags: [数字人, 模型笔记, Ditto, 运动空间, 扩散模型, 实时流式,
 arxiv_id: 2411.19509
 papers_id: arxiv-2411.19509
 summary: Ditto（蚂蚁集团，ACM MM 2025）把扩散目标从冗余的 VAE latent 换到 LivePortrait 定义的 265 维运动空间，用条件 DiT 生成身份无关运动、再由参考锚定的渲染器还原画面，从而同时拿到细粒度可控与单卡实时；本篇含我们的视频源唇动隔离、265 维构成的代码级澄清与三层 RTF 口径边界
+order: 20
 ---
 
 # Ditto

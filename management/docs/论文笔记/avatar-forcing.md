@@ -6,6 +6,7 @@ tags: [数字人, 模型笔记, Avatar Forcing, 交互头像, Diffusion Forcing,
 arxiv_id: 2601.00664
 papers_id: arxiv-2601.00664
 summary: Avatar Forcing（KAIST，CVPR 2026）在 FLOAT motion latent 空间做块因果 Diffusion Forcing，配双路条件编码与免标注 DPO，把双向对话头像压到约 500ms；本篇含我们接入后的流式改造、中文音频适配与漂移治理实测结论
+order: 10
 ---
 
 # Avatar Forcing
