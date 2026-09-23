@@ -39,7 +39,33 @@ order: 10
 ---
 ```
 
-## 3. Markdown 内容约定
+## 3. 文档顺序工具
+
+`./scripts/docs_order.py` 是本 skill 随附的、只依赖 Python 标准库的 frontmatter `order` 维护工具；从仓库根目录使用完整路径：
+
+```bash
+# 查看当前阅读顺序、整数空位与重复值（只读）
+python3 .agents/skills/documentation/scripts/docs_order.py list management/docs/数字人概述
+
+# 预览插入：默认消耗已有整数空位，且绝不写盘
+python3 .agents/skills/documentation/scripts/docs_order.py insert management/docs/数字人概述 \
+  --title "新文档" --after 数字人领域问题 --create
+
+# 确认上述预览后才写入
+python3 .agents/skills/documentation/scripts/docs_order.py insert management/docs/数字人概述 \
+  --title "新文档" --after 数字人领域问题 --create --apply
+
+# 明确需要 10、20、30 连续顺序时：新篇取插入点 order，后缀顺延；前缀不变
+python3 .agents/skills/documentation/scripts/docs_order.py insert management/docs/数字人概述 \
+  --title "新文档" --after 数字人介绍与技术路线 --create --shift --apply
+
+# 明确要求规范化整个目录时，按当前阅读顺序重编为 10、20、30…
+python3 .agents/skills/documentation/scripts/docs_order.py renumber management/docs/数字人概述 --apply
+```
+
+所有改写命令默认 dry-run，只有显式传入 `--apply` 才写盘。正常插入优先占用相邻文档间的整数空位，不改既有文档；`--shift` 才重排插入点及其后的后缀。工具拒绝重复的数值 `order`、多个 `order:` 行及不合法 frontmatter，除非用户明确使用 `--force`；写入后会做结构校验和单文件回滚保护。
+
+## 4. Markdown 内容约定
 
 - 最高正文标题使用 `##`，其下使用 `###`，不跳级；标题应是具体主题，不用“概述”“现行做法”等无信息桶标题包裹。
 - 内部文档链接使用 `[[数字人概述/数字人身份|数字人身份]]`；跨文档 slug 必须相对 `management/docs/`，不得链接相对 `.md` 文件。仅链接已存在的文档。
@@ -47,7 +73,7 @@ order: 10
 - 图片放在 `management/docs/_assets/<slug>/`，使用绝对 `/api/management/docs-assets/<slug>/<file>` URL。独立图片用 `![图 N · 说明](...)`，图号连续且正文必须解读该图。
 - 原始 HTML 不会被 Markdown 渲染器执行；不要用原始 `<img>` 代替 Markdown 图片。
 
-## 4. 公式与 Mermaid
+## 5. 公式与 Mermaid
 
 正文支持 KaTeX：行内公式写 `$...$`，块级公式写 `$$...$$`。每个公式后必须给符号表和中文解释，必要时可附代码块保留原始 TeX。
 
@@ -64,6 +90,6 @@ $$
 - Mermaid 节点内只能用 `$$...$$`：`A["输入 $$x_t$$"] --> B["损失 $$\mathcal{L}$$"]`；单 `$` 是 Mermaid 的已知不渲染边界。
 - 流程、架构、时序等结构关系优先 Mermaid，不使用 ASCII 图。完整语法与图内公式例子见 `references/mermaid-cheatsheet.md`。
 
-## 5. 交付检查
+## 6. 交付检查
 
 交付前检查：章节与已审 design 一致；事实可追溯且未编造；链接目标存在；图片 URL 与资产存在；sidecar JSON 合法；Mermaid 可渲染；公式语法使用受支持定界符；OpenSpec 严格验证通过。论文笔记还须执行 `.agents/skills/article-note/scripts/validate-note.py`。

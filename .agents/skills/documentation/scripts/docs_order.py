@@ -2,10 +2,10 @@
 """查看、插入和重排 Markdown 文档的 frontmatter ``order`` 字段。
 
 用法：
-    python3 scripts/docs_order.py list management/docs/数字人概述
-    python3 scripts/docs_order.py insert management/docs/数字人概述 \
+    python3 .agents/skills/documentation/scripts/docs_order.py list management/docs/数字人概述
+    python3 .agents/skills/documentation/scripts/docs_order.py insert management/docs/数字人概述 \
         --title "数字人领域问题" --after 数字人介绍与技术路线 --create --apply
-    python3 scripts/docs_order.py renumber management/docs/数字人概述 --apply
+    python3 .agents/skills/documentation/scripts/docs_order.py renumber management/docs/数字人概述 --apply
 
 所有会修改文件的命令默认只输出计划；只有传入 ``--apply`` 才会写盘。
 脚本只使用 Python 标准库，并且只编辑 YAML frontmatter 中的 ``order:`` 行。
