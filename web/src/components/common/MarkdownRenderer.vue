@@ -9,7 +9,7 @@ import MarkdownIt from 'markdown-it'
 import checkbox from 'markdown-it-task-checkbox'
 import { slugify } from '../../utils/markdown'
 import mermaid from 'mermaid'
-import * as katexPluginModule from '@vscode/markdown-it-katex'
+import katex from 'katex'
 import 'katex/dist/katex.min.css'
 import { useThemeStore } from '../../stores/theme'
 
@@ -51,44 +51,86 @@ const md = new MarkdownIt({
     liClass: 'task-list-item',
   })
 
-// The plugin is CJS: Vite dev prebundling and production builds expose its
-// default export differently, so normalize it before registering the rule.
-const katexPlugin = typeof katexPluginModule.default === 'function'
-  ? katexPluginModule.default
-  : katexPluginModule.default?.default
-
-if (typeof katexPlugin === 'function') {
-  // `$...$` and `$$...$$` render through KaTeX. The imported stylesheet also
-  // supplies Mermaid's existing KaTeX output with its required font metrics.
-  md.use(katexPlugin, { throwOnError: false })
-  guardInlineMathDelimiter()
-} else {
-  console.error('[MarkdownRenderer] KaTeX plugin failed to load; formulas remain visible as source text')
-}
-
-// The plugin accepts math content with leading/trailing whitespace. Rejecting
-// those tokens avoids treating money text such as "$5 到 $10 不等" as a formula.
-function guardInlineMathDelimiter() {
-  const rules = md.inline.ruler.__rules__
-  const original = rules?.find((rule) => rule.name === 'math_inline')?.fn
-  if (typeof original !== 'function') {
-    console.warn('[MarkdownRenderer] math_inline rule unavailable; skipped dollar delimiter guard')
-    return
+// 公式直接用 katex 渲染，不经第三方 markdown-it 插件：
+// Vite dev 依赖预打包会把插件内联的 katex 常量折叠出错，破坏内部控制字正则
+// （`\\begin` → `\b`），使 `\begin{cases}`、`\qquad` 等命令渲染错乱；
+// katex 作为直接依赖会单独成 chunk，dev 与 build 行为一致。
+function renderMath(tex, displayMode) {
+  try {
+    return katex.renderToString(tex, { displayMode, throwOnError: false })
+  } catch (error) {
+    return `<span class="katex-error">${md.utils.escapeHtml(tex)}</span>`
   }
-  md.inline.ruler.at('math_inline', (state, silent) => {
-    const startPos = state.pos
-    const tokensBefore = state.tokens.length
-    if (!original(state, silent)) return false
-    if (silent) return true
-    const token = state.tokens[state.tokens.length - 1]
-    if (token?.type === 'math_inline' && /^\s|\s$/.test(token.content)) {
-      state.tokens.length = tokensBefore
-      state.pos = startPos
-      return false
-    }
-    return true
-  })
 }
+
+// 从 `from` 起找未被反斜杠转义的定界符；找不到返回 -1。
+function findMathEnd(src, from, delim) {
+  let index = src.indexOf(delim, from)
+  while (index !== -1) {
+    let escapes = 0
+    for (let pos = index - 1; pos >= 0 && src[pos] === '\\'; pos -= 1) escapes += 1
+    if (escapes % 2 === 0) return index
+    index = src.indexOf(delim, index + delim.length)
+  }
+  return -1
+}
+
+// 行内 `$...$` 与段内 `$$...$$`。单 `$` 内容首尾带空白时判为普通文本
+// （如 "$5 到 $10 不等"），保持字面量而非公式。
+md.inline.ruler.before('escape', 'math_inline', (state, silent) => {
+  const start = state.pos
+  const src = state.src
+  if (src[start] !== '$') return false
+  const isDisplay = src.startsWith('$$', start)
+  const delim = isDisplay ? '$$' : '$'
+  const contentStart = start + delim.length
+  const end = findMathEnd(src, contentStart, delim)
+  if (end === -1) return false
+  const content = src.slice(contentStart, end)
+  if (!content.trim()) return false
+  if (!isDisplay && /^\s|\s$/.test(content)) return false
+  if (!silent) {
+    const token = state.push(isDisplay ? 'math_display' : 'math_inline', 'math', 0)
+    token.markup = delim
+    token.content = content
+  }
+  state.pos = end + delim.length
+  return true
+})
+
+// 块级公式：整行以 `$$` 开头，闭合定界符可在同行或后续行。
+md.block.ruler.before('fence', 'math_block', (state, startLine, endLine, silent) => {
+  const begin = state.bMarks[startLine] + state.tShift[startLine]
+  const lineEnd = state.eMarks[startLine]
+  if (state.src.slice(begin, begin + 2) !== '$$') return false
+  const rest = state.src.slice(begin + 2, lineEnd)
+  const sameLineEnd = rest.indexOf('$$')
+  let content
+  let nextLine
+  if (sameLineEnd !== -1) {
+    // 同行闭合且后面还有内容时，交回段落由行内规则处理
+    if (rest.slice(sameLineEnd + 2).trim()) return false
+    content = rest.slice(0, sameLineEnd)
+    nextLine = startLine + 1
+  } else {
+    const end = findMathEnd(state.src, begin + 2, '$$')
+    if (end === -1) return false
+    content = state.src.slice(begin + 2, end)
+    nextLine = startLine + content.split('\n').length
+  }
+  if (silent) return true
+  const token = state.push('math_block', 'math', 0)
+  token.block = true
+  token.content = content
+  token.map = [startLine, nextLine]
+  state.line = nextLine
+  return true
+}, { alt: ['paragraph', 'reference', 'blockquote', 'list'] })
+
+md.renderer.rules.math_block = (tokens, idx) =>
+  `<p class="katex-block">${renderMath(tokens[idx].content, true)}</p>\n`
+md.renderer.rules.math_inline = (tokens, idx) => renderMath(tokens[idx].content, false)
+md.renderer.rules.math_display = (tokens, idx) => renderMath(tokens[idx].content, true)
 
 // Heading auto-ID
 const defaultHeadingRender = md.renderer.rules.heading_open ||
