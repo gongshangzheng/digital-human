@@ -39,9 +39,9 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 |------|------|------|
 | `avatar-forcing.md` | 深读 + 工程层（微调/漂移实验/流式接入） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `ditto.md` | 深读 + 工程层（TRT 实时化/流式管线） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
-| `liveact.md` | 深读 + 工程层（SoulX-LiveAct 接入） | 待写 |
+| `liveact.md` | 深读 + 工程层（SoulX-LiveAct 接入） | ✅ 已完成（10 节骨架 + 7 图 + sidecar） |
 | `omnimate.md` | 深读 | 待写 |
-| `talker-t2av.md` | 深读 + 工程层（接入与验证） | 待写 |
+| `talker-t2av.md` | 深读 + 工程层（接入与验证）｜论文 [arXiv:2604.23586](https://arxiv.org/abs/2604.23586) Talker-T2AV: Joint Talking Audio-Video Generation with Autoregressive Diffusion Modeling | 待写 |
 | `liveportrait.md` | 深读 + 工程层（隐式关键点表示、stitching/retargeting 控制） | 待写 |
 | `lia-x.md` | 深读 + 工程层（可解释 latent、40D motion code 与身份特征注入） | 待写 |
 | `fpsattention.md` | 深读（FP8 量化 × 稀疏注意力协同） | 待写 |
@@ -54,6 +54,11 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `dax.md` | 深读（VideoGen 推理基础设施） | 待写 |
 | `turbodiffusion.md` | 深读（模型与系统协同设计） | 待写 |
 | `inferix.md` | 深读（自回归扩散推理引擎） | 待写 |
+| `vorch-streamer.md` | 深读（实时长时 T2AV 流式：后训练框架、暴露偏差与漂移治理、因果生成下“该说哪一段”）｜论文 [arXiv:2608.05663](https://arxiv.org/abs/2608.05663) Vorch-Streamer: Extending Human Audio-Visual Generation to Real-Time Long-Form Streaming | 待写 |
+
+> 新增登记说明（2026-09-23）：
+> - `talker-t2av` 之前只在 papers 库之外（知识库固定阅读上游版本 `6712f62`），现已补上论文出处 arXiv:2604.23586（v2，2026-08-04）。
+> - `vorch-streamer` 为本轮新增。它把我们这条主线里最核心的矛盾（自回归复用生成块作上下文 ⇒ exposure bias ⇒ 长时误差与视觉漂移累积）写成了首要困境，与 [[论文笔记/avatar-forcing|Avatar Forcing]]（历史 offset 递归）和 [[论文笔记/liveact|SoulX-LiveAct]]（ARPP/ConvKV）属同一问题的直接对照，建议与两者相邻阅读。
 
 ## 生成侧加速十篇（素材已备）
 
