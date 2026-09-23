@@ -25,11 +25,11 @@ description: |
 ## 2. 文档位置与元数据
 
 - 说明性 Markdown 统一放在 `management/docs/`，可用现有主题子目录，如 `数字人概述/`、`技术介绍/`、`论文笔记/`、`knowledge/`；仓库根目录不设 `docs/`。
-- frontmatter 必填 `title`、`author`、`date`、`tags`、`summary`；排序键按文件夹选择：
-  - 正文文档用 `order`（数字，10 为步长，如 `10, 20, 30`）表达阅读顺序；插入新篇优先占用相邻空位，不为插入一篇而重排既有文档。
-  - 沿用 `id` 排序的文件夹（如 `knowledge/` 的外部复制件）可继续只写 `id`。
-- **每个内容文件夹都必须有显式排序键**：未写 `order` 与 `id` 的文档会落到该目录内的 `date` 降序（越新越靠前），所以新建文档不得依赖日期隐式决定阅读顺序。
-- 文件夹索引 `README.md` 也要带最小 frontmatter（`title`/`author`/`date`/`tags`/`summary`）；否则顺序工具在该目录直接报错，且列表标题会退化成裸 slug。
+- frontmatter 必填 `title`、`author`、`date`、`tags`、`summary`；排序键按文件夹类型选择：
+  - **第一方内容文件夹**（`数字人概述/`、`论文笔记/`、`技术介绍/` 及以后新建的第一方主题目录）用 `order`（数字，10 为步长，如 `10, 20, 30`）表达阅读顺序；插入新篇优先占用相邻空位，不为插入一篇而重排既有文档。
+  - **外部复制件文件夹**（`knowledge/` 这类从博客/InternWiki 复制的素材）不强制排序键，沿用来源元数据即可；也不要为它回填来源侧本就没有的作者或摘要。
+- 第一方文件夹必须每篇都有 `order`：未写 `order` 的文档会落到该目录内的 `date` 降序（越新越靠前），所以新建文档不得依赖日期隐式决定阅读顺序。
+- 文件夹索引 `README.md`（第一方或复制件都一样）也要带最小 frontmatter（`title`/`author`/`date`/`tags`/`summary`）；否则顺序工具在该目录直接报错，且列表标题会退化成裸 slug。
 - 排序链为文件夹优先级 → `order` → `id` → `date` 降序 → slug。
 - 可选同名 sidecar `<slug>.json` 承载 `changelog`、`progress`、`related`、`appendix`；`related` 项必须是含 `slug` 和 `title` 的对象，不能是字符串。
 
@@ -70,7 +70,7 @@ python3 .agents/skills/documentation/scripts/docs_order.py renumber management/d
 
 所有改写命令默认 dry-run，只有显式传入 `--apply` 才写盘。正常插入优先占用相邻文档间的整数空位，不改既有文档；`--shift` 才重排插入点及其后的后缀。工具拒绝重复的数值 `order`、多个 `order:` 行及不合法 frontmatter，除非用户明确使用 `--force`；写入后会做结构校验和单文件回滚保护。
 
-新建或插入文档时 `order` 是**必填项**：用 `insert` 占用相邻空位（默认 dry-run，确认后加 `--apply`），单篇新建也要写 `order`，不要留空。工具要求目录内所有 `.md` 都有合法 frontmatter；若索引 `README.md` 未加 frontmatter，工具会以缺 frontmatter 的错误直接失败，先补 frontmatter 再运行。
+在**第一方文件夹**新建或插入文档时 `order` 是**必填项**：用 `insert` 占用相邻空位（默认 dry-run，确认后加 `--apply`），单篇新建也要写 `order`，不要留空。工具要求目录内所有 `.md` 都有合法 frontmatter；若索引 `README.md` 未加 frontmatter，工具会以缺 frontmatter 的错误直接失败，先补 frontmatter 再运行。
 
 ## 4. Markdown 内容约定
 
@@ -99,4 +99,4 @@ $$
 
 ## 6. 交付检查
 
-交付前检查：章节与已审 design 一致；事实可追溯且未编造；链接目标存在；图片 URL 与资产存在；sidecar JSON 合法；同目录 `order` 无缺失、无重复且与既定阅读顺序一致（用 `docs_order.py list <目录>` 复看）；Mermaid 可渲染；公式语法使用受支持定界符；OpenSpec 严格验证通过。论文笔记还须执行 `.agents/skills/article-note/scripts/validate-note.py`。
+交付前检查：章节与已审 design 一致；事实可追溯且未编造；链接目标存在；图片 URL 与资产存在；sidecar JSON 合法；**第一方**目录 `order` 无缺失、无重复且与既定阅读顺序一致（用 `docs_order.py list <目录>` 复看）；Mermaid 可渲染；公式语法使用受支持定界符；OpenSpec 严格验证通过。论文笔记还须执行 `.agents/skills/article-note/scripts/validate-note.py`。
