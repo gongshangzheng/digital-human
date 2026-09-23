@@ -1,0 +1,46 @@
+{
+  "slug": "论文笔记/face-vid2vid",
+  "title": "Face Vid2vid 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "change": "docs-note-face-vid2vid",
+      "summary": "首次创建：按 article-note 流水线产出 10 节骨架笔记，含 6 张论文原图（Figure 2/3/4/10/6/14，统一采用 PDF 编号）、Eq. 1/2 三项分解与 Eq. 6 总损失的符号表、自由视角与视频会议压缩链路，以及 Table 3 Angle 落后与 Table 1 MS-SSIM Nan 两处事实核对注。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2011.15126v3（HTML + PDF 16 页 + 8 张候选原图，采用 6 张；source tarball 406 失败、已降级）",
+    "analysis": "methodology / experiment / terminology / image-collection 四份已通过 validate-analysis；synthesis 作为事实位置索引",
+    "writing": "正文与 sidecar 已完成并校验",
+    "next": "未接入：若后续在 CyberVerse/models 下引入 Face Vid2vid 系组件，第 8 节将补第一手实测；liveportrait.md 的首现处回链（tasks 3.3）与 README 清单更新（tasks 3.4）不在本篇写作范围内，待主流水线处理"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/face-vid2vid/"
+    },
+    {
+      "title": "分析产物（methodology / experiment / terminology / image-collection）",
+      "path": ".cache/article-note/face-vid2vid/analysis/"
+    },
+    {
+      "title": "采用图的 WebP 发布件",
+      "path": "management/docs/_assets/face-vid2vid/"
+    }
+  ],
+  "related": [
+    { "slug": "论文笔记/liveportrait", "title": "LivePortrait 模型笔记" },
+    { "slug": "论文笔记/ditto", "title": "Ditto 模型笔记" },
+    { "slug": "数字人概述/数字人身份", "title": "数字人身份" },
+    { "slug": "数字人概述/数字人动作", "title": "数字人动作" },
+    { "slug": "数字人概述/工程设计", "title": "工程设计" }
+  ],
+  "notes": [
+    "未入本地 papers 库：data/papers.db 无 arxiv-2011.15126，正文第 0 节与第 10 节均按规范写 arxiv-2011.15126 并标注「本地 papers 库未入库」；是否补录由用户决定。",
+    "图号统一采用 PDF 编号：LaTeXML 的 anchor/title 编号比 PDF 多 1，已在 tasks 1.4 逐图核对（Figure 3/4/6/8/10/14/15 与候选文件名一致）。",
+    "事实核对注两处照录：Table 3 正面化的 Angle 列 Ours(90.9) 低于 pSp(99.8) 且论文未解释；Table 1 中 fs-vid2vid 与 FOMM-L 的 MS-SSIM 记为 Nan 且论文未说明。二者均原样保留、不替论文解释，禁止写成「全面领先」。",
+    "venue 依据：PDF 首页只标 arXiv 版本，CVPR 2021 oral 取自任务的版本/会议登记，正文已注明来源为登记值。",
+    "未采用 Figure 12/13（HTML 无位图，需从 PDF 截取，且属实现细节）；候选原图 8 张中 Figure 8（跨身份迁移）与 Figure 15（二进制残差）为可选、本篇未占图位。"
+  ]
+}

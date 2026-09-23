@@ -1,0 +1,50 @@
+{
+  "slug": "论文笔记/float",
+  "title": "FLOAT 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "change": "docs-note-float",
+      "summary": "首次创建：按 article-note 流水线产出 10 节骨架笔记，含 6 张论文原图（Figure 2/4/3/9/8/16）、5 个块级公式（身份-运动分解与正交基、OT 损失、帧级 AdaLN、incremental CFV、λ-control 闭式解）与符号表、1 张推理时序 Mermaid、Table 1 主结果逐字照录（带 $^{\\dagger}$ 脚注与分辨率未明示说明）以及「论文局限 vs 我们结论」对照。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2412.01064v5（source tarball 成功：LaTeX 源码 + 32 张矢量原图；raw/sources/float.pdf 取页码；float.md 残片未用）",
+    "analysis": "methodology / experiment / terminology 三份已通过 validate-analysis；synthesis 作为事实位置索引",
+    "writing": "正文与 sidecar 已完成并校验"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/float/"
+    },
+    {
+      "title": "分析产物（methodology / experiment / terminology / image-collection）",
+      "path": ".cache/article-note/float/analysis/"
+    },
+    {
+      "title": "采用图的 WebP 发布件",
+      "path": "management/docs/_assets/float/"
+    }
+  ],
+  "related": [
+    { "slug": "论文笔记/avatar-forcing", "title": "Avatar Forcing 模型笔记" },
+    { "slug": "论文笔记/ditto", "title": "Ditto 模型笔记" },
+    { "slug": "论文笔记/liveportrait", "title": "LivePortrait 模型笔记" },
+    { "slug": "数字人概述/数字人身份", "title": "数字人身份" },
+    { "slug": "数字人概述/数字人动作", "title": "数字人动作" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" },
+    { "slug": "knowledge/Avatar Forcing Motion Latent AutoEncoder", "title": "Avatar Forcing Motion Latent AutoEncoder" }
+  ],
+  "notes": [
+    "未入本地 papers 库：data/papers.db 无 arxiv-2412.01064，正文第 0 节与第 10 节按命名规范写 arxiv-2412.01064 并标注「FLOAT 未入本地 papers 库」；是否补录由用户决定，本轮不写库。",
+    "Table 1 引用带 $^{\\dagger}$ 脚注（原始 256×256 输出评测），并注明 FLOAT/Hallo/EchoMimic 的评测分辨率论文未明示，避免读者误判为同分辨率对比。",
+    "Table 2 配置 D 的 FID（HDTF）源码作 `21/528`，疑为 `21.528` 排版笔误，正文原样照录并加注，不改写。",
+    "图位与 design 落位有一处微调：应「图号连续」硬规则，论文 Figure 3（L_comp-lp 有效性）从 §3 移到 §6 消融处（§3 只留 Figure 2 总览，§5 留 Figure 4），六张图按 1..6 连续。",
+    "符号纪律：正文 $w_r$ 与 $w_{r\\to S}$ 是否同量论文未披露，正文统一按 $w_{r\\to S}$（源图运动隐变量）理解并注明；条件维度 $L\\times h$ 与 $(L'+L)\\times h$ 论文内部不一致，正文按 $L'+L$ 理解并注明。",
+    "incremental CFV 公式 LaTeX 源码第二行缺一个右括号（源码即如此），正文按物理含义补齐闭合括号并注明，未改动任何符号。",
+    "我方定位：未接入 FLOAT 原权重；Avatar Forcing 在其 motion latent 空间上重训并加因果流式 + DPO（d=512），长时漂移治理归《数字人身份》与 avatar-forcing 笔记，本篇不复制。",
+    "EMO / VASA-1 仅用 demo 视频定性对比、实现不可得，正文标明不得当作可比定量基线；对比图文件名含 no-dreamtalk-legacy 但 DreamTalk 未参与对比。"
+  ]
+}
