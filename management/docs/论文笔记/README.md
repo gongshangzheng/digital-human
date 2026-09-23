@@ -30,7 +30,7 @@
 | 文件 | 定位 | 状态 |
 |------|------|------|
 | `avatar-forcing.md` | 深读 + 工程层（微调/漂移实验/流式接入） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
-| `ditto.md` | 深读 + 工程层（TRT 实时化/流式管线） | 待写 |
+| `ditto.md` | 深读 + 工程层（TRT 实时化/流式管线） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `liveact.md` | 深读 + 工程层（SoulX-LiveAct 接入） | 待写 |
 | `omnimate.md` | 深读 | 待写 |
 | `talker-t2av.md` | 深读 + 工程层（接入与验证） | 待写 |

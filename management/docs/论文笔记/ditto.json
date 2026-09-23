@@ -1,0 +1,33 @@
+{
+  "slug": "论文笔记/ditto",
+  "title": "Ditto 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "change": "docs-note-ditto",
+      "summary": "首次创建：按 article-note 流水线产出 10 节骨架笔记，含 6 张论文原图、265 维构成的代码级澄清、三层 RTF 口径边界与我们的视频源唇动隔离结论。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2411.19509v3（HTML + PDF + 6 张原图；source tarball 406 失败已降级）",
+    "analysis": "methodology / experiment / code-analysis / image-collection 委派，citation / terminology 直接撰写；validate-analysis 通过",
+    "writing": "正文与 sidecar 已完成并校验"
+  },
+  "related": [
+    { "slug": "knowledge/Ditto 模型精读", "title": "Ditto 模型精读" },
+    { "slug": "knowledge/Ditto 改动实践", "title": "Ditto 改动实践" },
+    { "slug": "knowledge/Ditto 实时化与 TensorRT 加速复盘", "title": "Ditto 实时化与 TensorRT 加速复盘" },
+    { "slug": "knowledge/动作空间专题", "title": "动作空间专题" },
+    { "slug": "knowledge/音画同步专题", "title": "音画同步专题" },
+    { "slug": "论文笔记/avatar-forcing", "title": "Avatar Forcing 模型笔记" },
+    { "slug": "数字人概述/数字人动作", "title": "数字人动作" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" }
+  ],
+  "notes": [
+    "论文 arXiv v3 页首标注 Preprint，venue 依据外部登记为 ACM MM 2025。",
+    "视频源模式 use_d_keys 的代码默认值与知识库两篇的表述不一致，本篇按 change docs-note-ditto 的裁决回避细节，只写「外观与骨架取自源帧」。",
+    "265 维拆分与「66 是离散 bin」来自部署代码，非论文披露。",
+    "长时稳定性结论限于 3 分钟窗口，30 分钟档未做。"
+  ]
+}
