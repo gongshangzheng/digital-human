@@ -171,14 +171,18 @@ md.renderer.rules.paragraph_close = function (tokens, idx, options, env, self) {
 const rendered = computed(() => {
   if (!props.content) return '<p class="text-light">暂无内容</p>'
   let src = props.content
+  // Slugs may contain spaces (Chinese/English file names). CommonMark forbids
+  // spaces in bare link destinations, so each path/query segment is
+  // percent-encoded; vue-router decodes the param back to the raw slug.
+  const encodeSlugPath = (slug) => slug.trim().split('/').map(encodeURIComponent).join('/')
   // Task links: [[proj#t2-3]] or [[proj#t2-3|display]] → project tree with task selected
   src = src.replace(/\[\[([^#|\]]+)#([^|\]]+)\|([^\]]+)\]\]/g, (_, proj, task, text) =>
-    `[${text.trim()}](/management/projects?slug=${proj.trim()}&task=${task.trim()})`)
+    `[${text.trim()}](/management/projects?slug=${encodeURIComponent(proj.trim())}&task=${encodeURIComponent(task.trim())})`)
   src = src.replace(/\[\[([^#|\]]+)#([^|\]]+)\]\]/g, (_, proj, task) =>
-    `[${proj.trim()}/${task.trim()}](/management/projects?slug=${proj.trim()}&task=${task.trim()})`)
+    `[${proj.trim()}/${task.trim()}](/management/projects?slug=${encodeURIComponent(proj.trim())}&task=${encodeURIComponent(task.trim())})`)
   // Doc links: [[slug]] or [[slug|display]] → doc detail page
-  src = src.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, slug, text) => `[${text.trim()}](/management/docs/${slug.trim()})`)
-  src = src.replace(/\[\[([^\]]+)\]\]/g, (_, slug) => `[${slug.trim()}](/management/docs/${slug.trim()})`)
+  src = src.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, (_, slug, text) => `[${text.trim()}](/management/docs/${encodeSlugPath(slug)})`)
+  src = src.replace(/\[\[([^\]]+)\]\]/g, (_, slug) => `[${slug.trim()}](/management/docs/${encodeSlugPath(slug)})`)
   return md.render(src)
 })
 
