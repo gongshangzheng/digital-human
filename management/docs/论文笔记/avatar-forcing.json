@@ -2,6 +2,11 @@
   "changelog": [
     {
       "date": "2026-09-24",
+      "summary": "概念澄清：① 「forcing」命名继承 teacher forcing→diffusion forcing（每 token 独立噪声水平），术语表「扩散强制」行补 lineage；② 明确本篇**没有教师-学生蒸馏**——Stage 1 监督来自真实运动、Stage 2 DPO 的参考模型是自身权重、motion AE 从 FLOAT 权重初始化后重训；Causal Forcing 批评的「双向教师蒸馏」属另一条路线。补 research/followups-problem-solution.md（16 篇逐篇问题→方案 + 三条横向规律）",
+      "commit": ""
+    },
+    {
+      "date": "2026-09-24",
       "summary": "后续工作复查（09-24）：引用仍 16 篇但构成有变——新增 MindFlow（2606.27779，腹背双通路：Chunk-State 情绪状态链 + 自回归流匹配 + 选择性声学注入），移出 TaoMate（经摘要核对归属同名篇 2603.14331）；「推进」列按 arXiv 摘要一手核对补全（DSFD：视频 latent 被身份/外观/背景占据、逐像素融音频浪费容量，条件融合挪进低维身份解耦运动空间，且运动空间无双向教师；Q-ARVD：AR 误差累积致逐帧量化敏感度指数式不均衡；InterDyad/ECHO/Listener Nodding/CausalCine/LPM 1.0/Wan-Streamer/AVTR-1 各补要点）；被引数更新 CF 135 / CF++ 31；「仍然空着的两点」复查后依然成立（DSFD 也只到 motion captions）。精读笔记见 change research/followups-refresh-2026-09-24.md",
       "commit": ""
     },

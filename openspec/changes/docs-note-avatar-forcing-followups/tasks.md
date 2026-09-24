@@ -34,3 +34,10 @@
 - [x] 4.4 笔记「后续工作」小节重写：推进列全部填实、加 MindFlow 行、「仍然空着的两点」复查后保留（DSFD 也只到 motion captions）。
 - [x] 4.5 avatar-forcing.json changelog 追加。
 - [x] 4.6 校验（表格列数 / 链接 / 引号风格）与提交。
+
+## 5. 概念澄清（用户提问派生，2026-09-24）
+
+- [x] 5.1 「forcing」的命名来源：论文 Background 原文 "Diffusion forcing reformulates conventional **teacher forcing** in terms of diffusion models"——链条为 teacher forcing（RNN）→ diffusion forcing（每 token 独立噪声水平 $t_n$）→ Avatar Forcing；术语表「扩散强制」行补 lineage。
+- [x] 5.2 「有没有蒸馏」：**没有**。Stage 1 用 DF 目标回归向量场、监督来自真实运动；Stage 2 DPO 的 $\pi_{\text{ref}}$ 是 Stage 1 自己的权重（正则锚点）；motion AE 从 FLOAT 权重**初始化后重训**（初始化≠蒸馏）。已在「训练与实现细节」表后补一条 blockquote 说明，并点明 Causal Forcing 批评的「双向教师蒸馏」是另一条路线。
+- [x] 5.3 逐篇「问题→方案」清单落 `research/followups-problem-solution.md`（16 篇 + 三条横向规律）。
+- [x] 5.4 校验（引号风格 / 表格列数 / 链接 / API）与提交。

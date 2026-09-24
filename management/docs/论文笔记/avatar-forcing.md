@@ -168,6 +168,8 @@ $c^n$ 是第 $n$ 帧的统一条件，$m_{t_n}$ 是加噪后的运动隐变量�
 | 采样 | 10 NFE（Euler 求解器）+ classifier-free guidance |
 | DPO 超参 | 平衡系数 $\lambda = 0.1$、偏离参数 $\beta = 1000$，参考模型 $v_{\mathrm{ref}}$ 用 Stage 1 权重初始化 |
 
+> **本篇没有教师-学生蒸馏。** 监督直接来自训练视频的**真实运动**：Stage 1 用 diffusion forcing 目标 $\mathcal{L}_{DF}=\mathbb{E}_{n,t_n}\|v_\theta(\mathbf{m}^n_{t_n},t_n,\mathbf{c}^n)-(\mathbf{m}_1^n-\mathbf{m}_0^n)\|$ 回归向量场（motion AE 冻结）；Stage 2 的 DPO 里 $\pi_{\text{ref}}$ 是 Stage 1 **自己的**权重，属正则锚点而非蒸馏。motion AE 只是**从 FLOAT 权重初始化后在本数据集重训**，同样是初始化而非蒸馏。所以它不需要双向教师——后续 Causal Forcing 一类批评的「双向教师蒸馏成因果学生」是**另一条路线**（见「后续工作」）；AF 靠的是「每 token 独立噪声水平」让因果训练自身稳定，论文的消融也支持这一点：普通自回归扩散长时程出现运动漂移，diffusion forcing 稳定得多。
+
 ## 推理与系统链路
 
 推理的核心是「一次只生成一个块，但用缓存与 offset 维持连续性」：
@@ -379,7 +381,7 @@ GT 自身的方向游走带宽约 3~5°，noguide 升到 17.5° 以上并持续�
 
 | 术语 | 英文 | 含义 |
 |---|---|---|
-| 扩散强制 | Diffusion Forcing (DF) | 每个 token 有独立噪声水平的因果序列扩散训练范式 |
+| 扩散强制 | Diffusion Forcing (DF) | 每个 token 有独立噪声水平的因果序列扩散训练范式；**名字继承 teacher forcing**——预测下一个 token 时条件在**带噪的过去**上（$x_{t_n}=t_nx_1+(1-t_n)x_0$，逐 token 独立 $t_n$），而非 teacher forcing 那样只喂干净真值历史 |
 | DFoT | Diffusion Forcing Transformer | 本文的块因果生成器 |
 | 有界前瞻 | look-ahead | 允许每个块额外看到 `l` 帧未来以平滑块边界 |
 | 块因果掩码 | blockwise causal mask | 块内双向、块间因果的注意力掩码 |
