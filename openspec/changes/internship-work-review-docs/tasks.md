@@ -25,9 +25,9 @@
 
 - [x] 2.9 创建并实施 `docs-note-avatar-forcing`（avatar-forcing.md）— 含 `-rewrite` 重写，均已归档
 - [x] 2.10 创建并实施 `docs-note-ditto`（ditto.md）— 任务 29/29 完成、正文通过 `validate-note`；change 尚未归档
-- [ ] 2.11 创建并实施 `docs-note-liveact`（liveact.md）
-- [ ] 2.12 创建并实施 `docs-note-omnimate`（omnimate.md）
-- [ ] 2.13 创建并实施 `docs-note-talker-t2av`（talker-t2av.md）
+- [x] 2.11 创建并实施 `docs-note-liveact`（liveact.md）— 已归档
+- [x] 2.12 创建并实施 `docs-note-omnimate`（omnimate.md）— 10 节 + 5 图 + 2 Mermaid，已归档
+- [x] 2.13 创建并实施 `docs-note-talker-t2av`（talker-t2av.md）— 10 节 + 1 图 + 2 Mermaid（论文仅 1 张正文图，替代方案已登记），已归档
 - [ ] 2.14 批量创建生成侧加速十篇笔记（fpsattention / blade / nar / flashar / latent-spatial-memory / worldattention / zipar / dax / turbodiffusion / inferix）— 由 `docs-intern-acceleration` 3.1 收口：建成后回《数字人加速》补链接
 - [x] 2.15 创建并实施 `docs-note-liveportrait`（liveportrait.md）— 含 5 张论文原图，未接入故按定位层写（change 待归档）
 - [x] 2.16 创建并实施 `docs-note-lia-x`（lia-x.md）— 含 5 张论文原图（含三面板拼接），未接入故按定位层写（change 待归档）
@@ -35,6 +35,6 @@
 ## 3. 体系级验收
 
 - [ ] 3.1 复盘九篇 + 论文笔记齐备且平铺于各自子文件夹，互链正确、无嵌套
-  - 现状：复盘九篇齐备；笔记已完成 `avatar-forcing`、`ditto`，待写 liveact / omnimate / talker-t2av / liveportrait / lia-x 与生成侧加速十篇
+  - 现状：复盘九篇齐备；**「五篇深读」已全部完成**（avatar-forcing、ditto、liveact、omnimate、talker-t2av），另完成 liveportrait / lia-x / float / face-vid2vid 等定位篇；待写：生成侧加速十篇、`wan-streamer` 等后续新增条目
 - [ ] 3.2 抽查：量化成果总表每个数字可溯源到单篇文档；【已验证/待验证/已否证】标注齐全
 - [ ] 3.3 openspec validate 全部通过，git 提交
