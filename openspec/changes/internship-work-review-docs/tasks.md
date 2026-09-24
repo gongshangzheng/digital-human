@@ -16,7 +16,7 @@
 - [x] 2.3 创建并实施 `docs-intern-motion`（数字人动作.md）— 已归档
 - [x] 2.4 创建并实施 `docs-intern-cyberverse`（CyberVerse框架.md）— 已归档
 - [x] 2.5 创建并实施 `docs-intern-design`（工程设计.md）— 已归档
-- [ ] 2.6 创建并实施 `docs-intern-acceleration`（数字人加速.md）— 未归档，由进行中的 `docs-intern-acceleration` 承接（当前 10/11；剩余 3.1 待十篇笔记建成后补链接）
+- [x] 2.6 创建并实施 `docs-intern-acceleration`（数字人加速.md）— 已完成并归档（十篇加速笔记建成后回补 10 处链接）
 - [x] 2.7 创建并实施 `docs-intern-industry`（数字人行业全景.md）— 已归档
 - [x] 2.8 创建并实施 `docs-intern-summary`（总结.md）— 已归档
 - [x] 2.8b 创建并实施 `docs-dh-field-problems`（数字人领域问题.md）— 已归档（design 登记表第 9 行）
