@@ -1,0 +1,33 @@
+{
+  "slug": "论文笔记/fpsattention",
+  "title": "FPSAttention 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "change": "docs-note-fpsattention",
+      "summary": "首次创建：生成侧加速十篇的第一篇。10 节骨架 + sidecar + 3 张论文正文图；写清训练感知的 FP8 × 稀疏协同（粒度分工、步感知调度、kernel 取向），并登记本地素材（博客页与知识库）与论文的三处出入。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2506.04648v2（HTML + 26 页 PDF；source tarball 406、PDF 首下截断后用 curl -C - 补齐；3 张正文位图）",
+    "analysis": "methodology / experiment / local-crosscheck / image-collection 委派，citation / terminology 直接撰写；validate-analysis 通过（local-crosscheck 为自定义 lane 名，触发一条 warning）",
+    "writing": "正文与 sidecar 已完成并校验"
+  },
+  "related": [
+    { "slug": "knowledge/视频生成训练与推理加速专题", "title": "视频生成训练与推理加速专题" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" },
+    { "slug": "论文笔记/liveact", "title": "SoulX-LiveAct 模型笔记" },
+    { "slug": "论文笔记/vorch-streamer", "title": "Vorch-Streamer 模型笔记" },
+    { "slug": "论文笔记/ditto", "title": "Ditto 模型笔记" },
+    { "slug": "knowledge/digital-human-realtime-gpu-comparison", "title": "实时数字人 GPU 横评" }
+  ],
+  "notes": [
+    "papers 库未收录 arXiv:2506.04648，frontmatter 只写 arxiv_id，不写 papers_id。",
+    "已如实登记六处口径：kernel 与 E2E 是两套加速比；SageAttention 在本文里是 INT8 PTQ（1.26× 属 FP8 行）；「VBench 未降」应写为 +1.8% 且有三项维度下降；附录 E 讲的是跨论文可比性而非指标失效；不写「老卡跑不了」（论文说打折，我们的 A10 结论另标来源）；Figure 7 图内基线损失更低。",
+    "Table 4 的 (6,6,1) 行与 Table 3 的 (12,16,16) 行数值完全相同，已标注为同一组测量，不作为两处独立证据。",
+    "QAT 步数未披露，正文只写「2,000 步后收敛轨迹差异 < 2%」这一线索。",
+    "Figure 5 与 Figure 7 已从 PDF 渲染到工作区备用（fig5-p7-300.png / fig7-p10-300.png），因本机无法目视确认可读性，默认未发布；如需加入正文，用户确认后可发布。",
+    "本地素材三处出入（博客页两处误置、知识库「VBench 未降」口径）已写入正文第 8 节；博客位于另一个仓库（~/gongshangzheng.github.io），本 change 未修改。"
+  ]
+}
