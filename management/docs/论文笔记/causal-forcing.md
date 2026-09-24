@@ -5,7 +5,7 @@ date: 2026-09-23
 tags: [数字人, 模型笔记, Causal Forcing, 自回归扩散蒸馏, frame-level injectivity, DMD, 实时流式]
 arxiv_id: 2602.02214
 summary: Causal Forcing（清华 / ShengShu 等，ICML 2026）指出把双向视频扩散蒸成 few-step 自回归学生时，SOTA 的 ODE 初始化在理论上就错——双向教师只在 video level 单射、不满足 AR 学生所需的 frame level 单射，最优解塌成条件期望；改用 teacher forcing 训出的自回归教师做 causal ODE 蒸馏再上 asymmetric DMD，在同等训练预算下把 Self Forcing 的 Dynamic Degree 提升 19.3%；本篇含与 Avatar Forcing 在 diffusion forcing 上结论相反的对照
-order: 80
+order: 90
 ---
 
 # Causal Forcing
