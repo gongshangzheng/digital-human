@@ -16,9 +16,9 @@
 
 ## 3. 待用户确认的同步
 
-- [ ] 3.1 `docs-motion-space-modeling/design.md:75` 措辞（并行会话）。
-- [ ] 3.2 `docs-identity-consistent-learning/design.md:51` 措辞（并行会话）。
-- [ ] 3.3 `docs-intern-report/design.md` ③ 3.3 统一用词（本仓库）。
+- [x] 3.1 `docs-motion-space-modeling/design.md:75` 措辞（并行会话）。
+- [x] 3.2 `docs-identity-consistent-learning/design.md:51` 措辞（并行会话）。
+- [x] 3.3 `docs-intern-report/design.md` ③ 3.3 统一用词（本仓库）。
 
 ## 4. 验证
 

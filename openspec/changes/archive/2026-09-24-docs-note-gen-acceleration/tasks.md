@@ -33,4 +33,4 @@
 
 - [x] 5.1 每批 `validate-note.py` + 浏览器抽查（10 篇均 0 公式错误，图/Mermaid/链接正常）
 - [x] 5.2 `openspec validate docs-note-gen-acceleration --strict`
-- [ ] 5.3 分批聚焦提交（每批一个提交，不夹带他人工作）
+- [x] 5.3 分批聚焦提交（4 个提交：blade+LSM / zipar+nar+flashar / turbodiffusion+inferix / worldattention+dax+回补，均不夹带他人工作）
