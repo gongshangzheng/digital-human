@@ -22,4 +22,4 @@
 
 ## 4. 归档（可选，用户裁决）
 
-- [ ] 4.1 走 sync 流程把 MODIFIED requirement 合并进主 spec `openspec/specs/repository-agent-skills/spec.md`（保留原 2 个场景 + 新增 3 个场景），再归档 change
+- [x] 4.1 走 sync 流程把 MODIFIED requirement 合并进主 spec `openspec/specs/repository-agent-skills/spec.md`（保留原 2 个场景 + 新增 3 个场景），再归档 change

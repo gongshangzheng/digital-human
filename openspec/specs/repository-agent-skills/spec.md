@@ -28,7 +28,9 @@
 
 ### Requirement: Article-note formula guidance matches rendered Markdown
 
-项目级 `article-note` skill SHALL 指导论文笔记以 `$...$` 和 `$$...$$` 书写可渲染的 LaTeX 公式，并要求为公式提供符号表与中文解释。该 skill SHALL 指明 Mermaid 节点公式使用 `$$...$$`，并在校验中提示不受支持的 `\(...\)`、`\[...\]` 与 `\begin{equation}` 写法。
+项目级 `article-note` skill SHALL 指导论文笔记以 `$...$` 和 `$$...$$` 书写可渲染的 LaTeX 公式，并要求为公式提供符号表与中文解释。该 skill SHALL 指明 Mermaid 节点公式使用 `$$...$$`，并在校验中区分两类问题：不受支持的定界符（`\(...\)`、`\[...\]`、`\begin{equation}`，以提示报出）与当前渲染器下的**确定错误**（行内误用 `$$...$$`、正文或 Mermaid 内的双反斜杠命令 `\\命令`，以 ERROR 报出）。
+
+校验 SHALL 只在该错误真实存在时报告：代码围栏内不判 `$$`（Mermaid 块单独适用双反斜杠规则）、行内代码（反引号）内容剥离后再判、独占一行的 `$$` 与单行块级公式 `$$ ... $$` 视为合法、Mermaid 节点内的 `$$...$$` 视为合法。
 
 #### Scenario: 撰写带公式的论文笔记
 
@@ -39,6 +41,21 @@
 
 - **WHEN** 论文笔记包含 `\(...\)`、`\[...\]` 或 `\begin{equation}`
 - **THEN** article-note 校验提示替换为受支持的 `$...$` 或 `$$...$$` 写法，而不把可渲染公式误报为必须代码块
+
+#### Scenario: 校验行内误用块级定界符
+
+- **WHEN** 论文笔记的正文某行在文字中间出现 `$$...$$`（既非独占一行的 `$$`，也不是单行块级公式）
+- **THEN** 校验以 ERROR 报出该行号并提示改为 `$...$`，且退出码为非零
+
+#### Scenario: 校验双反斜杠命令
+
+- **WHEN** 论文笔记的正文或 Mermaid 块内出现 `\\命令`（如 `\\delta`、`\\times`）
+- **THEN** 校验以 ERROR 报出该行号并提示合并为单反斜杠，且退出码为非零
+
+#### Scenario: 合法写法不误报
+
+- **WHEN** 论文笔记包含独占一行的 `$$` 块级公式、单行块级公式 `$$ x $$`、Mermaid 节点内的 `$$x_t$$`，或反引号包裹的 `$$...$$` 文本
+- **THEN** 校验不因此报错
 
 ### Requirement: Documentation skill packages document order tooling
 
