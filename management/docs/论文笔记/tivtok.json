@@ -1,0 +1,49 @@
+{
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "summary": "首次创建：按 article-note 流程精读。10 节骨架；讲清 TIV/TV 分解、SIF（非对称注意力范围、无显式监督）、IB（广播并行解码）、跨块 TIV 平均复用与信息论动机；登记重建/长视频/生成/TIV 容量/TIV:TV 分配五组数字；§8 写与数字人的关系：给出 1 条正面机制（论文明确说运动物体身份稳定时可进 TIV）与 3 条限定（定性证据、TIV 含场景、编码非因果），并明确它与 AdapTok、Face Vid2vid 的互补关系",
+      "commit": ""
+    }
+  ],
+  "progress": {
+    "status": "draft",
+    "next": "若要继续：把三条待验证判据（TIV 身份纯度 / 跨条件可比性 / 因果化改造的代价）落成实验设计；两篇素材已齐，可写领域问题第七章首条目"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/tivtok/"
+    },
+    {
+      "title": "HTML 正文（含全部图表题注）",
+      "path": ".cache/article-note/tivtok/raw/sources/tivtok.html"
+    },
+    {
+      "title": "分析 lane 与索引",
+      "path": ".cache/article-note/tivtok/analysis/"
+    }
+  ],
+  "related": [
+    {
+      "slug": "数字人概述/数字人领域问题",
+      "title": "数字人领域问题",
+      "desc": "第七章「技术适用性」首条目（1D 视觉分词器 → 从视频提身份）的两篇素材之一"
+    },
+    {
+      "slug": "论文笔记/adaptok",
+      "title": "AdapTok 模型笔记",
+      "desc": "成对：AdapTok 给块级因果与自适应预算，TivTok 给不变/变分分解；两者互补"
+    },
+    {
+      "slug": "论文笔记/face-vid2vid",
+      "title": "Face Vid2vid 模型笔记",
+      "desc": "参照基线：从单张图提身份，作为「视频 token 比单图多给了什么」的参照"
+    },
+    {
+      "slug": "数字人概述/数字人身份",
+      "title": "数字人身份",
+      "desc": "selective sensitivity 判据与漂移诊断；本篇 §8 的三条判据与之一致"
+    }
+  ]
+}

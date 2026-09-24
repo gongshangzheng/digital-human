@@ -62,7 +62,7 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `causal-forcing.md` | 深读（自回归扩散蒸馏：frame-level injectivity 与条件期望解、TF 优于 DF、causal ODE + asymmetric DMD、causal CD；Avatar Forcing 被引最高的后续工作）｜论文 [arXiv:2602.02214](https://arxiv.org/abs/2602.02214) Causal Forcing: Autoregressive Diffusion Distillation Done Right for High-Quality Real-Time Interactive Video Generation | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `wan-streamer.md` | 深读（端到端实时交互基座）｜论文 [arXiv:2606.25041](https://arxiv.org/abs/2606.25041) Wan-Streamer v0.1: End-to-end Real-time Interactive Foundation Models | 待写 |
 | `adaptok.md` | 深读（自适应 token 分配 + 时间因果的 1D 视频分词；用于「从视频提角色身份」的适用性评估，见 [[数字人概述/数字人领域问题|数字人领域问题]] 第七章）｜论文 [arXiv:2505.17011](https://arxiv.org/abs/2505.17011) Learning Adaptive and Temporally Causal Video Tokenization in a 1D Latent Space | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
-| `tivtok.md` | 深读（时间不变/时变 token 分解：TIV 跨帧复用 + TV 逐帧残差；拟用于「从视频提角色身份」，见 [[数字人概述/数字人领域问题|数字人领域问题]] 第七章）｜论文 [arXiv:2606.17590](https://arxiv.org/abs/2606.17590) TivTok: Broadcasting Time-Invariant Tokens for Scalable Video Tokenization | 待写 |
+| `tivtok.md` | 深读（时间不变/时变 token 分解：TIV 跨帧复用 + TV 逐帧残差，SIF 涌现分解、IB 广播解码；用于「从视频提角色身份」的适用性评估，见 [[数字人概述/数字人领域问题|数字人领域问题]] 第七章）｜论文 [arXiv:2606.17590](https://arxiv.org/abs/2606.17590) TivTok: Broadcasting Time-Invariant Tokens for Scalable Video Tokenization | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
 
 > 新增登记说明（2026-09-23）：
 > - `talker-t2av` 之前只在 papers 库之外（知识库固定阅读上游版本 `6712f62`），现已补上论文出处 arXiv:2604.23586（v2，2026-08-04）。
