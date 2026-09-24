@@ -57,7 +57,7 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `turbodiffusion.md` | 深读（模型与系统协同设计） | 待写 |
 | `inferix.md` | 深读（自回归扩散推理引擎） | 待写 |
 | `vorch-streamer.md` | 深读（实时长时 T2AV 流式：后训练框架、暴露偏差与漂移治理、因果生成下“该说哪一段”）｜论文 [arXiv:2608.05663](https://arxiv.org/abs/2608.05663) Vorch-Streamer: Extending Human Audio-Visual Generation to Real-Time Long-Form Streaming | ✅ 已完成（10 节骨架 + 4 图 + sidecar，order: 26） |
-| `causal-forcing.md` | 深读（自回归扩散蒸馏：帧级单射性与条件期望解、逐帧自回归 + 1–2 步采样；Avatar Forcing 被引最高的后续工作）｜论文 [arXiv:2602.02214](https://arxiv.org/abs/2602.02214) Causal Forcing: Autoregressive Diffusion Distillation Done Right for High-Quality Real-Time Interactive Video Generation | 待写 |
+| `causal-forcing.md` | 深读（自回归扩散蒸馏：frame-level injectivity 与条件期望解、TF 优于 DF、causal ODE + asymmetric DMD、causal CD；Avatar Forcing 被引最高的后续工作）｜论文 [arXiv:2602.02214](https://arxiv.org/abs/2602.02214) Causal Forcing: Autoregressive Diffusion Distillation Done Right for High-Quality Real-Time Interactive Video Generation | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `wan-streamer.md` | 深读（端到端实时交互基座）｜论文 [arXiv:2606.25041](https://arxiv.org/abs/2606.25041) Wan-Streamer v0.1: End-to-end Real-time Interactive Foundation Models | 待写 |
 
 > 新增登记说明（2026-09-23）：

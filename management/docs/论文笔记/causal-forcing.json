@@ -1,0 +1,51 @@
+{
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "summary": "首次创建：按 article-note 流程精读。10 节骨架，理论主线为 frame-level injectivity 与条件期望塌陷；含三阶段方法、causal CD 扩展、6 张原图与 6 条公式；第 8 节记录与 Avatar Forcing 在 diffusion forcing 上结论相反的张力（分层写：论文结论 / 我们结论 / 未验证推断）",
+      "commit": ""
+    }
+  ],
+  "progress": {
+    "status": "draft",
+    "next": "若要继续：补训练硬件与随机种子（论文未披露）；若要做统一判据实验，先在运动隐空间与像素空间各跑一次 TF vs DF 的对照"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/causal-forcing/"
+    },
+    {
+      "title": "LaTeX 源（含附录证明）",
+      "path": ".cache/article-note/causal-forcing/raw/source-tar/example_paper.tex"
+    },
+    {
+      "title": "事实位置索引",
+      "path": ".cache/article-note/causal-forcing/synthesis.md"
+    }
+  ],
+  "related": [
+    {
+      "slug": "论文笔记/avatar-forcing",
+      "title": "Avatar Forcing 模型笔记",
+      "desc": "本篇的引用来源；其 block-causal diffusion forcing 结论与本文相反，对照写在「局限与启发」"
+    },
+    {
+      "slug": "论文笔记/vorch-streamer",
+      "title": "Vorch-Streamer 模型笔记",
+      "desc": "同为目的后训练把双向基座转因果流式，对象是 T2AV 长时自强制"
+    },
+    {
+      "slug": "论文笔记/ditto",
+      "title": "Ditto 模型笔记"
+    },
+    {
+      "slug": "数字人概述/数字人加速",
+      "title": "数字人加速"
+    },
+    {
+      "slug": "knowledge/视频生成训练与推理加速专题",
+      "title": "视频生成训练与推理加速专题"
+    }
+  ]
+}
