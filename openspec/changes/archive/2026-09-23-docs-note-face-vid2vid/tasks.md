@@ -28,7 +28,7 @@
 - [x] 4.1 `validate-note.py --note management/docs/论文笔记/face-vid2vid.md` 通过
 - [x] 4.2 浏览器抽查：KaTeX 188 个 / 0 错误、6 张图全部 decode、与 liveportrait 的双向互链生效
 - [x] 4.3 `openspec validate docs-note-face-vid2vid --strict`
-- [ ] 4.4 聚焦提交：笔记 + sidecar + `_assets/face-vid2vid/` + `liveportrait.md` 链接回补 + README + change 工件
+- [x] 4.4 聚焦提交：笔记 + sidecar + `_assets/face-vid2vid/` + `liveportrait.md` 链接回补 + README + change 工件
 
 ## 备注（写作文本的诚实项，已落在正文里）
 
