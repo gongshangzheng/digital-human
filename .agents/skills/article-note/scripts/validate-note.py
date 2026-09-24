@@ -9,6 +9,47 @@ from pathlib import Path
 ALLOWED_META = {"title", "author", "date", "tags", "summary", "id", "order", "arxiv_id", "papers_id"}
 IMAGE_RE = re.compile(r"!\[([^]]*)\]\(([^)]+)\)")
 LINK_RE = re.compile(r"\[\[([^]|]+)(?:\|[^]]+)?\]\]")
+MATH_BLOCK_LINE_RE = re.compile(r"\$\$.+\$\$")
+DOUBLE_BACKSLASH_RE = re.compile(r"\\\\+[A-Za-z]")
+INLINE_CODE_RE = re.compile(r"`[^`]*`")
+
+
+def check_math_delimiters(body):
+    """当前渲染器下的确定错误：行内误用 $$...$$、双反斜杠命令。
+
+    合法写法必须豁免：独占一行的 $$、单行块级公式 $$ x $$、Mermaid 节点内的
+    $$...$$、以及反引号包裹的字面文本。错误返回带行号与修法的短句。
+    """
+    found = []
+    fence = None
+    for lineno, line in enumerate(body.split("\n"), 1):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            fence = None if fence else stripped.strip("`").strip()
+            continue
+        if fence == "mermaid":
+            # Mermaid 节点内 $$...$$ 是受支持写法；但 KaTeX 里 \\ 是换行符
+            if DOUBLE_BACKSLASH_RE.search(line):
+                found.append(
+                    "line %d: double backslash command in mermaid (KaTeX reads \\\\ as a line break); "
+                    "use a single backslash" % lineno
+                )
+            continue
+        code_free = INLINE_CODE_RE.sub("", line)
+        if DOUBLE_BACKSLASH_RE.search(code_free):
+            found.append(
+                "line %d: double backslash command (KaTeX reads \\\\ as a line break); "
+                "use a single backslash" % lineno
+            )
+        if (
+            "$$" in code_free
+            and stripped != "$$"
+            and not MATH_BLOCK_LINE_RE.fullmatch(stripped)
+        ):
+            found.append(
+                "line %d: inline math uses the block delimiter $$...$$; use $...$" % lineno
+            )
+    return found
 
 
 def parse_frontmatter(text):
@@ -58,10 +99,13 @@ def main():
         warnings.append("standard sections missing or intentionally skipped: %s" % ", ".join(missing_sections))
     # The renderer supports $...$ and $$...$$. Markdown consumes the backslashes
     # in \(...\) / \[...\], so warn about unsupported delimiters instead.
+    # Two further mistakes are hard errors in this renderer: block delimiters
+    # used inline, and double backslashes (KaTeX reads \\ as a line break).
     if re.search(r"\\\(|\\\[", body):
         warnings.append("found \\(...\\) or \\[...\\] delimiters; this repository supports only $...$ and $$...$$")
     if "\\begin{equation" in body:
         warnings.append("found \\begin{equation}; use a $$...$$ display formula instead")
+    errors.extend(check_math_delimiters(body))
     images = IMAGE_RE.findall(body)
     for index, (alt, url) in enumerate(images, 1):
         if not url.startswith("/api/management/docs-assets/"):
