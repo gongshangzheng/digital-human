@@ -1,0 +1,4761 @@
+{
+  "papers": [
+    {
+      "id": "arcface-2018",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "ArcFace 深度解读：加性角度间隔损失，人脸识别的分水岭",
+      "title": "ArcFace: Additive Angular Margin Loss for Deep Face Recognition",
+      "blog_url": "https://gongshangzheng.github.io/arcface-2018.html",
+      "blog_date": "2026-08-03",
+      "venue": "CVPR 2019 Oral / IEEE TPAMI 2022",
+      "institution": "Imperial College London；InsightFace；University of Nottingham；Middlesex University",
+      "year": 2019,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "人脸识别",
+        "ArcFace",
+        "损失函数",
+        "InsightFace"
+      ],
+      "method_family": "identity",
+      "qa": [
+        {
+          "question": "softmax 分类不显式优化类内紧凑与类间分离、三元组度量学习又有组合爆炸与难样本挖掘负担，人脸嵌入该用什么损失才能让同身份聚合、异身份按间隔分开？",
+          "answer": "在归一化超球面上把 margin 直接加在目标类角度上（cos(θ+m)），因为角度与弧长一一对应，等价于在球面上拉开一段恒定的测地距离间隔；再用 sub-center 让每个类有 K 个子中心自动隔离标注噪声，并把清洗出的 IBUG-500K 把 IJB-C 推到 97.27%。"
+        }
+      ],
+      "derives_from": [
+        "SphereFace",
+        "CosFace",
+        "NormFace"
+      ],
+      "derived_by": [
+        "arc2face-2024",
+        "styleid-2026"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 1,
+      "authors": [
+        "Jiankang Deng",
+        "Jia Guo",
+        "Jing Yang",
+        "Niannan Xue",
+        "Irene Kotsia",
+        "Stefanos Zafeiriou"
+      ]
+    },
+    {
+      "id": "cdfs-2020",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十七）：CDFS，可控后代人脸合成",
+      "title": "Controllable Descendant Face Synthesis",
+      "blog_url": "https://gongshangzheng.github.io/cdfs-2020.html",
+      "blog_date": "2026-08-31",
+      "venue": "arXiv 2020",
+      "institution": "Tencent AI Lab",
+      "year": 2020,
+      "arxiv_id": null,
+      "tags": [
+        "亲属人脸合成",
+        "可控生成",
+        "GAN",
+        "自监督",
+        "数字人"
+      ],
+      "method_family": "identity",
+      "qa": [
+        {
+          "question": "在「父-母-子」三元组标注只有数千组、且同一对父母可能对应多个孩子的情况下，如何合成既能指定像谁、又能控年龄与性别的后代人脸？",
+          "answer": "把后代脸合成形式化为 two-versus-one 条件生成，用 5-bit 继承控制向量把「像谁」细化到左右眼眉/鼻/嘴/脸廓部件级，叠加 4 档年龄与性别控制；训练完全不用真值后代脸，靠「按控制向量交换部件再换回」的自监督闭环学到部件搬运能力。"
+        }
+      ],
+      "derives_from": [
+        "CAAE"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 2,
+      "authors": [
+        "Yong Zhang",
+        "Le Li",
+        "Zhilei Liu",
+        "Baoyuan Wu",
+        "Yanbo Fan",
+        "Zhifeng Li"
+      ]
+    },
+    {
+      "id": "makeittalk-2020",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十九）：MakeItTalk，speaker-aware 的跨域说话头动画",
+      "title": "MakeItTalk: Speaker-Aware Talking-Head Animation",
+      "blog_url": "https://gongshangzheng.github.io/makeittalk-2020.html",
+      "blog_date": "2026-09-02",
+      "venue": "SIGGRAPH Asia 2020",
+      "institution": "UMass Amherst × Adobe Research",
+      "year": 2020,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "talking-head",
+        "音频驱动",
+        "卡通"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "同一句语音可对应多种头动与表情（one-to-many 映射），直接回归会塌成被平均化的「平均脸」，如何只用真人数据训练却驱动油画、素描、卡通等未见画风的肖像？",
+          "answer": "把输出空间压到 68×3 的 3D landmark 相对位移（外观交给输入图，网络只学运动），用 AutoVC 解出 content、Resemblyzer 取出 speaker embedding 组成双分支残差调制以建模说话人动态，最后按输入类型走 Delaunay 三角形 warp（卡通）或 UNet image-to-image 翻译（真人）。"
+        }
+      ],
+      "derives_from": [
+        "AutoVC",
+        "Resemblyzer",
+        "VisemeNet"
+      ],
+      "derived_by": [
+        "flow-guided-talking-2021",
+        "hdtf-source-code-analysis"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 3,
+      "authors": [
+        "Yang Zhou",
+        "Xintong Han",
+        "Eli Shechtman",
+        "Jose Echevarria",
+        "Evangelos Kalogerakis",
+        "Dingzeyu Li"
+      ]
+    },
+    {
+      "id": "face-vid2vid",
+      "source": [
+        "note"
+      ],
+      "title_zh": "Face Vid2vid 模型笔记",
+      "title": "One-Shot Free-View Neural Talking-Head Synthesis for Video Conferencing",
+      "blog_url": null,
+      "blog_date": "2026-09-23",
+      "venue": "CVPR 2021 oral",
+      "institution": "NVIDIA",
+      "year": 2021,
+      "arxiv_id": "2011.15126",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "Face Vid2vid",
+        "隐式关键点",
+        "3D关键点分解",
+        "自由视角",
+        "视频会议压缩",
+        "谱系锚点"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "如何只用一张源图和一段驱动视频合成说话头视频，让身份完全来自源图、运动只来自驱动，并支持在原视角邻域内自由改变视角？",
+          "answer": "用无监督学到的可分解 3D 隐式关键点，把每个关键点拆成身份几何签名 x_c、头姿 (R,t) 与表情形变 δ 三项；源图提取一次 canonical 关键点供全片复用，驱动帧只估头姿与形变，合成时对关键点额外叠加用户指定的旋转平移即可改视角。"
+        },
+        {
+          "question": "视频会议场景下，怎样把人物视频的传输带宽压到传统编码器的一成量级？",
+          "answer": "由于身份关键点跨帧复用，每帧只需传输 3K+6 个运动标量，配合熵编码与可自适应调整的关键点数量，相对 H.264 CRF36 取得 10.37×（自适应）与 6.5×（20 关键点）的带宽下降，同时保持同身份重建与跨身份迁移指标优于 fs-vid2vid、FOMM 等基线。"
+        },
+        {
+          "question": "相比 FOMM 这类 2D 关键点方法，它的关键点运动表示做了哪些简化与升级？",
+          "answer": "不再为每个关键点估计需要在帧间传输的局部 Jacobian，而是假设头部近似刚体、局部块变换直接由 head rotation 给出，从而省掉 Jacobian 传输；同时把只能表达 2D 仿射的表示升级为带 3D 姿态的隐式关键点，因此可合成原视角之外的头部转动。"
+        }
+      ],
+      "derives_from": [
+        "First Order Motion Model (FOMM)"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/face-vid2vid",
+      "note_type": "doc",
+      "seq": 4,
+      "authors": []
+    },
+    {
+      "id": "paper-aniportrait",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十四）：AniPortrait，从音频到 3D 中间表示再到扩散肖像动画",
+      "title": "AniPortrait: Audio-Driven Synthesis of Photorealistic Portrait Animation",
+      "blog_url": "https://gongshangzheng.github.io/paper-aniportrait.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2024",
+      "institution": "Tencent Games Zhiji",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "AniPortrait",
+        "Portrait Animation",
+        "Talking Head",
+        "论文精读"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "音频驱动肖像动画既要求口型、表情、头姿同时成立，又要让运动可解释、可编辑、可复用于不同身份，端到端 audio-to-video 是否是最优解？",
+          "answer": "把任务拆成两阶段：Audio2Lmk 用 wav2vec 特征分别回归 3D facial mesh 与 6D head pose，经透视投影得到可编辑的 2D landmark 中间表示；Lmk2Video 以 SD1.5 + ReferenceNet + motion module 渲染，并用类 ControlNet 的多尺度 PoseGuider 在多个尺度注入 landmark、以 cross-attention 对齐参考与目标 landmark 来捕捉细唇动。"
+        }
+      ],
+      "derives_from": [
+        "AnimateAnyone",
+        "ControlNet"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 5,
+      "authors": [
+        "Huawei Wei",
+        "Zejun Yang",
+        "Zhisheng Wang"
+      ]
+    },
+    {
+      "id": "paper-hallo",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十五）：Hallo，用分层音频视觉对齐生成高质量说话肖像",
+      "title": "Hallo: Hierarchical Audio-Driven Visual Synthesis for Portrait Image Animation",
+      "blog_url": "https://gongshangzheng.github.io/paper-hallo.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2024",
+      "institution": "Fudan / Baidu / ETH Zurich / Nanjing University",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Hallo",
+        "Portrait Animation",
+        "论文精读",
+        "Talking Head"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "音频到底该驱动脸上的哪一部分？端到端扩散若把整张脸放进统一的 audio-visual cross-attention，只会得到「全脸平均」的粗驱动信号。",
+          "answer": "把音频驱动拆成 lip、expression、pose 三个视觉层级并用区域 mask 约束，让 hierarchical audio-visual cross-attention 各区域分别对齐音频再自适应融合；同时用 ReferenceNet 保身份纹理、用前两帧做 temporal alignment 保时序，并拼接 wav2vec 最后 12 层 embedding 增强语音语义。"
+        }
+      ],
+      "derives_from": [
+        "Stable Diffusion 1.5",
+        "AnimateDiff"
+      ],
+      "derived_by": [
+        "paper-hallo3"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 6,
+      "authors": [
+        "Mingwang Xu",
+        "Hui Li",
+        "Qingkun Su",
+        "Hanlin Shang",
+        "Liwei Zhang",
+        "Ce Liu",
+        "Jingdong Wang",
+        "Yao Yao",
+        "Siyu Zhu"
+      ]
+    },
+    {
+      "id": "paper-liveportrait",
+      "source": [
+        "blog",
+        "note"
+      ],
+      "title_zh": "数字人论文精读（十三）：LivePortrait，用隐式关键点把肖像动画做快、做稳、做可控",
+      "title": "LivePortrait: Efficient Portrait Animation with Stitching and Retargeting Control",
+      "blog_url": "https://gongshangzheng.github.io/paper-liveportrait.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2024",
+      "institution": "Kuaishou Technology",
+      "year": 2024,
+      "arxiv_id": "2407.03168",
+      "tags": [
+        "数字人",
+        "LivePortrait",
+        "Portrait Animation",
+        "论文精读",
+        "Talking Head"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "扩散方法画质领先但推理昂贵、时间一致性差且缺乏插入局部控制的接口，隐式关键点路线能否在质量、速度与可控性上同时做到可用？",
+          "answer": "以 Face Vid2vid 为基座做工程化重构：把分离的关键点/头姿/表情网络合并为单一 ConvNeXt-V2-Tiny 模型联合预测，引入显式 scale factor 的可缩放运动变换、SPADE 解码器与 PixelShuffle 上采样，并把训练数据扩到约 6900 万帧，在 RTX 4090 上达到 12.8ms/帧。"
+        },
+        {
+          "question": "动画在 256×256 裁剪空间生成，贴回原图时肩颈与背景会错位，且无法处理全身或多人场景，怎么办？",
+          "answer": "设计 stitching 模块：用源图与驱动图的 landmark 计算整体形变变换并融合到动画结果，配合 landmark-guided 优化让贴回不产生边界错位，使模型可直接对原图（含全身、多人）做动画。"
+        },
+        {
+          "question": "原始隐式关键点路线无法生动驱动眨眼与眼球、也无法跨身份控制闭眼与张嘴幅度，如何补齐这些精细可控性？",
+          "answer": "额外加两个轻量 retargeting 模块：把眼睛开合与嘴部开合显式参数化，推理时在关键点位移上做调制，从而独立控制眼球方向、眨眼与嘴唇开合，代价几乎可忽略。"
+        }
+      ],
+      "derives_from": [
+        "Face Vid2vid"
+      ],
+      "derived_by": [
+        "paper-joyvasa",
+        "paper-ditto",
+        "paper-chatanyone",
+        "paper-teller",
+        "paper-performrecast"
+      ],
+      "note": "论文笔记/liveportrait",
+      "note_type": "doc",
+      "seq": 7,
+      "authors": [
+        "Jianzhu Guo",
+        "Dingyun Zhang",
+        "Xiaoqiang Liu",
+        "Zhizhou Zhong",
+        "Yuan Zhang",
+        "Pengfei Wan",
+        "Di Zhang"
+      ]
+    },
+    {
+      "id": "paper-one-shot-one-talk",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十一）：One Shot, One Talk，从单张照片造可渲染全身 Avatar",
+      "title": "One Shot, One Talk: Whole-body Talking Avatar from a Single Image",
+      "blog_url": "https://gongshangzheng.github.io/paper-one-shot-one-talk.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2024",
+      "institution": null,
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "One Shot One Talk",
+        "3DGS",
+        "SMPL-X",
+        "全身数字人"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "只给一张全身照片，如何得到可换视角、可被姿态驱动、可作为资产复用的全身 talking avatar，而不是一次性输出的 RGB 视频？",
+          "answer": "用 SMPL-X mesh 提供身体/手/脸拓扑与关节控制、3D 高斯在 canonical mesh 的 UV 表面承载外观并靠变形场耦合；训练时把 MimicMotion（身体）与 Portrait4D-v2（头脸）生成的 2D 扩散伪帧当教师提供动作多样性，再对原图施加逐像素 source-image loss、对伪标签用 LPIPS 与 mesh/normal/mask 约束抑制身份漂移。"
+        }
+      ],
+      "derives_from": [
+        "MimicMotion",
+        "Portrait4D-v2"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 8,
+      "authors": [
+        "Jun Xiang",
+        "Yudong Guo",
+        "Leipeng Hu",
+        "Boyang Guo",
+        "Yancheng Yuan",
+        "Juyong Zhang"
+      ]
+    },
+    {
+      "id": "paper-diffsheg-2024",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（八）：DiffSHEG，扩散模型如何同时生成表情与手势",
+      "title": "DiffSHEG: A Diffusion-Based Approach for Real-Time Speech-driven Holistic 3D Expression and Gesture Generation",
+      "blog_url": "https://gongshangzheng.github.io/paper-diffsheg-2024.html",
+      "blog_date": "2026-06-12",
+      "venue": "CVPR 2024",
+      "institution": "HKUST / IDEA",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "DiffSHEG",
+        "Co-speech Gesture",
+        "扩散模型",
+        "论文精读"
+      ],
+      "method_family": "action-generation",
+      "qa": [
+        {
+          "question": "表情与手势长期被分开建模再拼接，导致联合分布错位、缺交互且扩散推理极慢，如何统一生成既同步又能实时、任意长地续写？",
+          "answer": "用 UniEG-Transformer 联合建模，让表情预测每一步单向流入（梯度截断）手势分支以刻画两者的不对称依赖；推理用 FOPPAS 基于相邻 clip 重叠帧做 outpainting 拼接任意长序列，配合 DDIM 25 步在 3090 上达 31.5 FPS。"
+        }
+      ],
+      "derives_from": [
+        "DiffGesture",
+        "DiffuseStyleGesture"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 9,
+      "authors": [
+        "Junming Chen",
+        "Yunfei Liu",
+        "Jianan Wang",
+        "Ailing Zeng",
+        "Yu Li",
+        "Qifeng Chen"
+      ]
+    },
+    {
+      "id": "paper-echomimic-2024",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（九）：EchoMimic，音频+可编辑landmark双驱动让数字人说话更自然",
+      "title": "EchoMimic: Lifelike Audio-Driven Portrait Animations through Editable Landmark Conditions",
+      "blog_url": "https://gongshangzheng.github.io/paper-echomimic-2024.html",
+      "blog_date": "2026-06-12",
+      "venue": "2024",
+      "institution": "Ant Group",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "EchoMimic",
+        "Talking Head",
+        "扩散模型",
+        "论文精读"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "纯音频驱动自由度高但姿态表情不稳定，纯 landmark 驱动稳定却僵硬且需要额外输入源，能否让一个模型兼得两种控制？",
+          "answer": "训练时同时使用音频与 facial landmarks 两个条件，并用 Random Landmark Selection 随机丢弃部分 landmark，使模型见过各种缺失情形；推理时即可在纯音频、纯 landmark、音频+选定 landmark 三种模式间切换，骨架为 SD1.5 加 Reference U-Net、Audio/Landmark 编码器与 temporal attention。"
+        }
+      ],
+      "derives_from": [
+        "Stable Diffusion 1.5"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 10,
+      "authors": [
+        "Zhiyuan Chen",
+        "Jiajiong Cao",
+        "Zhiquan Chen",
+        "Yuming Li",
+        "Chenguang Ma"
+      ]
+    },
+    {
+      "id": "dsl-fiqa-2024",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十七）：DSL-FIQA，双集合退化学习与关键点引导的人脸图像质量评估",
+      "title": "DSL-FIQA: Assessing Facial Image Quality via Dual-Set Degradation Learning and Landmark-Guided Transformer",
+      "blog_url": "https://gongshangzheng.github.io/dsl-fiqa-2024.html",
+      "blog_date": "2026-06-18",
+      "venue": "CVPR 2024",
+      "institution": "Snap Inc. Research；台湾大学",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "FIQA",
+        "人脸质量评估",
+        "FaceIQA",
+        "退化学习",
+        "Transformer"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "人脸图像质量评估长期混淆「识别系统是否认得出」与「人看起来质量好不好」，且退化表征与内容纠缠、缺乏面部语义引导与平衡数据，如何评估人脸感知质量？",
+          "answer": "用 Dual-Set Degradation Learning 在整图级别做「同内容异退化」合成集合与「异内容异退化」真实集合的双向对比，把退化与内容解耦；再用 1313 个面部关键点的固定标识符引导 Landmark-Guided Transformer 关注眼鼻嘴等显著区域，并发布平衡肤色与性别的 CGFIQA-40k 数据集。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 11,
+      "authors": [
+        "Wei-Ting Chen",
+        "Gurunandan Krishnan",
+        "Qiang Gao",
+        "Sy-Yen Kuo",
+        "Sizhuo Ma",
+        "Jian Wang"
+      ]
+    },
+    {
+      "id": "paper-x-portrait",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四十三）：X-Portrait，用 RGB 驱动信号实现表达力肖像动画",
+      "title": "X-Portrait: Expressive Portrait Animation with Hierarchical Motion Attention",
+      "blog_url": "https://gongshangzheng.github.io/paper-x-portrait.html",
+      "blog_date": "2026-07-08",
+      "venue": "SIGGRAPH 2024",
+      "institution": "ByteDance",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "X-Portrait",
+        "Portrait Animation",
+        "ControlNet",
+        "SIGGRAPH 2024"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "landmarks 是有损中间表示，依赖第三方检测器、丢掉牙齿/眼球/眉心等微表情细节，还会在 self-driven 训练下造成外观泄漏，能否跳过它直接用驱动视频的 RGB 帧做控制？",
+          "answer": "把驱动 RGB 帧直接作为 ControlNet 条件输入以保留全部运动信息，并用局部 ControlNet 增强微表情保真；为防外观泄漏，用预训练 Face Vid2vid 把驱动帧的运动迁移到另一身份生成 cross-identity 训练对，再以时序模块保证视频一致性。"
+        }
+      ],
+      "derives_from": [
+        "Face Vid2vid",
+        "ControlNet"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 12,
+      "authors": [
+        "You Xie",
+        "Hongyi Xu",
+        "Guoxian Song",
+        "Chao Wang",
+        "Yichun Shi",
+        "Linjie Luo"
+      ]
+    },
+    {
+      "id": "paper-joyvasa",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十）：JoyVASA，解耦表征 + 扩散运动生成的跨物种音频驱动肖像动画",
+      "title": "JoyVASA: Portrait and Animal Image Animation with Diffusion-Based Audio-Driven Facial Dynamics and Head Motion Generation",
+      "blog_url": "https://gongshangzheng.github.io/paper-joyvasa.html",
+      "blog_date": "2026-07-17",
+      "venue": "arXiv 2024",
+      "institution": "京东健康 & 浙江大学",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "diffusion-transformer",
+        "LivePortrait",
+        "audio-driven",
+        "talking-face"
+      ],
+      "method_family": "motion-space-diffusion",
+      "qa": [
+        {
+          "question": "端到端扩散方法一次只生成约 10 帧导致时序抖动，且运动生成依赖参考图像而与身份耦合，怎样做到「一次训练、万物驱动」并支持动物与卡通角色？",
+          "answer": "两阶段解耦：先用 LivePortrait 的解耦表征把静态外观与运动参数彻底分开，再用一个轻量扩散 Transformer 仅从音频生成身份无关的运动序列（面部动力学与头动分别建模），因此同一运动模型可驱动人类、动物与卡通角色，并显著缓解短帧拼接的时序抖动。"
+        }
+      ],
+      "derives_from": [
+        "LivePortrait"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 13,
+      "authors": [
+        "Xuyang Cao",
+        "Guoxin Wang",
+        "Sheng Shi",
+        "Jun Zhao",
+        "Yang Yao",
+        "Jintao Fei",
+        "Minyu Gao",
+        "Pei Xie"
+      ]
+    },
+    {
+      "id": "arc2face-2024",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（六十五）：Arc2Face，把 ArcFace 身份嵌入直接变成生成条件",
+      "title": "Arc2Face: A Foundation Model for ID-Consistent Human Faces",
+      "blog_url": "https://gongshangzheng.github.io/arc2face-2024.html",
+      "blog_date": "2026-09-01",
+      "venue": "ECCV 2024 Oral",
+      "institution": "Imperial College London × FAU Erlangen–Nürnberg",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "身份一致性",
+        "ArcFace",
+        "人脸生成"
+      ],
+      "method_family": "diffusion-foundation",
+      "qa": [
+        {
+          "question": "只给 ArcFace 的 512 维身份嵌入（没有原图、没有文本描述），能否生成这个人在各种姿态、表情、光照下的高质量人脸，从而验证身份嵌入是否真的编码了足以唯一刻画一张脸的信息？",
+          "answer": "把 Stable Diffusion v1.5 微调成以 ArcFace 嵌入为唯一条件、彻底去掉文本通道的 ID-to-Face 基础模型，用 GFPGAN 恢复的约 2100 万张 WebFace42M 人脸训练；未见身份的 CSIM 峰值达约 0.85、91.73% 的合成数据可被识别系统验证通过，还可外接 ControlNet 显式控制姿态与表情。"
+        }
+      ],
+      "derives_from": [
+        "Stable Diffusion 1.5",
+        "ArcFace"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 14,
+      "authors": [
+        "Foivos Paraperas Papantoniou",
+        "Alexandros Lattas",
+        "Stylianos Moschoglou",
+        "Jiankang Deng",
+        "Bernhard Kainz",
+        "Stefanos Zafeiriou"
+      ]
+    },
+    {
+      "id": "artalk-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十六）：ARTalk，实时语音驱动 3D 头部动画的多尺度自回归革命",
+      "title": "ARTalk: Speech-Driven 3D Head Animation via Autoregressive Model",
+      "blog_url": "https://gongshangzheng.github.io/artalk-2025.html",
+      "blog_date": "",
+      "venue": "SIGGRAPH Asia 2025",
+      "institution": "东京大学 MI Lab",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "3D talking head",
+        "autoregressive",
+        "VQ-VAE",
+        "real-time",
+        "FLAME"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "语音驱动 3D 头部动画能否同时拿到风格化质量与实时速度，而不必在扩散（质量高但需多步去噪）与自回归（可流式但过度平滑、缺头姿）之间二选一？",
+          "answer": "把 VAR 的 next-scale prediction 从静态图像迁移到时序运动：用 temporal multi-scale residual VQ（5 个时间尺度、共享码本、时序因果掩码）由粗到细编码 FLAME 的 expression 与 pose，再用 two-level 自回归 Transformer 预测 motion token，在 TFHP 上超越 DiffPoseTalk 且 A100 上 0.01s 生成 1 秒运动。"
+        }
+      ],
+      "derives_from": [
+        "VAR",
+        "CodeTalker"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 15,
+      "authors": [
+        "Xuangeng Chu",
+        "Nabarun Goswami",
+        "Ziteng Cui",
+        "Hanqin Wang",
+        "Tatsuya Harada"
+      ]
+    },
+    {
+      "id": "emo-avatar-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四十九）：EMO-Avatar，用 LLM Agent 把共情回复变成会说会动的数字人",
+      "title": "EMO-Avatar: An LLM-Agent-Orchestrated Framework for Multimodal Emotional Support in Human Animation",
+      "blog_url": "https://gongshangzheng.github.io/emo-avatar-2025.html",
+      "blog_date": "",
+      "venue": "ACM MM 2025",
+      "institution": "BUPT / Team AI4AI",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "EMO-Avatar",
+        "LLM Agent",
+        "AvaMERG",
+        "情感支持"
+      ],
+      "method_family": "agent-system",
+      "qa": [
+        {
+          "question": "只会打字的聊天机器人缺少多模态共情，怎样让数字人先理解用户情绪、再决定该安抚/探索/推动行动，并把这个策略真正落到语气、表情和身体动作上？",
+          "answer": "用 LLM Agent 分三层编排：ASR 与音视频 caption 先把多模态输入压成可推理的情绪证据，Reasoning Agent 按 Hill 三阶段的 Comforting–Exploration–Action 生成策略、文本及副语言/身体提示，再由带 Paralanguage Converter 的 TTS 与受 Ref Video RAG 引导的音频驱动动画模块输出同步的上半身共情视频。"
+        }
+      ],
+      "derives_from": [
+        "ESC framework (Liu et al., 2021)"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 16,
+      "authors": [
+        "Siyang Liu",
+        "Chujie Zheng",
+        "Orianna Demasi",
+        "Sahand Sabour",
+        "Yu Li",
+        "Zhou Yu",
+        "Yong Jiang",
+        "Minlie Huang"
+      ]
+    },
+    {
+      "id": "paper-latentsync",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十五）：LatentSync，用 StableSyncNet 解决潜在扩散唇形同步的捷径学习",
+      "title": "LatentSync: Taming Audio-Conditioned Latent Diffusion Models for Lip Sync with SyncNet Supervision",
+      "blog_url": "https://gongshangzheng.github.io/paper-latentsync.html",
+      "blog_date": "",
+      "venue": "ICCV 2025",
+      "institution": "ByteDance / 北交大 / Monash",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Lip Sync",
+        "Latent Diffusion",
+        "SyncNet",
+        "ByteDance"
+      ],
+      "method_family": "lip-sync",
+      "qa": [
+        {
+          "question": "把音频条件潜在扩散模型直接用于唇形同步时口型精度出乎意料地差，根因是什么、又该如何让模型真正依赖音频？",
+          "answer": "根因是视频修复框架天然提供的捷径学习——模型从遮罩帧唇周视觉直接推断唇形而忽略音频；解法是在潜在空间用一步法估计 clean latent、解码到像素空间后施加 SyncNet 监督，并设计 StableSyncNet 把同步判别准确率从 91% 提到 94%，配合 TREPA 增强时间一致性，实现端到端高分辨率唇形同步。"
+        }
+      ],
+      "derives_from": [
+        "SyncNet",
+        "Stable Diffusion 1.5"
+      ],
+      "derived_by": [
+        "paper-wav2lip"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 17,
+      "authors": [
+        "Chunyu Li",
+        "Chao Zhang",
+        "Weikai Xu",
+        "Jingyu Lin",
+        "Jinghui Xie",
+        "Weiguo Feng",
+        "Bingyue Peng",
+        "Cunjian Chen",
+        "Weiwei Xing"
+      ]
+    },
+    {
+      "id": "smartavatar-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四十八）：SmartAvatar，VLM 智能体驱动的 3D 人体头像生成",
+      "title": "SmartAvatar: Text- and Image-Guided Human Avatar Generation with VLM AI Agents",
+      "blog_url": "https://gongshangzheng.github.io/smartavatar-2025.html",
+      "blog_date": "",
+      "venue": "arXiv 2025",
+      "institution": "HKUST & Dartmouth",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "VLM Agent",
+        "3D头像生成",
+        "HumGen3D",
+        "自动验证"
+      ],
+      "method_family": "agent-system",
+      "qa": [
+        {
+          "question": "扩散式 3D 人体生成耗时数小时、易出 Janus 伪影且输出不可编辑不可动画，参数化模型的参数空间又难以从自然语言或图像直接映射，如何生成绑定骨骼、可控可编辑的人体头像？",
+          "answer": "完全不训练模型，用四个 LLM/VLM 智能体（Descriptor、Generator、Evaluator、Refiner）驱动现成的参数化生成器 HumGen3D：把文本/单图输入转成结构化属性并合成可执行 Blender Python 代码，渲染后用 GPT-4o 按 7 类属性评估相似度并迭代修正代码，直到达到 90% 阈值。"
+        }
+      ],
+      "derives_from": [
+        "HumGen3D"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 18,
+      "authors": [
+        "Alexander Huang-Menders",
+        "Xinhang Liu",
+        "Andy Xu",
+        "Yuyao Zhang",
+        "Chi-Keung Tang",
+        "Yu-Wing Tai"
+      ]
+    },
+    {
+      "id": "paper-ditto",
+      "source": [
+        "blog",
+        "note"
+      ],
+      "title_zh": "数字人论文精读（六）：Ditto，把扩散模型搬进运动空间的实时可控数字人",
+      "title": "Ditto: Motion-Space Diffusion for Controllable Realtime Talking Head Synthesis",
+      "blog_url": "https://gongshangzheng.github.io/paper-ditto.html",
+      "blog_date": "2026-06-05",
+      "venue": "ACM MM 2025",
+      "institution": "Ant Group",
+      "year": 2025,
+      "arxiv_id": "2411.19509",
+      "tags": [
+        "数字人",
+        "Talking Head",
+        "Ditto",
+        "Diffusion",
+        "论文精读"
+      ],
+      "method_family": "motion-space-diffusion",
+      "qa": [
+        {
+          "question": "如何让扩散式 talking head 同时做到实时与细粒度可控？",
+          "answer": "把扩散任务从冗余的图像/视频潜空间搬到低维可解释的运动空间：用 LivePortrait 风格的 motion extractor 得到 265D 面部运动，只让 Conditional DiT 生成运动序列，身份纹理交给 one-shot renderer。"
+        },
+        {
+          "question": "如何把隐式关键点运动变得像 blendshape 一样可控制？",
+          "answer": "把 expression deformation 看成 21 个 3D 关键点逐维探测其面部语义，建立运动维度到 gaze、emotion、pose 与局部区域的映射，实现 regional/magnitude control；并用模板视频学 gaze 修正，把头姿与眼神解耦。"
+        },
+        {
+          "question": "如何把运动空间扩散压到实时交互？",
+          "answer": "流式推理把 Audio2Feat、Motion DiT、Face Rendering 三段分别降延迟：HuBERT 用 KV cache + causal mask、DiT 降到 10 步并转 TensorRT、渲染前缓存外观特征，端到端 online RTF 0.895、首帧延迟 385ms。"
+        }
+      ],
+      "derives_from": [
+        "VASA-1",
+        "LivePortrait"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/ditto",
+      "note_type": "doc",
+      "seq": 19,
+      "authors": [
+        "Tianqi Li",
+        "Ruobing Zheng",
+        "Minghui Yang",
+        "Jingdong Chen",
+        "Ming Yang"
+      ]
+    },
+    {
+      "id": "paper-egstalker",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十一）：EGSTalker，把 3D Gaussian 数字人推向实时音频驱动",
+      "title": "EGSTalker: Real-Time Audio-Driven Talking Head Generation with Efficient Gaussian Deformation",
+      "blog_url": "https://gongshangzheng.github.io/paper-egstalker.html",
+      "blog_date": "2026-06-08",
+      "venue": "IEEE SMC 2025",
+      "institution": null,
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "EGSTalker",
+        "3DGS",
+        "Talking Head",
+        "论文精读"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "3DGS 的渲染已经够快，音频该如何高效驱动大量高斯点的变形？",
+          "answer": "用少量 agent tokens 把昂贵的 dense spatial-audio interaction 拆成“聚合—广播”两步，把复杂度从 O(N^2 d) 降到 O(N n d)；配合多分辨率 hash triplane 静态头与逐帧 deformation offsets，做到约 68.5 FPS 的实时 person-specific 3DGS talking head。"
+        }
+      ],
+      "derives_from": [
+        "GaussianTalker"
+      ],
+      "derived_by": [
+        "fpsattention"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 20,
+      "authors": [
+        "Tianheng Zhu",
+        "Yinfeng Yu",
+        "Liejun Wang",
+        "Fuchun Sun",
+        "Wendong Zheng"
+      ]
+    },
+    {
+      "id": "paper-chatanyone",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十八）：ChatAnyone，把 talking head 推到实时上半身互动",
+      "title": "ChatAnyone: Stylized Real-time Portrait Video Generation with Hierarchical Motion Diffusion Model",
+      "blog_url": "https://gongshangzheng.github.io/paper-chatanyone.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2025",
+      "institution": null,
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "ChatAnyone",
+        "上半身数字人",
+        "手势生成",
+        "论文精读"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "如何用单张图从音频实时生成带手势的上半身肖像视频？",
+          "answer": "分两阶段：先在低维运动空间做层级 audio-to-motion diffusion（先生成脸部运动，再据其生成上半身与手部控制），再用 warping-based GAN 做像素合成；手部用 MANO 渲染图经 AdaIN 注入，512×768 下约 30 FPS。"
+        }
+      ],
+      "derives_from": [
+        "LivePortrait"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 21,
+      "authors": [
+        "Jinwei Qi",
+        "Chaonan Ji",
+        "Sheng Xu",
+        "Peng Zhang",
+        "Bang Zhang",
+        "Liefeng Bo"
+      ]
+    },
+    {
+      "id": "paper-emo2",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十九）：EMO2，把手当作 End-Effector 的音频驱动手势生成",
+      "title": "EMO2: End-Effector Guided Audio-Driven Avatar Video Generation",
+      "blog_url": "https://gongshangzheng.github.io/paper-emo2.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2025",
+      "institution": null,
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "EMO2",
+        "End-Effector",
+        "手势生成",
+        "MANO"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "上半身数字人应如何建模手势，才能让身体自然跟随语音？",
+          "answer": "把双手当作语音手势的 end-effector 先生成：Stage 1 用 DiT 从音频生成 134D 双手 MANO 运动，Stage 2 用 ReferenceNet + AnimateDiff 视频扩散以 MANO maps 与身体关键点为条件，在像素空间补全脸、身体与背景（pixel prior inverse kinematics）。"
+        }
+      ],
+      "derives_from": [
+        "AnimateDiff"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 22,
+      "authors": [
+        "Linrui Tian",
+        "Siqi Hu",
+        "Qi Wang",
+        "Bang Zhang",
+        "Liefeng Bo"
+      ]
+    },
+    {
+      "id": "paper-flap",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十七）：FLAP，用 3D head 条件把音频肖像动画做成可控生成",
+      "title": "FLAP: Fully-controllable Audio-driven Portrait Video Generation through 3D head conditioned diffusion model",
+      "blog_url": "https://gongshangzheng.github.io/paper-flap.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2025",
+      "institution": null,
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "FLAP",
+        "3D Head",
+        "Portrait Animation",
+        "论文精读"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "扩散式肖像动画如何做到既自然又能被用户精确控制？",
+          "answer": "把可编辑的 FLAME 3D head coefficients（头姿、眼、下颌、眼睑、表情共 120 维）作为扩散条件，并用 Progressively Focused Training 先学头动、冻结相关注意力层再学表情，避免单目拟合导致的 pose/expression 耦合泄漏。"
+        }
+      ],
+      "derives_from": [
+        "Stable Diffusion",
+        "AnimateDiff",
+        "FLAME"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 23,
+      "authors": [
+        "Mu, L.",
+        "Liu, B."
+      ]
+    },
+    {
+      "id": "paper-omniavatar",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十）：OmniAvatar，把音频注入视频 latent 的全身数字人",
+      "title": "OmniAvatar: Efficient Audio-Driven Avatar Video Generation with Adaptive Body Animation",
+      "blog_url": "https://gongshangzheng.github.io/paper-omniavatar.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2025",
+      "institution": null,
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "OmniAvatar",
+        "Wan2.1",
+        "音频驱动视频",
+        "LoRA"
+      ],
+      "method_family": "diffusion-foundation",
+      "qa": [
+        {
+          "question": "如何让音频不只控制嘴，还能驱动 full-frame 视频里的身体动作与场景？",
+          "answer": "基于 Wan2.1-T2V-14B，用 Audio Pack 把 Wav2Vec2 音频特征对齐到 3D VAE 压缩后的视频 latent，再以 pixel-wise、multi-hierarchical 方式注入 DiT 多层，并用 LoRA 适配以保留基模的文本提示可控性。"
+        }
+      ],
+      "derives_from": [
+        "Wan2.1"
+      ],
+      "derived_by": [
+        "ex-omni-2d-2026",
+        "omnimate-2026"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 24,
+      "authors": [
+        "Qijun Gan",
+        "Ruizi Yang",
+        "Jianke Zhu",
+        "Shaofei Xue",
+        "Steven Hoi"
+      ]
+    },
+    {
+      "id": "paper-teller",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十六）：Teller，用自回归运动 token 做实时流式肖像动画",
+      "title": "Teller: Real-Time Streaming Audio-Driven Portrait Animation with Autoregressive Motion Generation",
+      "blog_url": "https://gongshangzheng.github.io/paper-teller.html",
+      "blog_date": "2026-06-09",
+      "venue": "CVPR 2025",
+      "institution": "Shanghai Soulgate Technology Co., Ltd.",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Teller",
+        "Streaming",
+        "Portrait Animation",
+        "论文精读"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "在流式语音输入下如何低延迟地生成 talking head 视频？",
+          "answer": "把连续面部运动经 RVQ 离散成 motion token，用自回归 Transformer 做“音频条件下的 next-token 预测”，再用 Efficient Temporal Module 单步修复脖子、耳环等小部位时序；200ms chunk 下总延迟 184ms，最高 25 FPS。"
+        }
+      ],
+      "derives_from": [
+        "LivePortrait"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 25,
+      "authors": [
+        "Dingcheng Zhen",
+        "Shunshun Yin",
+        "Shiyang Qin",
+        "Hou Yi",
+        "Ziwei Zhang",
+        "Siyuan Liu",
+        "Gan Qi",
+        "Ming Tao"
+      ]
+    },
+    {
+      "id": "paper-faceshot",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四十一）：FaceShot，用扩散特征匹配给任何角色做动画",
+      "title": "FaceShot: Bring Any Character into Life",
+      "blog_url": "https://gongshangzheng.github.io/paper-faceshot.html",
+      "blog_date": "2026-07-07",
+      "venue": "ICLR 2025",
+      "institution": "Tongji / Shanghai AI Lab",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "FaceShot",
+        "Portrait Animation",
+        "Landmark",
+        "Diffusion"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "当源图是 emoji、动物等非人类角色、landmark 检测器失效时该怎么办？",
+          "answer": "不改动画模型，而是用扩散模型中间层特征做外观引导的跨域 landmark 匹配，再用纯坐标变换把驱动视频运动迁移过去；这套 training-free 框架能为任意 landmark-driven 动画模型提供精确 landmark，在 CharacBench 上 0% 失败率。"
+        }
+      ],
+      "derives_from": [
+        "DIFT",
+        "IP-Adapter",
+        "MOFA-Video"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 26,
+      "authors": [
+        "Junyao Gao",
+        "Yanan Sun",
+        "Fei Shen",
+        "Xin Jiang",
+        "Zhening Xing",
+        "Kai Chen",
+        "Cairong Zhao"
+      ]
+    },
+    {
+      "id": "lia-x-2025",
+      "source": [
+        "blog",
+        "note"
+      ],
+      "title_zh": "数字人论文精读（四十二）：LIA-X，用稀疏运动字典让肖像动画可解释可编辑",
+      "title": "LIA-X: Interpretable Latent Portrait Animator",
+      "blog_url": "https://gongshangzheng.github.io/lia-x-2025.html",
+      "blog_date": "2026-07-08",
+      "venue": "ICCV 2025",
+      "institution": "Shanghai AI Lab / Inria",
+      "year": 2025,
+      "arxiv_id": "2508.09959",
+      "tags": [
+        "数字人",
+        "LIA-X",
+        "Portrait Animation",
+        "Sparse Dictionary",
+        "Edit-Warp-Render"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "warp-render 范式在源与驱动初始姿态/表情差异大时质量骤降，根源是什么？",
+          "answer": "它缺少“对齐源与驱动初始帧”的机制，源图只能被动接受运动迁移；同时 LIA 的运动字典语义纠缠，多个语义挤在同一向量里，用户无法单独操纵某一因素。"
+        },
+        {
+          "question": "如何让运动字典变得可解释、可编辑？",
+          "answer": "在 LIA 的运动系数上施加 L1 稀疏惩罚，迫使模型用最少数量的运动向量重建每帧，使各向量自然解耦出 yaw/pitch/roll、张闭嘴、挑眉、微笑等人类可理解的语义。"
+        },
+        {
+          "question": "稀疏字典带来了什么新能力？",
+          "answer": "提出 edit-warp-render：先用可解释运动向量编辑源肖像、使其接近驱动视频首帧，再做运动传递，显著提升大姿态与跨身份场景的质量，并把架构可扩展到约 10 亿参数。"
+        }
+      ],
+      "derives_from": [
+        "LIA"
+      ],
+      "derived_by": [
+        "float",
+        "toontalker-2023",
+        "talker-t2av"
+      ],
+      "note": "论文笔记/lia-x",
+      "note_type": "doc",
+      "seq": 27,
+      "authors": [
+        "Yaohui Wang",
+        "Di Yang",
+        "Xinyuan Chen",
+        "Francois Bremond",
+        "Yu Qiao",
+        "Antitza Dantcheva"
+      ]
+    },
+    {
+      "id": "anigs-2024",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四十四）：AniGS，用 4D 高斯重建把单图变成可动画 Avatar",
+      "title": "AniGS: Animatable Gaussian Avatar from a Single Image with Inconsistent Gaussian Reconstruction",
+      "blog_url": "https://gongshangzheng.github.io/anigs-2024.html",
+      "blog_date": "2026-07-09",
+      "venue": "CVPR 2025",
+      "institution": "阿里巴巴 + 中山大学",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "AniGS",
+        "4D Gaussian Splatting",
+        "CogVideo",
+        "CVPR 2025"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "如何从单张图得到可实时动画的 3D 人体 avatar，又不依赖稀缺的 3D 扫描数据？",
+          "answer": "用视频生成模型 CogVideoX-2B（参考图引导 + SMPL-X 姿态条件、RGB/Normal 联合生成）产出多视角 canonical 图像，再把视角间不一致当作“时间维度变化”用 4DGS（HexPlane 变形场）重建，配 Coarse Mesh 初始化，动画阶段可实时渲染。"
+        }
+      ],
+      "derives_from": [
+        "CogVideoX",
+        "4D Gaussian Splatting"
+      ],
+      "derived_by": [
+        "lhm-2025",
+        "motionshop-2-2025"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 28,
+      "authors": [
+        "Lingteng Qiu",
+        "Shenhao Zhu",
+        "Qi Zuo",
+        "Xiaodong Gu",
+        "Yuan Dong",
+        "Junfei Zhang",
+        "Chao Xu",
+        "Zhe Li",
+        "Weihao Yuan",
+        "Liefeng Bo",
+        "Guanying Chen",
+        "Zilong Dong"
+      ]
+    },
+    {
+      "id": "lhm-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四十五）：LHM，前馈 Transformer 秒级生成可动画 3D 人体",
+      "title": "LHM: Large Animatable Human Reconstruction Model from a Single Image in Seconds",
+      "blog_url": "https://gongshangzheng.github.io/lhm-2025.html",
+      "blog_date": "2026-07-09",
+      "venue": "ICCV 2025",
+      "institution": "阿里巴巴通义实验室",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "LHM",
+        "3D Gaussian Splatting",
+        "前馈重建",
+        "ICCV 2025"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "如何把单图可动画 3D 人体重建从“分钟级优化”变成“秒级前馈”？",
+          "answer": "用 Multimodal Body-Head Transformer 直接前馈回归 SMPL-X 表面点上的 3DGS 参数（相对初始化位置预测残差偏移），融合 Sapiens 身体特征与 DINOv2 多尺度头部特征（HFPE），并以纯视频帧渲染损失自监督训练，推理仅 2.01–6.57 秒。"
+        }
+      ],
+      "derives_from": [
+        "AniGS",
+        "LRM"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 29,
+      "authors": [
+        "Lingteng Qiu",
+        "Xiaodong Gu",
+        "Peihao Li",
+        "Qi Zuo",
+        "Weichao Shen",
+        "Junfei Zhang",
+        "Kejie Qiu",
+        "Weihao Yuan",
+        "Guanying Chen",
+        "Zilong Dong",
+        "Liefeng Bo"
+      ]
+    },
+    {
+      "id": "paper-hallo3",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十二）：Hallo3，视频扩散 Transformer 驱动的高动态肖像动画",
+      "title": "Hallo3: Highly Dynamic and Realistic Portrait Image Animation with Video Diffusion Transformer",
+      "blog_url": "https://gongshangzheng.github.io/paper-hallo3.html",
+      "blog_date": "2026-07-23",
+      "venue": "CVPR 2025",
+      "institution": "Fudan Generative Vision Lab / Baidu",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "Diffusion",
+        "Talking Head",
+        "DiT"
+      ],
+      "method_family": "diffusion-foundation",
+      "qa": [
+        {
+          "question": "当参考图是侧脸、且前景背景都在运动时，如何让 talking head 依然自然？",
+          "answer": "首次把预训练 DiT 视频生成模型 CogVideoX-5B-I2V 当 backbone，用与去噪网络结构对称的 Identity Reference Network 保身份、用 token 级 audio cross-attention 驱动嘴部、用少量 motion frames 做长视频外插，并以三路 CFG 解耦控制；在 wild 场景主体动态度断层领先。"
+        }
+      ],
+      "derives_from": [
+        "Hallo",
+        "CogVideoX"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 30,
+      "authors": [
+        "Jiahao Cui",
+        "Hui Li",
+        "Yun Zhan",
+        "Hanlin Shang",
+        "Kaihui Cheng",
+        "Yuqi Ma",
+        "Shan Mu",
+        "Hang Zhou",
+        "Jingdong Wang",
+        "Siyu Zhu"
+      ]
+    },
+    {
+      "id": "paper-hunyuan-avatar",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十三）：HunyuanVideo-Avatar，多角色高保真音频驱动人物动画",
+      "title": "HunyuanVideo-Avatar: High-Fidelity Audio-Driven Human Animation for Multiple Characters",
+      "blog_url": "https://gongshangzheng.github.io/paper-hunyuan-avatar.html",
+      "blog_date": "2026-07-23",
+      "venue": "arXiv 2025",
+      "institution": "腾讯混元 Tencent Hunyuan",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "MM-DiT",
+        "audio-driven",
+        "HunyuanVideo",
+        "多角色"
+      ],
+      "method_family": "diffusion-foundation",
+      "qa": [
+        {
+          "question": "音频驱动人物动画如何同时解决动态-一致性两难、情感对齐与多角色驱动？",
+          "answer": "在 MM-DiT（HunyuanVideo-13B）上外挂三个模块：Character Image Injection 用通道加法注入参考图特征以平衡动态与一致性，Face-Aware Audio Adapter 用 latent 级 face mask 隔离音频作用区以支持多角色，Audio Emotion Module 用 emotion reference image 控制表情情感。"
+        }
+      ],
+      "derives_from": [
+        "HunyuanVideo",
+        "Sonic"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 31,
+      "authors": [
+        "Yi Chen",
+        "Sen Liang",
+        "Zixiang Zhou",
+        "Ziyao Huang",
+        "Yifeng Ma",
+        "Junshu Tang",
+        "Qin Lin",
+        "Yuan Zhou",
+        "Qinglin Lu"
+      ]
+    },
+    {
+      "id": "collaborative-face-experts-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（六十四）：MoFE，多面部专家融合攻克大姿态身份一致性",
+      "title": "Collaborative Face Experts Fusion in Video Generation: Boosting Identity Consistency Across Large Face Poses",
+      "blog_url": "https://gongshangzheng.github.io/collaborative-face-experts-2025.html",
+      "blog_date": "2026-09-01",
+      "venue": "arXiv 2025",
+      "institution": "上海交大 & 腾讯优图 & NUS",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "身份一致性",
+        "大姿态",
+        "视频生成"
+      ],
+      "method_family": "identity",
+      "qa": [
+        {
+          "question": "视频生成中角色大幅转头时为什么会“换人”，又该如何保持身份？",
+          "answer": "论文指出现有方法靠单一静态人脸特征（如 ArcFace）在所有 timestep、所有 DiT 层均匀注入，在侧脸/大姿态下失效；CoFE 改用 ArcFace、CLIP、DINOv2 三个互补专家，在每个 DiT block 上以可学习门控动态融合，作为与文本流、首帧流并行的第三路 cross-attention 注入，并配 LaFID-180K 大姿态数据集。"
+        }
+      ],
+      "derives_from": [
+        "ConsisID",
+        "Wan2.1"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 32,
+      "authors": [
+        "Yuji Wang",
+        "Moran Li",
+        "Xiaobin Hu",
+        "Ran Yi",
+        "Jiangning Zhang",
+        "Chengming Xu",
+        "Weijian Cao",
+        "Yabiao Wang",
+        "Chengjie Wang",
+        "Lizhuang Ma"
+      ]
+    },
+    {
+      "id": "consisid-2024",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（六十三）：ConsisID，频率分解的身份保持文生视频",
+      "title": "Identity-Preserving Text-to-Video Generation by Frequency Decomposition",
+      "blog_url": "https://gongshangzheng.github.io/consisid-2024.html",
+      "blog_date": "2026-09-01",
+      "venue": "CVPR 2025 Highlight",
+      "institution": "PKU-YuanGroup",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "身份一致性",
+        "频率分解",
+        "文生视频"
+      ],
+      "method_family": "identity",
+      "qa": [
+        {
+          "question": "免调优的身份保持文生视频里，为什么 U-Net 时代的身份注入配方搬到 DiT 上会失灵？",
+          "answer": "论文提出 DiT 存在“缺低频补给线”和“缺高频感知力”两个频率缺陷，于是把身份信号按频率分家注入：低频全局特征（含面部关键点图）经 VAE 在浅层拼接，高频内禀特征用 ArcFace + CLIP 双塔经 Q-Former 融合后在每个注意力块内以 cross-attention 注入，整个身份通路仅 +0.5B 参数。"
+        }
+      ],
+      "derives_from": [
+        "CogVideoX",
+        "IP-Adapter"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 33,
+      "authors": [
+        "Shenghai Yuan",
+        "Jinfa Huang",
+        "Xianyi He",
+        "Yunyang Ge",
+        "Yujun Shi",
+        "Liuhan Chen",
+        "Jiebo Luo",
+        "Li Yuan"
+      ]
+    },
+    {
+      "id": "face-consistency-benchmark-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（六十二）：Face Consistency Benchmark，GenAI 视频的角色面部一致性专项基准",
+      "title": "Face Consistency Benchmark for GenAI Video",
+      "blog_url": "https://gongshangzheng.github.io/face-consistency-benchmark-2025.html",
+      "blog_date": "2026-09-01",
+      "venue": "PP-RAI 2025",
+      "institution": "TCL Research Europe/America",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "身份一致性",
+        "benchmark",
+        "时序一致性"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "现有综合视频基准能否可靠衡量生成视频里角色的面部身份一致性？",
+          "answer": "不能，VBench 类基准用 DINO 通用特征在整帧上比较，身份语义被稀释。论文提出 FCB：用 6 个现成人脸识别模型当量尺、用双协议（Mode 1 锚定保真、Mode 2 无锚时序相干）、并以真实视频做绝对校准，零训练地暴露了跨裁判分歧（最高约 2.7 倍）与最强模型距真实 1.25–4 倍的差距。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 34,
+      "authors": [
+        "Michal Podstawski",
+        "Malgorzata Kudelska",
+        "Haohong Wang"
+      ]
+    },
+    {
+      "id": "float",
+      "source": [
+        "note"
+      ],
+      "title_zh": "FLOAT 模型笔记",
+      "title": "FLOAT: Generative Motion Latent Flow Matching for Audio-driven Talking Portrait",
+      "blog_url": null,
+      "blog_date": "2026-09-23",
+      "venue": "ICCV 2025",
+      "institution": "KAIST + DeepBrain AI",
+      "year": 2025,
+      "arxiv_id": "2412.01064",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "FLOAT",
+        "运动隐空间",
+        "流匹配",
+        "音频驱动",
+        "情绪可控"
+      ],
+      "method_family": "motion-space-diffusion",
+      "qa": [
+        {
+          "question": "音频驱动 talking portrait 如何既做到低步数实时又支持 test-time 编辑？",
+          "answer": "先用 LIA 系自编码器预训练出一个显式身份-运动分解、带正交基的运动隐空间，再在该空间用 OT 直线路径做少步流匹配采样（默认 NFE=10、Euler 求解），生成的运动 latent 在正交基上的系数可由内积闭式解出并线性编辑（λ-control）。"
+        },
+        {
+          "question": "音频到面部运动本质一对多，情绪该如何被可控建模？",
+          "answer": "把预训练 speech emotion predictor 输出的 7 类 softmax 概率作为情绪条件注入，并用 incremental CFV 把音频条件与情绪条件分开调节（默认 γ_a=2、γ_e=1），从而在音频驱动下也能显式控制表达强度。"
+        },
+        {
+          "question": "在运动隐空间做流匹配相比像素/VAE latent 扩散划算在哪？",
+          "answer": "画质主要由自编码器决定、时序由 ODE 求解精度决定，所以把生成目标压到低维可分解运动空间后，流匹配以 NFE=10 就能在 HDTF/RAVDESS 上取得最优 FID、FVD 与唇同步，并在单张 V100 上跑到 41.37 FPS。"
+        }
+      ],
+      "derives_from": [
+        "LIA",
+        "VASA-1"
+      ],
+      "derived_by": [
+        "avatar-forcing-2026"
+      ],
+      "note": "论文笔记/float",
+      "note_type": "doc",
+      "seq": 35,
+      "authors": []
+    },
+    {
+      "id": "fpsattention",
+      "source": [
+        "note"
+      ],
+      "title_zh": "FPSAttention 模型笔记",
+      "title": "FPSAttention: Training-Aware FP8 and Sparsity Co-Design for Fast Video Diffusion",
+      "blog_url": null,
+      "blog_date": "2026-09-24",
+      "venue": "NeurIPS 2025 Spotlight",
+      "institution": "Monash/DAMO/ZIP Lab",
+      "year": 2025,
+      "arxiv_id": "2506.04648",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "FPSAttention",
+        "推理加速",
+        "FP8",
+        "稀疏注意力",
+        "QAT",
+        "视频扩散"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "视频扩散里“量化”与“稀疏”这两条加速线能否简单叠加？",
+          "answer": "不能。稀疏优先保留高幅值的注意力 token，而量化恰恰在高幅值处误差最大，两者选中的是同一批元素；训练无关的朴素叠加会把 Wan 1.3B 的 VBench 总分从 0.8019 打到 0.6325（下降 21.1%）。"
+        },
+        {
+          "question": "如何让量化与稀疏协同而不是互相放大？",
+          "answer": "把联合优化挪到训练期：Q/K 按 3D tile 量化、V 按 channel 量化、注意力概率用固定标量，稀疏度与精度再按去噪步调度（粗→细→中），并配 Hopper 取向的融合 Triton kernel；在 Wan2.1-14B/720p/单张 H20 上拿到 kernel 7.09×、端到端 4.96× 加速。"
+        }
+      ],
+      "derives_from": [
+        "STA",
+        "SageAttention"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/fpsattention",
+      "note_type": "doc",
+      "seq": 36,
+      "authors": []
+    },
+    {
+      "id": "ex-omni-2d-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十六）：Ex-Omni-2D，对话原生的全模态视觉存在对话模型",
+      "title": "Ex-Omni-2D: Expressive Omni-Modal Dialogue Models with Native Visual Presence",
+      "blog_url": "https://gongshangzheng.github.io/ex-omni-2d-2026.html",
+      "blog_date": "",
+      "venue": "arXiv 2026",
+      "institution": "CUHK-Shenzhen / LIGHTSPEED",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "全模态",
+        "数字人",
+        "对话系统",
+        "流式视频"
+      ],
+      "method_family": "agent-system",
+      "qa": [
+        {
+          "question": "对话大模型只有声音没有形象，avatar 又依赖外部给定的语音和视觉意图，如何让对话模型自己产出同步的表情视频回复？",
+          "answer": "让 LLM 在生成回复文本的同时输出结构化的 Visual Thought Plan（首帧场景、整体场景、情绪、运动风格、动作细节五字段），把视觉意图变成可由文本损失监督的纯文本接口。"
+        },
+        {
+          "question": "“用户提问→回复文本+回复语音+回复视频”的四元组数据几乎不存在，端到端训练怎么做？",
+          "answer": "用 VTP 与 Qwen3-TTS 的 16 码本语音单元作为中间接口，把问题解耦成对话、语音、视频三个可独立训练的模块，分别用对话数据、ASR+TTS 数据、avatar 视频数据训练，推理时按序串联缝合。"
+        },
+        {
+          "question": "50 步全序列 teacher 的端到端 RTF 高达 26.9，无法交互，如何加速？",
+          "answer": "蒸馏成 4 步 block-causal Streaming Student，并用 Prefix Streaming（stop-gradient 前缀 + clean-only 缓存，只在生成完成后写入）抑制长序列累积退化，4 卡 GPU 上 E2E RTF 降到 1.293。"
+        }
+      ],
+      "derives_from": [
+        "Wan2.1",
+        "OmniAvatar",
+        "Qwen3-TTS"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 37,
+      "authors": [
+        "Jin Xu",
+        "Zhifang Guo",
+        "Jinzheng He",
+        "Hangrui Hu",
+        "Ting He",
+        "Shuai Bai",
+        "Keqin Chen",
+        "Jialin Wang",
+        "Yang Fan",
+        "Kai Dang",
+        "Bin Zhang",
+        "Xiong Wang",
+        "Yunfei Chu",
+        "Junyang Lin"
+      ]
+    },
+    {
+      "id": "hypergaussians-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四十七）：HyperGaussians，高维高斯泼溅的高保真人脸虚拟人",
+      "title": "HyperGaussians: High-Dimensional Gaussian Splatting for High-Fidelity Animatable Face Avatars",
+      "blog_url": "https://gongshangzheng.github.io/hypergaussians-2025.html",
+      "blog_date": "",
+      "venue": "CVPR 2026",
+      "institution": "ETH Zurich",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "3DGS",
+        "高维高斯",
+        "人脸虚拟人"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "可驱动人脸 avatar 在表情变化时总是丢失牙齿缝隙、眼镜反射、皮肤纹理等高频细节，问题出在渲染架构还是表示能力？",
+          "answer": "论文把原因归到表示层面：直接预测 3D 高斯 offsets 的表达力不足。它把每个高斯基元的属性扩展成 (m+n) 维多元高斯，用表情 latent 做条件化，使高斯的大小、形状和朝向能随表情变化，从表示层提升细节。"
+        },
+        {
+          "question": "高维条件化需要对 n×n 协方差矩阵求逆，n=128 时无法实时，怎么办？",
+          "answer": "提出 Inverse Covariance Trick，把条件化从协方差域搬到精度矩阵域并配合分块 Cholesky 分解，只需对 m×m（m=3/4）小矩阵求逆，复杂度从 O(n^3+mn^2) 降到 O(m^3+m^2n)，n=128 时速度提升约 150 倍、内存减少 90% 以上。"
+        }
+      ],
+      "derives_from": [
+        "3D Gaussian Splatting",
+        "FlashAvatar",
+        "NDGS"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 38,
+      "authors": [
+        "Gent Serifi",
+        "Marcel C. Buehler"
+      ]
+    },
+    {
+      "id": "paper-performrecast",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三十九）：PerformRecast，用 3DMM 解耦表情与头部姿态的肖像视频编辑",
+      "title": "PerformRecast: Expression and Head Pose Disentanglement for Portrait Video Editing",
+      "blog_url": "https://gongshangzheng.github.io/paper-performrecast.html",
+      "blog_date": "",
+      "venue": "CVPR 2026",
+      "institution": "虎鲸文娱",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "肖像动画",
+        "表情编辑",
+        "3DMM",
+        "FLAME"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "肖像视频编辑里想让“只改表情、头部不动”却总做不到，表情与头部姿态为什么在现有 warping 框架里无法真正解耦？",
+          "answer": "根因是关键点变换公式的运算顺序：LivePortrait 是“先乘头部姿态再加表情形变”，而 FLAME 是“先加表情再乘头部姿态”。PerformRecast 把公式改成与 FLAME 一致（(x_c+δ)·R），从而继承 3DMM 的自然解耦能力。"
+        },
+        {
+          "question": "只替换表情保持头部姿态时，面部与非面部区域之间出现错位怎么办？",
+          "answer": "引入边界对齐模块（BAM），用 Teacher-Student 架构分区监督面部/非面部区域；同时改用 49 个显式 FLAME 3D 关键点的 FLAME Loss，并丢弃 LivePortrait 的四项辅助损失。"
+        }
+      ],
+      "derives_from": [
+        "LivePortrait",
+        "FLAME"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 39,
+      "authors": [
+        "Jiadong Liang",
+        "Bojun Xiong",
+        "Jie Tian",
+        "Hua Li",
+        "Xiao Long",
+        "Yong Zheng",
+        "Huan Fu"
+      ]
+    },
+    {
+      "id": "unils-2024",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十八）：UniLS，首个端到端音频驱动的统一说-听数字人",
+      "title": "UniLS: End-to-End Audio-Driven Avatars for Unified Listening and Speaking",
+      "blog_url": "https://gongshangzheng.github.io/unils-2024.html",
+      "blog_date": "",
+      "venue": "CVPR 2026",
+      "institution": "Shanda AI Research Tokyo",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "UniLS",
+        "talking face",
+        "listening stiffness",
+        "CVPR 2026"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "对话数字人只会“说”不会“听”，听者表情僵硬（listening stiffness）的根源是什么？",
+          "answer": "论文用 wav2vec 2.0 与 FLAME 参数做联合分布分析，发现 speaking 场景音频-运动强相关，而 listening 的运动嵌入远离对应音频、主要来自内部先验。由此把聆听行为重新定义为“内部运动先验为主体 + 弱音频调制为辅”。"
+        },
+        {
+          "question": "如何在同一个模型里统一说与听，并保持实时？",
+          "answer": "采用两阶段训练：Stage 1 在无音频条件下用 AR Transformer + 多尺度 VQ codec 学内部运动先验；Stage 2 用双轨 cross-attention（Track A/B 分别对齐两路音频）加 LoRA 微调注入音频条件，实现纯音频驱动的统一说-听生成，推理达 560.6 FPS。"
+        }
+      ],
+      "derives_from": [
+        "FLAME"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 40,
+      "authors": [
+        "Xuangeng Chu",
+        "Ruicong Liu",
+        "Yifei Huang",
+        "Yun Liu",
+        "Yichen Peng",
+        "Bo Zheng"
+      ]
+    },
+    {
+      "id": "live-avatar-paper",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十）：Live Avatar，14B 扩散模型的实时流式无限长数字人",
+      "title": "Live Avatar: Streaming Real-time Audio-Driven Avatar Generation with Infinite Length",
+      "blog_url": "https://gongshangzheng.github.io/live-avatar-paper.html",
+      "blog_date": "2026-06-05",
+      "venue": "ECCV 2026",
+      "institution": "阿里巴巴 Quark",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "LiveAvatar",
+        "DMD",
+        "Self-Forcing",
+        "TPP"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "14B 规模的扩散模型能否做到实时、无长度限制的流式音频驱动数字人？",
+          "answer": "论文做算法-系统协同设计：两阶段训练把双向扩散 teacher 加 Self-Forcing DMD 蒸馏成 4 步流式学生模型，再用 motion frame scaffold 提供训练期时间上下文。"
+        },
+        {
+          "question": "长时自回归生成为什么会在分钟级后崩塌？",
+          "answer": "作者归因于三个根因——条件漂移（RoPE 相对位置超训练范围导致 sink 帧注意力衰减）、分布漂移（真实参考帧与生成帧不同分布）、误差累积（clean KV cache 继承前序块瑕疵）。分别用 Rolling RoPE、Adaptive Attention Sink（在 latent 空间用模型自生成帧替换参考帧）和 History Corrupt（加噪 KV cache 只传运动动态）抑制。"
+        },
+        {
+          "question": "少步蒸馏后单卡仍不够快，怎么进一步并行？",
+          "answer": "提出 TPP（Timestep-Forcing Pipeline Parallelism），让每张 GPU 固定负责一个去噪时间步，把串行扩散链变成异步流水线，并滚动式更新本地 KV cache；5×H800 上达 45 FPS、稳定推演 10,000 秒以上。"
+        }
+      ],
+      "derives_from": [
+        "Wan-S2V",
+        "Self Forcing",
+        "DMD"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 41,
+      "authors": [
+        "Yubo Huang",
+        "Hailong Guo",
+        "Fangtai Wu",
+        "Weiqiang Wang",
+        "Shifeng Zhang",
+        "Shijie Huang",
+        "Qijun Gan",
+        "Lin Liu",
+        "Sirui Zhao",
+        "Enhong Chen",
+        "Jiaming Liu",
+        "Steven Hoi"
+      ]
+    },
+    {
+      "id": "paper-sentiavatar",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（七）：SentiAvatar，让 3D 数字人会说、会动、会表达",
+      "title": "SentiAvatar: Towards Expressive and Interactive Digital Humans",
+      "blog_url": "https://gongshangzheng.github.io/paper-sentiavatar.html",
+      "blog_date": "2026-06-08",
+      "venue": "arXiv 2026",
+      "institution": "RUC；SentiPulse",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "SentiAvatar",
+        "3D Motion",
+        "Co-speech Gesture",
+        "论文精读"
+      ],
+      "method_family": "action-generation",
+      "qa": [
+        {
+          "question": "已有语音手势生成虽然跟得上语音节奏，但语义动作很弱，只会通用摆手或晃动，如何让 3D 数字人既会说、会动、又会表达？",
+          "answer": "把问题拆到两个时间尺度：先用 LLM keyframe planner 结合动作标签和稀疏 HuBERT audio token 规划稀疏语义关键帧，再用 Audio-aware Infill Transformer 在关键帧之间用帧级 HuBERT 特征补齐节奏细节（plan-then-infill）。"
+        },
+        {
+          "question": "对话角色扮演数据只有多轮文本，缺动捕、表情和音频，训练所需数据从哪来？",
+          "answer": "构建 SuSuInterActs 数据集（角色设定 → LLM 生成多轮脚本 → 动捕与表情采集），并在此上训练统一文本、音频、身体与表情的 Motion Foundation Model，使同一套模型能实时交互式驱动 3D 数字人。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 42,
+      "authors": [
+        "Chuhao Jin",
+        "Rui Zhang",
+        "Qingzhe Gao",
+        "Haoyu Shi",
+        "Dayu Wu",
+        "Yichen Jiang",
+        "Yihan Wu",
+        "Ruihua Song"
+      ]
+    },
+    {
+      "id": "emotag-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（十二）：EmoTaG，用 FLAME-Gaussian 和情绪蒸馏做 5 秒个性化说话头",
+      "title": "EmoTaG: Emotion-Aware Talking Head Synthesis on Gaussian Splatting with Few-Shot Personalization",
+      "blog_url": "https://gongshangzheng.github.io/emotag-2026.html",
+      "blog_date": "2026-06-09",
+      "venue": "arXiv 2026",
+      "institution": "Michigan State University；Qualcomm Technologies Inc.；University of North Carolina at Chapel Hill",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "EmoTaG",
+        "3DGS",
+        "FLAME",
+        "论文精读"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "只有 5 秒目标视频时，few-shot 高斯 talking head 为什么一遇到带情绪的语音就不行？",
+          "answer": "情绪语音带来更强的 mouth opening fluctuation，neutral 先验直接迁移会失配并导致几何不稳。EmoTaG 把运动预测约束到 FLAME-Gaussian 空间：FLAME 决定“怎么动”，Gaussian 决定“怎么画”，用结构先验稳住几何。"
+        },
+        {
+          "question": "情绪化的运动从哪里来，又怎样不失控？",
+          "answer": "用 GRMN 把运动拆成音素主运动与情绪偏差两个分支（δ = δ_b + g·δ_r），再用 Semantic Emotion Guidance 由 DeepFace teacher 监督情绪残差分支与强度门控，并加入 mouth Gaussian residual 表达开口细节；约 11 分钟即可完成个性化适配。"
+        }
+      ],
+      "derives_from": [
+        "Real3D-Portrait",
+        "MimicTalk",
+        "FLAME"
+      ],
+      "derived_by": [
+        "match-2026"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 43,
+      "authors": [
+        "Haolan Xu",
+        "Keli Cheng",
+        "Lei Wang",
+        "Ning Bi",
+        "Xiaoming Liu"
+      ]
+    },
+    {
+      "id": "paper-soulx-flashhead",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十二）：SoulX-FlashHead，用 Oracle 蒸馏把 1.3B DiT 做成 96 FPS 流式数字人",
+      "title": "SoulX-FlashHead: Oracle-guided Generation of Infinite Real-time Streaming Talking Heads",
+      "blog_url": "https://gongshangzheng.github.io/paper-soulx-flashhead.html",
+      "blog_date": "2026-06-11",
+      "venue": "arXiv 2026",
+      "institution": "Soul AI Lab",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "SoulX-FlashHead",
+        "Talking Head",
+        "Streaming",
+        "Diffusion Transformer"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "实时、高保真、无限长为什么难以同时成立？",
+          "answer": "论文指出四组互相拉扯的约束：motion representation 轻快但纹理细节断裂、大扩散/DiT 画质好但延迟高、短片段流式首帧快但音频上下文太短使 Wav2Vec 特征漂移塌缩、长时自回归则误差滚雪球导致身份漂移。对应地用像素级 latent 表示、1.3B 主干 + 蒸馏、8 秒 Temporal Audio Context Cache、oracle 蒸馏分别化解。"
+        },
+        {
+          "question": "长时自回归中 student 被自己的历史预测带偏、身份逐渐漂移，怎么纠正？",
+          "answer": "提出 Oracle-Guided Bidirectional Distillation：以真实历史 motion 为 oracle 构造 teacher 分布，让学生在自己滚动生成的历史下也去匹配它（KL 分布匹配 + 第 k 个 chunk 的 latent 回归），并配合 Stochastic Truncation 只在必要位置反传，实现无限长流式生成（Lite 版 96 FPS）。"
+        }
+      ],
+      "derives_from": [
+        "Wan2.1",
+        "DMD"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 44,
+      "authors": [
+        "Tan Yu",
+        "Qian Qiao",
+        "Le Shen",
+        "Ke Zhou",
+        "Jincheng Hu",
+        "Dian Sheng",
+        "Bo Hu",
+        "Haoming Qin",
+        "Jun Gao",
+        "Changhai Zhou",
+        "Shunshun Yin",
+        "Siyuan Liu"
+      ]
+    },
+    {
+      "id": "uika-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十四）：UIKA，任意数量 Pose-Free 图像的前馈式通用头部头像",
+      "title": "UIKA: Fast Universal Head Avatar from Pose-Free Images",
+      "blog_url": "https://gongshangzheng.github.io/uika-2026.html",
+      "blog_date": "2026-06-15",
+      "venue": "CVPR 2026 Highlight",
+      "institution": "蚂蚁集团 & 南京大学",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "UIKA",
+        "论文精读",
+        "3D Gaussian Splatting",
+        "Head Avatar"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "现有前馈头部头像多要求固定输入张数或需要相机位姿，如何从任意数量、无标定图像一次前馈得到可实时驱动的 3D Gaussian 头部头像？",
+          "answer": "用 UV 引导的显式对应建模：frozen DINOv3 + DPT head 逐像素预测 UV 坐标，把每张图重投影到 canonical UV 空间做逐像素聚合，再由 Head Query 解码成 3D 高斯，单次前馈即可得到可动画驱动的头像。"
+        },
+        {
+          "question": "只用 screen-space cross-attention 的 learnable token 缺乏结构化对应关系，泛化和边界细节都差，怎么改？",
+          "answer": "引入双流注意力：在标准 screen attention 之外增加 UV 空间注意力分支，让 token 同时与两空间特征交互，把跨视角对应关系显式化；配合自适应融合与 UV Decoder，在头发等边界区域的 UV 预测更平滑（CVPR 2026 Highlight）。"
+        }
+      ],
+      "derives_from": [
+        "Pixel3DMM",
+        "LAM",
+        "GPAvatar"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 45,
+      "authors": [
+        "Zijian Wu",
+        "Boyao Zhou",
+        "Liangxiao Hu",
+        "Hongyu Liu",
+        "Yuan Sun",
+        "Xuan Wang",
+        "Xun Cao",
+        "Yujun Shen",
+        "Hao Zhu"
+      ]
+    },
+    {
+      "id": "avatar-forcing-2026",
+      "source": [
+        "blog",
+        "note"
+      ],
+      "title_zh": "数字人论文精读（三十）：Avatar Forcing，扩散强制驱动的实时交互数字人",
+      "title": "Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation",
+      "blog_url": "https://gongshangzheng.github.io/avatar-forcing-2026.html",
+      "blog_date": "2026-06-22",
+      "venue": "arXiv 2026",
+      "institution": "KAIST",
+      "year": 2026,
+      "arxiv_id": "2601.00664",
+      "tags": [
+        "数字人",
+        "交互式头像",
+        "Diffusion Forcing",
+        "DPO",
+        "实时生成"
+      ],
+      "method_family": "motion-space-diffusion",
+      "qa": [
+        {
+          "question": "如何让数字人头像真正实时地对用户的语音和非语言信号作出反应，而不是只播预生成视频？",
+          "answer": "在 FLOAT 的运动 latent 空间做块因果 Diffusion Forcing 自回归生成：显式的 identity-motion 加性分解把身份钉死、只预测运动，配合 rolling KV cache 复用历史，把交互延迟压到约 0.5 秒（对照 INFP 的 3.4 秒）。"
+        },
+        {
+          "question": "因果生成下的低延迟与动作平滑如何兼得？",
+          "answer": "在块因果掩码上加有界前瞻：每个 block 允许额外关注未来 l=2 帧，并在推理时用 offset 机制对齐各 block 的 timestep，缓解跨 block 边界的运动抖动。"
+        },
+        {
+          "question": "Listener 数据本身表达度低于 speaker，又没有人工偏好标注，怎么提升反应表现力？",
+          "answer": "采用免标注 DPO：把“丢弃用户条件”时的生成结果当作差样本、保留条件的生成当作好样本构造偏好对，无需人工标注就把动作推得更有反应性，人类偏好率超过 80%，并覆盖听/说/注视多种状态。"
+        }
+      ],
+      "derives_from": [
+        "FLOAT",
+        "Diffusion Forcing",
+        "INFP"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/avatar-forcing",
+      "note_type": "doc",
+      "seq": 46,
+      "authors": [
+        "Taekyung Ki",
+        "Sangwon Jang",
+        "Jaehyeong Jo",
+        "Jaehong Yoon",
+        "Sung Ju Hwang"
+      ]
+    },
+    {
+      "id": "wan-streamer-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三十一）：Wan-Streamer，单 Transformer 端到端全双工交互",
+      "title": "Wan-Streamer v0.1: End-to-end Real-time Interactive Foundation Models",
+      "blog_url": "https://gongshangzheng.github.io/wan-streamer-2026.html",
+      "blog_date": "2026-06-25",
+      "venue": "arXiv 2026",
+      "institution": "Alibaba Wan Team",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "全双工交互",
+        "流式生成",
+        "多模态基础模型",
+        "实时系统"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "级联式“理解→生成→事后对齐”的系统为什么实现不了真正的全双工交互？",
+          "answer": "论文指出实时音视频交互有三个内在约束（因果性、增量性、原生同步），围绕离线编码器、双向视频解码器、轮次对话或事后音视频同步设计的系统无法靠工程修补恢复低延迟全双工行为。"
+        },
+        {
+          "question": "如何用一个模型同时处理文本、音频、视频的输入与输出？",
+          "answer": "在单个 block-causal 因果 Transformer 中把六路流（文本/音频/视频 × 输入/输出）交错嵌入统一序列，文本用 next-token prediction、音频与视频用 conditional flow matching 联合训练，且上下文保持 clean 只对当前 noisy latent 去噪；模型侧延迟约 200 ms、输出 25 FPS。"
+        }
+      ],
+      "derives_from": [
+        "Qwen2.5",
+        "Wan",
+        "Moshi"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 47,
+      "authors": [
+        "Lianghua Huang",
+        "Zhi-Fan Wu",
+        "Wei Wang",
+        "Yupeng Shi",
+        "Mengyang Feng",
+        "Junjie He",
+        "Chen-Wei Xie",
+        "Yu Liu",
+        "Jingren Zhou",
+        "Ang Wang",
+        "Bang Zhang",
+        "Baole Ai",
+        "Chen Liang",
+        "Cheng Yu",
+        "Chongyang Zhong",
+        "Jinwei Qi",
+        "Kai Zhu",
+        "Pandeng Li",
+        "Peng Zhang",
+        "Wenyuan Zhang",
+        "Xinhua Cheng",
+        "Yitong Huang",
+        "Yun Zheng",
+        "Yuzheng Wang",
+        "Zoubin Bi"
+      ]
+    },
+    {
+      "id": "paper-liveact",
+      "source": [
+        "blog",
+        "note"
+      ],
+      "title_zh": "数字人论文精读（三十八）：SoulX-LiveAct，Neighbor Forcing + ConvKV 实现小时级实时数字人动画",
+      "title": "SoulX-LiveAct: Towards Hour-Scale Real-Time Human Animation with Neighbor Forcing and ConvKV Memory",
+      "blog_url": "https://gongshangzheng.github.io/paper-liveact.html",
+      "blog_date": "2026-07-07",
+      "venue": "arXiv 2026",
+      "institution": "Soul AI Lab",
+      "year": 2026,
+      "arxiv_id": "2603.11746",
+      "tags": [
+        "数字人",
+        "AR Diffusion",
+        "Neighbor Forcing",
+        "ConvKV Memory",
+        "Real-time Animation"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "自回归扩散到底该沿 AR 链传播什么表征，才能既避免训练-推理失配又能复用 KV？",
+          "answer": "提出 Neighbor Forcing：传播同一扩散步下时间邻居的 noisy latent，使所有 block 共享一个扩散步骤、KV 可复用，同时避开 Teacher Forcing 的 train-test mismatch 和 Self Forcing 的高训练成本（无需 ODE 初始化，蒸馏步数 1000→300）。"
+        },
+        {
+          "question": "长时生成中 KV cache 无限增长，内存怎么控？",
+          "answer": "提出 ConvKV Memory：对因果注意力里的 K/V 做逐通道一维卷积（压缩比 λ=5），把无界历史压成定长记忆，换来常数内存的实时长时生成（2×H100 上 20 FPS、小时级动画）。"
+        }
+      ],
+      "derives_from": [
+        "Self Forcing",
+        "Diffusion Forcing",
+        "Wan2.1"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/liveact",
+      "note_type": "doc",
+      "seq": 48,
+      "authors": [
+        "Dingcheng Zhen",
+        "Xu Zheng",
+        "Ruixin Zhang",
+        "Zhiqi Jiang",
+        "Yichao Yan",
+        "Ming Tao",
+        "Shunshun Yin"
+      ]
+    },
+    {
+      "id": "match-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四十六）：MATCH，前馈式高斯配准实现 10× 加速头部 Avatar 创建",
+      "title": "Feed-forward Gaussian Registration for Head Avatar Creation and Editing",
+      "blog_url": "https://gongshangzheng.github.io/match-2026.html",
+      "blog_date": "2026-07-10",
+      "venue": "CVPR 2026",
+      "institution": "ETH Zürich / Google",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "MATCH",
+        "Gaussian Splatting",
+        "头部 Avatar",
+        "论文精读"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "优化式头部 avatar 创建要 45 小时、推理式前馈又缺跨帧对应且质量差，如何把 avatar 创建从“天”压到“秒”？",
+          "answer": "提出 MATCH，从标定多视图图像直接前馈预测 UV 对齐的密集语义对应高斯泼溅纹理，0.5 秒/帧推理，把 GEM 的 avatar 创建从 45.3 h 加速到 4.63 h（约 10×），并支持插值、语义编辑与表情迁移。"
+        },
+        {
+          "question": "LRM 风格的全量 dense cross-attention 计算量随输入图像数二次增长，怎么改？",
+          "answer": "用 Registration-guided Attention：先做粗略 mesh registration 算出每个 UV token 与 image token 的对应分数，只让每个 UV token 关注 top-k=100 个最相关的 image token，注意力复杂度从 O(V²) 降为 O(V) 且上下文长度恒定。"
+        }
+      ],
+      "derives_from": [
+        "GEM",
+        "Avat3r",
+        "FLAME"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 49,
+      "authors": [
+        "Malte Prinzler",
+        "Paulo Gotardo",
+        "Siyu Tang",
+        "Timo Bolkart"
+      ]
+    },
+    {
+      "id": "avatarforcing-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十一）：AvatarForcing，有界前瞻 + 双锚 KV Cache 把流式 talking avatar 压到 34 ms/帧",
+      "title": "AvatarForcing: One-Step Streaming Talking Avatars via Local-Future Sliding-Window Denoising",
+      "blog_url": "https://gongshangzheng.github.io/avatarforcing-2026.html",
+      "blog_date": "2026-07-23",
+      "venue": "CVPR 2026",
+      "institution": "快手 Kling AI Research",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "AvatarForcing",
+        "流式扩散",
+        "talking avatar",
+        "论文精读"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "严格因果的 AR 扩散在分钟级长视频上为什么必然崩溃（CSIM-last 掉到 0.07）？",
+          "answer": "因为严格因果下第 k 帧条件分布递归依赖自身的历史预测，误差被逐帧放大、自回归中状态持续漂移；论文用有界前瞻替代严格因果来切断这条放大链。"
+        },
+        {
+          "question": "在固定延迟预算下，如何同时兼顾即时响应与长程稳定？",
+          "answer": "提出 B_{L,N} 滑动窗口联合去噪：对窗口内 L 个 block 做一次双向 attention 去噪（N=1）、发射最左 block 后整体滑窗并追加新鲜噪声；再配双锚 KV cache（style anchor + temporal anchor）和两阶段流式蒸馏，1.3B student 在 34 ms/帧、0.51 s 端到端延迟下保持分钟级身份与唇形稳定。"
+        }
+      ],
+      "derives_from": [
+        "Self-Forcing"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 50,
+      "authors": [
+        "Liyuan Cui",
+        "Wentao Hu",
+        "Wenyuan Zhang",
+        "Zesong Yang",
+        "Fan Shi",
+        "Xiaoqiang Liu"
+      ]
+    },
+    {
+      "id": "flexavatar-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十四）：FlexAvatar，无位姿无表情标签的可驱动高斯头部大重建模型",
+      "title": "FlexAvatar: Flexible Large Reconstruction Model for Animatable Gaussian Head Avatars with Detailed Deformation",
+      "blog_url": "https://gongshangzheng.github.io/flexavatar-2025.html",
+      "blog_date": "2026-07-27",
+      "venue": "CVPR 2026",
+      "institution": "清华大学 + 字节 PICO",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "3DGS",
+        "头部Avatar",
+        "大重建模型",
+        "CVPR2026"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "随手拍 1~N 张无位姿照片，能否前馈重建出可实时驱动、带表情细节的高斯头部 avatar？",
+          "answer": "用两段式前馈架构：上半段以结构化 Head Query token 对冻结 DINOv3 特征做跨视角自注意力聚合（完全不做位姿编码，靠内容对应对齐视角）输出规范空间静态高斯；下半段用动态高斯解码器生成表情相关形变，45 FPS 实时驱动。"
+        },
+        {
+          "question": "LBS 只能表达骨骼级低频运动，皱纹、露齿、嘴唇挤压等高频细节怎么建又不过于昂贵？",
+          "answer": "把 FLAME 表情对应的 UV 位置图作为驱动信号，与 ID 特征图逐通道拼接后交给 UNet 在 UV 空间解码动态形变，让卷积网络能定位“哪里该动”；并把 FLAME 模板从 5023 顶点扩到 5143（新增顶点全给牙齿区域）以预留露齿的几何容量。"
+        }
+      ],
+      "derives_from": [
+        "DINOv3",
+        "LAM",
+        "Avat3r",
+        "FLAME"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 51,
+      "authors": [
+        "Cheng Peng",
+        "Zhuo Su",
+        "Liao Wang",
+        "Chen Guo",
+        "Zhaohu Li",
+        "Chengjiang Long",
+        "Zheng Lv",
+        "Jingxiang Sun",
+        "Chenyangguang Zhang",
+        "Yebin Liu"
+      ]
+    },
+    {
+      "id": "styledit-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五十八）：StyleDiT，风格潜空间扩散 Transformer 统一后代与配偶人脸合成",
+      "title": "StyleDiT: A Unified Framework for Diverse Child and Partner Faces Synthesis with Style Latent Diffusion Transformer",
+      "blog_url": "https://gongshangzheng.github.io/styledit-2025.html",
+      "blog_date": "2026-08-31",
+      "venue": "IEEE FG 2026",
+      "institution": "Research Center for Information Technology Innovation (CITI), Academia Sinica",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "亲属人脸合成",
+        "StyleDiT",
+        "扩散模型",
+        "StyleGAN",
+        "数字人"
+      ],
+      "method_family": "identity",
+      "qa": [
+        {
+          "question": "后代脸合成要同时满足多样性、像父母（保真）和属性可控，这个三难如何在一个模型里统一？",
+          "answer": "在 StyleGAN 的 9088 维 S 潜空间上跑 1D 扩散 Transformer（x0-prediction），以两张条件脸的 S 潜码为条件 token，用 RTG 多条件 Classifier-Free Guidance 把“像爸多少、像妈多少”变成两个独立可调的旋钮，同一对父母可采出一群不同的“兄弟姐妹”。"
+        },
+        {
+          "question": "给定孩子与一方父母推断另一方父母，为什么简单线性外推会失败？",
+          "answer": "线性外推 2S_C − S_F/M 会跑出真实人脸流形产生严重伪影。StyleDiT 用学习式条件扩散做外推，并用同一套框架统一孩子预测与配偶预测，兼顾多样性与保真。"
+        }
+      ],
+      "derives_from": [
+        "StyleGAN2",
+        "e4e"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 52,
+      "authors": [
+        "Pin-Yen Chiu",
+        "Dai-Jie Wu",
+        "Po-Hsun Chu",
+        "Chia-Hsuan Hsu",
+        "Hsiang-Chen Chiu",
+        "Chih-Yu Wang",
+        "Jun-Cheng Chen"
+      ]
+    },
+    {
+      "id": "id-sim-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（六十一）：ID-Sim，聚焦身份而非外观的相似度度量",
+      "title": "ID-Sim: An Identity-Focused Similarity Metric",
+      "blog_url": "https://gongshangzheng.github.io/id-sim-2026.html",
+      "blog_date": "2026-09-01",
+      "venue": "CVPR 2026",
+      "institution": "MIT CSAIL × Adobe Research",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "身份一致性",
+        "相似度度量",
+        "鲁棒性"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "像素级、语义级、分割级相似度度量各有失明区，能否学出一个像人类一样“对背景/视角/光照不敏感、只对身份敏感”的度量？",
+          "answer": "提出 ID-Sim：冻结 DINOv3 ViT-L/16 加 LoRA 适配，用双头投影做对比训练——全局头在 CLS token 上用 InfoNCE、局部头把 patch 相似度换成 Sinkhorn 最优传输距离再代入 InfoNCE，得到前馈式选择性身份相似度度量。"
+        },
+        {
+          "question": "训练这种度量需要“身份保持的上下文变化”和“身份改变的负样本”，数据从哪来？",
+          "answer": "构造 10k 三元组（约 30k 图）：真实数据用平衡采样并按“实例”定义过滤；用生成模型做保身份编辑作正样本、用 inpainting 改身份作硬负样本；该数据配方使身份验证 ROC AUC 从 0.693 升到 0.965，并在 49 个评测场景中拿下 48 项第一。"
+        }
+      ],
+      "derives_from": [
+        "DINOv3",
+        "LPIPS"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 53,
+      "authors": [
+        "Julia Chae",
+        "Nicholas Kolkin",
+        "Jui-Hsien Wang",
+        "Richard Zhang",
+        "Sara Beery",
+        "Cusuh Ham"
+      ]
+    },
+    {
+      "id": "styleid-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（六十）：StyleID，风格化无关的人脸身份识别度量与基准",
+      "title": "StyleID: A Perception-Aware Dataset and Metric for Stylization-Agnostic Facial Identity Recognition",
+      "blog_url": "https://gongshangzheng.github.io/styleid-2026.html",
+      "blog_date": "2026-09-01",
+      "venue": "SIGGRAPH 2026",
+      "institution": "KAIST VML（Junyong Noh 组）",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "身份一致性",
+        "风格化",
+        "评测指标"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "ArcFace 等照片域身份度量在卡通/风格化脸上形同虚设，怎样度量“风格化之后人类还认不认得出是同一个人”？",
+          "answer": "用 2AFC 心理测量曲线在受控风格化管线上校准出人类识别率，按“识别率 ≥ 90%”筛出 224k 感知正对（4073 身份 × 55 图，StyleBench-S），并构建人类判定基准 StyleBench-H，把度量对齐人类感知。"
+        },
+        {
+          "question": "风格化无关的身份编码器该选什么骨干、怎么训？",
+          "answer": "以 CLIP-L 而非 ArcFace 为骨干，用三项损失训练：继承 ArcFace 的加性角度间隔损失提供类级边界、监督对比损失保证实例级跨风格不变性、再加锚定正则；Cross-Method TPR 从 0.37 提升到 0.74，艺术家手绘集 AUROC 达 0.9922，并可用于 JoJoGAN 等风格化的身份损失。"
+        }
+      ],
+      "derives_from": [
+        "ArcFace",
+        "CLIP"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 54,
+      "authors": [
+        "Kwan Yun",
+        "Changmin Lee",
+        "Ayeong Jeong",
+        "Youngseo Kim",
+        "Seungmi Lee",
+        "Junyong Noh"
+      ]
+    },
+    {
+      "id": "leaptalk-2026",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（六十六）：LeapTalk，布朗桥单步蒸馏把 talking head 推到 200 FPS",
+      "title": "LeapTalk: Breaking the Latency-Quality Trade-off in Talking Head Generation",
+      "blog_url": "https://gongshangzheng.github.io/leaptalk-2026.html",
+      "blog_date": "2026-09-07",
+      "venue": "arXiv 2026",
+      "institution": null,
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "单步蒸馏",
+        "Brownian Bridge",
+        "流式生成",
+        "Talking Head"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "流式 talking head 每段都从高斯噪声出发做 noise-to-data 生成，条件只来自历史 chunk，导致长视频身份漂移、细节退化，而多步扩散又延迟过高——能否在保持实时的同时消除逐段误差累积？",
+          "answer": "把每段生成从 noise-to-data 改写为以参考图为固定起点的 data-to-data 布朗桥传输，只在桥中段注入运动不确定性；再用 SNR 对齐的时间变换把多步 flow teacher 的 score 监督接到桥 student 上做异构 DMD 蒸馏，并加音频驱动 CFG 与面部/唇部 mask 空间加权。单步推理下 Lite 模型达 200 FPS，长时身份曲线几乎不漂移，去掉布朗桥 FID 会从 21 恶化到 217。"
+        }
+      ],
+      "derives_from": [
+        "Self-Forcing"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 55,
+      "authors": [
+        "Rongxiang Zhang",
+        "Songhua Liu"
+      ]
+    },
+    {
+      "id": "omnimate-2026",
+      "source": [
+        "blog",
+        "note"
+      ],
+      "title_zh": "数字人论文精读（六十七）：OmniMate，开放式流式的音视频联合交互 Avatar",
+      "title": "OmniMate: Open-Ended Real-Time Streaming Audio-Visual Generation for Interactive Avatars",
+      "blog_url": "https://gongshangzheng.github.io/omnimate-2026.html",
+      "blog_date": "2026-09-07",
+      "venue": "arXiv 2026 (AAAI 2027 投稿)",
+      "institution": "西安交大 + 中国电信 AI 等",
+      "year": 2026,
+      "arxiv_id": "2607.23023",
+      "tags": [
+        "数字人",
+        "全双工交互",
+        "流式生成",
+        "音视频联合生成",
+        "实时系统"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "开放式实时交互里没人预先告诉模型回应要持续多久、何时收尾回到聆听状态，固定时长会截断或产生冗余，而外挂完成检测又会破坏实时性，怎么办？",
+          "answer": "用生成进度控制器 GPC 把「还要说多久」变成显式条件：按 LLM 预估执行时长给每个位置分配 1–1000 的连续进度值、超出部分一律置 0 表示聆听，经位置编码与 MLP 后加到各模态 latent 上；并用二段式文本 cross-attention mask 构造四类状态转换序列来监督。消融显示去掉 GPC 后语音错误率从 0.097 恶化到 0.239。"
+        },
+        {
+          "question": "流式生成的历史上下文有限，单张参考图在大姿态/新视角下锁不住外观，语音侧音色也会在多轮对话间漂移，如何长期保持跨模态身份一致？",
+          "answer": "用多参考条件模块 MRCM 分两路：视觉侧以多张多角度参考图编码 latent 提供持久外观锚（去掉后 V-ID 从 0.957 降到 0.949），声音侧用 training-free 策略在去噪过程中把生成的音频 latent 持续替换为参考语音 latent 以稳定音色。两个模块与 GPC 正交，分别守住视觉身份与语音正确率。"
+        }
+      ],
+      "derives_from": [
+        "OmniAvatar",
+        "LTX-2.3"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/omnimate",
+      "note_type": "doc",
+      "seq": 56,
+      "authors": [
+        "Quanyue Song",
+        "Yishan He",
+        "Yanbo Ding",
+        "Zhixiang He",
+        "Yongxiang Li",
+        "Caigui Jiang",
+        "Zhi Zhi Guo"
+      ]
+    },
+    {
+      "id": "causal-forcing",
+      "source": [
+        "note"
+      ],
+      "title_zh": "Causal Forcing 模型笔记",
+      "title": "Causal Forcing: Autoregressive Diffusion Distillation Done Right for High-Quality Real-Time Interactive Video Generation",
+      "blog_url": null,
+      "blog_date": "2026-09-23",
+      "venue": "ICML 2026",
+      "institution": "清华 / ShengShu 等",
+      "year": 2026,
+      "arxiv_id": "2602.02214",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "Causal Forcing",
+        "自回归扩散蒸馏",
+        "frame-level injectivity",
+        "DMD",
+        "实时流式"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "把双向视频扩散蒸馏成 few-step 自回归学生时，存在全注意力到因果注意力的 architectural gap，为什么 SOTA（Self Forcing）的 DMD 阶段补不上它？",
+          "answer": "论文把责任定位在 ODE 初始化：MSE 回归式 ODE 蒸馏要求配对数据单射，双向教师只在 video level 单射，而 AR 学生逐帧生成、需要 frame level 单射，于是最优解塌成条件期望、画面发糊；隔离实验证明消掉步数差只留架构差后标准 DMD 初始化仍然失败。"
+        },
+        {
+          "question": "既然错在教师不是因果的，正确的蒸馏流程应该怎么改？",
+          "answer": "换成三阶段：先用 teacher forcing 训出原生自回归扩散模型当教师（并给出反直觉结论——TF 比 diffusion forcing 更适合训 AR 模型，因为 DF 存在训练—推理分布失配），再从它采样 PF-ODE 轨迹做 causal ODE 蒸馏，最后沿用 asymmetric DMD 做自我 rollout；同等训练预算下 Dynamic Degree 比 Self Forcing 提升 19.3%，并把同一论证推广成首个 causal consistency distillation 框架。"
+        }
+      ],
+      "derives_from": [
+        "Self Forcing",
+        "CausVid"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/causal-forcing",
+      "note_type": "doc",
+      "seq": 57,
+      "authors": []
+    },
+    {
+      "id": "vorch-streamer",
+      "source": [
+        "note"
+      ],
+      "title_zh": "Vorch-Streamer 模型笔记",
+      "title": "Vorch-Streamer: Extending Human Audio-Visual Generation to Real-Time Long-Form Streaming",
+      "blog_url": null,
+      "blog_date": "2026-09-23",
+      "venue": "2026",
+      "institution": "Vorch Team 等",
+      "year": 2026,
+      "arxiv_id": "2608.05663",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "Vorch-Streamer",
+        "T2AV",
+        "长时自强制",
+        "DMD",
+        "暴露偏差",
+        "语音规划"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "把预训练双向音视频基座改成自回归流式生成器后，复用自己生成的块作上下文会带来暴露偏差，小误差沿因果历史累积成画面漂移与同步退化，如何压住长时漂移？",
+          "answer": "在 LTX2.3 上做后训练而非新架构：先用基座自合成 80K 段 12–21 秒头像音视频提供 model-consistent 监督；再按约 1 秒同步块切分、块内双向块间因果，并用 10% teacher forcing + 90% diffusion forcing 的样本级混合缩小训练—推理差距；最后做长时自强制加 DMD 蒸馏，让 student 在与推理完全相同的 3+1 有界 KV 窗口下自 rollout。单张 H200 上达 27.12 FPS。"
+        },
+        {
+          "question": "文本 prompt 描述的是整段话语，而每个因果块只能看到有限窗口，同一个 prompt 让模型同时负责「说什么」和「什么时候说」，导致音频从目标语音中间开始或时间错配，怎么解耦？",
+          "answer": "把语音规划显式交给 LLM：把话语转成 25 Hz（每 token 40 ms）的离散 planning token，经查表与投影注入音频分支，并附一个可学习的 silence token，使因果生成器知道「现在该说哪一段」，从而支持打断与显式静默倾听。"
+        }
+      ],
+      "derives_from": [
+        "LTX-2.3",
+        "OmniForcing"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/vorch-streamer",
+      "note_type": "doc",
+      "seq": 58,
+      "authors": []
+    },
+    {
+      "id": "digital-human-identity-consistency",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十八）：身份一致性——CSIM 的黄昏与度量的新生",
+      "title": "数字人系列（十八）：身份一致性——CSIM 的黄昏与度量的新生",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-identity-consistency.html",
+      "blog_date": "",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "身份一致性",
+        "CSIM",
+        "benchmark",
+        "评测"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "被当作通用语言的 CSIM（ArcFace 余弦）到底在度量什么、漏掉了什么，数字人身份一致性接下来该用什么来量？",
+          "answer": "以 16 篇深读论文为证据，把 CSIM 的失效归纳为风格化失效、时序漂移、环境不鲁棒、长时身份演变与度量循环性五大缺陷，并指出它同时兼任裁判、训练 loss、RL 奖励和选帧器导致分数语义失真；随后梳理图像侧四范式与视频侧五路线的带病演进、VBench-2.0/OpenS2V-Nexus/FCB/IPVG 间未停战的口径战争，以及 StyleID、ID-Sim、ID-V2V 三条新度量路线，最终收束于表示、监督信号、评测协议三轴的统一身份度量设计空间。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 59,
+      "authors": []
+    },
+    {
+      "id": "tool-augmented-digital-human",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "工具增强型数字人 Agent：当数字人学会调用工具",
+      "title": "工具增强型数字人 Agent：当数字人学会调用工具",
+      "blog_url": "https://gongshangzheng.github.io/tool-augmented-digital-human.html",
+      "blog_date": "",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "LLM Agent",
+        "Tool Use",
+        "MCP",
+        "VLM Agent"
+      ],
+      "method_family": "agent-system",
+      "qa": [
+        {
+          "question": "数字人后端已经是具备工具调用能力的 LLM，为什么数字人却仍然只是「一张会动的嘴」，怎样才能把工具使用真正整合进数字人 Agent？",
+          "answer": "从 LLM Agent 方法学（Build-Collaborate-Evolve 框架、tool-use decision 与 tool selection 两个子能力）、MCP 与 ACP/A2A/ANP 互操作协议、VLM Agent 的「渲染→评估→调整」验证循环出发，梳理已有产品、开源项目与学术论文中的数字人调工具实例，并引入「人作为可调用工具」和工具使用优化（对比推理）两个前沿范式，最后从具身 AI 架构视角指出工具使用尚未被系统性整合，归纳出八类开放问题。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 60,
+      "authors": []
+    },
+    {
+      "id": "realtime-digital-human-survey",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（一）：实时数字人生成 Survey，从唇部重绘到动作空间扩散",
+      "title": "数字人系列（一）：实时数字人生成 Survey，从唇部重绘到动作空间扩散",
+      "blog_url": "https://gongshangzheng.github.io/realtime-digital-human-survey.html",
+      "blog_date": "2026-06-03",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Talking Head",
+        "Lip Sync",
+        "Real Time AI",
+        "Survey",
+        "Motion Diffusion"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "「实时数字人」到底由哪些技术路线构成，各路线在输入条件、可控性、实时性与部署成本上如何取舍？",
+          "answer": "先按输入条件（已有视频+新音频、单图+音频、固定身份资产、文本）划分任务，再把领域拆成驱动信号、中间表示、生成器、数据集与指标、部署链路六个相互约束的问题；逐一对比局部换嘴/视频配音、单图 talking head、portrait animation、NeRF/3DGS 专人建模与流式基模路线的能力边界与瓶颈，并给出「先定任务类型、再定路线类型」的业务选型顺序。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 61,
+      "authors": []
+    },
+    {
+      "id": "digital-human-full-frame-avatar",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（六）：整帧与全身生成，从 OmniAvatar 到 LongCat-Video-Avatar",
+      "title": "数字人系列（六）：整帧与全身生成，从 OmniAvatar 到 LongCat-Video-Avatar",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-full-frame-avatar.html",
+      "blog_date": "2026-06-04",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "OmniAvatar",
+        "LongCat-Video-Avatar",
+        "Full Body Avatar",
+        "Video Generation"
+      ],
+      "method_family": "diffusion-foundation",
+      "qa": [
+        {
+          "question": "整帧/全身生成把自由度从嘴部扩大到身份、脸、身体、手势与背景，它相对局部换嘴难在哪里，底座架构又该如何取舍？",
+          "answer": "指出自由度越大失败空间越大：身份漂移、手部畸变、背景闪烁、手势与语义不符、唇音同步衰减都会同时出现；再用 GAN、UNet+Diffusion、DiT 三条底座在训练成本、推理速度与长时序稳定性上的取舍说明当前全身生成主流转向 DiT，但必须配套蒸馏、量化与流式系统，并以短/中/长时序分层指标（LSE-D、FID/FVD、ArcFace 相似度、MOS）做验收。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 62,
+      "authors": []
+    },
+    {
+      "id": "digital-human-lip-sync-video-dubbing",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（二）：换嘴与视频配音路线，从 Wav2Lip 到 MuseTalk",
+      "title": "数字人系列（二）：换嘴与视频配音路线，从 Wav2Lip 到 MuseTalk",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-lip-sync-video-dubbing.html",
+      "blog_date": "2026-06-04",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Lip Sync",
+        "Talking Head",
+        "Portrait Animation",
+        "Wav2Lip",
+        "MuseTalk",
+        "LivePortrait",
+        "AniPortrait",
+        "Hallo",
+        "Teller",
+        "FLAP",
+        "InfiniteTalk"
+      ],
+      "method_family": "lip-sync",
+      "qa": [
+        {
+          "question": "lip-sync、video dubbing、talking head 与 portrait animation 的边界究竟在哪里，音频、原视频、参考头像与驱动运动分别承担什么角色？",
+          "answer": "主张按输入条件而不是模型名字划任务：局部换嘴/配音只需重绘嘴部与脸部 ROI、原片动作全保留；单图 talking head 必须自己生成表情、头动与眼动；portrait animation 需要驱动视频或 motion template；专人 3DGS/NeRF 还需先训身份资产。并据此比较各路线的运动来源、控制粒度、身份稳定性与实时成本，指出「能生成 talking head」不等于「能上线实时数字人」。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [
+        "paper-sadtalker",
+        "ultralight-digital-human-source-read",
+        "paper-musetalk"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 63,
+      "authors": [
+        "K R Prajwal",
+        "Rudrabha Mukhopadhyay",
+        "Vinay Namboodiri",
+        "C V Jawahar"
+      ]
+    },
+    {
+      "id": "digital-human-streaming-distillation",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（七）：实时流式与蒸馏，从 LiveAvatar 到 Self-Forcing",
+      "title": "数字人系列（七）：实时流式与蒸馏，从 LiveAvatar 到 Self-Forcing",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-streaming-distillation.html",
+      "blog_date": "2026-06-04",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "LiveAvatar",
+        "LongLive",
+        "DMD",
+        "Self-Forcing"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "为什么实时数字人不能只看模型的 FPS，边听边生成与长时不漂移的瓶颈究竟在哪一层？",
+          "answer": "把端到端延迟拆成音频窗口、模型推理、渲染后处理、编码、网络传输与播放缓冲，指出首帧延迟常由音频窗口长度而非模型推理决定；系统侧用滑动窗口、环形缓存、状态回写与背压丢帧维持可持续生成状态，模型侧用 DMD/DMD2 少步蒸馏加量化把多步扩散压到可交互延迟，并强调少步蒸馏不必然降质、蒸馏真正省下的是并发预算。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [
+        "live-avatar-paper",
+        "paper-liveact",
+        "avatarforcing-2026",
+        "leaptalk-2026",
+        "causal-forcing"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 64,
+      "authors": []
+    },
+    {
+      "id": "paper-sadtalker",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（四）：SadTalker，用 3D 运动系数驱动单图说话人",
+      "title": "SadTalker: Learning Realistic 3D Motion Coefficients for Stylized Audio-Driven Single Image Talking Face Animation",
+      "blog_url": "https://gongshangzheng.github.io/paper-sadtalker.html",
+      "blog_date": "2026-06-04",
+      "venue": "CVPR 2023",
+      "institution": "Xi'an Jiaotong University；Tencent AI Lab",
+      "year": 2023,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Talking Head",
+        "SadTalker",
+        "3DMM",
+        "论文精读"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "为什么直接从音频回归像素会得到表情寡淡的「平均脸」和大头动时的失真，怎样才能让单张照片自然地说话？",
+          "answer": "把问题解耦到 3DMM 运动系数：嘴型与音频强相关，用确定性 ExpNet 回归表情残差；头动与音频弱相关，用条件 PoseVAE 采样多样化的头姿序列。两组系数再驱动一个 3D-aware 渲染器合成视频——该渲染器借鉴 face-vid2vid 的隐式 3D 关键点表示，唇形同步约束则借鉴 Wav2Lip 的 lip-sync 判别器思路。"
+        }
+      ],
+      "derives_from": [
+        "Wav2Lip",
+        "Face-vid2vid"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 65,
+      "authors": [
+        "Wenxuan Zhang",
+        "Xiaodong Cun",
+        "Xuan Wang",
+        "Yong Zhang",
+        "Xi Shen",
+        "Yu Guo",
+        "Ying Shan",
+        "Fei Wang"
+      ]
+    },
+    {
+      "id": "paper-vasa1",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（五）：VASA-1，512×512 实时生成的整体面部动力学",
+      "title": "VASA-1: Lifelike Audio-Driven Talking Faces Generated in Real Time",
+      "blog_url": "https://gongshangzheng.github.io/paper-vasa1.html",
+      "blog_date": "2026-06-04",
+      "venue": "NeurIPS 2024",
+      "institution": "Microsoft Research",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Talking Head",
+        "VASA-1",
+        "Diffusion",
+        "论文精读"
+      ],
+      "method_family": "motion-space-diffusion",
+      "qa": [
+        {
+          "question": "以往方法把唇部、表情、眼神、头姿分开建模，破坏了面部运动的整体性，导致结果僵硬且难以实时，能否在统一模型里整体建模并做到实时？",
+          "answer": "提出整体面部动力学生成（HFDG），把唇部、非唇表情、眼神与眨眼统一为一个潜在运动变量，在解耦的面部潜在空间（3D 外观、身份、头姿、面部动力学）中用扩散 Transformer 生成运动序列再解码渲染；实现 512×512、40 FPS、启动延迟约 170 ms 的音频驱动说话人脸，并首次把扩散用于大规模身份无关运动生成，同时提出数据驱动的 CAPP 度量音频-头姿对齐。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [
+        "paper-ditto",
+        "float"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 66,
+      "authors": [
+        "Sicheng Xu",
+        "Guojun Chen",
+        "Yu-Xiao Guo",
+        "Jiaolong Yang",
+        "Chong Li",
+        "Zhenyu Zang",
+        "Yizhong Zhang",
+        "Xin Tong",
+        "Baining Guo"
+      ]
+    },
+    {
+      "id": "paper-wav2lip",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（一）：Wav2Lip，用唇形同步专家把任意视频精准对口型",
+      "title": "A Lip Sync Expert Is All You Need for Speech to Lip Generation In the Wild",
+      "blog_url": "https://gongshangzheng.github.io/paper-wav2lip.html",
+      "blog_date": "2026-06-04",
+      "venue": "ACM MM 2020",
+      "institution": "IIIT Hyderabad",
+      "year": 2020,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Lip Sync",
+        "Wav2Lip",
+        "论文精读"
+      ],
+      "method_family": "lip-sync",
+      "qa": [
+        {
+          "question": "已有方法在野外视频上会产生大量明显不同步的片段，为什么它们学不好精确的音素-嘴型对应，怎样才能把同步精度真正做上去？",
+          "answer": "引入一个在大规模唇读数据上预训练的唇形同步专家判别器（架构直接来自 SyncNet）提供 L_sync 监督，并在训练生成器时冻结其权重——消融显示 fine-tune 反而让判别准确率从 91.6% 掉到 73.6%，因为判别器会去学生成伪影；配合 5 帧（25 fps 下约 200 ms，正好覆盖一个音素）时间窗与跨模态注意力融合，LSE-D 相比 LipGAN 降低约 35%，真实场景用户偏好率超过 90%。"
+        }
+      ],
+      "derives_from": [
+        "SyncNet"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 67,
+      "authors": [
+        "K R Prajwal",
+        "Rudrabha Mukhopadhyay",
+        "Vinay Namboodiri",
+        "C V Jawahar"
+      ]
+    },
+    {
+      "id": "cyberverse-realtime-digital-human-agent",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（一）：CyberVerse：把论文拼成一个能对话的实时数字人",
+      "title": "数字人工程解读（一）：CyberVerse：把论文拼成一个能对话的实时数字人",
+      "blog_url": "https://gongshangzheng.github.io/cyberverse-realtime-digital-human-agent.html",
+      "blog_date": "2026-06-05",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "github",
+        "source-code",
+        "数字人",
+        "WebRTC",
+        "gRPC",
+        "Agent",
+        "实时推理"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "生成模型只解决「会动的脸」，如何把 ASR、LLM、TTS、口型驱动、WebRTC 推流、记忆与工具调用拼成一个能实时对话的数字人系统？",
+          "answer": "CyberVerse 用三个进程划清边界——Go 的 API Server 负责会话编排、WebRTC 信令与媒体管线，Python 的 Inference Server 承载 ASR/LLM/TTS/Avatar/RAG 推理，Vue 前端负责推流接收与渲染；两者之间用七份 proto 定义六个 gRPC 服务与共享消息契约，媒体链路交给 LiveKit/SFU。所有后端做成可替换插件，VoiceLLMService.Interrupt 支持用户打断，并给出「先用纯语音模式跑通、再打开 Avatar 视频后端」的落地路径。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 68,
+      "authors": []
+    },
+    {
+      "id": "digital-human-hub",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列总览：从唇形同步到实时交互体",
+      "title": "数字人系列总览：从唇形同步到实时交互体",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-hub.html",
+      "blog_date": "2026-06-05",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Talking Head",
+        "Lip Sync",
+        "Real Time AI",
+        "Survey",
+        "WebRTC"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "给定一张人像照片、一段语音或一个固定角色资产，离一个真正能商用的实时数字人还有多远？",
+          "answer": "把整个系列组织成 Hub/Survey/专题综述/论文精读/源码工程/产业图谱六层阅读路径，先建立任务 taxonomy 与技术路线 taxonomy（换嘴配音、运动空间、3DGS/NeRF、扩散基模、整帧全身、实时流式与蒸馏、算力与 Benchmark、风格化与身份评测、后端 Agent），再用产业图谱把技术栈与商业位置连起来，并补上「数字人作为状态模拟器」的扩展定义与未来方向。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 69,
+      "authors": []
+    },
+    {
+      "id": "ditto-talkinghead",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（五）：Ditto 源码：把 Talking Head 做成实时流水线",
+      "title": "Ditto: Motion-Space Diffusion for Controllable Realtime Talking Head Synthesis",
+      "blog_url": "https://gongshangzheng.github.io/ditto-talkinghead.html",
+      "blog_date": "2026-06-05",
+      "venue": "arXiv",
+      "institution": "Ant Group",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "github",
+        "source-code",
+        "talking-head",
+        "diffusion",
+        "digital-human"
+      ],
+      "method_family": "motion-space-diffusion",
+      "qa": [
+        {
+          "question": "如何在保证实时性与细粒度可控性的同时生成自然的口型、表情和头动？",
+          "answer": "Ditto 把扩散模型搬进运动空间：以 HuBERT 音频特征加 source canonical、情绪、眼睛开合/眼球方向等条件，经 LMDM 生成低维 motion sequence，再走 MotionStitch 运动缝合与控制、3D feature warping、解码和回贴成视频。工程上把源图注册、音频特征、运动扩散、缝合、warping、解码和写出组织成可流式的队列化流水线，并用 ONNX/TensorRT 权重与在线/离线两套 pipeline 支撑实时推理。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 70,
+      "authors": [
+        "Tianqi Li",
+        "Ruobing Zheng",
+        "Minghui Yang",
+        "Jingdong Chen",
+        "Ming Yang"
+      ]
+    },
+    {
+      "id": "infinitetalk-paper",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三）：InfiniteTalk，稀疏帧配音与无限长音频驱动生成",
+      "title": "InfiniteTalk: Audio-driven Video Generation for Sparse-Frame Video Dubbing",
+      "blog_url": "https://gongshangzheng.github.io/infinitetalk-paper.html",
+      "blog_date": "2026-06-05",
+      "venue": "arXiv",
+      "institution": "MeiGen-AI",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "稀疏帧配音",
+        "flow matching",
+        "DiT"
+      ],
+      "method_family": "lip-sync",
+      "qa": [
+        {
+          "question": "传统配音只重绘嘴部会让表情与肢体和语音错位；而朴素 I2V 会误差累积、FL2V 又把动作锁死，怎样才能既锚定身份又让动作随音频自由变化并支持无限长？",
+          "answer": "提出稀疏帧配音：只战略性地保留少量参考关键帧来锚定身份、标志性手势与相机轨迹，其余画面全部交由音频驱动的全身生成。方法上用 conditional flow matching、把含噪 latent 与上下文帧/参考帧/mask 在时间与通道维三次拼接后喂给 DiT 注入条件，用上下文帧传递块间动量实现无缝续接，并用软条件的参考帧位置采样策略（M0–M3）在「听话」与「自由」之间取得平衡。"
+        }
+      ],
+      "derives_from": [
+        "MultiTalk",
+        "Wan2.1"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 71,
+      "authors": [
+        "Shaoshu Yang",
+        "Zhe Kong",
+        "Feng Gao",
+        "Meng Cheng",
+        "Xiangyu Liu",
+        "Yong Zhang",
+        "Zhuoliang Kang",
+        "Wenhan Luo",
+        "Xunliang Cai",
+        "Ran He",
+        "Xiaoming Wei"
+      ]
+    },
+    {
+      "id": "infinitetalk-source-read",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（七）：InfiniteTalk 源码：站在视频大模型肩上的无限长数字人",
+      "title": "InfiniteTalk: Audio-driven Video Generation for Sparse-Frame Video Dubbing",
+      "blog_url": "https://gongshangzheng.github.io/infinitetalk-source-read.html",
+      "blog_date": "2026-06-05",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "源码解读",
+        "稀疏帧配音",
+        "扩散模型",
+        "DiT",
+        "Wan2.1",
+        "无限长视频",
+        "InfiniteTalk"
+      ],
+      "method_family": "lip-sync",
+      "qa": [
+        {
+          "question": "如何用可控的工程成本做出无限长、全身同步的音频驱动数字人，而不必从头训练一个视频大模型？",
+          "answer": "不做新架构，而是把 Wan2.1-I2V-14B 通用视频扩散基座拿来，只训练「音频条件权重」，在 DiT Block 里加音频与参考帧两路 cross-attention（音频用 chinese-wav2vec2 特征），再用上一块尾帧作为下一块上下文帧的滑窗续接把单次短视频生成能力接力成无限长。整体是「基座大模型 + 轻量条件适配 + 滑窗续接」范式，仓库里绝大部分代码是借来的基座，自己的贡献很薄。"
+        }
+      ],
+      "derives_from": [
+        "Wan2.1",
+        "MultiTalk"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 72,
+      "authors": [
+        "Shaoshu Yang",
+        "Zhe Kong",
+        "Feng Gao",
+        "Meng Cheng",
+        "Xiangyu Liu",
+        "Yong Zhang",
+        "Zhuoliang Kang",
+        "Wenhan Luo",
+        "Xunliang Cai",
+        "Ran He",
+        "Xiaoming Wei"
+      ]
+    },
+    {
+      "id": "ultralight-digital-human-source-read",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（六）：Ultralight-Digital-Human：一个能塞进手机的数字人",
+      "title": "Ultralight-Digital-Human",
+      "blog_url": "https://gongshangzheng.github.io/ultralight-digital-human-source-read.html",
+      "blog_date": "2026-06-05",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "源码解读",
+        "唇形同步",
+        "UNet",
+        "MobileNet",
+        "流式推理",
+        "ONNX",
+        "Ultralight-Digital-Human"
+      ],
+      "method_family": "lip-sync",
+      "qa": [
+        {
+          "question": "如何把音频驱动的唇形同步数字人压到能塞进手机、移动端实时的体量？",
+          "answer": "沿 Wav2Lip 一脉的遮嘴重建路线，只重绘人脸下半部分而非整帧；UNet 全程用 MobileNetV2 的 InvertedResidual 深度可分离卷积，输入是参考帧加涂黑嘴部的当前帧共 6 通道，音频特征在 bottleneck 处拼接注入；训练只靠 L1 加 0.01 权重的 VGG19 感知损失做自监督，作者实测后彻底移除 SyncNet；再配合一人一模型的个性化设定与 wenet 音频编码器、ONNX 流式推理，把音频编码器和 UNet 总体积压到 1M 以内。"
+        }
+      ],
+      "derives_from": [
+        "Wav2Lip"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 73,
+      "authors": []
+    },
+    {
+      "id": "voice-ai-digital-human-landscape",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十）：实时语音 AI 与数字人产业图谱",
+      "title": "数字人系列（十）：实时语音 AI 与数字人产业图谱",
+      "blog_url": "https://gongshangzheng.github.io/voice-ai-digital-human-landscape.html",
+      "blog_date": "2026-06-05",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "语音AI",
+        "TTS",
+        "推理框架",
+        "产业图谱",
+        "Boson",
+        "SGLang"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "支撑实时数字人与语音 AI 的产业链由哪些层构成，每层靠什么竞争？",
+          "answer": "文章把整条链条拆成五层自下而上的技术栈：语音模型（可控 TTS/声音克隆与全双工语音 LLM）、推理框架（SGLang/vLLM/TensorRT-LLM 及面向语音多模态的 SGLang-Omni）、数字人视频（开源说话头模型对企业级视频平台）、Agent 平台与实时通信（CyberVerse/Pipecat/LiveKit 与一站式语音 Agent）、云与算力（NVIDIA GPU 与 serverless 推理云）。核心主线是每一层都同时存在开放权重与闭源商业平台两条路线的博弈，并以 Higgs Audio v3 可用 SGLang-Omni 服务为例说明模型层与推理层正在重新协同。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 74,
+      "authors": []
+    },
+    {
+      "id": "digital-human-3dgs-nerf-avatar",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（四）：3DGS 与 NeRF 数字人路线，从专人建模到实时渲染",
+      "title": "数字人系列（四）：3DGS 与 NeRF 数字人路线，从专人建模到实时渲染",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-3dgs-nerf-avatar.html",
+      "blog_date": "2026-06-08",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "3DGS",
+        "NeRF",
+        "Rigged Avatar",
+        "Motion Controller",
+        "Talking Head"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "固定身份数字人为什么要先建三维可渲染资产，NeRF 与 3DGS 又怎样把渲染变成路线优势？",
+          "answer": "person-specific 设定下先用目标人物短视频训练三维可渲染表示：AD-NeRF 把人物拆成 head/torso 两个音频条件神经辐射场，RAD-NeRF 与 ER-NeRF 用 audio-spatial 分解和区域感知把辐射场推向实时；3DGS 路线则把表示换成 Gaussian primitives 加 deformation（TalkingGaussian、GaussianTalker、GSTalker、EGSTalker），把渲染从昂贵的体采样换成 rasterization。结果是训练从百小时级降到小时级、FPS 升到 60–70，瓶颈随之从体渲染转向音频条件如何低成本驱动大量 Gaussian，文章用资产层/驱动层/渲染层三层接口统一解释这条路线。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 75,
+      "authors": [
+        "Yudong Guo",
+        "Keyu Chen",
+        "Sen Liang",
+        "Yong-Jin Liu",
+        "Hujun Bao",
+        "Juyong Zhang"
+      ]
+    },
+    {
+      "id": "digital-human-diffusion-foundation-avatar",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（五）：扩散基模与整帧数字人路线",
+      "title": "数字人系列（五）：扩散基模与整帧数字人路线",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-diffusion-foundation-avatar.html",
+      "blog_date": "2026-06-08",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "扩散模型",
+        "DiT",
+        "Wan2.1",
+        "InfiniteTalk",
+        "OmniAvatar",
+        "LongCat",
+        "LiveAvatar",
+        "StreamAvatar"
+      ],
+      "method_family": "diffusion-foundation",
+      "qa": [
+        {
+          "question": "通用视频扩散基模怎样被音频、参考身份与流式状态约束成数字人生成器？",
+          "answer": "保留视频 DiT / flow-matching 基座的画面与时序先验，再按四类条件改造：身份注入（ReferenceNet、character image injection、reference sink）、音频注入（wav2vec2 特征、audio cross-attention、多层级音频嵌入、Face-Aware Audio Adapter）、长时续接（context frames、sliding-window denoising、KV cache、Rolling RoPE）与基座保留（LoRA、部分参数与多任务训练）。最后用少步蒸馏、consistency/DMD、量化与流水线并行把多步扩散改造成流式系统，代表工作包括 OmniAvatar、MultiTalk、HunyuanVideo-Avatar、InfiniteTalk、SkyReels-Audio、Live Avatar、StreamAvatar、LLIA。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 76,
+      "authors": []
+    },
+    {
+      "id": "digital-human-motion-space-avatar",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（三）：运动空间路线，从 SadTalker 到 VASA-1 与 Ditto",
+      "title": "数字人系列（三）：运动空间路线，从 SadTalker 到 VASA-1 与 Ditto",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-motion-space-avatar.html",
+      "blog_date": "2026-06-08",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Motion Space",
+        "SadTalker",
+        "VASA-1",
+        "Ditto",
+        "Talking Head"
+      ],
+      "method_family": "motion-space-diffusion",
+      "qa": [
+        {
+          "question": "为什么把音频先映射到运动空间，比直接生成像素或视频 latent 更适合实时 talking head？",
+          "answer": "因为这条路线把身份纹理、头发和背景都交给参考图像与渲染器，只让生成模型预测低维、可控制、接近语义的运动序列：SadTalker 用 3DMM 表情系数加头姿系数（ExpNet + PoseVAE），VASA-1 用整体面部动力学 latent 加 diffusion transformer，Ditto 则用 LivePortrait 风格的 canonical keypoints、expression deformation、rotation、translation 加 Conditional DiT。生成目标收缩到运动空间后，扩散更容易单卡实时（Ditto 在线 RTF 0.895、首帧 385ms）、更容易做 gaze/emotion 控制，失败也被限定在表情与头姿层面而非整帧漂移。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 77,
+      "authors": []
+    },
+    {
+      "id": "paper-musetalk",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二）：MuseTalk，实时视频配音里的 latent inpainting 路线",
+      "title": "MuseTalk: Real-Time High-Fidelity Video Dubbing via Spatio-Temporal Sampling",
+      "blog_url": "https://gongshangzheng.github.io/paper-musetalk.html",
+      "blog_date": "2026-06-08",
+      "venue": "arXiv",
+      "institution": "TMElyralab",
+      "year": 2024,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "MuseTalk",
+        "Lip Sync",
+        "Video Dubbing",
+        "论文精读"
+      ],
+      "method_family": "lip-sync",
+      "qa": [
+        {
+          "question": "怎样在不做多步扩散的前提下实现高保真、可实时的视频配音换嘴？",
+          "answer": "把任务边界收缩到 one-shot video dubbing：保留原视频的头动、眼动与背景，只重绘脸部 ROI。方法把画面裁剪并 resize 到 256×256 后压进冻结 VAE 的 latent 空间，用源自 Stable Diffusion 的 multimodal U-Net 做单步 latent inpainting（timesteps=0），音频由轻量 Whisper-Tiny 编码后经 cross-attention 注入，生成结果 decode 后再用 face parsing 融合回原帧。因为完全不做扩散采样，官方报告在 V100、256×256、preloaded data 条件下可达 30 FPS。"
+        },
+        {
+          "question": "重建、对抗与同步三种训练信号互相冲突、模型还会通过裁剪几何偷看参考帧嘴型，怎么解？",
+          "answer": "用两阶段训练把互相冲突的目标拆开：第一阶段 Facial Abstract Pretraining 只用 L1 加 VGG19 感知损失学稳定的人脸局部 inpainting，第二阶段才加入 face/lip 双判别器与 SyncNet loss 微调清晰度和同步性，避免在能力不足时直接联合优化导致训练不稳。数据侧用 Informative Frame Sampling 按姿态与唇形相似度选参考帧以缩小训练-推理 gap，并用 Dynamic Margin Sampling 独立随机化参考帧与目标帧的下巴 margin，切断模型从鼻下巴相对位置推断嘴部开合的捷径。"
+        }
+      ],
+      "derives_from": [
+        "Wav2Lip",
+        "Stable Diffusion"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 78,
+      "authors": [
+        "Yue Zhang",
+        "Zhizhou Zhong",
+        "Minhao Liu",
+        "Zhaokang Chen",
+        "Bin Wu",
+        "Yubin Zeng",
+        "Chao Zhan",
+        "Yingjie He",
+        "Junxin Huang",
+        "Wenjiang Zhou"
+      ]
+    },
+    {
+      "id": "digital-human-avatar-survey",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（八）：Avatar 类型数字人，从 Talking Head 到全身可渲染资产",
+      "title": "数字人系列（八）：Avatar 类型数字人，从 Talking Head 到全身可渲染资产",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-avatar-survey.html",
+      "blog_date": "2026-06-09",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Avatar",
+        "Talking Head",
+        "3DGS",
+        "OmniAvatar",
+        "ChatAnyone",
+        "EMO2",
+        "论文综述"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "Avatar 类型数字人应该按什么维度分类，才能避免把不同任务塞进同一张榜单比较？",
+          "answer": "先按输入输出与产品约束划任务：head/portrait talking video、upper-body co-speech avatar、full-body motion generation、full-frame avatar video、renderable avatar asset、streaming/realtime avatar；再按中间表示与生成器划技术路线：2D talking-head/latent inpainting、structured motion policy、motion diffusion 加 fast renderer、video foundation model adaptation、3DGS/NeRF/mesh asset、mask-localized multi-character control。结论是指标必须与任务绑定（Sync 看嘴、FGD 看动作、CSIM 看身份、FPS 看系统），并指出 full-frame 扩散与实时交互之间、单图恢复可动人体、动作语义理解三个开放问题。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 79,
+      "authors": []
+    },
+    {
+      "id": "digital-human-brainstorm",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人研究准备：正式头脑风暴前要看清什么",
+      "title": "数字人研究准备：正式头脑风暴前要看清什么",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-brainstorm.html",
+      "blog_date": "2026-06-09",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Brainstorming",
+        "Research",
+        "Talking Head",
+        "Real Time AI"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "面向面试场景的实时 Head & Shoulders 数字人，应该选哪条技术路线？",
+          "answer": "先把目标钉成「注册式实时半身数字人」，再建立「驱动条件/运动来源 × 技术表示」二维 taxonomy（指出 talking head 与 portrait animation 只是命名习惯、不能当分类边界）。按实时性、半身扩展性、身份稳定、工程成本重新打分后，第一候选是 Motion Space/Latent Motion（先生成低维 motion packet 再渲染，天然适合流式），第二候选是 3DGS/NeRF 注册式渲染后端，Keypoint/Pose 作为控制层；最终建议 MVP 用 Motion Space 主链路加注册身份渲染器，并把口型、表情、视线、头动、肩颈拆成可流式预测字段并设计降级策略。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 80,
+      "authors": []
+    },
+    {
+      "id": "digital-human-training-inference-benchmark",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（九）：评测指标、数据集、训练算力与产品选型",
+      "title": "数字人系列（九）：评测指标、数据集、训练算力与产品选型",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-training-inference-benchmark.html",
+      "blog_date": "2026-06-09",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Benchmark",
+        "算力",
+        "Evaluation",
+        "产品选型",
+        "Survey",
+        "FID",
+        "FVD",
+        "SyncNet",
+        "CSIM",
+        "Dataset",
+        "评测指标"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "数字人实验与部署到底要准备什么：指标怎么算、算力要多少、数据集怎么选？",
+          "answer": "把评测方法论、数据、训练与推理资源放到同一坐标系：先给出五大指标族（画质 FID/PSNR/SSIM/LPIPS、时序 FVD/Dino-S、同步 Sync-C/LSE-C/LMD、身份 CSIM/ArcFace、效率 FPS/RTF/TTFF/VRAM）的计算直觉与失败模式（如 FID 样本量敏感、局部换嘴天然占优、SyncNet 非英语退化、CSIM 只认身份不认质量），再汇总六条路线的训练/推理算力量级与各自 benchmark 重点、主流数据集规模与 License，并给出 FlashHead/LAM/UIKA/LiteAvatar 的标准化对比协议、指标陷阱清单与 PoC→规模化的落地选型。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 81,
+      "authors": []
+    },
+    {
+      "id": "digital-human-demo-gallery",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十一）：不同方案的实际效果演示",
+      "title": "数字人系列（十一）：不同方案的实际效果演示",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-demo-gallery.html",
+      "blog_date": "2026-06-10",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Demo",
+        "Lip Sync",
+        "SentiAvatar",
+        "3D Avatar",
+        "EGSTalker",
+        "3DGS"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "同样被叫作「数字人」的方案，在画面里到底改了哪一层？",
+          "answer": "用三段实际视频把三条路线区分开：嘴唇同步方案只局部重绘嘴部，身份、头动、身体、背景与镜头都沿用原视频，本质是给已有视频重新配音；SentiAvatar 围绕固定 3D 角色 SuSu 生成身体动作、手势和面部表情，目标是让动作与语音节奏和语义匹配的交互表达；EGSTalker 用 3D Gaussian Splatting 重建特定真人的头部，需 3–5 分钟目标人物视频训练（约 3.7 小时）后即可用任意音频实时驱动（68.51 FPS）。选型前必须先问清楚要解决的是配音、实时交互表达，还是特定真人的高保真复刻。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 82,
+      "authors": []
+    },
+    {
+      "id": "cyberverse-flashhead-lite-experiment",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（二）：CyberVerse 实验：FlashHead Lite + wav2vec2 的端到端耗时拆解",
+      "title": "数字人工程解读（二）：CyberVerse 实验：FlashHead Lite + wav2vec2 的端到端耗时拆解",
+      "blog_url": "https://gongshangzheng.github.io/cyberverse-flashhead-lite-experiment.html",
+      "blog_date": "2026-06-12",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "CyberVerse",
+        "FlashHead",
+        "数字人",
+        "WebRTC",
+        "性能分析"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "在 SoulX-FlashHead-1_3B Lite + wav2vec2-base-960h 组合下，实时数字人链路的耗时到底花在哪里？",
+          "answer": "按 Python Avatar 生成 → Go 编排 → VP8 编码 → WebRTC 发布逐段拆解日志后发现，Avatar 生成并非持续播放阶段的主要瓶颈：FlashHead 生成一个 24 帧、512×512、20fps 的 chunk 只用 0.514 秒，快于该 chunk 对应的约 1.2 秒播放时长。真正的瓶颈在 Go 侧 DirectPeer——VP8 编码每段需 0.5–0.7 秒，发布队列 queue_ms 从 1.2 秒一路积压到约 4.8 秒，而真正写入 WebRTC 的 publish_ms 只有 17–29ms；首帧 3.713 秒偏慢但需要补齐 ASR/LLM/TTS/Avatar 各阶段 trace 才能归因。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 83,
+      "authors": []
+    },
+    {
+      "id": "lam-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十三）：LAM，单图生成可动画 Gaussian 头像的纯 3D 实时管线",
+      "title": "LAM: Large Avatar Model for One-shot Animatable Gaussian Head",
+      "blog_url": "https://gongshangzheng.github.io/lam-2025.html",
+      "blog_date": "2026-06-12",
+      "venue": "arXiv",
+      "institution": "通义实验室",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "论文精读",
+        "3DGS",
+        "FLAME",
+        "one-shot"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "单图生成可动画 3D 头像，如何同时做到纯 3D、无后处理网络且跨平台实时？",
+          "answer": "把 Gaussian avatar 重建在 FLAME 的 canonical space（标准中性表情与正面姿态），并用 mesh subdivision 对 FLAME 顶点做两次细分，把 5,023 个顶点扩到 81,424 个点作为 Gaussian 的显式几何锚点，每个点继承 FLAME 顶点的 blendshapes 与 skinning weights。这样动画阶段完全由确定性的 LBS 加 blendshapes 矩阵运算完成，管线中没有任何神经网络，可直接移植到 WebGL/OpenGL/Vulkan，A100 上 280.96 FPS、iPhone 16 上 35 FPS。"
+        },
+        {
+          "question": "如何从单张图片准确预测八万多个 canonical Gaussian 的属性？",
+          "answer": "冻结 DINOv2 提取多尺度原始图像特征作为 cross-attention 的 key/value，把 FLAME canonical 顶点坐标经 NeRF 式位置编码与 MLP 投影成 learnable query，再用 10 层 stacked cross-attention（16 heads、1024 dim）让每个点从图像特征中采样对应区域的外观，最后由线性 decoding header 解码出颜色、不透明度、尺度、旋转与位置偏移。消融显示 raw image features cross-attention（比 painted features 高 1.78 dB）与 canonical space 重建（比 reference pose 高 1.69 dB）是两个贡献最大的设计。"
+        }
+      ],
+      "derives_from": [
+        "GAGAvatar",
+        "FLAME",
+        "DINOv2"
+      ],
+      "derived_by": [
+        "uika-2026",
+        "flexavatar-2025"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 84,
+      "authors": [
+        "Yisheng He",
+        "Xiaodong Gu",
+        "Xiaodan Ye",
+        "Chao Xu",
+        "Zhengyi Zhao",
+        "Yuan Dong",
+        "Weihao Yuan",
+        "Zilong Dong",
+        "Liefeng Bo"
+      ]
+    },
+    {
+      "id": "digital-human-engineering-benchmark",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（四）：实时数字人模型推理 Benchmark 汇总",
+      "title": "数字人工程解读（四）：实时数字人模型推理 Benchmark 汇总",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-engineering-benchmark.html",
+      "blog_date": "2026-06-16",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Benchmark",
+        "推理速度",
+        "显存",
+        "LiteAvatar",
+        "FlashHead",
+        "CyberVerse",
+        "OpenAvatarChat"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "各开源实时数字人方案在真实 GPU 上的推理速度、显存占用和真正约束分别是什么？",
+          "answer": "汇总 A10 单卡实测数据：LiteAvatar 25.19 FPS / 7507 MiB、LAM 30 FPS / 1725 MiB、SoulX-FlashHead-1_3B Lite 约 46.7 FPS、FlashHead 1.3B Pro 4.8 FPS / 7839 MiB、LiveAct 18B 仅 0.8–0.9 FPS。重点纠正了 LiveAct「不可用/OOM」的旧结论：两次完整跑通显示显存峰值只有 10.4–11.7 GiB，真正约束是主机内存（offload 三件套下稳态约 85–90 GiB、峰值约 113–118 GiB）以及 A10/Ampere 缺 FP8 硬件，因此单卡 A10 只适合离线评测；数据同时区分「官方自报」与「本项目实测」两类口径。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 85,
+      "authors": []
+    },
+    {
+      "id": "lite-avatar-source-code-analysis",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（八）：LiteAvatar 源码：纯 CPU 实时 2D 数字人驱动引擎",
+      "title": "数字人工程解读（八）：LiteAvatar 源码：纯 CPU 实时 2D 数字人驱动引擎",
+      "blog_url": "https://gongshangzheng.github.io/lite-avatar-source-code-analysis.html",
+      "blog_date": "2026-06-16",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "lite-avatar",
+        "audio2face",
+        "cpu-inference",
+        "onnxruntime",
+        "digital-human",
+        "paraformer",
+        "源码解读"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "如何在不依赖 GPU 的情况下实现 30fps 的实时 2D 数字人口型驱动？",
+          "answer": "整条链路是「音频→特征→参数→图像」三阶段：用 FunASR 的 Paraformer 提取音频特征，轻量 ONNX 模型单步预测 32 维面部参数，再由 TorchScript 的 net_encode/net_decode 生成嘴部区域图像并与背景帧融合。工程上以 1 秒滑动窗口加重叠帧线性插值处理长音频保证时序连续，用四阶巴特沃斯低通滤波平滑参数抑制抖动，静音段检测后把参数回归中性姿态，最终 ONNX 加速器加 TorchScript 生成器总计约 500MB，可在消费级笔记本纯 CPU 上跑到 30fps。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 86,
+      "authors": []
+    },
+    {
+      "id": "open-avatar-chat-liteavatar",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（三）：OpenAvatarChat 源码：LiteAvatar 实时数字人的模块化设计与 WebRTC 部署",
+      "title": "数字人工程解读（三）：OpenAvatarChat 源码：LiteAvatar 实时数字人的模块化设计与 WebRTC 部署",
+      "blog_url": "https://gongshangzheng.github.io/open-avatar-chat-liteavatar.html",
+      "blog_date": "2026-06-16",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "OpenAvatarChat",
+        "LiteAvatar",
+        "WebRTC",
+        "TURN",
+        "coturn",
+        "fastrtc",
+        "数字人部署",
+        "端口配置",
+        "Handler Pipeline"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "如何把 ASR、LLM、TTS、Avatar 渲染和 WebRTC 推流拼装成一个可部署的实时数字人对话系统？",
+          "answer": "OpenAvatarChat 用 Handler Pipeline 作为编排层：每个 Handler 声明输入/输出数据类型，引擎按依赖自动串联 RtcClient→SileroVad→SenseVoice→Qwen→CosyVoice→LiteAvatar，替换任一环节只需实现同接口。LiteAvatar Handler 管理独立子进程 Worker，用共享内存池在主进程与子进程间传音频/视频帧避免序列化开销；前端经 fastrtc + aiortc 走强制 H.264 的 WebRTC 链路。公网部署的关键是 coturn TURN 的端口规划——3478/5349 信令加 49152+ 媒体中继端口，每个 PeerConnection 需要 2 个 UDP 端口（并发数 n 需 2n 个），且 YAML 凭证必须与 turnserver.conf 一致，否则会表现为「数字人永远在加载中」。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 87,
+      "authors": []
+    },
+    {
+      "id": "flow-guided-talking-2021",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十五）：Flow-Guided One-Shot Talking Face，用稠密光流替代稀疏关键点的突破",
+      "title": "Flow-Guided One-Shot Talking Face Generation with a High-resolution Audio-visual Dataset",
+      "blog_url": "https://gongshangzheng.github.io/flow-guided-talking-2021.html",
+      "blog_date": "2026-06-17",
+      "venue": "CVPR 2021",
+      "institution": "Virtual Human Group, Netease Fuxi AI Lab",
+      "year": 2021,
+      "arxiv_id": null,
+      "tags": [
+        "talking face",
+        "flow-guided",
+        "3DMM",
+        "HDTF",
+        "CVPR 2021"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "为什么稀疏 landmark 撑不起 512×512 的高清 one-shot talking face，应该用什么中间表示替代？",
+          "answer": "稀疏关键点只能描述嘴角、眉梢等少数离散位置的几何，分辨率提升后点与点之间的空白急剧增大，网络被迫猜测皱纹、牙齿可见度等连续纹理，因此在高清下必然模糊。论文改用稠密光流作为音频到视频的中间表示：先用 AdaIN 注入身份风格的音频编码器预测 3DMM 动画参数（28 维嘴部、5 维眉毛、5 维头姿差分），再由 3DMM 参数化成近似稠密光流 F_app，为每个像素提供运动指导，从而首次实现 512×512 one-shot talking face（PSNR 24.42），并开源了 300+ 说话人、约 15.8 小时的 HDTF 数据集。"
+        },
+        {
+          "question": "3DMM 只能精确描述人脸核心区、背景光流完全错误，那如何合成完整且高清的画面？",
+          "answer": "先把 F_app 按语义分区构建：inner face 由 3DMM 网格投影后逐顶点算位移再插值，head-related 区域取 inner face 边界最近邻像素的光流做刚性跟随，upper torso 取 inner face 光流均值作为全局平移。再用 5 级 Hourglass 网络（输入原图、光流、扭曲图 8 通道）预测前景掩码与 matting mask，用软掩码把背景光流修正回恒等坐标网格；最后在特征空间做 warping 与 matting 混合，运动准确的区域直接用扭曲后的参考特征保留纹理，运动不准或需要新内容的区域（如口腔内牙齿）交给网络生成特征修补。"
+        }
+      ],
+      "derives_from": [
+        "MakeItTalk",
+        "FOMM"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 88,
+      "authors": [
+        "Zhimeng Zhang",
+        "Lincheng Li",
+        "Yu Ding",
+        "Changjie Fan"
+      ]
+    },
+    {
+      "id": "hdtf-source-code-analysis",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（九）：HDTF 源码：流引导的单样本高分辨率说话人脸生成",
+      "title": "Flow-Guided One-Shot Talking Face Generation With a High-Resolution Audio-Visual Dataset",
+      "blog_url": "https://gongshangzheng.github.io/hdtf-source-code-analysis.html",
+      "blog_date": "2026-06-17",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "HDTF",
+        "talking-face",
+        "one-shot",
+        "dense-flow",
+        "CVPR-2021",
+        "源码解读",
+        "digital-human",
+        "foreground-matting"
+      ],
+      "method_family": "2d-talking-head",
+      "qa": [
+        {
+          "question": "官方 HDTF 仓库如何把 3DMM 投影点落成一条可运行的流引导单样本换脸推理管线？",
+          "answer": "代码分两阶段：CPU 端的 code_constructing_Fapp 用约 50 个 3DMM 投影点计算稀疏位移，经 scipy 最近邻插值生成 512×512 近似稠密光流——面部区域最近邻插值、下巴以下躯干区域取全局平均运动、最后叠加坐标网格变成可直接喂给 F.grid_sample 的绝对采样坐标。GPU 端的 VideoGenerator 先用 Encoder 提取参考图特征，再由 ForegroundMatting（5 级 Hourglass U-Net，输入原图/光流/扭曲图三路拼接）预测前景掩码、matting mask 与 matting 修复图，前景用修正光流、背景回归坐标网格；随后在特征空间做 warp 加 matting 加权混合，经 Bottleneck ResBlock 精炼与 Decoder 输出，下采样用高斯模糊加插值的 AntiAliasInterpolation2d 抗锯齿。"
+        }
+      ],
+      "derives_from": [
+        "MakeItTalk",
+        "FOMM"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 89,
+      "authors": []
+    },
+    {
+      "id": "mead-2020",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（二十九）：MEAD，大规模情绪音视频数据集如何推动 Talking Face 从动嘴到传情",
+      "title": "MEAD: A Large-scale Audio-visual Dataset for Emotional Talking-face Generation",
+      "blog_url": "https://gongshangzheng.github.io/mead-2020.html",
+      "blog_date": "2026-06-18",
+      "venue": "ECCV 2020",
+      "institution": "SenseTime Research；南洋理工大学（NTU）；卡内基梅隆大学（CMU）；中科院自动化所（CASIA）；中科院深圳先进技术研究院",
+      "year": 2020,
+      "arxiv_id": null,
+      "tags": [
+        "MEAD",
+        "Talking Face",
+        "情绪生成",
+        "数据集",
+        "ECCV 2020"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "为什么 talking face 生成长期只会「动嘴」不会「传情」，真正的瓶颈是什么？",
+          "answer": "论文判断核心障碍是缺少大规模、高质量的情绪音视频数据，而既有数据集各有缺口：GRID 与 Lombard 完全没有情绪维度，SAVEE 只有 4 名演员且每种情绪仅 1 级强度，RAVDESS 强度只有 2 级，CREMA-D 声称 3 级强度但只有约 1/12 数据有完整标注。为此 MEAD 采用成本更高但标注可信的 controlled 采集范式，构建了 60 名演员、8 种情绪（7 种非中性情绪各有 weak/medium/strong 三级强度）、7 个同步视角、共 281,400 条 1080P 片段的数据集，语料按 TIMIT 音素覆盖原则设计并覆盖 15 元音与 24 辅音。"
+        },
+        {
+          "question": "如何让一个模型按指定的情绪类别与强度生成说话人脸？",
+          "answer": "baseline 把唇形与情绪表达解耦成三个模块再融合：Audio-to-Landmarks 用 LSTM 从 28 维 MFCC 预测嘴部关键点热力图，Neutral-to-Emotion Transformer 把情绪类别与强度的 one-hot 向量做空间拼接作为条件，经对称 encoder-decoder 生成目标表情人脸，Refinement U-Net 接收情绪人脸与嘴部热力图做融合精修。监督由八项联合损失组成（关键点回归、像素重建、嘴部重建、VGG 感知、LSGAN 对抗、TV 平滑以及情绪与强度分类），生成视频的情绪识别准确率 86.26% 几乎追平真实视频的 86.29%，但强度分级可信度仍是短板（仅约 20% 参与者认同排序），且方法无法从音频中解耦情绪。"
+        }
+      ],
+      "derives_from": [
+        "RAVDESS"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 90,
+      "authors": [
+        "Wang, K.",
+        "et al."
+      ]
+    },
+    {
+      "id": "4dhumanqa-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三十六）：4DHumanQA，第一个经感知验证的 3D 动画质量评估度量",
+      "title": "4DHumanQA: Quality Assessment of 3D Human Animation",
+      "blog_url": "https://gongshangzheng.github.io/4dhumanqa-2025.html",
+      "blog_date": "2026-07-06",
+      "venue": "arXiv",
+      "institution": "Inria",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "4DHumanQA",
+        "3D Animation",
+        "Quality Assessment",
+        "MOS"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "3D 人体动画的质量该怎么评？",
+          "answer": "现有做法要么用 MPJPE 这类几何指标（忽略感知质量），要么用 LPIPS 这类图像指标（不懂 3D 运动语义）。作者构建 4DHumanPercept 数据集——250 个动画、8 个源模型、6 类失真、48 名被试的 DSIS 五级 MOS 评分，并提出第一个经人类感知验证的自动评估度量。"
+        },
+        {
+          "question": "单一客观指标能否替代主观感知评分？",
+          "answer": "不能。7 个候选特征与 MOS 的 SROCC 仅 0.144–0.436（最强单特征 MPJPE 0.436，最弱 LPIPS 0.144），但 7 特征线性回归组合模型把 SROCC 提升到 0.961 与 PLCC 0.917，证明多维运动/几何/感知特征互补，且自动指标无法有效替代主观用户研究。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 91,
+      "authors": [
+        "Rekik, R.",
+        "et al."
+      ]
+    },
+    {
+      "id": "captalk-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三十七）：CapTalk，首个文本引导风格化的 3D 说话头部动画",
+      "title": "CapTalk: Text-Guided Stylization and Speech-Driven 3D Head Animation",
+      "blog_url": "https://gongshangzheng.github.io/captalk-2025.html",
+      "blog_date": "2026-07-06",
+      "venue": "arXiv",
+      "institution": "University of Tokyo；Snap Research",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "CapTalk",
+        "Talking Head",
+        "3D Head Animation",
+        "Text-Guided"
+      ],
+      "method_family": "3d-avatar",
+      "qa": [
+        {
+          "question": "能否用文字描述在推理时控制 3D 说话头部的说话风格与情绪？",
+          "answer": "提出 CapTalk：把风格与情绪文本描述经 T5 编码作为条件，在多尺度二值量化 Codec 得到的离散 FLAME 运动码上做基于窗口的自回归生成，首次让用户同时控制说话风格与情绪。"
+        },
+        {
+          "question": "如何获得带风格与情绪标注的大规模 3D 面部运动数据？",
+          "answer": "构建 CapTalkingHead 数据集（24,441 clips / 约 200.8 小时 / 1800 万帧），用微调 Qwen2.5-VL 7B 从视频提取风格描述、Qwen-Audio-Chat 从音频提取 8 类情绪，成为唯一同时具备 FLAME 3D 标注、风格与情绪标注的大规模数据集。"
+        },
+        {
+          "question": "两种文本条件是否互补？",
+          "answer": "是。消融显示去掉 caption 后各项指标显著退化，Style caption 主要改善全脸距离 FFD，Emotion caption 主要改善长程运动一致性 LODD，双模态同时使用（完整模型）在所有指标上最佳。"
+        }
+      ],
+      "derives_from": [
+        "FaceFormer",
+        "CodeTalker",
+        "SelfTalk",
+        "DiffPoseTalk"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 92,
+      "authors": [
+        "Xuangeng Chu",
+        "Yuan Gan",
+        "Ziteng Cui",
+        "Shuhong Liu",
+        "Jian Wang",
+        "Bing Zhou",
+        "Tatsuya Harada"
+      ]
+    },
+    {
+      "id": "cospeech-npr-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三十四）：Co-Speech NPR，首个为非真实感角色设计的共语音生成",
+      "title": "Co-Speech Gesture and Facial Expression Generation for Non-Photorealistic 3D Characters",
+      "blog_url": "https://gongshangzheng.github.io/cospeech-npr-2025.html",
+      "blog_date": "2026-07-06",
+      "venue": "SIGGRAPH 2025",
+      "institution": "Sony",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Non-Photorealistic",
+        "Co-Speech Gesture",
+        "卡通",
+        "动漫"
+      ],
+      "method_family": "stylized",
+      "qa": [
+        {
+          "question": "为真实人类设计的共语音手势方法用在动漫/非真实感角色上会失效，该怎么办？",
+          "answer": "提出语义优先的手势生成管线：把对话文本切成短语，用 SentenceBERT 提句嵌入，与自建 500 实例对话手势数据集做余弦相似度检索，取 Top-K 后做序列整合与时长对齐，相似度过低时回退到中性手势。"
+        },
+        {
+          "question": "动漫角色特有的夸张符号化表情从哪来？",
+          "answer": "用多模态 LLM 从 Manga109 等漫画中自动识别面部分区并分类，抽出约 130 类情感表情（震惊蓝线、冒汗滴、脸红、星星眼、不等号眼等）建成表情库，再按对话文本情感匹配检索并与唇同步、眨眼平滑整合。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 93,
+      "authors": [
+        "Omine, T.",
+        "Kawabata, N.",
+        "Homma, F."
+      ]
+    },
+    {
+      "id": "digital-human-backend-agent-design",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十四）：数字人后端 Agent 的设计理念——从管道拼装到端到端统一",
+      "title": "数字人系列（十四）：数字人后端 Agent 的设计理念——从管道拼装到端到端统一",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-backend-agent-design.html",
+      "blog_date": "2026-07-06",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Agent",
+        "Backend",
+        "Architecture",
+        "Interactive Avatar",
+        "Synthesia",
+        "CyberVerse",
+        "OpenAvatarChat",
+        "A2-LLM",
+        "Hi-Reco",
+        "Mio",
+        "Live Avatar",
+        "Ambient Intelligence",
+        "Avatar Forcing",
+        "LTS-VoiceAgent",
+        "Fay",
+        "LiveTalking",
+        "级联管线",
+        "端到端",
+        "双工通信",
+        "RAG",
+        "Persona",
+        "MCP"
+      ],
+      "method_family": "agent-system",
+      "qa": [
+        {
+          "question": "把单个生成模型组装成能与人对话的数字人系统时，后端 Agent 应该怎么设计？",
+          "answer": "从 8 个维度拆解设计选择：架构范式（级联 / 端到端 / 混合）、交互层级（Talk→Listen→See）、延迟预算与流式策略、打断与双工通信、记忆与人格、模块化 vs 一体化、环境感知、流式生成，并对比 Synthesia、CyberVerse、OpenAvatarChat、Mio、A2-LLM、Fay、LiveTalking 等 14 个产品与论文在延迟与可替换性上的取舍。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 94,
+      "authors": []
+    },
+    {
+      "id": "digital-human-cartoon-stylized-evaluation",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十三）：卡通与风格化数字人——从跨域生成到评测方法论",
+      "title": "数字人系列（十三）：卡通与风格化数字人——从跨域生成到评测方法论",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-cartoon-stylized-evaluation.html",
+      "blog_date": "2026-07-06",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Cartoon",
+        "Stylized",
+        "卡通",
+        "风格化",
+        "Talking Head",
+        "Evaluation",
+        "User Study",
+        "FID",
+        "THEval",
+        "评测指标",
+        "Non-Photorealistic"
+      ],
+      "method_family": "stylized",
+      "qa": [
+        {
+          "question": "当目标不是“像真人”时，FID/FVD/SyncNet/CSIM 这类客观指标还适用吗？",
+          "answer": "系统梳理卡通/风格化数字人的代表工作与四条技术路线后做失效分析，指出这些指标训练域与卡通域差异过大（FID 的“像训练集”假设、SyncNet 的真实人脸判别、ArcFace 的二次元失效），主张以 User Study/MOS/Likert/2AFC 为主，并给出 THEval 八维框架与 StyleLoss 等新方向。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 95,
+      "authors": []
+    },
+    {
+      "id": "digital-human-realtime-gpu-comparison",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十二）：实时性全景对比——从 GPU 需求到交互延迟",
+      "title": "数字人系列（十二）：实时性全景对比——从 GPU 需求到交互延迟",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-realtime-gpu-comparison.html",
+      "blog_date": "2026-07-06",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Benchmark",
+        "实时性",
+        "GPU",
+        "FPS",
+        "延迟",
+        "推理",
+        "显存",
+        "Survey",
+        "选型"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "手上只有某种 GPU 时，能做到什么级别的实时数字人？",
+          "answer": "把 30+ 模型按四个硬件层级（CPU/移动端 → 单张消费级 GPU → 单张数据中心 GPU → 多卡）汇总 FPS、首帧延迟、端到端延迟与显存，拆解音频窗口、特征提取、模型推理、编码传输、播放缓冲五个延迟环节，并给出选型决策树；核心结论是 FPS 只是必要条件，必须同时报告音频窗口长度与首帧延迟。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 96,
+      "authors": []
+    },
+    {
+      "id": "geneava-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三十五）：GenEAva，首个 135 类细粒度表情卡通头像数据集",
+      "title": "GenEAva: Generating Cartoon Avatars with Fine-Grained Facial Expressions from Realistic Diffusion-based Faces",
+      "blog_url": "https://gongshangzheng.github.io/geneava-2025.html",
+      "blog_date": "2026-07-06",
+      "venue": "IEEE FG 2025",
+      "institution": "Boston University；Georgetown University",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Cartoon Avatar",
+        "GenEAva",
+        "数据集",
+        "表情生成"
+      ],
+      "method_family": "stylized",
+      "qa": [
+        {
+          "question": "卡通头像缺的到底是模型还是数据？如何生成 135 类细粒度表情的卡通头像？",
+          "answer": "瓶颈在数据。方法是在 Emo135 表情数据上微调 SDXL（含 LoRA rank=4），让模型学习表情分布而非依赖参考图做表情迁移，推理时仅凭含表情/种族/性别/年龄的文本提示采样生成真实人脸，再用 DCTNet 风格化为 3D 卡通头像，产出 13,230 张、135 种表情、性别与 7 种族均衡的 GenEAva 1.0。"
+        },
+        {
+          "question": "如何让扩散模型真正“画准表情”，同时避免身份记忆风险？",
+          "answer": "引入基于 POSTER 表情编码器的表情损失，用一步逆公式从当前噪声预测反解近似生成图，使表情损失可反向传播到 U-Net；身份侧用 LoRA rank=4、小数据与 8 轮上限降低对训练人脸的复制，并以 ArcFace 定量分析与 AMT 用户研究（945 对、表情 96%/身份 93% 保留率）双重验证身份新颖性。"
+        }
+      ],
+      "derives_from": [
+        "SDXL",
+        "DCTNet",
+        "POSTER"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 97,
+      "authors": [
+        "Hao Yu",
+        "Rupayan Mallick",
+        "Margrit Betke",
+        "Sarah Adel Bargal"
+      ]
+    },
+    {
+      "id": "theval-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三十二）：THEval，八大指标如何把 Talking Head 评测拉回人类感知",
+      "title": "THEval: Evaluation Framework for Talking Head Video Generation",
+      "blog_url": "https://gongshangzheng.github.io/theval-2025.html",
+      "blog_date": "2026-07-06",
+      "venue": "CVPR Findings 2026",
+      "institution": "Inria；上海 AI Lab；Darmstadt",
+      "year": 2026,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "THEval",
+        "Evaluation",
+        "Talking Head",
+        "FID"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "惯用的 FID/FVD/SyncNet/LMD 指标真的与人类感知相关吗？",
+          "answer": "在 17 个模型、5,011 个源视频、约 85,000 个生成视频上计算与人类偏好的 Spearman 秩相关，6 个传统指标全部不显著（p > 0.05，95% 置信区间均含 0）；最讽刺的是以 SyncNet 为判别器训练的 Wav2Lip 拿到最高 LSE-C，却在用户研究中被评为最差。"
+        },
+        {
+          "question": "什么指标才与人类感知对齐？",
+          "answer": "提出 Quality / Naturalness / Synchronization 三维度八指标框架，把评估哲学从“逐帧对比生成与 GT”改成“比较运动行为统计特征”，每个指标相对 GT 归一化后无加权平均得到 Final Score，与人类偏好 Spearman ρ = 0.870。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 98,
+      "authors": [
+        "Nabyl Quignon",
+        "Baptiste Chopin",
+        "Yaohui Wang",
+        "Antitza Dantcheva"
+      ]
+    },
+    {
+      "id": "toontalker-2023",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人论文精读（三十三）：ToonTalker，首个跨域卡通-真实双向人脸重演",
+      "title": "ToonTalker: Cross-Domain Face Reenactment",
+      "blog_url": "https://gongshangzheng.github.io/toontalker-2023.html",
+      "blog_date": "2026-07-06",
+      "venue": "ICCV 2023",
+      "institution": "清华深研院；腾讯 AI Lab；蚂蚁集团",
+      "year": 2023,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "ToonTalker",
+        "卡通",
+        "Cross-Domain",
+        "Face Reenactment"
+      ],
+      "method_family": "stylized",
+      "qa": [
+        {
+          "question": "卡通视频数据稀缺、与真人又没有配对数据时，如何做真实↔卡通双向人脸重演？",
+          "answer": "用域特异组件（外观/动作编码器、生成器）提取各域独有的外观与动作，域共享的两个参数共享 Query Transformer 把不同域的动作描述符投射到同一规范运动空间，运动迁移通过规范空间中的向量加法实现，从而支持 Real→Cartoon 与 Cartoon→Real 双向重演。"
+        },
+        {
+          "question": "没有配对数据，如何保证跨域动作语义一致？",
+          "answer": "提出类比约束：只要求“真实域的动作差量”等于“卡通域对应的动作差量”，几何上等价于在规范空间中构造平行四边形，无需配对样本；训练上先用 VoxCeleb 大规模真实数据预训练，再用少量自建 Disney 卡通数据联合微调。"
+        }
+      ],
+      "derives_from": [
+        "Perceiver",
+        "FOMM",
+        "LIA"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 99,
+      "authors": [
+        "Yuan Gong",
+        "Yong Zhang",
+        "Xiaodong Cun",
+        "Fei Yin",
+        "Yanbo Fan",
+        "Xuan Wang",
+        "Baoyuan Wu",
+        "Yujiu Yang"
+      ]
+    },
+    {
+      "id": "digital-human-training-loss-survey",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十五）：训练全景——Loss 函数族与训练策略的系统性整理",
+      "title": "数字人系列（十五）：训练全景——Loss 函数族与训练策略的系统性整理",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-training-loss-survey.html",
+      "blog_date": "2026-07-07",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "Loss Function",
+        "Training Strategy",
+        "Wing Loss",
+        "Perceptual Loss",
+        "GAN Loss",
+        "SyncNet",
+        "Survey"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "数字人训练到底用了哪些 Loss、它们该怎么组合？",
+          "answer": "把 Loss 按监督信号分成 7 大族（像素重建、感知、对抗、同步、身份保持、关键点与运动约束、生成模型专属），逐族给出数学形式与作用；再梳理 5 条技术路线的典型组合、4 类训练策略（分阶段、模块化 vs 端到端、冲突解决）与 12 个系统的对比总表。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 100,
+      "authors": []
+    },
+    {
+      "id": "motionshop-2-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人工程解读（十）：MotionShop-2，视频角色替换的工程化升级",
+      "title": "数字人工程解读（十）：MotionShop-2，视频角色替换的工程化升级",
+      "blog_url": "https://gongshangzheng.github.io/motionshop-2-2025.html",
+      "blog_date": "2026-07-09",
+      "venue": null,
+      "institution": "阿里通义 + aigc3d 团队",
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "MotionShop",
+        "视频角色替换",
+        "3D Gaussian Splatting"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "如何把任意 3D Avatar 自然地替换进真实视频，同时保持原始运动轨迹与背景不变？",
+          "answer": "采用“双并行管线 + 合成输出”：一条管线做角色检测、SAM 分割跟踪与 ProPainter 视频修复得到干净背景，另一条做姿态估计、动画重定向、光照估计与渲染；两条管线完全独立并行，总耗时从两者之和压到两者最大值，实现分钟级处理。"
+        },
+        {
+          "question": "相比原始 MotionShop，MotionShop-2 升级了什么？",
+          "answer": "三个模块：视频修复在不换算法的前提下提速 20% 且质量不降；姿态估计从 SMPL（24 关节）升级为 SMPL-X（约 55 关节，含手部与面部 blendshape）并加时序正则；渲染从 TIDE 升级为支持 3D 高斯泼溅与混合渲染的 UniTIDE，并集成 AniGS 打通“单图生成 Avatar → 替换视频”闭环。"
+        }
+      ],
+      "derives_from": [
+        "MotionShop",
+        "AniGS"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 101,
+      "authors": [
+        "aigc3d Team"
+      ]
+    },
+    {
+      "id": "digital-human-hand-generation",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十七）：手部生成方案——从 3D 整体运动到 2D 像素空间",
+      "title": "数字人系列（十七）：手部生成方案——从 3D 整体运动到 2D 像素空间",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-hand-generation.html",
+      "blog_date": "2026-07-10",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "手部生成",
+        "Co-Speech Gesture",
+        "扩散模型",
+        "Holistic Generation"
+      ],
+      "method_family": "action-generation",
+      "qa": [
+        {
+          "question": "有没有能直接生成手部、或连头带手一起生成的方法？",
+          "answer": "有。方案归为三条路线：3D 参数空间整体生成（TalkSHOW、EMAGE、UMo）、2D 像素空间直接生成（CyberHost、EMO2、AudCast、InfinityHuman）、3D 运动到 2D 渲染级联（Audio2Photoreal、OmniAvatar）；核心难点是手势与语音是语义级弱对应（多样性、21 关节结构复杂、像素细节欠拟合、跨部位协调），不同路线在可控性、视觉质量与实时性上各有取舍。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 102,
+      "authors": []
+    },
+    {
+      "id": "opens2v-nexus-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人评测参考：OpenS2V-Nexus，主体到视频生成的基准与百万级数据集",
+      "title": "OpenS2V-Nexus: A Detailed Benchmark and Million-Scale Dataset for Subject-to-Video Generation",
+      "blog_url": "https://gongshangzheng.github.io/opens2v-nexus-2025.html",
+      "blog_date": "2026-09-01",
+      "venue": "arXiv",
+      "institution": "北京大学深圳研究生院；University of Rochester；Rabbitpre AI",
+      "year": 2025,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "benchmark",
+        "身份一致性",
+        "主体一致性",
+        "S2V"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "主体到视频生成（S2V）的“主体一致性/身份一致性”该怎么评？",
+          "answer": "提出七类任务 × 六维指标的评测 taxonomy，用 NexusScore 取代 VBench 系未裁剪帧相似度：以参考图为 prompt 用 YOLO-World 检测主体、裁剪后与实体名称在 GME 多模态检索空间算相似度，再经双阈值过滤聚合，把“主体好不好”拆成主体一致性、自然性、文本相关性、人脸相似度、视觉质量与运动幅度。"
+        },
+        {
+          "question": "为什么现有“一致性高分”不可信？",
+          "answer": "因为存在 copy-paste 捷径——模型直接搬运参考图的姿态、光照与轮廓，分数很高但人眼觉得假；同时所有模型对人类身份的保真都系统性弱于非人实体。为此作者构建百万级 OpenS2V-5M 数据集与 0.35M 反捷径设计的 Nexus Data，让基准能暴露而非掩盖这两个问题。"
+        }
+      ],
+      "derives_from": [
+        "VBench",
+        "ConsisID"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 103,
+      "authors": [
+        "Shenghai Yuan",
+        "Xianyi He",
+        "Yufan Deng",
+        "Yang Ye",
+        "Jinfa Huang",
+        "Bin Lin",
+        "Jiebo Luo",
+        "Li Yuan"
+      ]
+    },
+    {
+      "id": "vbench2-2025",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人评测参考：VBench-2.0，面向内在忠实性的视频生成基准套件",
+      "title": "VBench-2.0: Advancing Video Generation Benchmark Suite for Intrinsic Faithfulness",
+      "blog_url": "https://gongshangzheng.github.io/vbench2-2025.html",
+      "blog_date": "2026-09-01",
+      "venue": "arXiv 2503.21755",
+      "institution": "上海 AI Lab + NTU S-Lab + 中山大学",
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "benchmark",
+        "身份一致性",
+        "视频生成",
+        "评测"
+      ],
+      "method_family": "evaluation",
+      "qa": [
+        {
+          "question": "表面忠实性指标饱和后，视频生成评测的下一个前沿是什么？",
+          "answer": "转向“内在忠实性”——生成视频是否遵守物理规律、常识、解剖结构与组合完整性。VBench-2.0 把内在忠实性切成 Human Fidelity、Creativity、Controllability、Physics、Commonsense 五大维度共 18 项可独立测量的能力。"
+        },
+        {
+          "question": "怎么评才可靠？",
+          "answer": "承认没有单一评测器全能：按维度混搭 generalist（VLM 出描述 + LLM 做语义对齐，或视频多问答）与 specialist（例如 Human Identity 直接用 RetinaFace 定位 + ArcFace 特征 + 首帧锚定算余弦相似度），并用预过滤、冗余提问、后处理校验等 safeguards 抑制大模型幻觉。"
+        }
+      ],
+      "derives_from": [
+        "VBench"
+      ],
+      "derived_by": [
+        "opens2v-nexus-2025"
+      ],
+      "note": null,
+      "note_type": null,
+      "seq": 104,
+      "authors": [
+        "Dian Zheng",
+        "Ziqi Huang",
+        "Hongbo Liu",
+        "Kai Zou",
+        "Yinan He",
+        "Fan Zhang",
+        "Lulu Gu",
+        "Yuanhan Zhang",
+        "Jingwen He",
+        "Wei-Shi Zheng",
+        "Yu Qiao",
+        "Ziwei Liu"
+      ]
+    },
+    {
+      "id": "digital-human-survey-map",
+      "source": [
+        "blog"
+      ],
+      "title_zh": "数字人系列（十九）：综述地图——市面数字人综述精读对比与新模型线索",
+      "title": "数字人系列（十九）：综述地图——市面数字人综述精读对比与新模型线索",
+      "blog_url": "https://gongshangzheng.github.io/digital-human-survey-map.html",
+      "blog_date": "2026-09-07",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": null,
+      "tags": [
+        "数字人",
+        "综述",
+        "Survey",
+        "Talking Head",
+        "文献地图"
+      ],
+      "method_family": "survey",
+      "qa": [
+        {
+          "question": "这个领域的综述版图长什么样、我该读哪一篇？",
+          "answer": "逐篇精读四篇代表综述：From Pixels to Portraits v8（五族 taxonomy + 公开模型实测对比）、Human Motion Video Generation（三段管线框架）、THG Taxonomy（把 Editing 立为一级类）、Advancing THG（Loss 专节），拆解各自分类体系、独门贡献与覆盖局限，并整理出 12 条新模型线索。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 105,
+      "authors": []
+    },
+    {
+      "id": "talker-t2av",
+      "source": [
+        "note"
+      ],
+      "title_zh": "Talker-T2AV 模型笔记",
+      "title": "Talker-T2AV: Joint Talking Audio-Video Generation with Autoregressive Diffusion Modeling",
+      "blog_url": null,
+      "blog_date": "2026-09-23",
+      "venue": "arXiv 2604.23586v2",
+      "institution": "HKUST 等",
+      "year": null,
+      "arxiv_id": "2604.23586",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "Talker-T2AV",
+        "自回归扩散",
+        "联合音视频生成",
+        "两级解耦"
+      ],
+      "method_family": "motion-space-diffusion",
+      "qa": [
+        {
+          "question": "dual-DiT 联合音视频生成为什么又慢又不灵活？",
+          "answer": "因为它用两条并行 DiT 塔（音频/视频）在整条去噪轨迹上用双向跨模态注意力耦合：一是把高层语义与低层渲染全程纠缠，二是天生非因果且输出定长（文本超长只能加速或截断），三是每一步去噪都要在稠密 T×H×W 时空 latent 上做注意力，实测比实时慢 2–3 个数量级。"
+        },
+        {
+          "question": "如何既保证跨模态对齐又把效率做上去？",
+          "answer": "把生成拆成两级：Stage 1 用共享因果 LM（由 Qwen3-0.6B 初始化）在统一 patch 序列上做高层跨模态规划，Stage 2 用两个参数独立、互不做跨模态注意力的轻量 DiT 头分别渲染音频与视频 latent。音频侧用 WhisperX-VAE 的 32 维、视频侧用 LIA-X 的 40 维 motion，两者都是冻结且同帧率 25 Hz 的纯 1-D 序列，逐位置相加即“按构造成立”地对齐；5 秒片段只需 31.25 个自回归 patch 步，单卡 H20 上达 24 FPS（1B 参数）。"
+        },
+        {
+          "question": "同一个模型能支持哪些任务、能力边界在哪？",
+          "answer": "逐位置相加的融合方式同时是单模态条件生成的开关：给定真实音频或真实 motion 时直接替换对应分支的 patch embedding，因此同一 checkpoint 零架构改动、零微调地支持 T2AV、A2V 与视频配音。边界是视频侧只生成 40 维 motion latent、不出像素，出帧必须依赖外部 LIA-X 解码器并额外提供一张源身份图；此外骨干工作在连续 latent 空间，长序列误差容易累积。"
+        }
+      ],
+      "derives_from": [
+        "LIA-X"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/talker-t2av",
+      "note_type": "doc",
+      "seq": 106,
+      "authors": []
+    }
+  ]
+}

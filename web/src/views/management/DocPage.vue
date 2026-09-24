@@ -75,7 +75,10 @@
             </div>
           </header>
           <div class="doc-body">
-            <MarkdownRenderer :content="bodyContent" />
+            <template v-for="(seg, i) in bodySegments" :key="i">
+              <PaperTable v-if="seg.type === 'papers'" :papers="papersData" />
+              <MarkdownRenderer v-else :content="seg.content" />
+            </template>
           </div>
           <section v-if="sidecar?.related?.length" class="doc-related">
             <h3>相关文档</h3>
@@ -162,6 +165,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { NSpin, NTag, NSelect, NButton, NModal, NTimeline, NTimelineItem, NIcon } from 'naive-ui'
 import { ChevronBackOutline, ChevronForwardOutline } from '@vicons/ionicons5'
 import MarkdownRenderer from '../../components/common/MarkdownRenderer.vue'
+import PaperTable from '../../components/common/PaperTable.vue'
 import EmptyState from '../../components/common/EmptyState.vue'
 import { getDocList, getDocDetail } from '../../api/docs'
 import { extractToc, slugify } from '../../utils/markdown'
@@ -213,6 +217,20 @@ const tocItems = computed(() => currentDoc.value ? extractToc(currentDoc.value.c
 const bodyContent = computed(() =>
   currentDoc.value ? currentDoc.value.content.replace(/^# .+\n*/gm, '') : ''
 )
+
+// sidecar.papers 驱动的信息表：正文用 `<!-- papers-table -->` 占位，
+// 按标记切分正文，标记处挂载 PaperTable 组件（而不是交给 markdown-it）。
+const PAPERS_MARKER = '<!-- papers-table -->'
+const papersData = computed(() => sidecar.value?.papers || [])
+const bodySegments = computed(() => {
+  const parts = bodyContent.value.split(PAPERS_MARKER)
+  const segments = []
+  parts.forEach((part, index) => {
+    if (part.trim()) segments.push({ type: 'md', content: part })
+    if (index < parts.length - 1) segments.push({ type: 'papers' })
+  })
+  return segments
+})
 
 const mobileOptions = computed(() =>
   docsList.value.map(d => ({ label: d.title || d.slug, value: d.slug }))
