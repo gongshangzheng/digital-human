@@ -1,0 +1,69 @@
+{
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "summary": "首次创建：按 article-note 流程精读。10 节骨架，主线为「关键点变换运算顺序 → 表情/头姿解耦」；含 FLAME 一致变换、三组显式 3D 关键点 + FLAME Loss、边界对齐模块（BAM）、Teacher-Student 两阶段与 Replacement/Enhancement 两种推理模式；6 张原图、式 1–9，Table 1 同时登记 Replacement 与 Enhancement 两列；第 8 节对照 LivePortrait/Face Vid2vid 谱系并登记 GAN 生成上限",
+      "commit": ""
+    }
+  ],
+  "progress": {
+    "status": "draft",
+    "next": "若要继续：补 Table 3（MEAD）逐格数字；核对 6 FPS 的 GPU 型号与训练学习率调度（论文未披露）"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/performrecast/"
+    },
+    {
+      "title": "论文全文（arXiv HTML 派生）",
+      "path": ".cache/article-note/performrecast/paper.txt"
+    },
+    {
+      "title": "事实位置索引与缺口",
+      "path": ".cache/article-note/performrecast/raw/facts.md"
+    },
+    {
+      "title": "提取日志（source/PDF 返回 406，HTML 成功）",
+      "path": ".cache/article-note/performrecast/raw/sources/extraction-log.md"
+    }
+  ],
+  "related": [
+    {
+      "slug": "论文笔记/liveportrait",
+      "title": "LivePortrait 模型笔记",
+      "desc": "本篇的直接基座；本文改的正是它的关键点变换公式并去掉其第二训练阶段"
+    },
+    {
+      "slug": "论文笔记/face-vid2vid",
+      "title": "Face Vid2vid 模型笔记",
+      "desc": "隐式关键点三项分解的谱系上游"
+    },
+    {
+      "slug": "论文笔记/ditto",
+      "title": "Ditto 模型笔记",
+      "desc": "下游：把 LivePortrait 的 265D 运动空间当扩散目标"
+    },
+    {
+      "slug": "论文笔记/avatar-forcing",
+      "title": "Avatar Forcing 模型笔记",
+      "desc": "下游：在 FLOAT 运动空间做块因果 Diffusion Forcing"
+    },
+    {
+      "slug": "数字人概述/数字人身份",
+      "title": "数字人身份"
+    },
+    {
+      "slug": "数字人概述/数字人动作",
+      "title": "数字人动作"
+    },
+    {
+      "slug": "数字人概述/数字人关键技术地图",
+      "title": "数字人关键技术谱系"
+    },
+    {
+      "slug": "knowledge/数字人基础",
+      "title": "数字人基础"
+    }
+  ]
+}

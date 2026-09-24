@@ -46,6 +46,7 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `lia-x.md` | 深读 + 定位层（未接入：可解释 latent、40D motion code 与身份特征注入） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
 | `float.md` | 深读 + 定位层（基座：Avatar Forcing 复用的 motion latent 空间） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `face-vid2vid.md` | 深读 + 定位层（LivePortrait 前置：3D 隐式关键点与 free-view） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
+| `performrecast.md` | 深读 + 定位层（未接入：FLAME 一致变换解耦表情/头姿、49 点显式监督、BAM；表情-only 编辑与两种推理模式）｜论文 [arXiv:2603.19731](https://arxiv.org/abs/2603.19731) PerformRecast: Expression and Head Pose Disentanglement for Portrait Video Editing | ✅ 已完成（10 节骨架 + 6 图 + sidecar，order: 65） |
 | `fpsattention.md` | 深读（FP8 量化 × 稀疏注意力协同） | ✅ 已完成（10 节骨架 + 3 图 + sidecar，order: 100） |
 | `blade.md` | 深读（块稀疏注意力 × 步数蒸馏联合训练） | ✅ 已完成（论文标注：2 图 + 5 公式 + sidecar） |
 | `nar.md` | 深读（邻域自回归建模；需从头训练） | ✅ 已完成（论文标注：3 图 + 2 公式 + sidecar） |
