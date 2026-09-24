@@ -48,11 +48,11 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `face-vid2vid.md` | 深读 + 定位层（LivePortrait 前置：3D 隐式关键点与 free-view） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `fpsattention.md` | 深读（FP8 量化 × 稀疏注意力协同） | ✅ 已完成（10 节骨架 + 3 图 + sidecar，order: 100） |
 | `blade.md` | 深读（块稀疏注意力 × 步数蒸馏联合训练） | ✅ 已完成（论文标注：2 图 + 5 公式 + sidecar） |
-| `nar.md` | 深读（邻域自回归建模） | 待写 |
-| `flashar.md` | 深读（自回归生成的后训练加速） | 待写 |
+| `nar.md` | 深读（邻域自回归建模；需从头训练） | ✅ 已完成（论文标注：3 图 + 2 公式 + sidecar） |
+| `flashar.md` | 深读（自回归生成的后训练加速；配图受抓取限制） | ✅ 已完成（论文标注：1 图 + 2 Mermaid + 10 公式 + sidecar） |
 | `latent-spatial-memory.md` | 深读（隐空间空间记忆；注意：任务是相机轨迹 world model） | ✅ 已完成（论文标注：3 图 + 7 公式 + sidecar） |
 | `worldattention.md` | 深读（缓存与计算系统协同） | 待写 |
-| `zipar.md` | 深读（空间局部性并行解码） | 待写 |
+| `zipar.md` | 深读（空间局部性并行解码；零训练） | ✅ 已完成（论文标注：3 图 + 3 公式 + sidecar） |
 | `dax.md` | 深读（VideoGen 推理基础设施） | 待写 |
 | `turbodiffusion.md` | 深读（模型与系统协同设计） | 待写 |
 | `inferix.md` | 深读（自回归扩散推理引擎） | 待写 |

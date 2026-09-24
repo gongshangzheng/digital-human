@@ -1,0 +1,58 @@
+{
+  "slug": "论文笔记/nar",
+  "title": "NAR 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "change": "docs-note-gen-acceleration",
+      "summary": "首次创建：生成侧加速十篇中的 NAR（Neighboring Autoregressive Modeling, arXiv 2503.10696）。10 节骨架 + sidecar + 3 张已发布图（范式对比、维度导向解码头、UCF-101 样例）；写清「改训练目标为 next-neighbor、按曼哈顿距离等距层并行生成、只压解码步数」的成本口径，2 个块级公式（等距层定义、步数 2n−1 / 2n+t−2），Mermaid 一张（next-neighbor 目标与各解码头的关系），四问（加速段=解码步数 / 前提=从头训练 / 证据=论文已验证 / 口径=单卡 A100 80GB、ImageNet 256² + UCF-101 + GenEval，44.0s→1.09s 与 13.8× 分属不同表不可横比），以及第 8 节「论文局限 vs 我们结论」对照表。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2503.10696v1（LaTeXML HTML 全文 + PDF 16 页，页码可核）；raw/figures 下落 4 张位图（paradigm_comparison、dimensional_heads、c2v_ucf101、visualization_stage1）",
+    "analysis": "methodology / experiment / terminology 三 lane 已备 + image-collection 与 synthesis 归并；validate-analysis 通过",
+    "writing": "正文与 sidecar 已完成并校验"
+  },
+  "appendix": [
+    {
+      "title": "分析方法学 lane",
+      "path": ".cache/article-note/nar/analysis/methodology.md"
+    },
+    {
+      "title": "分析实验与证据 lane",
+      "path": ".cache/article-note/nar/analysis/experiment.md"
+    },
+    {
+      "title": "分析术语与符号 lane",
+      "path": ".cache/article-note/nar/analysis/terminology.md"
+    },
+    {
+      "title": "配图候选与章节映射",
+      "path": ".cache/article-note/nar/analysis/image-collection.md"
+    },
+    {
+      "title": "综合分析",
+      "path": ".cache/article-note/nar/synthesis.md"
+    }
+  ],
+  "related": [
+    { "slug": "knowledge/视频生成训练与推理加速专题", "title": "视频生成训练与推理加速专题" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" },
+    { "slug": "论文笔记/zipar", "title": "ZipAR 模型笔记" },
+    { "slug": "论文笔记/fpsattention", "title": "FPSAttention 模型笔记" },
+    { "slug": "论文笔记/blade", "title": "BLADE 模型笔记" },
+    { "slug": "论文笔记/latent-spatial-memory", "title": "Latent Spatial Memory 模型笔记" },
+    { "slug": "论文笔记/README", "title": "论文笔记（篇目索引）" }
+  ],
+  "notes": [
+    "未入本地 papers 库（data/papers.db 无 arxiv-2503.10696），frontmatter 按命名规范写 papers_id: arxiv-2503.10696。",
+    "证据等级原样保留为「论文已验证」，来源为本仓库知识库整理（management/docs/knowledge/视频生成训练与推理加速专题.md §2.3 NAR 行），未升格也未降格；论文摘要给出代码地址 https://github.com/ThisisBillhe/NAR，但本工作区未克隆/未运行/未核验，故不能进入「代码或 README 证据」或「仓库 benchmark」档；且为 arXiv v1 预印本、无同行评审声明。",
+    "训练前提是本篇核心红线：NAR 属「从头训练（from scratch）」，需改模型结构（新增维度导向解码头）与注意力 mask，复用同一 tokenizer 与训练管线，不能直接套用现成 NTP 权重；硬证据为 Table 4 —— 去掉解码头后 NAR-L 步数虽降到 31，FID 反而从 3.06 崩到 66.31（对照 LlamaGen-L 3.80）。正文四问速答②、§4 训练表与 §8 对照表均已写明。",
+    "报告口径的拼接风险已拆开标注：知识库 §2.3 那一行把「UCF-101：44.0s→1.09s」与「吞吐 13.8×」并列，实际 44.0s 是 Table 2 中 LARP-L-Long（343M、1280 步）的墙钟时间、1.09s 是 NAR-L（369M、34 步），而 13.8× 出自图像侧 §4.2.1/Table 1（NAR-L 195.4 vs LlamaGen-XXL 14.1）。二者分属不同表/任务，正文 §6「报告口径与边界」明确「不可拼成一句、不可与其它论文直接横比」。",
+    "论文内部数字冲突已如实登记：摘要/§1 写步数降低 91.8%、FID 降低 0.81（相对 LlamaGen-XL），与 Table 1/§4.2.1/§4.4 的 87.8%（256→31）及 NAR-XL FID 2.70 vs 3.39（差 0.69）不一致；正文优先采用表内可核数字并单列该冲突。摘要 2.4×/8.6× 无法从 Table 1/2 直接复现（8.6× 由 Table 2 时间列推得，2.4× 对应 NAR-B vs PAR-B-4X），正文在表注中标注为推断。",
+    "未披露项已如实登记：训练用卡型号/卡数/时长/总 FLOPs、解码头带来的额外参数/显存/时延增量、优化器/batch/warmup/EMA/初始化、proximity-aware mask 的逐元素构造公式、重叠位置混合 logits 的融合系数、视频评测采样数、是否使用 KV cache、多卡/分布式配置。",
+    "我方未接入：本地无对应 NTP/邻域 AR 视觉训练链与权重，第 8 节「论文局限 vs 我们结论」只写定位与可复用点（等距层解码顺序、维度正交解码头 + 邻域感知掩码设计原则、重叠位置多头混合），不承诺本地可用；迁移到 talking-head/实时数字人属外推、标记为待自测。",
+    "配图 3 张已发布到 management/docs/_assets/nar/：fig-1-paradigm-comparison.webp（1141×643 ≈50 KB ← 论文 Figure 3）、fig-2-dimensional-heads.webp（1182×1137 ≈44 KB ← 论文 Figure 4）、fig-3-ucf101-samples.webp（1324×1559 ≈162 KB ← 论文 Figure A）；正文逐图解读，图 3 明确标注为定性画廊、无数值。"
+  ]
+}
