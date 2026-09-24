@@ -40,8 +40,8 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `avatar-forcing.md` | 深读 + 工程层（微调/漂移实验/流式接入） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `ditto.md` | 深读 + 工程层（TRT 实时化/流式管线） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `liveact.md` | 深读 + 工程层（SoulX-LiveAct 接入） | ✅ 已完成（10 节骨架 + 7 图 + sidecar） |
-| `omnimate.md` | 深读 | 待写 |
-| `talker-t2av.md` | 深读 + 工程层（接入与验证）｜论文 [arXiv:2604.23586](https://arxiv.org/abs/2604.23586) Talker-T2AV: Joint Talking Audio-Video Generation with Autoregressive Diffusion Modeling | 待写 |
+| `omnimate.md` | 深读 + 定位层（开放时长交互：GPC 进度条件 + MRCM 多参考身份） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
+| `talker-t2av.md` | 深读 + 工程层（接入与验证）｜论文 [arXiv:2604.23586](https://arxiv.org/abs/2604.23586) Talker-T2AV: Joint Talking Audio-Video Generation with Autoregressive Diffusion Modeling | ✅ 已完成（10 节骨架 + 1 图 + 2 Mermaid + sidecar） |
 | `liveportrait.md` | 深读 + 定位层（未接入：隐式关键点表示、stitching/retargeting 控制） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
 | `lia-x.md` | 深读 + 定位层（未接入：可解释 latent、40D motion code 与身份特征注入） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
 | `float.md` | 深读 + 定位层（基座：Avatar Forcing 复用的 motion latent 空间） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |

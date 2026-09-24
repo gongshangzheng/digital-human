@@ -6,7 +6,7 @@ tags: [数字人, Talker-T2AV, T2AV, LIA-X, 音视频生成]
 id: 14
 ---
 
-> 本文固定阅读本地缓存的上游版本 `6712f62`。本地 adapter、FaceCropper 和性能冒烟见 [[knowledge/Talker-T2AV 接入与验证|Talker-T2AV 接入与验证]]。音画同步模块边界见 [[knowledge/音画同步专题|音画同步专题]]。项目全景见 [[project:digital-human]]。
+> 本文固定阅读本地缓存的上游版本 `6712f62`。**论文层正式笔记见 [[论文笔记/talker-t2av|Talker-T2AV 模型笔记]]。** 本地 adapter、FaceCropper 和性能冒烟见 [[knowledge/Talker-T2AV 接入与验证|Talker-T2AV 接入与验证]]。音画同步模块边界见 [[knowledge/音画同步专题|音画同步专题]]。项目全景见 [[project:digital-human]]。
 
 ## 一、它到底生成什么
 

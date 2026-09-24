@@ -1,0 +1,55 @@
+{
+  "slug": "论文笔记/omnimate",
+  "title": "OmniMate 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "change": "docs-note-omnimate",
+      "summary": "首次创建：按 article-note 流水线产出 10 节骨架笔记，含 5 张论文原图、GPC 进度条件（1–1000 / 0，latent 加法注入）与 MRCM 双身份条件（视觉需训练、说话人 training-free）的机制拆解、四阶段训练（含弃用原始多步 diffusion teacher）、主结果与消融表逐字照录，并同段标注指标口径未公开与四项非第一。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2607.23023v2（source tarball 成功：单文件 Arxiv.tex + 5 张矢量原图；PDF 9 页用于页码）",
+    "analysis": "methodology / experiment / terminology / image-collection 委派完成，validate-analysis 通过",
+    "writing": "正文与 sidecar 已完成并校验"
+  },
+  "related": [
+    { "slug": "数字人概述/数字人领域问题", "title": "数字人领域问题" },
+    { "slug": "数字人概述/数字人身份", "title": "数字人身份" },
+    { "slug": "论文笔记/avatar-forcing", "title": "Avatar Forcing 模型笔记" },
+    { "slug": "论文笔记/liveact", "title": "SoulX-LiveAct 模型笔记" },
+    { "slug": "论文笔记/vorch-streamer", "title": "Vorch-Streamer 模型笔记" }
+  ],
+  "appendix": {
+    "figures": [
+      { "figure": 1, "paper": "Figure 1", "file": "fig-1-teaser.webp", "section": "一句话总结" },
+      { "figure": 2, "paper": "Figure 2", "file": "fig-2-method.webp", "section": "方法精析" },
+      { "figure": 3, "paper": "Figure 3", "file": "fig-3-train-gpc.webp", "section": "训练与实现细节" },
+      { "figure": 4, "paper": "Figure 4", "file": "fig-4-result.webp", "section": "实验与结果" },
+      { "figure": 5, "paper": "Figure 5", "file": "fig-5-ablation.webp", "section": "实验与结果（消融）" }
+    ],
+    "formulas": [
+      { "id": "(1)", "content": "视频帧级进度值映射到 1–1000", "page": "pdf p.3" },
+      { "id": "(2)", "content": "音频 token 级进度值映射到 1–1000", "page": "pdf p.4（tex 同段）" },
+      { "id": "(3)", "content": "progress 经 PE+MLP 后逐元素相加注入 latent", "page": "pdf p.4" },
+      { "id": "(4)", "content": "二值分段文本交叉注意力掩码 m_i", "page": "pdf p.4" },
+      { "id": "(5)", "content": "按掩码插值执行/聆听提示", "page": "pdf p.4" },
+      { "id": "(6)", "content": "参考图 VAE 编码", "page": "pdf p.5" },
+      { "id": "(7)", "content": "参考 latent 与噪声 latent 时间维拼接", "page": "pdf p.5" },
+      { "id": "(8)", "content": "音频 latent 按有无参考语音条件替换", "page": "pdf p.5" }
+    ],
+    "imageNote": "GPC 与 MRCM 是两个并列机制、共用同一 latent 注入点：progress（控制信号）走 PE+MLP 加法注入，参考图（拼接 + 负 RoPE）与参考语音（latent 替换）走身份条件注入。",
+    "formulaNote": "式 (1)(2) 为唯一给出闭式表达式的公式，(4)(8) 为分段定义；正文未给出任何损失函数公式，仅 Figure 3 图内出现 DMD Loss / MSE Loss 标签。"
+  },
+  "notes": [
+    "指标口径未公开：论文正文称指标细节在 appendix，但本 arXiv 版本没有 appendix（9 页，第 8 页起为参考文献，源码中 \\input{ReproducibilityChecklist.tex} 被注释），13 个指标（FPS/TTFF/AQ/A-ID/Speech/TA/VQ/TV/V-ID/Sync-D/IB-Score/LSE-C/LSE-D）的定义、评测模型、打分尺度、样本量与随机种子全部未披露，不可复现验证。",
+    "venue：首页模板为 AAAI 2027，未见录用标注，故正文写「arXiv 2607.23023（模板为 AAAI 2027，未见录用标注）」，不声明会议。",
+    "未作为独立 arXiv 条目入本地 papers 资料集：papers/data/ 下只有 blog_papers.json，无该篇 arXiv 记录；data/papers.db 里 id=arxiv-2607.23023 的行 source=blog，来自博客精读（omnimate-2026）导入。papers_id 按命名规范登记为 arxiv-2607.23023。",
+    "主结果表逐字照录并同段标注两项事实：AQ/VQ/Sync-D/LSE-C 并非第一（6.22 vs 6.46、3.93 vs 3.97、0.042 vs 0.004、4.06 vs 4.12），且多数胜出指标（FPS/TTFF/Speech/IB-Score）依赖未公开定义的实现。",
+    "消融结论只按 Speech↓（w/o GPC 0.239、w/o DataConstruct 0.382、w/o DistillTeacher 0.489）与 A-ID/V-ID 采信；w/o GPC 与 w/o MRCM 的 FPS 反高于 Full，论文未披露各变体训练预算是否一致，故不用 FPS/TTFF 论证消融。",
+    "Figure 2 图题与图内字母不一致：TeX 图题写 (a) 流式推理管线 / (b) GPC / (c) MRCM，图内实际排版为 (a) Streaming Inference / (b) MRCM / (c) GPC；笔记按图内字母引用并显式登记该差异。",
+    "原文自身两处写法不统一：LTX2.3 与 LTX-2.3、VerseBench 与 Versebench（同指），笔记保留原文差异并注明。",
+    "我方未接入本篇（论文未披露项目页与代码仓库，无权重），第 8 节只记机制定位，无第一手实测数据。"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "slug": "论文笔记/talker-t2av",
+  "title": "Talker-T2AV 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-23",
+      "change": "docs-note-talker-t2av",
+      "summary": "首次创建：按 article-note 流水线产出 10 节骨架笔记，含 1 张论文原图 + 2 张自绘 Mermaid、4 个块级公式、Table 1–6 关键数值照录，以及 UTMOS 措辞张力与 SyncNet C/D 量纲两处事实核对注。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2604.23586v2（HTML LaTeXML 全文 + 15 页 PDF；source tarball 406 失败，图源受限）",
+    "analysis": "methodology / experiment / terminology / image-collection 四 lane 完成；validate-analysis 通过",
+    "writing": "正文与 sidecar 已完成并校验"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/talker-t2av/"
+    },
+    {
+      "title": "论文主源（LaTeXML 全文）",
+      "path": ".cache/article-note/talker-t2av/raw/sources/talker-t2av.html"
+    },
+    {
+      "title": "论文 PDF（15 页，页码依据）",
+      "path": ".cache/article-note/talker-t2av/raw/sources/talker-t2av.pdf"
+    },
+    {
+      "title": "已发布图源与产物",
+      "path": ".cache/article-note/talker-t2av/publish-webp/fig-1-overview.webp"
+    },
+    {
+      "title": "分析 lane 产物",
+      "path": ".cache/article-note/talker-t2av/analysis/"
+    }
+  ],
+  "related": [
+    { "slug": "论文笔记/lia-x", "title": "LIA-X 模型笔记" },
+    { "slug": "论文笔记/ditto", "title": "Ditto 模型笔记" },
+    { "slug": "论文笔记/avatar-forcing", "title": "Avatar Forcing 模型笔记" },
+    { "slug": "knowledge/Talker-T2AV 模型精读", "title": "Talker-T2AV 模型精读" },
+    { "slug": "knowledge/Talker-T2AV 接入与验证", "title": "Talker-T2AV 接入与验证" },
+    { "slug": "数字人概述/数字人领域问题", "title": "数字人领域问题" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" }
+  ],
+  "notes": [
+    "本篇论文只有 1 张正文图（Figure 1），其余 6 个 figure 容器全是表格（Table 1–6），因此配图策略为「1 原图 + 2 张自绘 Mermaid」，正文与 frontmatter 后均已说明该限制。",
+    "本地 data/papers.db 中查无 arxiv-2604.23586，正文 papers 库条目行已写明「本地 papers 库未入库」。",
+    "上游固定版本为 knowledge 两篇所读的 6712f62；本篇只做前向链接，接入与验证细节仍归那两篇（标注「我方材料」）。",
+    "UTMOS 口径疑点：正文写「substantially better ... naturalness」，但 Table 1 英文 UTMOS 本文 3.458 略低于 UniAVGen 3.459（论文标 3.459 为最优）；已在主结果表同段加事实核对注，未照搬结论句。",
+    "SyncNet C/D 口径疑点：C 落在 0.661–6.330、D 落在 8.441–13.906，与常见 SyncNet 置信度量纲不同，论文未说明变体与后处理；已在同段加注并明确不做跨来源横比。",
+    "venue 写作「arXiv 2604.23586v2」：arXiv 首页无 comment、无会议信息，不声明会议。作者单位按 HTML 首页逐作者核对（HKUST、Independent Researcher、Zhejiang University、NUS、CUHK、Peking University），未做归属推测。",
+    "Table 5 的 A2V 变体用本文自己 T2AV 生成的语音作驱动音频，故该子表受音频质量影响，不是纯 A2V 条件对比；正文已注明。",
+    "第 8 节「论文局限 vs 我们结论」右列只填证据状态（未验证 / 未形成公平验证），未把论文表 3 / 表 4 读成我方结论。",
+    "Table 3 的 Sonic Sync-D 单元格加粗与数值不一致（中文列 11.36 并非最优），已在同段加事实核对注，不改写数值。",
+    "Table 1 行名 MoVA 与正文/参考文献 MOVA 拼写不一致，已在 Table 1 事实核对注与术语表登记。",
+    "正文公式均为块级 $$...$$（Eq. 1–4 与 stop predictor 共 5 个）并逐式附符号表；已用 web/node_modules 的 katex 逐式校验通过，2 张 Mermaid 用 mermaid 11.16 的 parse 校验通过（flowchart-v2）。"
+  ]
+}
