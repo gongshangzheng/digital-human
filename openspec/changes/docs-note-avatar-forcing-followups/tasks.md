@@ -25,3 +25,12 @@
 - [x] 4.2 核对新写入的 17 个 arXiv 编号与 S2 返回清单逐条一致（正文出现 17 个 + 本篇自身 `2601.00664`，无漏、无多、无错）。
 - [x] 4.3 `openspec validate docs-note-avatar-forcing-followups --strict` 通过；经 FastAPI 详情接口确认 `论文笔记/avatar-forcing` 与 `论文笔记/README` 可读。
 - [x] 4.4 提交 `docs(note): ...`，仅包含预期文件。
+
+## 4. 后续工作复查（2026-09-24，用户指令）
+
+- [x] 4.1 Semantic Scholar 复查：仍 16 篇，构成有变——**+MindFlow（2606.27779）−TaoMate（2607.24359）**；被引数更新（Causal Forcing 135、CF++ 31）。
+- [x] 4.2 补读剩余 11 篇 arXiv 摘要（一手），精读笔记落 `research/followups-refresh-2026-09-24.md`。
+- [x] 4.3 TaoMate 归属修正：按摘要（few-step joint audio-video、anchor-guided memory）移入同名篇 2603.14331 附注；其「不可变视觉锚点」与我们锚帧库平行，标为跨篇对照。
+- [x] 4.4 笔记「后续工作」小节重写：推进列全部填实、加 MindFlow 行、「仍然空着的两点」复查后保留（DSFD 也只到 motion captions）。
+- [x] 4.5 avatar-forcing.json changelog 追加。
+- [x] 4.6 校验（表格列数 / 链接 / 引号风格）与提交。

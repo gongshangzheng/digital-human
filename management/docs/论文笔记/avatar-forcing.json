@@ -2,6 +2,11 @@
   "changelog": [
     {
       "date": "2026-09-24",
+      "summary": "后续工作复查（09-24）：引用仍 16 篇但构成有变——新增 MindFlow（2606.27779，腹背双通路：Chunk-State 情绪状态链 + 自回归流匹配 + 选择性声学注入），移出 TaoMate（经摘要核对归属同名篇 2603.14331）；「推进」列按 arXiv 摘要一手核对补全（DSFD：视频 latent 被身份/外观/背景占据、逐像素融音频浪费容量，条件融合挪进低维身份解耦运动空间，且运动空间无双向教师；Q-ARVD：AR 误差累积致逐帧量化敏感度指数式不均衡；InterDyad/ECHO/Listener Nodding/CausalCine/LPM 1.0/Wan-Streamer/AVTR-1 各补要点）；被引数更新 CF 135 / CF++ 31；「仍然空着的两点」复查后依然成立（DSFD 也只到 motion captions）。精读笔记见 change research/followups-refresh-2026-09-24.md",
+      "commit": ""
+    },
+    {
+      "date": "2026-09-24",
       "summary": "口径修正：长时“身份漂移”改为“运动输出漂移”。实测漂的是逐帧运动隐变量 r_d 的方向（+2.1°/min），CSIM 下降是身份度量的读数、其分量归属（外观 vs 姿态/视角）尚未分离；小节标题与 3 处内部锚点同步迁移，并补“解耦近似”那条因果是推断的说明",
       "commit": ""
     },
