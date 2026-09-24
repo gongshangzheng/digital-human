@@ -41,6 +41,7 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `ditto.md` | 深读 + 工程层（TRT 实时化/流式管线） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `liveact.md` | 深读 + 工程层（SoulX-LiveAct 接入） | ✅ 已完成（10 节骨架 + 7 图 + sidecar） |
 | `omnimate.md` | 深读 + 定位层（开放时长交互：GPC 进度条件 + MRCM 多参考身份） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
+| `interactive-avatar.md` | 深读（实时无限流式：RRM 意图感知 + 长短视觉记忆 + DMD）｜**与 `omnimate.md` 同团队**（西交大 + 中国电信 TeleAI，重叠作者 Quanyue Song / Yishan He / Zhixiang He / Caigui Jiang / Zhizhi Guo）｜论文 [arXiv:2606.22905](https://arxiv.org/abs/2606.22905) InteractiveAvatar: Real-Time Streaming Video Generation for Consistent and Intent-Aware Avatars | 待写 |
 | `talker-t2av.md` | 深读 + 工程层（接入与验证）｜论文 [arXiv:2604.23586](https://arxiv.org/abs/2604.23586) Talker-T2AV: Joint Talking Audio-Video Generation with Autoregressive Diffusion Modeling | ✅ 已完成（10 节骨架 + 1 图 + 2 Mermaid + sidecar） |
 | `liveportrait.md` | 深读 + 定位层（未接入：隐式关键点表示、stitching/retargeting 控制） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
 | `lia-x.md` | 深读 + 定位层（未接入：可解释 latent、40D motion code 与身份特征注入） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
@@ -66,6 +67,11 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 > 新增登记说明（2026-09-23）：
 > - `talker-t2av` 之前只在 papers 库之外（知识库固定阅读上游版本 `6712f62`），现已补上论文出处 arXiv:2604.23586（v2，2026-08-04）。
 > - `vorch-streamer` 为本轮新增。它把我们这条主线里最核心的矛盾（自回归复用生成块作上下文 ⇒ exposure bias ⇒ 长时误差与视觉漂移累积）写成了首要困境，与 [[论文笔记/avatar-forcing|Avatar Forcing]]（历史 offset 递归）和 [[论文笔记/liveact|SoulX-LiveAct]]（ARPP/ConvKV）属同一问题的直接对照，建议与两者相邻阅读。
+
+> 新增登记说明（2026-09-24）：
+> - `interactive-avatar` 为本轮新增，**同队作品是 `omnimate` 而不是 `omniavatar`**：InteractiveAvatar（arXiv:2606.22905，2026-06）与 OmniMate（arXiv:2607.23023，2026-07）同属西交大 + 中国电信 TeleAI，重叠作者 Quanyue Song / Yishan He / Zhixiang He / Caigui Jiang / Zhizhi Guo；两者机制互补（前者攻长时视觉一致性与意图感知 RRM，后者攻开放式回合的 GPC 进度控制）。
+> - **易混提醒**：OmniMate 的标题末尾就是 “for **Interactive Avatars**”，所以“OmniMate + InteractiveAvatar 同队”很容易被记成“OmniAvatar + InteractiveAvatar”；OmniAvatar（arXiv:2506.18866）是浙大 + 阿里的另一条线；另有 OmniHuman-1（arXiv:2502.01061）属字节跳动，不要与前两者并列。
+> - `interactive-avatar` 未入 papers 库，将来写笔记时 frontmatter 只登记 `arxiv_id`。
 
 ## 生成侧加速十篇（素材已备）
 
