@@ -23,20 +23,23 @@ const props = defineProps({
 
 const router = useRouter()
 
+// 方法族配色：用 NTag 的 `color`（背景 + 文字色）显式指定，
+// 不用 `type`——Naive UI 只接受 default/primary/info/success/warning/error，
+// 非法 type 会退化成同色导致文字看不见。
 const METHOD_FAMILY_COLORS = {
-  'lip-sync': 'blue',
-  '2d-talking-head': 'cyan',
-  'motion-space-diffusion': 'purple',
-  '3d-avatar': 'green',
-  'diffusion-foundation': 'magenta',
-  'streaming-realtime': 'orange',
-  'action-generation': 'gold',
-  'identity': 'red',
-  'agent-system': 'teal',
-  'engineering': 'default',
-  'evaluation': 'lime',
-  'stylized': 'pink',
-  'survey': 'default',
+  'lip-sync': '#2f80ed',
+  '2d-talking-head': '#2d9cdb',
+  'motion-space-diffusion': '#7b61ff',
+  '3d-avatar': '#27ae60',
+  'diffusion-foundation': '#bb6bd9',
+  'streaming-realtime': '#e07b39',
+  'action-generation': '#b8860b',
+  'identity': '#eb5757',
+  'agent-system': '#0f9b8e',
+  'engineering': '#7f8c8d',
+  'evaluation': '#2f9e6e',
+  'stylized': '#d1478f',
+  'survey': '#95a5a6',
 }
 
 // 一篇文章可含多条 qa：每条 qa 展开为一行，论文级字段随行携带。
@@ -83,7 +86,7 @@ function linkButton(label, onClick, title) {
   )
 }
 
-const columns = [
+const columns = computed(() => [
   {
     title: '#',
     key: 'seq',
@@ -130,10 +133,15 @@ const columns = [
     filterOptions: [...new Set(rows.value.map((r) => r.method_family).filter(Boolean))]
       .map((v) => ({ label: v, value: v })),
     filter: (value, row) => row.method_family === value,
-    render: (row) =>
-      row.method_family
-        ? h(NTag, { size: 'small', bordered: false, type: METHOD_FAMILY_COLORS[row.method_family] || 'default' }, { default: () => row.method_family })
-        : '',
+    render: (row) => {
+      if (!row.method_family) return ''
+      const bg = METHOD_FAMILY_COLORS[row.method_family] || '#8c8c8c'
+      return h(
+        NTag,
+        { size: 'small', bordered: false, color: { color: bg, textColor: '#ffffff' } },
+        { default: () => row.method_family },
+      )
+    },
   },
   {
     title: '提出的问题',
@@ -174,7 +182,7 @@ const columns = [
       return links.length ? links : '未建'
     },
   },
-]
+])
 </script>
 
 <style scoped lang="scss">
