@@ -1,0 +1,49 @@
+{
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "summary": "首次创建：按 article-note 流程精读。10 节骨架；讲清三段机制（变长训练用 block-wise mask sampler、推理用块因果打分器 + IPAL 整数线性规划分配、AR 生成用 <EOB>）；6 条口径（分配依据是重建质量 / 块级因果 / 自建基线标 † 与数据规模 / 16×128×128 不可与他篇 256² 横比 / ILP 不说成最优分配 / 会议状态未确认）；§8 写与数字人两条硬约束的逐项对照，并给出两条必须先验证的判据（分配是否与身份信息量相关、跨条件身份 token 可比性）",
+      "commit": ""
+    }
+  ],
+  "progress": {
+    "status": "draft",
+    "next": "若要继续：核对延迟测量硬件与批设置（正文未说明）；把两条身份判据落成实验设计；TivTok 笔记完成后一起写领域问题第七章首条目"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/adaptok/"
+    },
+    {
+      "title": "HTML 正文（含全部图表题注）",
+      "path": ".cache/article-note/adaptok/raw/sources/adaptok.html"
+    },
+    {
+      "title": "分析 lane 与索引",
+      "path": ".cache/article-note/adaptok/analysis/"
+    }
+  ],
+  "related": [
+    {
+      "slug": "数字人概述/数字人领域问题",
+      "title": "数字人领域问题",
+      "desc": "第七章「技术适用性」首条目（1D 视觉分词器 → 从视频提身份）的两篇素材之一"
+    },
+    {
+      "slug": "论文笔记/causal-forcing",
+      "title": "Causal Forcing 模型笔记",
+      "desc": "同属因果表示/蒸馏这条线；其 frame-level injectivity 论证可与本篇的块级因果对照"
+    },
+    {
+      "slug": "论文笔记/float",
+      "title": "FLOAT 模型笔记",
+      "desc": "低维运动隐空间：与本篇的 1D token 空间形成表示层对照"
+    },
+    {
+      "slug": "数字人概述/数字人身份",
+      "title": "数字人身份",
+      "desc": "身份度量与漂移诊断；本篇 §8 的判据与其中的 selective sensitivity 判据配套"
+    }
+  ]
+}
