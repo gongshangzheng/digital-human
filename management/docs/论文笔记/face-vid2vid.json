@@ -6,6 +6,11 @@
       "date": "2026-09-23",
       "change": "docs-note-face-vid2vid",
       "summary": "首次创建：按 article-note 流水线产出 10 节骨架笔记，含 6 张论文原图（Figure 2/3/4/10/6/14，统一采用 PDF 编号）、Eq. 1/2 三项分解与 Eq. 6 总损失的符号表、自由视角与视频会议压缩链路，以及 Table 3 Angle 落后与 Table 1 MS-SSIM Nan 两处事实核对注。"
+    },
+    {
+      "date": "2026-09-24",
+      "change": "内容级增补（无独立 change）",
+      "summary": "在 §3 方法精析开头补一张「我们口径」的完整模型结构 Mermaid（源侧缓存边界 / 驱动侧复用 canonical / 生成侧两次 warp / free-view 开关），并对齐其余笔记的主链路图做法；同时按 Fig. 12 的 reshape 配置串更正三处口径：f_s 的深度为 16、末端 32 通道（原先记作「深度未披露」），并明确仍缺的是空间分辨率。"
     }
   ],
   "progress": {
@@ -30,11 +35,26 @@
     }
   ],
   "related": [
-    { "slug": "论文笔记/liveportrait", "title": "LivePortrait 模型笔记" },
-    { "slug": "论文笔记/ditto", "title": "Ditto 模型笔记" },
-    { "slug": "数字人概述/数字人身份", "title": "数字人身份" },
-    { "slug": "数字人概述/数字人动作", "title": "数字人动作" },
-    { "slug": "数字人概述/工程设计", "title": "工程设计" }
+    {
+      "slug": "论文笔记/liveportrait",
+      "title": "LivePortrait 模型笔记"
+    },
+    {
+      "slug": "论文笔记/ditto",
+      "title": "Ditto 模型笔记"
+    },
+    {
+      "slug": "数字人概述/数字人身份",
+      "title": "数字人身份"
+    },
+    {
+      "slug": "数字人概述/数字人动作",
+      "title": "数字人动作"
+    },
+    {
+      "slug": "数字人概述/工程设计",
+      "title": "工程设计"
+    }
   ],
   "notes": [
     "未入本地 papers 库：data/papers.db 无 arxiv-2011.15126，正文第 0 节与第 10 节均按规范写 arxiv-2011.15126 并标注「本地 papers 库未入库」；是否补录由用户决定。",
