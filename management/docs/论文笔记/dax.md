@@ -5,7 +5,7 @@ date: 2026-09-24
 tags: [数字人, 方案笔记, DAX, 视频扩散推理, 系统优化, 序列并行]
 papers_id: none
 summary: DAX 是把序列并行、SageAttention、compile、INT8 线性层与 TeaCache 组合起来的视频扩散推理算子/系统优化仓库（GitHub RiseAI-Sys/DAX，Apache-2.0，上游为阿里内部 GitLab），README benchmark 报告 Wan2.1-T2V-14B、720p、5s 在 8×H20 上 6836s→188s（36.4×）；但它无论文（未检索到同行评议论文），证据等级仅为「仓库 benchmark」，且 36.4× 是 8 卡结果、不能当单卡速度。
-order: 190
+order: 230
 ---
 
 # DAX

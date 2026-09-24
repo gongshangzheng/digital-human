@@ -6,7 +6,7 @@ tags: [数字人, 模型笔记, TurboDiffusion, 步数蒸馏, rCM, 视频扩散�
 arxiv_id: 2512.16093
 papers_id: arxiv-2512.16093
 summary: TurboDiffusion 用一套「需训练」的端到端组合配方（rCM 步数蒸馏把 100 步压到 3–4 步 + SageSLA 稀疏与低比特注意力 + W8A8 INT8 线性层 + 算子重写 FusedNorm）在单张 RTX 5090 上把 Wan2.1-T2V-14B-720P 的扩散生成延迟从 4767s 压到 24s（约 199×）；质量结论只有并排抽帧的视觉对比，无 VBench/FVD 量化。
-order: 165
+order: 200
 ---
 
 # TurboDiffusion

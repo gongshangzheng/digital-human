@@ -6,7 +6,7 @@ tags: [数字人, 模型笔记, SoulX-LiveAct, 自回归扩散, Neighbor Forcing
 arxiv_id: 2603.11746
 papers_id: arxiv-2603.11746
 summary: SoulX-LiveAct（Soul AI Lab 等，2026）把自回归扩散的争论点从「是否 AR」移到「沿 AR 链传播什么」：用同一步的时间邻居 latent 做条件（Neighbor Forcing）让所有 block 共享一个扩散步并复用 KV，再用对 K/V 做 1D 卷积的 ConvKV Memory 把历史压成定长记忆，换来常数内存的实时长时生成；本篇含论文内部三处数字不一致的如实登记与我们的单卡 A10 接入实测
-order: 25
+order: 30
 ---
 
 # SoulX-LiveAct

@@ -6,7 +6,7 @@ tags: [数字人, 模型笔记, BLADE, 块稀疏注意力, 步数蒸馏, 视频�
 arxiv_id: 2508.10774
 papers_id: arxiv-2508.10774
 summary: BLADE 把「自适应块稀疏注意力 ASA」与「稀疏感知的 data-free 步数蒸馏（基于 TDM）」放进同一个训练回路联合优化，同时压「每步注意力成本」与「去噪步数」两段开销：Wan2.1-1.3B 上 kernel 3.30×、端到端 14.10×，CogVideoX-5B 端到端 8.89×（8 步 vs 官方 50 步）。
-order: 110
+order: 140
 ---
 
 # BLADE

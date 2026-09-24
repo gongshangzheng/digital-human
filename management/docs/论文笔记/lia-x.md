@@ -6,7 +6,7 @@ tags: [数字人, 模型笔记, LIA-X, 人像动画, 稀疏运动字典, 潜空�
 arxiv_id: 2508.09959
 papers_id: arxiv-2508.09959
 summary: LIA-X（Shanghai AI Lab + Inria）把运动迁移建模为潜空间 motion code 的线性导航，用稀疏运动字典把运动解耦成可解释因子，从而把 warp-render 升级为 edit-warp-render；最大约 1B 参数、8×A100，跨重演以 ID Similarity 0.206 / Image Quality 58.74 两项最优，但自重现 VoxCelebHQ-256 的 FID 10.74 反高于 DaGAN 9.13
-order: 40
+order: 60
 ---
 
 # lia-x

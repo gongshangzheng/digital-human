@@ -26,12 +26,12 @@
 ## 4. sidecar 与索引
 
 - [x] 4.1 ✅ `performrecast.json`（changelog / progress / appendix / related）。
-- [x] 4.2 ✅ `论文笔记/README.md` 清单补一行（order 65）。
+- [x] 4.2 ✅ `论文笔记/README.md` 清单补一行（order 90，经目录 renumber 后）。
 
 ## 5. 验证与交付
 
 - [x] 5.1 ✅ `validate-note.py` 通过。
 - [x] 5.2 ✅ 表格列数一致、公式定界符合法、Mermaid 可渲染、6 张图 URL 与资产存在。
-- [x] 5.3 ✅ `docs_order.py list` 中本篇 order 65 无冲突（目录内另有并行会话遗留的重复 order 160，与本篇无关）。
+- [x] 5.3 ✅ `docs_order.py list` 中本篇无冲突；目录后统一 `renumber` 为 10 步网格（本篇 90）。
 - [x] 5.4 ✅ `openspec validate docs-note-performrecast --strict` 通过。
 - [x] 5.5 ✅ 提交 `docs(note): 新增 performrecast 论文笔记`。

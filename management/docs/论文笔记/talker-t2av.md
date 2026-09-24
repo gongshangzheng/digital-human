@@ -6,7 +6,7 @@ tags: [数字人, 模型笔记, Talker-T2AV, 自回归扩散, 联合音视频生
 arxiv_id: 2604.23586
 papers_id: arxiv-2604.23586
 summary: Talker-T2AV（HKUST 等，arXiv 2604.23586v2）把联合音视频生成拆成「共享因果 LM 做高层跨模态规划 + 两个模态专属轻量 DiT 头做低层渲染」，用冻结、同帧率 25 Hz 的纯 1-D 编码器（视频 LIA-X 40 维 motion、音频 WhisperX-VAE 32 维）加逐位置相加把跨模态对齐变成「按构造成立」，于是单卡 H20 上 24 FPS（T2AV）/ 30 FPS（A2V）、参数 1B/0.8B；本篇含 Table 1–6 关键数值照录、英文 UTMOS 与 SyncNet C/D 两处口径疑点、以及「视频侧只生成 40 维 motion、像素由外部 LIA-X + 源身份图渲染」的依赖边界
-order: 80
+order: 110
 ---
 
 # Talker-T2AV

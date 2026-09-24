@@ -6,7 +6,7 @@ tags: [数字人, 模型笔记, LivePortrait, 隐式关键点, 非扩散, 拼接
 arxiv_id: 2407.03168
 papers_id: arxiv-2407.03168
 summary: LivePortrait（快手 + 中科大 + 复旦，arXiv 预印本）在 Face Vid2vid 的隐式关键点框架上加可缩放运动变换与约 6900 万帧 / 18.9K 身份的数据整理，再用三个小 MLP 做 stitching 与眼/唇 retargeting，在 RTX 4090 上把单帧生成压到 12.8ms；本篇含两阶段冻结边界、掩码方向冲突与 Table 3 落后项的照录核对
-order: 30
+order: 50
 ---
 
 # liveportrait

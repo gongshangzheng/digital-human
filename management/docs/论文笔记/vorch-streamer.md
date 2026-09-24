@@ -5,7 +5,7 @@ date: 2026-09-23
 tags: [数字人, 模型笔记, Vorch-Streamer, T2AV, 长时自强制, DMD, 暴露偏差, 语音规划]
 arxiv_id: 2608.05663
 summary: Vorch-Streamer（Vorch Team 等，2026）在预训练双向音视频基座（LTX2.3，22B）上做三阶段后训练——合成语料、TF/DF 混合的因果流式、长时自强制加 DMD 蒸馏——把「用自己生成的块当上下文」的暴露偏差压住，并用 LLM 语音规划解决「因果生成器该说哪一段」；单张 H200 上 27.12 FPS，是唯一超过 24 FPS 播放速率的原生 T2AV 方法
-order: 26
+order: 40
 ---
 
 # Vorch-Streamer

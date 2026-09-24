@@ -6,7 +6,7 @@ tags: [数字人, 模型笔记, OmniMate, 流式生成, 开放时长, 交互头�
 arxiv_id: 2607.23023
 papers_id: arxiv-2607.23023
 summary: OmniMate（西安交大 + 中国电信 AI 等，2026）把「开放时长下什么时候说完」与「长时跨模态身份漂移」拆成两个并列机制注入同一音视频骨干：GPC 把 LLM 预估时长变成 1–1000（execution）/0（listening）的连续进度信号、经正弦位置编码加 MLP 后逐元素加到 latent 上，MRCM 则用「多参考图拼接 + 负 RoPE」（需训练）与「推理期替换音频 latent」（training-free）两路身份条件；四阶段训练在 LTX2.3 上做轻量适配，VerseBench 交互化子集上自报 27.64 FPS / TTFF 3.49s，但 AQ/VQ/Sync-D/LSE-C 并非第一且多数胜出项的指标实现未公开
-order: 70
+order: 100
 ---
 
 # OmniMate

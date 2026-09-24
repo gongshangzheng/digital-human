@@ -5,7 +5,7 @@ date: 2026-09-24
 tags: [数字人, 方案笔记, WorldAttention, 稀疏注意力, 分层 KV 缓存]
 papers_id: none
 summary: WorldAttention 是阿里 DAMO Academy 官方开源仓库（Apache-2.0）提出的 HSA 混合稀疏注意力 + 分层 KV 缓存（HKV）长上下文视频世界模型方案，README 报告单张 H100 上 kernel 14.02×（相对 FlashAttention-3）、E2E 2.21×、22.0 FPS；但它无同行评议论文（README 占位 arXiv ID，arXiv / HF Papers / OpenAlex 三处检索 0 结果），且 HSA block-sparse kernel 未随仓库发布，证据等级仅为「代码 / README 证据」，当前不可本地复现。
-order: 180
+order: 220
 ---
 
 # WorldAttention

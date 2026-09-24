@@ -5,7 +5,7 @@ date: 2026-09-24
 tags: [数字人, 模型笔记, FPSAttention, 推理加速, FP8, 稀疏注意力, QAT, 视频扩散]
 arxiv_id: 2506.04648
 summary: FPSAttention（Monash/DAMO/ZIP Lab，NeurIPS 2025 Spotlight）把「量化 + 稀疏」从推理期的朴素叠加挪到训练期的联合优化：Q/K 按 3D tile 量化、V 按 channel 量化、注意力权重用固定标量，稀疏度与精度按去噪步调度（粗→细→中），再配 Hopper 取向的 kernel，在 Wan2.1-14B/720p/单张 H20 上拿到 kernel 7.09× 与端到端 4.96×
-order: 100
+order: 130
 ---
 
 # FPSAttention

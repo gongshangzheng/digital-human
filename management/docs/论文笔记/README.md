@@ -47,8 +47,8 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `lia-x.md` | 深读 + 定位层（未接入：可解释 latent、40D motion code 与身份特征注入） | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
 | `float.md` | 深读 + 定位层（基座：Avatar Forcing 复用的 motion latent 空间） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `face-vid2vid.md` | 深读 + 定位层（LivePortrait 前置：3D 隐式关键点与 free-view） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
-| `performrecast.md` | 深读 + 定位层（未接入：FLAME 一致变换解耦表情/头姿、49 点显式监督、BAM；表情-only 编辑与两种推理模式）｜论文 [arXiv:2603.19731](https://arxiv.org/abs/2603.19731) PerformRecast: Expression and Head Pose Disentanglement for Portrait Video Editing | ✅ 已完成（10 节骨架 + 6 图 + sidecar，order: 65） |
-| `fpsattention.md` | 深读（FP8 量化 × 稀疏注意力协同） | ✅ 已完成（10 节骨架 + 3 图 + sidecar，order: 100） |
+| `performrecast.md` | 深读 + 定位层（未接入：FLAME 一致变换解耦表情/头姿、49 点显式监督、BAM；表情-only 编辑与两种推理模式）｜论文 [arXiv:2603.19731](https://arxiv.org/abs/2603.19731) PerformRecast: Expression and Head Pose Disentanglement for Portrait Video Editing | ✅ 已完成（10 节骨架 + 6 图 + sidecar，order: 90） |
+| `fpsattention.md` | 深读（FP8 量化 × 稀疏注意力协同） | ✅ 已完成（10 节骨架 + 3 图 + sidecar，order: 130） |
 | `blade.md` | 深读（块稀疏注意力 × 步数蒸馏联合训练） | ✅ 已完成（论文标注：2 图 + 5 公式 + sidecar） |
 | `nar.md` | 深读（邻域自回归建模；需从头训练） | ✅ 已完成（论文标注：3 图 + 2 公式 + sidecar） |
 | `flashar.md` | 深读（自回归生成的后训练加速；配图受抓取限制） | ✅ 已完成（论文标注：1 图 + 2 Mermaid + 10 公式 + sidecar） |
@@ -58,11 +58,14 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `dax.md` | 方案笔记（无同行评议论文：仓库 benchmark；算子/系统组合优化） | ✅ 已完成（D2 骨架 + 1 Mermaid + 2 公式 + sidecar） |
 | `turbodiffusion.md` | 深读（步数蒸馏 + 系统优化栈；无原图，图均为无图题定性帧对比） | ✅ 已完成（2 Mermaid + 4 公式 + sidecar） |
 | `inferix.md` | 深读（block-diffusion 推理引擎；证据等级＝引擎能力/待自测） | ✅ 已完成（2 图 + 2 Mermaid + 3 公式 + sidecar） |
-| `vorch-streamer.md` | 深读（实时长时 T2AV 流式：后训练框架、暴露偏差与漂移治理、因果生成下“该说哪一段”）｜论文 [arXiv:2608.05663](https://arxiv.org/abs/2608.05663) Vorch-Streamer: Extending Human Audio-Visual Generation to Real-Time Long-Form Streaming | ✅ 已完成（10 节骨架 + 4 图 + sidecar，order: 26） |
+| `vorch-streamer.md` | 深读（实时长时 T2AV 流式：后训练框架、暴露偏差与漂移治理、因果生成下“该说哪一段”）｜论文 [arXiv:2608.05663](https://arxiv.org/abs/2608.05663) Vorch-Streamer: Extending Human Audio-Visual Generation to Real-Time Long-Form Streaming | ✅ 已完成（10 节骨架 + 4 图 + sidecar，order: 40） |
 | `causal-forcing.md` | 深读（自回归扩散蒸馏：frame-level injectivity 与条件期望解、TF 优于 DF、causal ODE + asymmetric DMD、causal CD；Avatar Forcing 被引最高的后续工作）｜论文 [arXiv:2602.02214](https://arxiv.org/abs/2602.02214) Causal Forcing: Autoregressive Diffusion Distillation Done Right for High-Quality Real-Time Interactive Video Generation | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `wan-streamer.md` | 深读（端到端实时交互基座）｜论文 [arXiv:2606.25041](https://arxiv.org/abs/2606.25041) Wan-Streamer v0.1: End-to-end Real-time Interactive Foundation Models | 待写 |
 | `adaptok.md` | 深读（自适应 token 分配 + 时间因果的 1D 视频分词；用于「从视频提角色身份」的适用性评估，见 [[数字人概述/数字人领域问题|数字人领域问题]] 第七章）｜论文 [arXiv:2505.17011](https://arxiv.org/abs/2505.17011) Learning Adaptive and Temporally Causal Video Tokenization in a 1D Latent Space | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
 | `tivtok.md` | 深读（时间不变/时变 token 分解：TIV 跨帧复用 + TV 逐帧残差，SIF 涌现分解、IB 广播解码；用于「从视频提角色身份」的适用性评估，见 [[数字人概述/数字人领域问题|数字人领域问题]] 第七章）｜论文 [arXiv:2606.17590](https://arxiv.org/abs/2606.17590) TivTok: Broadcasting Time-Invariant Tokens for Scalable Video Tokenization | ✅ 已完成（10 节骨架 + 5 图 + sidecar） |
+| `rasa.md` | 深读（**跨身份角色动画**：把「跨身份空间映射」与「运动控制」两类能力的**固有纠缠**显式解耦，向 DiT 注入结构化先验；原话 the inherent entanglement of two capabilities）｜论文 [arXiv:2608.28219](https://arxiv.org/abs/2608.28219) RASA: Disentangled Spatial-Motional Priors for Cross-Identity Character Animation | 待写 |
+| `facial-animation-disentangled.md` | 深读（**用 transformer 学 motion manifold** 并解耦身份与运动；可建模任意长度的 3D 几何序列）｜论文 *Computer Graphics Forum* 2022（cites=15, DOI 10.1111/cgf.14641）Facial Animation with Disentangled Identity and Motion using Transformers | 待写 |
+| `style-disentangled-diffusion.md` | 深读（从 **multi-ID 数据集**学**每个说话人的个人风格**，引入 **style disentanglement module** 提升解耦度与可解释性；**语音驱动身体动作**）｜论文 ICASSP 2026（DOI 10.1109/icassp55912.2026.11462327）Style-Disentangled Diffusion for Controllable and Identity-Generalized Speech-Driven Body Motion Generation | 待写 |
 
 > 新增登记说明（2026-09-23）：
 > - `talker-t2av` 之前只在 papers 库之外（知识库固定阅读上游版本 `6712f62`），现已补上论文出处 arXiv:2604.23586（v2，2026-08-04）。
@@ -72,6 +75,13 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 > - `interactive-avatar` 为本轮新增，**同队作品是 `omnimate` 而不是 `omniavatar`**：InteractiveAvatar（arXiv:2606.22905，2026-06）与 OmniMate（arXiv:2607.23023，2026-07）同属西交大 + 中国电信 TeleAI，重叠作者 Quanyue Song / Yishan He / Zhixiang He / Caigui Jiang / Zhizhi Guo；两者机制互补（前者攻长时视觉一致性与意图感知 RRM，后者攻开放式回合的 GPC 进度控制）。
 > - **易混提醒**：OmniMate 的标题末尾就是 “for **Interactive Avatars**”，所以“OmniMate + InteractiveAvatar 同队”很容易被记成“OmniAvatar + InteractiveAvatar”；OmniAvatar（arXiv:2506.18866）是浙大 + 阿里的另一条线；另有 OmniHuman-1（arXiv:2502.01061）属字节跳动，不要与前两者并列。
 > - `interactive-avatar` 未入 papers 库，将来写笔记时 frontmatter 只登记 `arxiv_id`。
+
+> 新增登记说明（2026-09-23，第三批 · **身份 × 运动解耦**）：
+> 以上三篇由「身份一致性 vs 运动风格」的边界调研引入（见 `openspec/changes/docs-identity-consistent-learning/research/identity-consistent-learning.md` §4.5）。三篇都指向**同一个上游命题**——身份与运动的**纠缠与解耦**，但**分解轴各不相同**：
+> - `rasa`（2026，最新）：**能力分离** —— 跨身份空间映射 vs 运动控制
+> - `facial-animation-disentangled`（CGF 2022）：**表示分离** —— motion manifold + 身份/运动解耦
+> - `style-disentangled-diffusion`（ICASSP 2026）：**风格解耦 + multi-ID 个性化**（身体动作）
+> **⚠ 易混提醒**：这三篇的解耦轴与本项目拟研究的「**时间不变性分离**（一条轨迹里"不变"vs"变"）」**不是同一条轴**。写笔记时须在第 8 节「局限与启发」里对照说清，**避免把不同轴的解耦当成同一件事**；也不得把该上游命题写成"我们发现的问题"。
 
 ## 生成侧加速十篇（素材已备）
 
