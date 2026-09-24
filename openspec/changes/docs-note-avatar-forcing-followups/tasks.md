@@ -41,3 +41,12 @@
 - [x] 5.2 「有没有蒸馏」：**没有**。Stage 1 用 DF 目标回归向量场、监督来自真实运动；Stage 2 DPO 的 $\pi_{\text{ref}}$ 是 Stage 1 自己的权重（正则锚点）；motion AE 从 FLOAT 权重**初始化后重训**（初始化≠蒸馏）。已在「训练与实现细节」表后补一条 blockquote 说明，并点明 Causal Forcing 批评的「双向教师蒸馏」是另一条路线。
 - [x] 5.3 逐篇「问题→方案」清单落 `research/followups-problem-solution.md`（16 篇 + 三条横向规律）。
 - [x] 5.4 校验（引号风格 / 表格列数 / 链接 / API）与提交。
+
+## 6. 四处截断摘要补全（2026-09-24 续）
+
+- [x] 6.1 DynaForcing：三层互补方案（Hybrid Forcing / Dynamics-Aware Reward Regularization / Reference Perturbation）+ 计算图剪枝与梯度回放降显存一个数量级 + Dyn-Deg 0.31→0.73、Sync-C 7.03→7.68。
+- [x] 6.2 Q-ARVD：S1 最终质量感知帧加权、S2 离群感知自适应双尺度量化。
+- [x] 6.3 ECHO：LCU + **SDCM**（只对非唇区域融合用户行为线索）。
+- [x] 6.4 AVTR-1：补 **R-DGG** 度量（扣除听者历史与说话人动作后，说话人语音的额外预测信息；无配对音频的 talking head 与错配对不成立）与组件分别许可。
+- [x] 6.5 research/followups-problem-solution.md 加「与本仓库的交叉点」三条（Reference Perturbation ↔ 我们参考条件化失败；DSFD 无双向教师 = 我主线处境；R-DGG = 可借用的交互评测工具）。
+- [x] 6.6 笔记后续工作表四处同步 + 校验 + 提交。
