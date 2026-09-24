@@ -5,7 +5,6 @@ date: 2026-09-24
 tags: [数字人, 模型笔记, Latent Spatial Memory, 视频世界模型, 空间记忆, 扩散缓存]
 summary: LSM-World 把持久 3D 空间记忆从 RGB 点云搬进 diffusion latent，读出时只做一次 latent 分辨率投影，消掉每个 conditioning step 的 render→VAE-encode 往返；在 Wan2.2-TI2V-5B、704×1280、单张 H100 上报告端到端 10.57×、3D cache 显存 55× 下降（均相对 RGB 缓存管线，论文自报，非 8 卡口径）
 arxiv_id: 2606.09828
-papers_id: arxiv-2606.09828
 order: 150
 ---
 

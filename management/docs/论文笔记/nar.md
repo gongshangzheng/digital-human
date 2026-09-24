@@ -4,7 +4,6 @@ author: 汤问
 date: 2026-09-24
 tags: [数字人, 模型笔记, NAR, 邻域自回归, 视觉生成, 并行解码]
 arxiv_id: 2503.10696
-papers_id: arxiv-2503.10696
 summary: NAR 把自回归视觉生成的训练目标从 next-token 改成 next-neighbor，按到起点曼哈顿距离由近到远解码，把图像步数从 n² 压到 2n−1（ImageNet 256² 实测 256→31 步，NAR-L FID 3.06 vs LlamaGen-XXL 3.09、吞吐 13.8×）、视频从 tn² 压到 2n+t−2（UCF-101 34 步、44.0s→1.09s），代价是必须从头训练、不能套现成 NTP 权重。
 order: 170
 ---

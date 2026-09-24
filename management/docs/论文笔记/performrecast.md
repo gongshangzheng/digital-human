@@ -4,6 +4,7 @@ author: 汤问
 date: 2026-09-24
 tags: [数字人, 模型笔记, PerformRecast, 表情编辑, 头姿解耦, FLAME, 显式3D关键点, 边界对齐]
 arxiv_id: 2603.19731
+papers_id: arxiv-2603.19731
 order: 90
 summary: PerformRecast（虎鲸文娱，CVPR 2026）指出 LivePortrait 的关键点变换运算顺序（先乘头姿再加表情）会让表情形变混入头姿信息，无法真正做到“只改表情、头不动”；改成与 FLAME 前向一致的先加表情再乘头姿后即继承 3DMM 的自然解耦，再用 Pixel3DMM 跟踪的 49 个显式 3D 关键点做 FLAME Loss 替掉四项辅助损失与第二训练阶段，并用边界对齐模块（BAM）修好面部/非面部边界错位；论文还构建了基于 MetaHuman 的表情编辑 benchmark，支持 Replacement 与 Enhancement 两种推理模式
 ---

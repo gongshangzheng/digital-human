@@ -4,7 +4,6 @@ author: 汤问
 date: 2026-09-23
 tags: [数字人, 模型笔记, Face Vid2vid, 隐式关键点, 3D关键点分解, 自由视角, 视频会议压缩, 谱系锚点]
 arxiv_id: 2011.15126
-papers_id: arxiv-2011.15126
 summary: Face Vid2vid（NVIDIA，CVPR 2021 oral）用无监督可分解 3D 隐式关键点把每帧的运动压成「头姿 6 个 + 表情形变 3K 个」标量、身份 canonical 关键点跨帧复用，从而同时拿到局部自由视角与视频会议低带宽——相对 H.264 CRF36，自适应方案 10.37×、每帧平均 53.03 B（≈0.001618 bpp）；本篇是 LivePortrait 的前置，含 Table 3 的 Angle 落后与 Table 1 的 MS-SSIM `Nan` 照录核对
 order: 80
 ---

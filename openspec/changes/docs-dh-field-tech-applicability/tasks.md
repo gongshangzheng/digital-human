@@ -26,3 +26,10 @@
 - [x] 4.1 design 记录"不归档"与长期演进约定。
 - [ ] 4.2 后续每条新技术仍按同一流程：先在本 change 的 design 追加条目规格与引用白名单，再追加 tasks，用户确认后才写正文。
 - [ ] 4.3 每轮补充完成后**不跑** `openspec-archive-change`。
+
+## 5. 待读登记与登记口径修复（2026-09-24）
+
+- [x] 5.1 `论文笔记/README.md` 追加 `pixel3dmm.md`（arXiv:2505.00615，ICLR 2026）待读行，并写登记说明（它是 tracking / 显式监督信号来源；我们评测框架已有 `driving_mode: pixel3dmm`；未入 papers 库；博客引文纠错记录）。
+- [x] 5.2 修复 `papers_id` 登记不一致（11 篇）：`performrecast` 在 papers 库中但缺字段 → 补 `papers_id: arxiv-2603.19731`；`blade`/`face-vid2vid`/`flashar`/`float`/`inferix`/`latent-spatial-memory`/`nar`/`talker-t2av`/`turbodiffusion`/`zipar` 十篇写了 `papers_id` 但既不在 `papers.db` 也不在 `blog_papers.json` → 删除悬空字段。复核后全库一致。
+- [x] 5.3 `论文笔记/README.md` 命名规范写死口径：`papers_id` **仅当该论文确实在 papers 库中时才写**（库只从 `blog_papers.json` 导入）。
+- [x] 5.4 修复博客仓库 `src/pages/paper-performrecast.html` 与 `public/paper-performrecast.html` 中 `arXiv:2505.00615` 的错误标题（编号对、标题错）。

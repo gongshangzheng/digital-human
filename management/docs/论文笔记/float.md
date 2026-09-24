@@ -4,7 +4,6 @@ author: 汤问
 date: 2026-09-23
 tags: [数字人, 模型笔记, FLOAT, 运动隐空间, 流匹配, 音频驱动, 情绪可控]
 arxiv_id: 2412.01064
-papers_id: arxiv-2412.01064
 summary: FLOAT（KAIST + DeepBrain AI，ICCV 2025）先用 LIA 系自编码器预训练出显式身份-运动分解、带正交基的运动隐空间，再在该空间以 OT 路径流匹配生成 talking motion latent 并解码出视频，默认 NFE=10、Euler 求解，HDTF FID 21.100 / RAVDESS FID 31.681 均为最优，情绪经 speech-driven 7 类 softmax 加 incremental CFV 控制，V100 上 41.37 FPS
 order: 70
 ---

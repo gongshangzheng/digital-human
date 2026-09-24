@@ -66,6 +66,14 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `rasa.md` | 深读（**跨身份角色动画**：把「跨身份空间映射」与「运动控制」两类能力的**固有纠缠**显式解耦，向 DiT 注入结构化先验；原话 the inherent entanglement of two capabilities）｜论文 [arXiv:2608.28219](https://arxiv.org/abs/2608.28219) RASA: Disentangled Spatial-Motional Priors for Cross-Identity Character Animation | 待写 |
 | `facial-animation-disentangled.md` | 深读（**用 transformer 学 motion manifold** 并解耦身份与运动；可建模任意长度的 3D 几何序列）｜论文 *Computer Graphics Forum* 2022（cites=15, DOI 10.1111/cgf.14641）Facial Animation with Disentangled Identity and Motion using Transformers | 待写 |
 | `style-disentangled-diffusion.md` | 深读（从 **multi-ID 数据集**学**每个说话人的个人风格**，引入 **style disentanglement module** 提升解耦度与可解释性；**语音驱动身体动作**）｜论文 ICASSP 2026（DOI 10.1109/icassp55912.2026.11462327）Style-Disentangled Diffusion for Controllable and Identity-Generalized Speech-Driven Body Motion Generation | 待写 |
+| `pixel3dmm.md` | 深读（**单图 3D 人脸重建 / FLAME 跟踪**：screen-space 逐像素 UV 先验，冻结 DINOv3 + 可训 DPT head；PerformRecast 的**显式监督来源**，我们评测框架已有 `driving_mode: pixel3dmm`）｜论文 [arXiv:2505.00615](https://arxiv.org/abs/2505.00615) Pixel3DMM: Versatile Screen-Space Priors for Single-Image 3D Face Reconstruction（ICLR 2026，Giebenhain 等） | 待写 |
+
+
+> **新增登记说明（2026-09-24，Pixel3DMM）**：
+> - `pixel3dmm`（arXiv:2505.00615，ICLR 2026，Giebenhain 等）为本轮新增。它不是"又一篇生成模型"，而是 **tracking / 显式监督信号的来源**：[[论文笔记/performrecast|PerformRecast]] 靠它跟踪的 49 个显式 3D 关键点做 FLAME Loss，从而丢掉 LivePortrait 的四项辅助损失与第二阶段；FlexAvatar 用它给野外单图估 FLAME；UIKA 借它的 screen-space UV 配方（对照显示它在**头发边界处不如 UIKA 平滑**）。
+> - **我们已经在用它**：`knowledge/3dgs-methods-research.md` 的依赖清单写了「Pixel3DMM（完整追踪功能需要）：`easy-pixel3dmm` + `pytorch3d` + `nvdiffrast`」，且评测框架已有 `driving_mode: pixel3dmm`——写笔记时这一层要单独交代。
+> - **未入 papers 库**（既不在 `papers.db` 也不在 `blog_papers.json`），frontmatter 只登记 `arxiv_id`。
+> - **引文纠错**：博客 `paper-performrecast` 的参考文献曾把 `arXiv:2505.00615` 的标题误写为 "A Large-Scale Dataset of 3D Face Annotations for Digital Humans"（**编号对、标题错**），本轮已修；`uika-2026` 页引的一直是正确标题。
 
 > 新增登记说明（2026-09-23）：
 > - `talker-t2av` 之前只在 papers 库之外（知识库固定阅读上游版本 `6712f62`），现已补上论文出处 arXiv:2604.23586（v2，2026-08-04）。
@@ -89,7 +97,7 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 
 ## 命名规范
 
-- 文件名 = 论文/模型短名 slug，frontmatter 必填 `arxiv_id`（有则填）、`papers_id`（papers 库 id）、`date`、`summary`、`tags`；每篇配同名 sidecar `<slug>.json`
+- 文件名 = 论文/模型短名 slug，frontmatter 必填 `arxiv_id`（有则填）、`papers_id`（**仅当该论文确实在 papers 库中时才写**；库只从博客精读清单 `blog_papers.json` 导入，其余论文留空）、`date`、`summary`、`tags`；每篇配同名 sidecar `<slug>.json`
 - 每篇由独立单篇 change（`docs-note-<slug>`）实施：先「资料整理」后「动笔写作」
 - 图片存 `management/docs/_assets/<slug>/`（与笔记 slug 对齐），引用用绝对 URL
 

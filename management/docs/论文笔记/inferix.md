@@ -4,7 +4,6 @@ author: 汤问
 date: 2026-09-24
 tags: [数字人, 模型笔记, Inferix, block-diffusion, 推理引擎, 世界模拟]
 arxiv_id: 2511.20714
-papers_id: arxiv-2511.20714
 summary: Inferix 是面向 block-diffusion（半自回归）世界模拟的推理引擎，提供块级 KV 管理、Ulysses/Ring 并行、DAX 量化集成与 RTMP/WebRTC 流式输出四项能力；论文只给框架与能力清单、**未公开加速数值**（唯一相关数字是背景例子的单卡 H20 生成 5 秒 Wan2.1-14B 视频约 6,800 秒），故证据等级为「引擎能力/待自测」。
 order: 210
 ---
