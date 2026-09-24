@@ -1,0 +1,52 @@
+{
+  "slug": "论文笔记/inferix",
+  "title": "Inferix 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "change": "docs-note-gen-acceleration",
+      "summary": "首次创建：生成侧加速十篇中的 Inferix。10 节骨架 + sidecar + 2 张已发布图（范式对比、引擎框架）+ 2 张 Mermaid（Block DiT 组件流、跨块状态→并行→流式引擎流）+ 3 个块级公式（generate-and-cache 循环、KV 显存规模、首块/稳态/端到端延迟，均标注为我方形式化）。写清四问：① 加速面=系统与算子（block-diffusion 推理引擎：KV 管理、并行、流式输出）；② 训练前提=需要特定模型范式（需 block-diffusion 模型，不是标准全序列 DiT 的直接加速器）；③ 证据等级=引擎能力/待自测（我方整理口径：未公开加速数值）；④ 报告口径=论文无可用加速数字，不能与其它论文比较。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2511.20714v2（HTML + 9 页 PDF 均可用；source tarball 抽取 HTTP 406 失败，无源码级证据）。页码取自 PDF 实际分页；论文自身无编号公式、无实验章节、无加速数值。",
+    "analysis": "methodology / experiment / terminology 三 lane 素材已备；本轮补齐 image-collection 并重写 synthesis；validate-analysis 通过（三 lane 均由上游产出，本轮未改动其内容）",
+    "writing": "正文与 sidecar 已完成并校验（validate-note 通过）"
+  },
+  "appendix": [
+    {
+      "title": "分析方法学 lane",
+      "path": ".cache/article-note/inferix/analysis/methodology.md"
+    },
+    {
+      "title": "分析实验与证据 lane",
+      "path": ".cache/article-note/inferix/analysis/experiment.md"
+    },
+    {
+      "title": "分析术语与符号 lane",
+      "path": ".cache/article-note/inferix/analysis/terminology.md"
+    },
+    {
+      "title": "配图候选与章节映射",
+      "path": ".cache/article-note/inferix/analysis/image-collection.md"
+    }
+  ],
+  "related": [
+    { "slug": "knowledge/视频生成训练与推理加速专题", "title": "视频生成训练与推理加速专题" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" },
+    { "slug": "数字人概述/工程设计", "title": "工程设计" },
+    { "slug": "论文笔记/README", "title": "论文笔记（篇目索引）" }
+  ],
+  "notes": [
+    "未入本地 papers 库（data/papers.db 无 arXiv:2511.20714），frontmatter 按命名规范写 papers_id: arxiv-2511.20714。",
+    "证据等级：引擎能力/待自测，无公开加速数值。原样来自本仓库知识库整理（management/docs/knowledge/视频生成训练与推理加速专题.md §2.4「端到端系统」Inferix 行），未升格、未降格；论文全文无任何吞吐/延迟/显存/加速比/多卡 scaling，也未报任何模型在 InterVBench 或 VBench 上的数值，故不得写成「已验证加速倍数」，也不得与 DAX（8×H20、6836s→188s、36.4×，仓库 benchmark）或 TurboDiffusion（RTX5090、4767s→24s、199×，论文已验证）直接横比。",
+    "全篇仅有两处量化数字，正文已分别标注边界：§2 的「单卡 H20 生成 5 秒 Wan2.1-14B 视频约 6,800 秒」是背景成本（非 Inferix 成绩、分辨率未披露），§3.4 的 profiling 开销 `< 5%` 未披露测量环境/模型/硬件/基线。",
+    "论文无编号公式，正文三个 $$ 公式（generate-and-cache 循环、KV 显存规模 M_KV(N)、首块/稳态/端到端延迟）均标注为「我方形式化」，不是论文原式；论文自身只有两处 inline 记号 `5\\%` 与 `\\uparrow`。",
+    "论文明确未实现/属未来工作的部分：块稀疏注意力、Diffusion→Semi-AR 微调、少步蒸馏（step distillation）、高并发部署（§5 Roadmap、§6 Conclusion）。DAX quantization 只出现在 Figure 2 图题与参考文献，正文无对应小节，位宽/作用算子/精度损失均未披露。",
+    "未披露项已如实登记：Inferix 实测模型规模、分辨率、帧率、硬件/卡数/互联/拓扑（§2 的 H20 属背景例子）、块大小与块内步数、并行配置与 CP 实际值（图 2 的 CP=4 仅为示意）、profiler 测量基线、VDE 公式与五个子指标计算方式、InterVBench 的 80/20 划分名单与评测脚本、支持模型（MAGI-1/CausVid/Self Forcing）的版本与权重来源。",
+    "我方未接入（本地无 block-diffusion 权重与训练链），第 8 节只写定位与可复用点（块级 KV 的管理接口、首块延迟 vs 稳态吞吐分开观测、换 prompt 清 cross-attention cache、并行选路依据），不承诺本地可用。",
+    "配图 2 张已发布到 management/docs/_assets/inferix/：fig-1-paradigm-comparison.webp（1559×709，≈95 KB，← 论文 Figure 1）、fig-2-inferix-framework.webp（1535×780，≈79 KB，← 论文 Figure 2）。Table 1（InterVBench 数据源，PDF p.4）与 §4.3 的无编号内嵌 SVG prompt 框未采用为配图，改用正文表格承载。",
+    "元数据不一致（写作时已提示另核）：HTML 页首标注 2511.20714v2 [cs.CV] 28 Apr 2026，PDF 正文标注 Date: April 30, 2026，terminology lane 记录 HTML 首屏另有 date: August 24, 2026；v2 版本日期口径需以 arXiv 页面为准。"
+  ]
+}

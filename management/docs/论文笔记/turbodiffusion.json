@@ -1,0 +1,82 @@
+{
+  "slug": "论文笔记/turbodiffusion",
+  "title": "TurboDiffusion 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "change": "docs-note-gen-acceleration",
+      "summary": "首次创建：生成侧加速十篇中的 TurboDiffusion。10 节骨架 + sidecar；不发布论文原图（论文图均为无图题定性帧对比），改用 2 张自绘 Mermaid（rCM 蒸馏 + 系统优化栈组合关系；加速来源分解与依赖前提）+ 4 个块级公式（均标注「我方形式化」，论文 0 编号公式）+ 数值表格。写清四问：① 加速面=去噪步数 + 系统与算子（rCM 蒸馏压步数；SageSLA / W8A8 / FusedNorm 降每步成本，未命中缓存与多卡）；② 训练前提=需要训练（蒸馏；SLA finetune ∥ rCM → 权重合并）；③ 证据等级=论文已验证（延迟口径）但质量仅视觉对比、缺 VBench/FVD 量化；④ 报告口径=Wan2.1-14B / 720p / 单卡 RTX 5090 / 4767s→24s（约 199×），与 DAX（8×H20）等不可横比。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "素材包内只有 arXiv LaTeXML 全文 HTML，无 PDF（extraction-log：PDF IncompleteRead、source tarball HTTP 406）→ 全文引用只用章节号 / 图号，不写页码。论文自身 0 张表、0 个编号公式。",
+    "analysis": "methodology / experiment / terminology 三 lane 素材已备（上游产出，本轮未改动其内容），本轮补齐 image-collection.md 并重写 synthesis.md。",
+    "writing": "正文与 sidecar 已完成；validate-note.py 与 validate-analysis.py 两条校验均通过。"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/turbodiffusion/"
+    },
+    {
+      "title": "HTML 正文（唯一主源，含全部图题）",
+      "path": ".cache/article-note/turbodiffusion/raw/sources/turbodiffusion.html"
+    },
+    {
+      "title": "抓取记录（PDF 失败原因）",
+      "path": ".cache/article-note/turbodiffusion/raw/sources/extraction-log.md"
+    },
+    {
+      "title": "分析方法学 lane",
+      "path": ".cache/article-note/turbodiffusion/analysis/methodology.md"
+    },
+    {
+      "title": "分析实验与证据 lane",
+      "path": ".cache/article-note/turbodiffusion/analysis/experiment.md"
+    },
+    {
+      "title": "分析术语与符号 lane",
+      "path": ".cache/article-note/turbodiffusion/analysis/terminology.md"
+    },
+    {
+      "title": "配图实况与不采用理由（72 个 figure 块）",
+      "path": ".cache/article-note/turbodiffusion/analysis/image-collection.md"
+    }
+  ],
+  "related": [
+    {
+      "slug": "论文笔记/inferix",
+      "title": "Inferix 模型笔记"
+    },
+    {
+      "slug": "数字人概述/数字人加速",
+      "title": "数字人加速"
+    },
+    {
+      "slug": "knowledge/视频生成训练与推理加速专题",
+      "title": "视频生成训练与推理加速专题"
+    },
+    {
+      "slug": "论文笔记/blade",
+      "title": "BLADE 模型笔记"
+    },
+    {
+      "slug": "论文笔记/README",
+      "title": "论文笔记（篇目索引）"
+    }
+  ],
+  "notes": [
+    "未入本地 papers 库（data/papers.db 无 arXiv:2512.16093），frontmatter 按命名规范写 papers_id: arxiv-2512.16093。",
+    "证据等级：论文已验证（延迟与倍数，来源为论文图题与图内文字）；训练定位与训练要求来自**我方整理**（management/docs/knowledge/视频生成训练与推理加速专题.md §2.4「端到端系统」TurboDiffusion 行），属二手性质，正文已逐处标注，未升格为「同协议可横比」。",
+    "无原图：论文的全部 figure 均为无图题的定性帧对比拼图（同一 prompt 下 Original / FastVideo / TurboDiffusion 抽帧并排），没有可单独发布的机制图（无 pipeline 图、无架构图），因此本篇不发布任何论文原图，改用 2 张自绘 Mermaid + 表格；实况登记见 analysis/image-collection.md。",
+    "质量证据缺口（本篇最重要的边界）：论文关于质量只有 §2.2 末与 §3 两句定性断言（maintains the video quality / negligible quality degradation），全文无 VBench / FVD / PSNR / SSIM / CLIP / 人工偏好任何一种量化指标，支撑材料仅为图 5–29 的并排抽帧。故不得写「质量无损失已验证」；若我方复用少步 + 高稀疏设置，必须自测质量。",
+    "口径边界（引用时必须同时写出）：单张 RTX 5090（单卡消费级）、5 秒视频、480P/720P、延迟为「扩散生成延迟，排除文本编码与 VAE 解码」（§2.2），且全部为单卡结果（§2.1）。与 DAX（Wan2.1-T2V-14B / 720p / 8×H20：6836s→188s，36.4×，仓库 benchmark）等口径不同，不可直接横比（我方整理总调：不能拼成统一速度排行榜）。",
+    "知识库口径核对：知识库 §2.4 记 4767s→24s / 199×，与 analysis lane 从图 3、图 24 图题核算的 198.6 一致（无冲突）。知识库未登记的图 3 其余三组倍数（120× / 97× / 170×）已照录，并注明 1.3B-480P 的 97× 低于标题的 100–200×，正文不写「最低 100×」。",
+    "事实核对注（待核，未升格为结论）：(1) 知识库 FAQ 写「原始基线还包含 CPU offload」，analysis 内部两 lane 冲突——experiment lane 从 arXiv PDF 矢量文本层读到图 4 有 `CPU Offload` 行（4767→3182s，标注 OOM, Cannot Run），terminology lane 指出 HTML 全文无 `offload` / `CPU` 字样；正文照录两方口径，并把该行排除在结论性叙述之外。(2) 图 4 的 `+ SageSLA` 一级在图中未单独标延迟值，84/3.45 ≈ 24.3s 与终值 24s 的吻合属我方推断。(3) 图 18 的 FastVideo 列抽帧编号（4-*）与同图 Original/TurboDiffusion 列（3-*）不一致，可能为组图错位，本篇不配该图因而不受影响。",
+    "配图实况计数口径不一致：任务说明记「72 个 figure 块」，methodology lane 记「29 图对应 74 个 figure 块、432 次 jpg 引用、408 个唯一 jpg、2 个 svg」。两者对「全部是无图题的定性帧对比、无机制图」这一判断一致；确切块数**未重读 HTML 复核**，登记为待核。",
+    "公式说明：论文 0 个编号公式（HTML 中 ltx_equation 计数为 0），正文 4 个块级公式均为「我方形式化」（成本两因子分解、步数维倍率 100/3 ≈ 33.3、图 4 逐级乘积、W8A8 块级量化），不归到论文名下；SLA [5] 与 rCM [6] 的原始目标函数未取证，未在正文冒充本文公式。",
+    "训练细节几乎全部未披露：数据集名称、数据规模、batch size、学习率/调度、优化器、训练步数、GPU 小时、seed、合并算法（weight merge 规则）、rCM 目标函数 —— 论文均写「Please see our GitHub Code for more details」。README 相关的 few 条（Wan2.1-14B 合成数据集 250K、torchrun --nproc_per_node=8、FSDP2 + Ulysses CP + SAC、white-box SLA 训练、merge_models.py、40GB 以上显存建议关掉 --quant_linear）在正文标注为「代码或 README 证据」，且**本笔记未 clone 仓库复核**。",
+    "我方未接入（本地无 Wan 系训练链、无蒸馏/量化复现记录），第 8 节只写定位与可复用点（步数蒸馏优先于内核优化、近似约束在训练期注入、W8A8 收益与硬件档位绑定），不承诺本地可用，也不把 199× 当本地性能承诺。"
+  ]
+}

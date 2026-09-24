@@ -9,19 +9,19 @@
 - [x] 1.2b 范围变更：`fpsattention` 已由另一会话完成并归档（`2026-09-24-docs-note-fpsattention`）→ 移出本 change；**本 change 实际覆盖 9 篇**
 - [x] 1.3 第一批分析（blade / latent-spatial-memory）：methodology + experiment + terminology + image-collection + synthesis，过 `validate-analysis.py`
 - [x] 1.4 第二批分析（zipar / nar / flashar）
-- [ ] 1.5 第三批分析（turbodiffusion / inferix + 仓库类 worldattention / dax）
+- [x] 1.5 第三批论文分析（turbodiffusion / inferix）；仓库类来源已由联网调研确认为官方仓库（无同行评议论文）
 
 ## 2. 图片发布
 
 - [x] 2.1 第一批：从 HTML 下载采用图 → WebP → publish 到 `_assets/<slug>/`（blade 2 张 / LSM 3 张）
 - [x] 2.2 第二批：zipar 3 张 / nar 3 张 / flashar 1 张（Figure 1、3 被 arXiv 406 限流，正文如实说明）
-- [ ] 2.3 第三批：只发 inferix（turbodiffusion 无大图 → Mermaid + 表；仓库类无图）
+- [x] 2.3 第三批：inferix 发布 2 张（范式对比 / 引擎框架）；turbodiffusion 不发布原图（图均为无图题定性帧对比）
 
 ## 3. 写作
 
 - [x] 3.1 第一批两篇正文 + sidecar（blade 304 行 / latent-spatial-memory 377 行，均双校验通过）
 - [x] 3.2 第二批三篇（zipar 323 行 / nar 345 行 / flashar 444 行，均双校验通过）
-- [ ] 3.3 第三批：turbodiffusion、inferix（论文类）+ worldattention、dax（仓库类，按 D2 骨架）
+- [~] 3.3 第三批：turbodiffusion（402 行）、inferix（353 行）已完成；worldattention、dax 待写（仓库类，按 D2 骨架）
 
 ## 4. 回补与收口
 
