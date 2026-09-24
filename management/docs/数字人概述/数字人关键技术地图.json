@@ -10,7 +10,7 @@
       "blog_url": "https://gongshangzheng.github.io/arcface-2018.html",
       "blog_date": "2026-08-03",
       "venue": "CVPR 2019 Oral / IEEE TPAMI 2022",
-      "institution": "Imperial College London；InsightFace；University of Nottingham；Middlesex University",
+      "institution": null,
       "year": 2019,
       "arxiv_id": null,
       "tags": [
@@ -38,7 +38,6 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 1,
       "authors": [
         "Jiankang Deng",
         "Jia Guo",
@@ -46,7 +45,8 @@
         "Niannan Xue",
         "Irene Kotsia",
         "Stefanos Zafeiriou"
-      ]
+      ],
+      "seq": 1
     },
     {
       "id": "cdfs-2020",
@@ -81,7 +81,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 2,
       "authors": [
         "Yong Zhang",
         "Le Li",
@@ -89,7 +88,8 @@
         "Baoyuan Wu",
         "Yanbo Fan",
         "Zhifeng Li"
-      ]
+      ],
+      "seq": 2
     },
     {
       "id": "makeittalk-2020",
@@ -128,7 +128,6 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 3,
       "authors": [
         "Yang Zhou",
         "Xintong Han",
@@ -136,7 +135,8 @@
         "Jose Echevarria",
         "Evangelos Kalogerakis",
         "Dingzeyu Li"
-      ]
+      ],
+      "seq": 3
     },
     {
       "id": "face-vid2vid",
@@ -182,8 +182,7 @@
       "derived_by": [],
       "note": "论文笔记/face-vid2vid",
       "note_type": "doc",
-      "seq": 4,
-      "authors": []
+      "seq": 4
     },
     {
       "id": "paper-aniportrait",
@@ -219,12 +218,12 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 5,
       "authors": [
         "Huawei Wei",
         "Zejun Yang",
         "Zhisheng Wang"
-      ]
+      ],
+      "seq": 5
     },
     {
       "id": "paper-hallo",
@@ -262,7 +261,6 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 6,
       "authors": [
         "Mingwang Xu",
         "Hui Li",
@@ -273,7 +271,8 @@
         "Jingdong Wang",
         "Yao Yao",
         "Siyu Zhu"
-      ]
+      ],
+      "seq": 6
     },
     {
       "id": "paper-liveportrait",
@@ -323,7 +322,6 @@
       ],
       "note": "论文笔记/liveportrait",
       "note_type": "doc",
-      "seq": 7,
       "authors": [
         "Jianzhu Guo",
         "Dingyun Zhang",
@@ -332,7 +330,8 @@
         "Yuan Zhang",
         "Pengfei Wan",
         "Di Zhang"
-      ]
+      ],
+      "seq": 7
     },
     {
       "id": "paper-one-shot-one-talk",
@@ -368,7 +367,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 8,
       "authors": [
         "Jun Xiang",
         "Yudong Guo",
@@ -376,7 +374,8 @@
         "Boyang Guo",
         "Yancheng Yuan",
         "Juyong Zhang"
-      ]
+      ],
+      "seq": 8
     },
     {
       "id": "paper-diffsheg-2024",
@@ -412,7 +411,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 9,
       "authors": [
         "Junming Chen",
         "Yunfei Liu",
@@ -420,7 +418,8 @@
         "Ailing Zeng",
         "Yu Li",
         "Qifeng Chen"
-      ]
+      ],
+      "seq": 9
     },
     {
       "id": "paper-echomimic-2024",
@@ -455,14 +454,14 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 10,
       "authors": [
         "Zhiyuan Chen",
         "Jiajiong Cao",
         "Zhiquan Chen",
         "Yuming Li",
         "Chenguang Ma"
-      ]
+      ],
+      "seq": 10
     },
     {
       "id": "dsl-fiqa-2024",
@@ -474,7 +473,7 @@
       "blog_url": "https://gongshangzheng.github.io/dsl-fiqa-2024.html",
       "blog_date": "2026-06-18",
       "venue": "CVPR 2024",
-      "institution": "Snap Inc. Research；台湾大学",
+      "institution": null,
       "year": 2024,
       "arxiv_id": null,
       "tags": [
@@ -495,7 +494,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 11,
       "authors": [
         "Wei-Ting Chen",
         "Gurunandan Krishnan",
@@ -503,7 +501,8 @@
         "Sy-Yen Kuo",
         "Sizhuo Ma",
         "Jian Wang"
-      ]
+      ],
+      "seq": 11
     },
     {
       "id": "paper-x-portrait",
@@ -539,7 +538,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 12,
       "authors": [
         "You Xie",
         "Hongyi Xu",
@@ -547,7 +545,8 @@
         "Chao Wang",
         "Yichun Shi",
         "Linjie Luo"
-      ]
+      ],
+      "seq": 12
     },
     {
       "id": "paper-joyvasa",
@@ -582,7 +581,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 13,
       "authors": [
         "Xuyang Cao",
         "Guoxin Wang",
@@ -592,7 +590,8 @@
         "Jintao Fei",
         "Minyu Gao",
         "Pei Xie"
-      ]
+      ],
+      "seq": 13
     },
     {
       "id": "arc2face-2024",
@@ -628,7 +627,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 14,
       "authors": [
         "Foivos Paraperas Papantoniou",
         "Alexandros Lattas",
@@ -636,7 +634,8 @@
         "Jiankang Deng",
         "Bernhard Kainz",
         "Stefanos Zafeiriou"
-      ]
+      ],
+      "seq": 14
     },
     {
       "id": "artalk-2025",
@@ -672,14 +671,14 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 15,
       "authors": [
         "Xuangeng Chu",
         "Nabarun Goswami",
         "Ziteng Cui",
         "Hanqin Wang",
         "Tatsuya Harada"
-      ]
+      ],
+      "seq": 15
     },
     {
       "id": "emo-avatar-2025",
@@ -714,7 +713,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 16,
       "authors": [
         "Siyang Liu",
         "Chujie Zheng",
@@ -724,7 +722,8 @@
         "Zhou Yu",
         "Yong Jiang",
         "Minlie Huang"
-      ]
+      ],
+      "seq": 16
     },
     {
       "id": "paper-latentsync",
@@ -762,7 +761,6 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 17,
       "authors": [
         "Chunyu Li",
         "Chao Zhang",
@@ -773,7 +771,8 @@
         "Bingyue Peng",
         "Cunjian Chen",
         "Weiwei Xing"
-      ]
+      ],
+      "seq": 17
     },
     {
       "id": "smartavatar-2025",
@@ -808,7 +807,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 18,
       "authors": [
         "Alexander Huang-Menders",
         "Xinhang Liu",
@@ -816,7 +814,8 @@
         "Yuyao Zhang",
         "Chi-Keung Tang",
         "Yu-Wing Tai"
-      ]
+      ],
+      "seq": 18
     },
     {
       "id": "paper-ditto",
@@ -861,14 +860,14 @@
       "derived_by": [],
       "note": "论文笔记/ditto",
       "note_type": "doc",
-      "seq": 19,
       "authors": [
         "Tianqi Li",
         "Ruobing Zheng",
         "Minghui Yang",
         "Jingdong Chen",
         "Ming Yang"
-      ]
+      ],
+      "seq": 19
     },
     {
       "id": "paper-egstalker",
@@ -879,7 +878,7 @@
       "title": "EGSTalker: Real-Time Audio-Driven Talking Head Generation with Efficient Gaussian Deformation",
       "blog_url": "https://gongshangzheng.github.io/paper-egstalker.html",
       "blog_date": "2026-06-08",
-      "venue": "IEEE SMC 2025",
+      "venue": null,
       "institution": null,
       "year": 2025,
       "arxiv_id": null,
@@ -905,14 +904,14 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 20,
       "authors": [
         "Tianheng Zhu",
         "Yinfeng Yu",
         "Liejun Wang",
         "Fuchun Sun",
         "Wendong Zheng"
-      ]
+      ],
+      "seq": 20
     },
     {
       "id": "paper-chatanyone",
@@ -947,7 +946,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 21,
       "authors": [
         "Jinwei Qi",
         "Chaonan Ji",
@@ -955,7 +953,8 @@
         "Peng Zhang",
         "Bang Zhang",
         "Liefeng Bo"
-      ]
+      ],
+      "seq": 21
     },
     {
       "id": "paper-emo2",
@@ -990,14 +989,14 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 22,
       "authors": [
         "Linrui Tian",
         "Siqi Hu",
         "Qi Wang",
         "Bang Zhang",
         "Liefeng Bo"
-      ]
+      ],
+      "seq": 22
     },
     {
       "id": "paper-flap",
@@ -1034,11 +1033,11 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 23,
       "authors": [
         "Mu, L.",
         "Liu, B."
-      ]
+      ],
+      "seq": 23
     },
     {
       "id": "paper-omniavatar",
@@ -1076,14 +1075,14 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 24,
       "authors": [
         "Qijun Gan",
         "Ruizi Yang",
         "Jianke Zhu",
         "Shaofei Xue",
         "Steven Hoi"
-      ]
+      ],
+      "seq": 24
     },
     {
       "id": "paper-teller",
@@ -1095,7 +1094,7 @@
       "blog_url": "https://gongshangzheng.github.io/paper-teller.html",
       "blog_date": "2026-06-09",
       "venue": "CVPR 2025",
-      "institution": "Shanghai Soulgate Technology Co., Ltd.",
+      "institution": null,
       "year": 2025,
       "arxiv_id": null,
       "tags": [
@@ -1118,7 +1117,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 25,
       "authors": [
         "Dingcheng Zhen",
         "Shunshun Yin",
@@ -1128,7 +1126,8 @@
         "Siyuan Liu",
         "Gan Qi",
         "Ming Tao"
-      ]
+      ],
+      "seq": 25
     },
     {
       "id": "paper-faceshot",
@@ -1165,7 +1164,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 26,
       "authors": [
         "Junyao Gao",
         "Yanan Sun",
@@ -1174,7 +1172,8 @@
         "Zhening Xing",
         "Kai Chen",
         "Cairong Zhao"
-      ]
+      ],
+      "seq": 26
     },
     {
       "id": "lia-x-2025",
@@ -1222,7 +1221,6 @@
       ],
       "note": "论文笔记/lia-x",
       "note_type": "doc",
-      "seq": 27,
       "authors": [
         "Yaohui Wang",
         "Di Yang",
@@ -1230,7 +1228,8 @@
         "Francois Bremond",
         "Yu Qiao",
         "Antitza Dantcheva"
-      ]
+      ],
+      "seq": 27
     },
     {
       "id": "anigs-2024",
@@ -1269,7 +1268,6 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 28,
       "authors": [
         "Lingteng Qiu",
         "Shenhao Zhu",
@@ -1283,7 +1281,8 @@
         "Liefeng Bo",
         "Guanying Chen",
         "Zilong Dong"
-      ]
+      ],
+      "seq": 28
     },
     {
       "id": "lhm-2025",
@@ -1319,7 +1318,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 29,
       "authors": [
         "Lingteng Qiu",
         "Xiaodong Gu",
@@ -1332,7 +1330,8 @@
         "Guanying Chen",
         "Zilong Dong",
         "Liefeng Bo"
-      ]
+      ],
+      "seq": 29
     },
     {
       "id": "paper-hallo3",
@@ -1368,7 +1367,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 30,
       "authors": [
         "Jiahao Cui",
         "Hui Li",
@@ -1380,7 +1378,8 @@
         "Hang Zhou",
         "Jingdong Wang",
         "Siyu Zhu"
-      ]
+      ],
+      "seq": 30
     },
     {
       "id": "paper-hunyuan-avatar",
@@ -1416,7 +1415,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 31,
       "authors": [
         "Yi Chen",
         "Sen Liang",
@@ -1427,7 +1425,8 @@
         "Qin Lin",
         "Yuan Zhou",
         "Qinglin Lu"
-      ]
+      ],
+      "seq": 31
     },
     {
       "id": "collaborative-face-experts-2025",
@@ -1463,7 +1462,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 32,
       "authors": [
         "Yuji Wang",
         "Moran Li",
@@ -1475,7 +1473,8 @@
         "Yabiao Wang",
         "Chengjie Wang",
         "Lizhuang Ma"
-      ]
+      ],
+      "seq": 32
     },
     {
       "id": "consisid-2024",
@@ -1511,7 +1510,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 33,
       "authors": [
         "Shenghai Yuan",
         "Jinfa Huang",
@@ -1521,7 +1519,8 @@
         "Liuhan Chen",
         "Jiebo Luo",
         "Li Yuan"
-      ]
+      ],
+      "seq": 33
     },
     {
       "id": "face-consistency-benchmark-2025",
@@ -1554,12 +1553,12 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 34,
       "authors": [
         "Michal Podstawski",
         "Malgorzata Kudelska",
         "Haohong Wang"
-      ]
+      ],
+      "seq": 34
     },
     {
       "id": "float",
@@ -1607,8 +1606,7 @@
       ],
       "note": "论文笔记/float",
       "note_type": "doc",
-      "seq": 35,
-      "authors": []
+      "seq": 35
     },
     {
       "id": "fpsattention",
@@ -1651,8 +1649,7 @@
       "derived_by": [],
       "note": "论文笔记/fpsattention",
       "note_type": "doc",
-      "seq": 36,
-      "authors": []
+      "seq": 36
     },
     {
       "id": "ex-omni-2d-2026",
@@ -1696,7 +1693,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 37,
       "authors": [
         "Jin Xu",
         "Zhifang Guo",
@@ -1712,7 +1708,8 @@
         "Xiong Wang",
         "Yunfei Chu",
         "Junyang Lin"
-      ]
+      ],
+      "seq": 37
     },
     {
       "id": "hypergaussians-2025",
@@ -1752,11 +1749,11 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 38,
       "authors": [
         "Gent Serifi",
         "Marcel C. Buehler"
-      ]
+      ],
+      "seq": 38
     },
     {
       "id": "paper-performrecast",
@@ -1768,7 +1765,7 @@
       "blog_url": "https://gongshangzheng.github.io/paper-performrecast.html",
       "blog_date": "",
       "venue": "CVPR 2026",
-      "institution": "虎鲸文娱",
+      "institution": null,
       "year": 2026,
       "arxiv_id": null,
       "tags": [
@@ -1796,7 +1793,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 39,
       "authors": [
         "Jiadong Liang",
         "Bojun Xiong",
@@ -1805,7 +1801,8 @@
         "Xiao Long",
         "Yong Zheng",
         "Huan Fu"
-      ]
+      ],
+      "seq": 39
     },
     {
       "id": "unils-2024",
@@ -1844,7 +1841,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 40,
       "authors": [
         "Xuangeng Chu",
         "Ruicong Liu",
@@ -1852,7 +1848,48 @@
         "Yun Liu",
         "Yichen Peng",
         "Bo Zheng"
-      ]
+      ],
+      "seq": 40
+    },
+    {
+      "id": "causal-forcing-plus-plus",
+      "source": [
+        "manual"
+      ],
+      "title_zh": "Causal Forcing++：面向实时交互视频生成的可扩展少步自回归扩散蒸馏",
+      "title": "Causal Forcing++: Scalable Few-Step Autoregressive Diffusion Distillation for Real-Time Interactive Video Generation",
+      "blog_url": null,
+      "blog_date": "",
+      "venue": "arXiv 2026",
+      "institution": "清华 / ShengShu 等",
+      "year": 2026,
+      "arxiv_id": "2605.15141",
+      "tags": [
+        "数字人",
+        "实时流式",
+        "自回归扩散蒸馏",
+        "一致性蒸馏",
+        "少步采样"
+      ],
+      "method_family": "streaming-realtime",
+      "qa": [
+        {
+          "question": "逐帧自回归 + 仅 1–2 步采样的实时交互视频生成里，少步 AR 学生该怎么初始化？现有策略要么与目标不对齐、要么不支持少步、要么太贵难以 scale。",
+          "answer": "用因果一致性蒸馏（causal CD）做少步 AR 初始化。它学到的 AR 条件流映射与因果 ODE 蒸馏相同，但监督只来自相邻时间步之间的单次在线教师 ODE 步，无需预计算并存储完整 PF-ODE 轨迹，因此更高效也更容易优化。"
+        },
+        {
+          "question": "如此初始化后的收益有多大？",
+          "answer": "在逐帧 2 步设定下反而超过 4 步分块式的 Causal Forcing：VBench Total +0.1、Quality +0.3、VisionReward +0.335，同时首帧延迟降低 50%、Stage 2 训练成本约降为 1/4；并进一步扩展到动作条件的世界模型生成（Genie3 风格）。"
+        }
+      ],
+      "derives_from": [
+        "Causal Forcing"
+      ],
+      "derived_by": [],
+      "note": null,
+      "note_type": null,
+      "seq": 41,
+      "authors": []
     },
     {
       "id": "live-avatar-paper",
@@ -1864,7 +1901,7 @@
       "blog_url": "https://gongshangzheng.github.io/live-avatar-paper.html",
       "blog_date": "2026-06-05",
       "venue": "ECCV 2026",
-      "institution": "阿里巴巴 Quark",
+      "institution": null,
       "year": 2026,
       "arxiv_id": null,
       "tags": [
@@ -1897,7 +1934,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 41,
       "authors": [
         "Yubo Huang",
         "Hailong Guo",
@@ -1911,7 +1947,8 @@
         "Enhong Chen",
         "Jiaming Liu",
         "Steven Hoi"
-      ]
+      ],
+      "seq": 42
     },
     {
       "id": "paper-sentiavatar",
@@ -1923,7 +1960,7 @@
       "blog_url": "https://gongshangzheng.github.io/paper-sentiavatar.html",
       "blog_date": "2026-06-08",
       "venue": "arXiv 2026",
-      "institution": "RUC；SentiPulse",
+      "institution": null,
       "year": 2026,
       "arxiv_id": null,
       "tags": [
@@ -1948,7 +1985,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 42,
       "authors": [
         "Chuhao Jin",
         "Rui Zhang",
@@ -1958,7 +1994,8 @@
         "Yichen Jiang",
         "Yihan Wu",
         "Ruihua Song"
-      ]
+      ],
+      "seq": 43
     },
     {
       "id": "emotag-2026",
@@ -1970,7 +2007,7 @@
       "blog_url": "https://gongshangzheng.github.io/emotag-2026.html",
       "blog_date": "2026-06-09",
       "venue": "arXiv 2026",
-      "institution": "Michigan State University；Qualcomm Technologies Inc.；University of North Carolina at Chapel Hill",
+      "institution": null,
       "year": 2026,
       "arxiv_id": null,
       "tags": [
@@ -2001,14 +2038,14 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 43,
       "authors": [
         "Haolan Xu",
         "Keli Cheng",
         "Lei Wang",
         "Ning Bi",
         "Xiaoming Liu"
-      ]
+      ],
+      "seq": 44
     },
     {
       "id": "paper-soulx-flashhead",
@@ -2048,7 +2085,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 44,
       "authors": [
         "Tan Yu",
         "Qian Qiao",
@@ -2062,7 +2098,8 @@
         "Changhai Zhou",
         "Shunshun Yin",
         "Siyuan Liu"
-      ]
+      ],
+      "seq": 45
     },
     {
       "id": "uika-2026",
@@ -2103,7 +2140,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 45,
       "authors": [
         "Zijian Wu",
         "Boyao Zhou",
@@ -2114,7 +2150,8 @@
         "Xun Cao",
         "Yujun Shen",
         "Hao Zhu"
-      ]
+      ],
+      "seq": 46
     },
     {
       "id": "avatar-forcing-2026",
@@ -2160,14 +2197,14 @@
       "derived_by": [],
       "note": "论文笔记/avatar-forcing",
       "note_type": "doc",
-      "seq": 46,
       "authors": [
         "Taekyung Ki",
         "Sangwon Jang",
         "Jaehyeong Jo",
         "Jaehong Yoon",
         "Sung Ju Hwang"
-      ]
+      ],
+      "seq": 47
     },
     {
       "id": "wan-streamer-2026",
@@ -2208,7 +2245,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 47,
       "authors": [
         "Lianghua Huang",
         "Zhi-Fan Wu",
@@ -2235,7 +2271,8 @@
         "Yun Zheng",
         "Yuzheng Wang",
         "Zoubin Bi"
-      ]
+      ],
+      "seq": 48
     },
     {
       "id": "paper-liveact",
@@ -2277,7 +2314,6 @@
       "derived_by": [],
       "note": "论文笔记/liveact",
       "note_type": "doc",
-      "seq": 48,
       "authors": [
         "Dingcheng Zhen",
         "Xu Zheng",
@@ -2286,7 +2322,8 @@
         "Yichao Yan",
         "Ming Tao",
         "Shunshun Yin"
-      ]
+      ],
+      "seq": 49
     },
     {
       "id": "match-2026",
@@ -2327,13 +2364,13 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 49,
       "authors": [
         "Malte Prinzler",
         "Paulo Gotardo",
         "Siyu Tang",
         "Timo Bolkart"
-      ]
+      ],
+      "seq": 50
     },
     {
       "id": "avatarforcing-2026",
@@ -2372,7 +2409,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 50,
       "authors": [
         "Liyuan Cui",
         "Wentao Hu",
@@ -2380,7 +2416,8 @@
         "Zesong Yang",
         "Fan Shi",
         "Xiaoqiang Liu"
-      ]
+      ],
+      "seq": 51
     },
     {
       "id": "flexavatar-2025",
@@ -2422,7 +2459,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 51,
       "authors": [
         "Cheng Peng",
         "Zhuo Su",
@@ -2434,7 +2470,8 @@
         "Jingxiang Sun",
         "Chenyangguang Zhang",
         "Yebin Liu"
-      ]
+      ],
+      "seq": 52
     },
     {
       "id": "styledit-2025",
@@ -2446,7 +2483,7 @@
       "blog_url": "https://gongshangzheng.github.io/styledit-2025.html",
       "blog_date": "2026-08-31",
       "venue": "IEEE FG 2026",
-      "institution": "Research Center for Information Technology Innovation (CITI), Academia Sinica",
+      "institution": null,
       "year": 2026,
       "arxiv_id": null,
       "tags": [
@@ -2474,7 +2511,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 52,
       "authors": [
         "Pin-Yen Chiu",
         "Dai-Jie Wu",
@@ -2483,7 +2519,8 @@
         "Hsiang-Chen Chiu",
         "Chih-Yu Wang",
         "Jun-Cheng Chen"
-      ]
+      ],
+      "seq": 53
     },
     {
       "id": "id-sim-2026",
@@ -2523,7 +2560,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 53,
       "authors": [
         "Julia Chae",
         "Nicholas Kolkin",
@@ -2531,7 +2567,8 @@
         "Richard Zhang",
         "Sara Beery",
         "Cusuh Ham"
-      ]
+      ],
+      "seq": 54
     },
     {
       "id": "styleid-2026",
@@ -2571,7 +2608,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 54,
       "authors": [
         "Kwan Yun",
         "Changmin Lee",
@@ -2579,7 +2615,8 @@
         "Youngseo Kim",
         "Seungmi Lee",
         "Junyong Noh"
-      ]
+      ],
+      "seq": 55
     },
     {
       "id": "leaptalk-2026",
@@ -2614,11 +2651,11 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 55,
       "authors": [
         "Rongxiang Zhang",
         "Songhua Liu"
-      ]
+      ],
+      "seq": 56
     },
     {
       "id": "omnimate-2026",
@@ -2630,7 +2667,7 @@
       "title": "OmniMate: Open-Ended Real-Time Streaming Audio-Visual Generation for Interactive Avatars",
       "blog_url": "https://gongshangzheng.github.io/omnimate-2026.html",
       "blog_date": "2026-09-07",
-      "venue": "arXiv 2026 (AAAI 2027 投稿)",
+      "venue": "arXiv 2026 / 中国电信 AI（AAAI 2027 投稿）",
       "institution": "西安交大 + 中国电信 AI 等",
       "year": 2026,
       "arxiv_id": "2607.23023",
@@ -2659,7 +2696,6 @@
       "derived_by": [],
       "note": "论文笔记/omnimate",
       "note_type": "doc",
-      "seq": 56,
       "authors": [
         "Quanyue Song",
         "Yishan He",
@@ -2668,7 +2704,8 @@
         "Yongxiang Li",
         "Caigui Jiang",
         "Zhi Zhi Guo"
-      ]
+      ],
+      "seq": 57
     },
     {
       "id": "causal-forcing",
@@ -2707,11 +2744,12 @@
         "Self Forcing",
         "CausVid"
       ],
-      "derived_by": [],
+      "derived_by": [
+        "causal-forcing-plus-plus"
+      ],
       "note": "论文笔记/causal-forcing",
       "note_type": "doc",
-      "seq": 57,
-      "authors": []
+      "seq": 58
     },
     {
       "id": "vorch-streamer",
@@ -2754,8 +2792,7 @@
       "derived_by": [],
       "note": "论文笔记/vorch-streamer",
       "note_type": "doc",
-      "seq": 58,
-      "authors": []
+      "seq": 59
     },
     {
       "id": "digital-human-identity-consistency",
@@ -2788,8 +2825,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 59,
-      "authors": []
+      "seq": 60
     },
     {
       "id": "tool-augmented-digital-human",
@@ -2822,8 +2858,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 60,
-      "authors": []
+      "seq": 61
     },
     {
       "id": "realtime-digital-human-survey",
@@ -2857,8 +2892,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 61,
-      "authors": []
+      "seq": 62
     },
     {
       "id": "digital-human-full-frame-avatar",
@@ -2891,8 +2925,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 62,
-      "authors": []
+      "seq": 63
     },
     {
       "id": "digital-human-lip-sync-video-dubbing",
@@ -2936,13 +2969,13 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 63,
       "authors": [
         "K R Prajwal",
         "Rudrabha Mukhopadhyay",
         "Vinay Namboodiri",
         "C V Jawahar"
-      ]
+      ],
+      "seq": 64
     },
     {
       "id": "digital-human-streaming-distillation",
@@ -2981,8 +3014,7 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 64,
-      "authors": []
+      "seq": 65
     },
     {
       "id": "paper-sadtalker",
@@ -2993,9 +3025,9 @@
       "title": "SadTalker: Learning Realistic 3D Motion Coefficients for Stylized Audio-Driven Single Image Talking Face Animation",
       "blog_url": "https://gongshangzheng.github.io/paper-sadtalker.html",
       "blog_date": "2026-06-04",
-      "venue": "CVPR 2023",
-      "institution": "Xi'an Jiaotong University；Tencent AI Lab",
-      "year": 2023,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -3018,7 +3050,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 65,
       "authors": [
         "Wenxuan Zhang",
         "Xiaodong Cun",
@@ -3028,7 +3059,8 @@
         "Yu Guo",
         "Ying Shan",
         "Fei Wang"
-      ]
+      ],
+      "seq": 66
     },
     {
       "id": "paper-vasa1",
@@ -3039,9 +3071,9 @@
       "title": "VASA-1: Lifelike Audio-Driven Talking Faces Generated in Real Time",
       "blog_url": "https://gongshangzheng.github.io/paper-vasa1.html",
       "blog_date": "2026-06-04",
-      "venue": "NeurIPS 2024",
-      "institution": "Microsoft Research",
-      "year": 2024,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -3064,7 +3096,6 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 66,
       "authors": [
         "Sicheng Xu",
         "Guojun Chen",
@@ -3075,7 +3106,8 @@
         "Yizhong Zhang",
         "Xin Tong",
         "Baining Guo"
-      ]
+      ],
+      "seq": 67
     },
     {
       "id": "paper-wav2lip",
@@ -3086,9 +3118,9 @@
       "title": "A Lip Sync Expert Is All You Need for Speech to Lip Generation In the Wild",
       "blog_url": "https://gongshangzheng.github.io/paper-wav2lip.html",
       "blog_date": "2026-06-04",
-      "venue": "ACM MM 2020",
-      "institution": "IIIT Hyderabad",
-      "year": 2020,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -3109,13 +3141,13 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 67,
       "authors": [
         "K R Prajwal",
         "Rudrabha Mukhopadhyay",
         "Vinay Namboodiri",
         "C V Jawahar"
-      ]
+      ],
+      "seq": 68
     },
     {
       "id": "cyberverse-realtime-digital-human-agent",
@@ -3150,8 +3182,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 68,
-      "authors": []
+      "seq": 69
     },
     {
       "id": "digital-human-hub",
@@ -3185,8 +3216,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 69,
-      "authors": []
+      "seq": 70
     },
     {
       "id": "ditto-talkinghead",
@@ -3197,9 +3227,9 @@
       "title": "Ditto: Motion-Space Diffusion for Controllable Realtime Talking Head Synthesis",
       "blog_url": "https://gongshangzheng.github.io/ditto-talkinghead.html",
       "blog_date": "2026-06-05",
-      "venue": "arXiv",
-      "institution": "Ant Group",
-      "year": 2024,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "github",
@@ -3219,14 +3249,14 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 70,
       "authors": [
         "Tianqi Li",
         "Ruobing Zheng",
         "Minghui Yang",
         "Jingdong Chen",
         "Ming Yang"
-      ]
+      ],
+      "seq": 71
     },
     {
       "id": "infinitetalk-paper",
@@ -3237,9 +3267,9 @@
       "title": "InfiniteTalk: Audio-driven Video Generation for Sparse-Frame Video Dubbing",
       "blog_url": "https://gongshangzheng.github.io/infinitetalk-paper.html",
       "blog_date": "2026-06-05",
-      "venue": "arXiv",
-      "institution": "MeiGen-AI",
-      "year": 2025,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -3262,7 +3292,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 71,
       "authors": [
         "Shaoshu Yang",
         "Zhe Kong",
@@ -3275,7 +3304,8 @@
         "Xunliang Cai",
         "Ran He",
         "Xiaoming Wei"
-      ]
+      ],
+      "seq": 72
     },
     {
       "id": "infinitetalk-source-read",
@@ -3314,7 +3344,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 72,
       "authors": [
         "Shaoshu Yang",
         "Zhe Kong",
@@ -3327,7 +3356,8 @@
         "Xunliang Cai",
         "Ran He",
         "Xiaoming Wei"
-      ]
+      ],
+      "seq": 73
     },
     {
       "id": "ultralight-digital-human-source-read",
@@ -3365,8 +3395,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 73,
-      "authors": []
+      "seq": 74
     },
     {
       "id": "voice-ai-digital-human-landscape",
@@ -3401,8 +3430,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 74,
-      "authors": []
+      "seq": 75
     },
     {
       "id": "digital-human-3dgs-nerf-avatar",
@@ -3436,7 +3464,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 75,
       "authors": [
         "Yudong Guo",
         "Keyu Chen",
@@ -3444,7 +3471,8 @@
         "Yong-Jin Liu",
         "Hujun Bao",
         "Juyong Zhang"
-      ]
+      ],
+      "seq": 76
     },
     {
       "id": "digital-human-diffusion-foundation-avatar",
@@ -3481,8 +3509,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 76,
-      "authors": []
+      "seq": 77
     },
     {
       "id": "digital-human-motion-space-avatar",
@@ -3493,7 +3520,7 @@
       "title": "数字人系列（三）：运动空间路线，从 SadTalker 到 VASA-1 与 Ditto",
       "blog_url": "https://gongshangzheng.github.io/digital-human-motion-space-avatar.html",
       "blog_date": "2026-06-08",
-      "venue": null,
+      "venue": "从 3DMM 运动系数到 motion-space diffusion",
       "institution": null,
       "year": null,
       "arxiv_id": null,
@@ -3516,8 +3543,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 77,
-      "authors": []
+      "seq": 78
     },
     {
       "id": "paper-musetalk",
@@ -3528,9 +3554,9 @@
       "title": "MuseTalk: Real-Time High-Fidelity Video Dubbing via Spatio-Temporal Sampling",
       "blog_url": "https://gongshangzheng.github.io/paper-musetalk.html",
       "blog_date": "2026-06-08",
-      "venue": "arXiv",
-      "institution": "TMElyralab",
-      "year": 2024,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -3557,7 +3583,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 78,
       "authors": [
         "Yue Zhang",
         "Zhizhou Zhong",
@@ -3569,7 +3594,8 @@
         "Yingjie He",
         "Junxin Huang",
         "Wenjiang Zhou"
-      ]
+      ],
+      "seq": 79
     },
     {
       "id": "digital-human-avatar-survey",
@@ -3605,8 +3631,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 79,
-      "authors": []
+      "seq": 80
     },
     {
       "id": "digital-human-brainstorm",
@@ -3639,8 +3664,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 80,
-      "authors": []
+      "seq": 81
     },
     {
       "id": "digital-human-training-inference-benchmark",
@@ -3680,8 +3704,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 81,
-      "authors": []
+      "seq": 82
     },
     {
       "id": "digital-human-demo-gallery",
@@ -3716,8 +3739,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 82,
-      "authors": []
+      "seq": 83
     },
     {
       "id": "cyberverse-flashhead-lite-experiment",
@@ -3750,8 +3772,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 83,
-      "authors": []
+      "seq": 84
     },
     {
       "id": "lam-2025",
@@ -3762,9 +3783,9 @@
       "title": "LAM: Large Avatar Model for One-shot Animatable Gaussian Head",
       "blog_url": "https://gongshangzheng.github.io/lam-2025.html",
       "blog_date": "2026-06-12",
-      "venue": "arXiv",
-      "institution": "通义实验室",
-      "year": 2025,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -3795,7 +3816,6 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 84,
       "authors": [
         "Yisheng He",
         "Xiaodong Gu",
@@ -3806,7 +3826,8 @@
         "Weihao Yuan",
         "Zilong Dong",
         "Liefeng Bo"
-      ]
+      ],
+      "seq": 85
     },
     {
       "id": "digital-human-engineering-benchmark",
@@ -3842,8 +3863,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 85,
-      "authors": []
+      "seq": 86
     },
     {
       "id": "lite-avatar-source-code-analysis",
@@ -3878,8 +3898,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 86,
-      "authors": []
+      "seq": 87
     },
     {
       "id": "open-avatar-chat-liteavatar",
@@ -3917,8 +3936,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 87,
-      "authors": []
+      "seq": 88
     },
     {
       "id": "flow-guided-talking-2021",
@@ -3929,9 +3947,9 @@
       "title": "Flow-Guided One-Shot Talking Face Generation with a High-resolution Audio-visual Dataset",
       "blog_url": "https://gongshangzheng.github.io/flow-guided-talking-2021.html",
       "blog_date": "2026-06-17",
-      "venue": "CVPR 2021",
-      "institution": "Virtual Human Group, Netease Fuxi AI Lab",
-      "year": 2021,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "talking face",
@@ -3958,13 +3976,13 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 88,
       "authors": [
         "Zhimeng Zhang",
         "Lincheng Li",
         "Yu Ding",
         "Changjie Fan"
-      ]
+      ],
+      "seq": 89
     },
     {
       "id": "hdtf-source-code-analysis",
@@ -4003,8 +4021,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 89,
-      "authors": []
+      "seq": 90
     },
     {
       "id": "mead-2020",
@@ -4015,9 +4032,9 @@
       "title": "MEAD: A Large-scale Audio-visual Dataset for Emotional Talking-face Generation",
       "blog_url": "https://gongshangzheng.github.io/mead-2020.html",
       "blog_date": "2026-06-18",
-      "venue": "ECCV 2020",
-      "institution": "SenseTime Research；南洋理工大学（NTU）；卡内基梅隆大学（CMU）；中科院自动化所（CASIA）；中科院深圳先进技术研究院",
-      "year": 2020,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "MEAD",
@@ -4043,11 +4060,11 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 90,
       "authors": [
         "Wang, K.",
         "et al."
-      ]
+      ],
+      "seq": 91
     },
     {
       "id": "4dhumanqa-2025",
@@ -4058,9 +4075,9 @@
       "title": "4DHumanQA: Quality Assessment of 3D Human Animation",
       "blog_url": "https://gongshangzheng.github.io/4dhumanqa-2025.html",
       "blog_date": "2026-07-06",
-      "venue": "arXiv",
-      "institution": "Inria",
-      "year": 2025,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -4084,11 +4101,11 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 91,
       "authors": [
         "Rekik, R.",
         "et al."
-      ]
+      ],
+      "seq": 92
     },
     {
       "id": "captalk-2025",
@@ -4099,9 +4116,9 @@
       "title": "CapTalk: Text-Guided Stylization and Speech-Driven 3D Head Animation",
       "blog_url": "https://gongshangzheng.github.io/captalk-2025.html",
       "blog_date": "2026-07-06",
-      "venue": "arXiv",
-      "institution": "University of Tokyo；Snap Research",
-      "year": 2025,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -4134,7 +4151,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 92,
       "authors": [
         "Xuangeng Chu",
         "Yuan Gan",
@@ -4143,7 +4159,8 @@
         "Jian Wang",
         "Bing Zhou",
         "Tatsuya Harada"
-      ]
+      ],
+      "seq": 93
     },
     {
       "id": "cospeech-npr-2025",
@@ -4154,9 +4171,9 @@
       "title": "Co-Speech Gesture and Facial Expression Generation for Non-Photorealistic 3D Characters",
       "blog_url": "https://gongshangzheng.github.io/cospeech-npr-2025.html",
       "blog_date": "2026-07-06",
-      "venue": "SIGGRAPH 2025",
-      "institution": "Sony",
-      "year": 2025,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -4180,12 +4197,12 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 93,
       "authors": [
         "Omine, T.",
         "Kawabata, N.",
         "Homma, F."
-      ]
+      ],
+      "seq": 94
     },
     {
       "id": "digital-human-backend-agent-design",
@@ -4236,8 +4253,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 94,
-      "authors": []
+      "seq": 95
     },
     {
       "id": "digital-human-cartoon-stylized-evaluation",
@@ -4277,8 +4293,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 95,
-      "authors": []
+      "seq": 96
     },
     {
       "id": "digital-human-realtime-gpu-comparison",
@@ -4316,8 +4331,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 96,
-      "authors": []
+      "seq": 97
     },
     {
       "id": "geneava-2025",
@@ -4328,9 +4342,9 @@
       "title": "GenEAva: Generating Cartoon Avatars with Fine-Grained Facial Expressions from Realistic Diffusion-based Faces",
       "blog_url": "https://gongshangzheng.github.io/geneava-2025.html",
       "blog_date": "2026-07-06",
-      "venue": "IEEE FG 2025",
-      "institution": "Boston University；Georgetown University",
-      "year": 2025,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -4358,13 +4372,13 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 97,
       "authors": [
         "Hao Yu",
         "Rupayan Mallick",
         "Margrit Betke",
         "Sarah Adel Bargal"
-      ]
+      ],
+      "seq": 98
     },
     {
       "id": "theval-2025",
@@ -4375,9 +4389,9 @@
       "title": "THEval: Evaluation Framework for Talking Head Video Generation",
       "blog_url": "https://gongshangzheng.github.io/theval-2025.html",
       "blog_date": "2026-07-06",
-      "venue": "CVPR Findings 2026",
-      "institution": "Inria；上海 AI Lab；Darmstadt",
-      "year": 2026,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -4401,13 +4415,13 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 98,
       "authors": [
         "Nabyl Quignon",
         "Baptiste Chopin",
         "Yaohui Wang",
         "Antitza Dantcheva"
-      ]
+      ],
+      "seq": 99
     },
     {
       "id": "toontalker-2023",
@@ -4418,9 +4432,9 @@
       "title": "ToonTalker: Cross-Domain Face Reenactment",
       "blog_url": "https://gongshangzheng.github.io/toontalker-2023.html",
       "blog_date": "2026-07-06",
-      "venue": "ICCV 2023",
-      "institution": "清华深研院；腾讯 AI Lab；蚂蚁集团",
-      "year": 2023,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -4448,7 +4462,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 99,
       "authors": [
         "Yuan Gong",
         "Yong Zhang",
@@ -4458,7 +4471,8 @@
         "Xuan Wang",
         "Baoyuan Wu",
         "Yujiu Yang"
-      ]
+      ],
+      "seq": 100
     },
     {
       "id": "digital-human-training-loss-survey",
@@ -4494,8 +4508,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 100,
-      "authors": []
+      "seq": 101
     },
     {
       "id": "motionshop-2-2025",
@@ -4534,10 +4547,10 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 101,
       "authors": [
         "aigc3d Team"
-      ]
+      ],
+      "seq": 102
     },
     {
       "id": "digital-human-hand-generation",
@@ -4570,8 +4583,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 102,
-      "authors": []
+      "seq": 103
     },
     {
       "id": "opens2v-nexus-2025",
@@ -4582,9 +4594,9 @@
       "title": "OpenS2V-Nexus: A Detailed Benchmark and Million-Scale Dataset for Subject-to-Video Generation",
       "blog_url": "https://gongshangzheng.github.io/opens2v-nexus-2025.html",
       "blog_date": "2026-09-01",
-      "venue": "arXiv",
-      "institution": "北京大学深圳研究生院；University of Rochester；Rabbitpre AI",
-      "year": 2025,
+      "venue": null,
+      "institution": null,
+      "year": null,
       "arxiv_id": null,
       "tags": [
         "数字人",
@@ -4611,7 +4623,6 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 103,
       "authors": [
         "Shenghai Yuan",
         "Xianyi He",
@@ -4621,7 +4632,8 @@
         "Bin Lin",
         "Jiebo Luo",
         "Li Yuan"
-      ]
+      ],
+      "seq": 104
     },
     {
       "id": "vbench2-2025",
@@ -4662,7 +4674,6 @@
       ],
       "note": null,
       "note_type": null,
-      "seq": 104,
       "authors": [
         "Dian Zheng",
         "Ziqi Huang",
@@ -4676,7 +4687,8 @@
         "Wei-Shi Zheng",
         "Yu Qiao",
         "Ziwei Liu"
-      ]
+      ],
+      "seq": 105
     },
     {
       "id": "digital-human-survey-map",
@@ -4709,8 +4721,7 @@
       "derived_by": [],
       "note": null,
       "note_type": null,
-      "seq": 105,
-      "authors": []
+      "seq": 106
     },
     {
       "id": "talker-t2av",
@@ -4754,8 +4765,127 @@
       "derived_by": [],
       "note": "论文笔记/talker-t2av",
       "note_type": "doc",
-      "seq": 106,
-      "authors": []
+      "seq": 107
+    },
+    {
+      "id": "blade",
+      "source": [
+        "note"
+      ],
+      "title_zh": "BLADE 模型笔记",
+      "title": "BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation",
+      "blog_url": null,
+      "blog_date": "2026-09-24",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": "2508.10774",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "BLADE",
+        "块稀疏注意力",
+        "步数蒸馏",
+        "视频生成加速"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "视频扩散推理里「每步注意力成本」与「去噪步数」是两段独立开销，能否放进同一个训练回路一起压？",
+          "answer": "把自适应块稀疏注意力（ASA）与稀疏感知的 data-free 步数蒸馏（基于 TDM）联合优化，同时压低每步注意力成本与步数：Wan2.1-1.3B 上 kernel 3.30×、端到端 14.10×，CogVideoX-5B 端到端 8.89×（8 步 vs 官方 50 步）。"
+        }
+      ],
+      "derives_from": [
+        "TDM"
+      ],
+      "derived_by": [],
+      "note": "论文笔记/blade",
+      "note_type": "doc",
+      "seq": 108
+    },
+    {
+      "id": "latent-spatial-memory",
+      "source": [
+        "note"
+      ],
+      "title_zh": "Latent Spatial Memory 模型笔记",
+      "title": "Latent Spatial Memory for Video World Models",
+      "blog_url": null,
+      "blog_date": "2026-09-24",
+      "venue": null,
+      "institution": "均相对 RGB 缓存管线",
+      "year": null,
+      "arxiv_id": "2606.09828",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "Latent Spatial Memory",
+        "视频世界模型",
+        "空间记忆",
+        "扩散缓存"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "视频世界模型的持久 3D 空间记忆若用 RGB 点云保存，每个 conditioning step 都要 render→VAE-encode 往返一次，开销怎么消？",
+          "answer": "把空间记忆从 RGB 点云搬进 diffusion latent，读出时只做一次 latent 分辨率投影，消掉逐 step 的 render→VAE 往返：Wan2.2-TI2V-5B、704×1280、单张 H100 上端到端 10.57×、3D cache 显存下降 55×（论文自报）。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": "论文笔记/latent-spatial-memory",
+      "note_type": "doc",
+      "authors": [
+        "Weijie Wang",
+        "Haoyu Zhao",
+        "Yifan Yang",
+        "Feng Chen",
+        "Zeyu Zhang",
+        "Yefei He",
+        "Zicheng Duan",
+        "Donny Y. Chen",
+        "Yuqing Yang",
+        "Bohan Zhuang"
+      ],
+      "seq": 109
+    },
+    {
+      "id": "zipar",
+      "source": [
+        "note"
+      ],
+      "title_zh": "ZipAR 模型笔记",
+      "title": "ZipAR: Parallel Autoregressive Image Generation through Spatial Locality",
+      "blog_url": null,
+      "blog_date": "2026-09-24",
+      "venue": null,
+      "institution": null,
+      "year": null,
+      "arxiv_id": "2412.04062",
+      "tags": [
+        "数字人",
+        "模型笔记",
+        "ZipAR",
+        "自回归生成",
+        "并行解码",
+        "空间局部性"
+      ],
+      "method_family": "engineering",
+      "qa": [
+        {
+          "question": "自回归图像生成逐行串行解码太慢，能否不重训就加速？",
+          "answer": "用「空间局部性」把逐行串行解码改成跨行并行解码，零训练、即插即用：LlamaGen-XL-512（A100、batch=1、MS-COCO）延迟 33.17s→5.86s（−82.3%）、步数 1024→185（−81.9%），CLIP 0.287→0.281。论文只验证图像 AR，迁到视频需自行定义时间维窗口。"
+        }
+      ],
+      "derives_from": [],
+      "derived_by": [],
+      "note": "论文笔记/zipar",
+      "note_type": "doc",
+      "authors": [
+        "Yefei He",
+        "et al."
+      ],
+      "seq": 110
     }
   ]
 }

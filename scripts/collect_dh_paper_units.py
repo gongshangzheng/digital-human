@@ -235,8 +235,8 @@ def assign_seq(entries: list[dict]) -> list[dict]:
 
 
 def merge_with_existing(new_entries: list[dict], existing: list[dict]) -> list[dict]:
-    """保留已在 sidecar 中补全的内容字段。"""
-    keep = {"qa", "derives_from", "derived_by", "method_family", "note", "note_type", "title"}
+    """保留已在 sidecar 中补全的内容字段，并保留手工录入条目。"""
+    keep = {"qa", "derives_from", "derived_by", "method_family", "note", "note_type", "title", "authors", "arxiv_id"}
     old = {e.get("id"): e for e in existing}
     for e in new_entries:
         prev = old.get(e["id"])
@@ -245,6 +245,13 @@ def merge_with_existing(new_entries: list[dict], existing: list[dict]) -> list[d
         for field in keep:
             if prev.get(field):
                 e[field] = prev[field]
+    # 手工录入条目（source 含 "manual"）不在博客/笔记扫描范围内，重跑时原样保留
+    scanned_ids = {e.get("id") for e in new_entries}
+    for prev in existing:
+        if prev.get("id") in scanned_ids:
+            continue
+        if "manual" in (prev.get("source") or []):
+            new_entries.append(prev)
     return new_entries
 
 
