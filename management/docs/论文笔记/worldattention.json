@@ -1,0 +1,65 @@
+{
+  "slug": "论文笔记/worldattention",
+  "title": "WorldAttention 方案笔记",
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "change": "docs-note-gen-acceleration",
+      "summary": "首次创建：生成侧加速十篇中的仓库/报告类笔记 WorldAttention。按 D2「能力与边界」骨架（是什么 / 机制与依赖 / 报告口径与证据等级 / 能否落到我们的管线 / 参考与延伸），不套论文 10 节。写清四件事：① 形态=注意力内核 HSA + 分层 KV cache HKV + 三阶段训练，上游 github.com/alibaba-damo-academy/WorldAttention（Apache-2.0）；② 机制与依赖=HSA 线性全局 + head 自适应稀疏双分支、HKV 两阶段检索（chunk→page）+ 三级驻留（GPU/CPU/NVMe），并写明块稀疏 kernel 未随仓库发布（block_sparse.py raise NotImplementedError）→ 不可复现；③ 报告口径=单 H100 kernel 14.02×（相对 FA3）/ E2E 2.21× / 22.0 FPS，证据等级=代码/README 证据，且无同行评议论文（README 占位 arXiv ID，arXiv / HF Papers / OpenAlex 三处检索 0 结果）；④ 结论=当前不能作为可直接采用的加速器（缺 kernel、缺训练链、缺权重）。不含论文原图，改用 1 张自绘 Mermaid（HSA 双分支 + HKV 分层组织）+ 2 个块级公式（均标注「我方形式化」）+ 数值/未披露表格。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "无 arXiv 论文可抓（三处独立检索 0 结果），素材以官方仓库 README 与代码为一手来源，另有联网调研 brief（.cache/article-note/worldattention/repo-brief.md：GitHub API 元数据、来源清单、与知识库口径逐条核对、未确认项）。",
+    "analysis": "本轮仅产出 image-collection.md（明确「无图可发」及理由）并新建 synthesis.md；不产出 methodology/experiment/terminology 等论文 lane（无论文可拆）。",
+    "writing": "正文与 sidecar 已完成；validate-note.py 与 validate-analysis.py 两条校验均通过。"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/worldattention/"
+    },
+    {
+      "title": "联网调研 brief（官方仓库 / 来源清单 / 口径核对 / 未确认项）",
+      "path": ".cache/article-note/worldattention/repo-brief.md"
+    },
+    {
+      "title": "配图实况与取舍（无图可发及理由）",
+      "path": ".cache/article-note/worldattention/analysis/image-collection.md"
+    },
+    {
+      "title": "上游仓库",
+      "path": "https://github.com/alibaba-damo-academy/WorldAttention"
+    }
+  ],
+  "related": [
+    {
+      "slug": "论文笔记/latent-spatial-memory",
+      "title": "Latent Spatial Memory 模型笔记"
+    },
+    {
+      "slug": "数字人概述/数字人加速",
+      "title": "数字人加速"
+    },
+    {
+      "slug": "knowledge/视频生成训练与推理加速专题",
+      "title": "视频生成训练与推理加速专题"
+    },
+    {
+      "slug": "论文笔记/README",
+      "title": "论文笔记（篇目索引）"
+    }
+  ],
+  "notes": [
+    "无同行评议论文（本篇最重要的边界）：README 顶部 Paper / Project Page / HF Paper 三个 badge 的 href 全部是 #，BibTeX 引用块仍是占位符 journal = {arXiv preprint arXiv:XXXX.XXXXX}；README 的 To-Do 里 `- [x] Release the paper on arXiv` 虽已勾选（该行在 2026-08-11 07:14 的提交中还是 `[ ]`），但 arXiv 站内检索（all:WorldAttention 及 3 条独立短语查询）、HuggingFace Papers API、OpenAlex 标题检索三处独立来源均为 0 结果。结论：截至 2026-09-24，无公开可核实的 arXiv ID，也无同行评议版本。",
+    "kernel 未开源、不可复现：官方代码 wan/modules/hsa/block_sparse.py 的 docstring 为「Block-sparse attention kernel of the HSA sparse branch. Not included in this release.」，函数体直接 raise NotImplementedError；README To-Do 的 `- [ ] Release the HSA kernels`、`- [ ] Release the inference pipeline` 均未勾选；仓库无 models/ 目录（权重未发布）。因此 README 的 14.02× / 2.21× / 22.0 FPS 在当前仓库状态下无法本地复现。",
+    "证据等级＝代码/README 证据（知识库口径，原样带出、未升格为「论文已验证」）：三项数字（单 H100 kernel 14.02×、E2E 2.21×、22.0 FPS）在公开网络只有该仓库 README Intro 一处出处，无技术报告 PDF、无项目页、无第三方复现。我方整理（management/docs/knowledge/视频生成训练与推理加速专题.md §2.1）所记「kernel 14.02×、E2E 2.21×、22fps」与 README 逐字一致，无口径冲突。",
+    "口径差异提示：我方知识库 §2.1 写「kernel 14.02×」未带基线名，README 明确是相对 FlashAttention-3（Our system-oriented kernel design for HSA brings a 14.02× speedup over FlashAttention-3）；引用时应补基线名，避免与相对完整推理基线的 E2E 2.21× 混淆。",
+    "无原图：上游是代码仓库，无许可可发布图（无论文 figure、无项目页配图），故本篇不发布任何图片、正文不写任何 docs-assets 链接；改用 1 张自绘 Mermaid（HSA 双分支 + HKV 两阶段检索/三级驻留的组织关系）+ 2 个块级公式 + 数值/未披露表格。理由登记见 analysis/image-collection.md。",
+    "公式说明：README 与仓库代码均无编号公式，正文 2 个块级公式均为「我方形式化」——式 1（full attention O(N^2 d) 与 HSA O(N d + N·s̄·d) 的降阶）标注为形式化；式 2（Amdahl 视角 S_E2E = 1/((1-p)+p/S_kernel)，代入 14.02× 与 2.21× 得 p≈0.59）明确标注「我方形式化 · 推断」，两个倍率分母不同，仅用于解释量级差，不当成官方实测分解。",
+    "未披露项（一律写「未披露」，不猜）：14.02× 的测量设置（序列长度/head dim/dtype/H100 显存型号/稀疏度）、22.0 FPS 的生成设置（分辨率/帧数/是否含 VAE decode/是否含 CFG）、训练数据与超参、对应 Wan 底座版本与规模（是否自训）。README 另给出 VBench-Long subject consistency 0.9472 与 InterVBench 0.9668，我方知识库未登记，本篇照录并注明「仅 README 出处、无第三方交叉验证，不构成质量结论」。",
+    "机制与口径来自一手代码可 grep 复现的实证：pipeline/hkv/tiering.py 第 1 行 docstring「Page-granular residency across GPU, CPU DRAM and NVMe.」、tier 取值含 nvme、HKVTierManager 参数 gpu_max_pages/cpu_max_pages/nvme_enabled/nvme_dir；pipeline/hkv/retrieval.py 导出 select_top_chunks/select_topk_pages；configs/ 下 train_stage1_causal.yaml / train_stage2_hsa_warmup.yaml / train_stage3_hsa_tune.yaml 三个文件实际存在（文件级实证）。本笔记未 clone 仓库复核，只依据 repo-brief.md 记录的官方 raw/API 抓取结果。",
+    "未入本地 papers 库（data/papers.db 无该条），frontmatter 按任务要求不写 arxiv_id、papers_id 写 none（无论文）。",
+    "定位结论：当前不能作为可直接采用的加速器——缺可用稀疏 kernel、缺三阶段训练链、缺权重；我方 talking-head 片段多为短上下文，知识库提示「短上下文中 cache 可能没有收益」。仅「两阶段检索 + 分层驻留」的思路可借鉴。"
+  ]
+}

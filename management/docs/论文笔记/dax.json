@@ -1,0 +1,67 @@
+{
+  "slug": "论文笔记/dax",
+  "title": "DAX 方案笔记",
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "change": "docs-note-gen-acceleration",
+      "summary": "首次创建：生成侧加速十篇中的仓库/报告类笔记 DAX。按 D2「能力与边界」骨架（是什么 / 机制与依赖 / 报告口径与证据等级 / 能否落到我们的管线 / 参考与延伸），不套论文 10 节。写清四件事：① 形态=面向视频扩散推理的算子/系统优化组合（不是模型），公开仓库 github.com/RiseAI-Sys/DAX（Apache-2.0，创建 2025-07-31），上游真实来源为阿里内部 GitLab（首版 README 的 clone 行 http://gitlab.alibaba-inc.com/cvl/DAX.git + 两小时后 commit 2f1e00c04bbb「fix url」的单行 diff 可判定）；② 机制与依赖=序列并行 + SageAttention2 + torch.compile + INT8 线性层 + TeaCache 的组合，前四项降每步成本、TeaCache 跨步复用减有效步数，训练要求=零训练（系统侧组合）；③ 报告口径=Wan2.1-T2V-14B、720p、5s、8×H20：6836s→188s（36.4×），证据等级=仓库 benchmark（我方整理口径），无论文（未检索到同行评议论文），并强调 36.4× 是 8 卡结果、不能当单卡速度、不可与他篇横比；④ 结论=思路可借鉴度高（零训练、系统侧），但需多卡环境与算子/缓存改造，单卡场景不能直接复用该倍数。不含原图，改用 1 张自绘 Mermaid（五个优化项各作用在链路哪一段）+ 2 个块级公式（端到端延迟分解；benchmark 累积消融倍率分解，均标注「我方形式化/派生」）+ 数值/未披露表格。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "无 arXiv 论文可抓（arXiv 站内与 HuggingFace Papers API 检索均无 DAX 条目），素材以官方仓库 README / benchmark 图 / 代码目录为一手来源，另有联网调研 brief（.cache/article-note/dax/repo-brief.md：GitHub API 元数据、上游内部 GitLab 的判定证据、来源清单、与知识库口径逐条核对、未确认项）。",
+    "analysis": "本轮仅产出 image-collection.md（明确「无图可发」及理由）并新建 synthesis.md；不产出 methodology/experiment/terminology 等论文 lane（无论文可拆）。",
+    "writing": "正文与 sidecar 已完成；validate-note.py 与 validate-analysis.py 两条校验均通过。"
+  },
+  "appendix": [
+    {
+      "title": "素材工作区（gitignored）",
+      "path": ".cache/article-note/dax/"
+    },
+    {
+      "title": "联网调研 brief（官方仓库 / 上游来源 / 来源清单 / 口径核对 / 未确认项）",
+      "path": ".cache/article-note/dax/repo-brief.md"
+    },
+    {
+      "title": "配图实况与取舍（无图可发及理由）",
+      "path": ".cache/article-note/dax/analysis/image-collection.md"
+    },
+    {
+      "title": "上游公开仓库",
+      "path": "https://github.com/RiseAI-Sys/DAX"
+    }
+  ],
+  "related": [
+    {
+      "slug": "论文笔记/turbodiffusion",
+      "title": "TurboDiffusion 模型笔记"
+    },
+    {
+      "slug": "数字人概述/数字人加速",
+      "title": "数字人加速"
+    },
+    {
+      "slug": "数字人概述/工程设计",
+      "title": "工程设计"
+    },
+    {
+      "slug": "knowledge/视频生成训练与推理加速专题",
+      "title": "视频生成训练与推理加速专题"
+    }
+  ],
+  "notes": [
+    "无论文（本篇最重要的边界）：截至 2026-09-24 未检索到同行评议论文，也未检索到任何 arXiv 预印本或技术报告——仓库无 Citation 段、无 arXiv/Paper badge、无 release/tag、无 project page；HuggingFace Papers API（查询 Diffusion Accelerated eXecution 等）与 arXiv 站内检索均无 DAX 条目（命中的 SageAttention2 / Wan 等是 DAX 引用的上游工作，不是它自己的论文）。frontmatter 因此按任务要求不写 arxiv_id，papers_id 写 none。",
+    "上游为阿里内部 GitLab，公开仓库为镜像/衍生：证据是 DAX 首版 README（commit ec114233f9a1，2025-08-01T09:03:28Z）安装段写 git clone http://gitlab.alibaba-inc.com/cvl/DAX.git，仅 2 小时后的提交 2f1e00c04bbb（message: fix url，2025-08-01T11:18:56Z）把它替换为 https://github.com/RiseAI-Sys/DAX.git，diff 只有这一行。RiseAI-Sys org 创建于 2025-07-30T11:21:31Z（仓库创建前一天），同 org 下另有 attention-gym / ParaVAE / .github 共 4 个公开仓库，均无论文入口。内部仓库 gitlab.alibaba-inc.com/cvl/DAX 为内网域名、公网不可达（curl http=000），其现状未确认；RiseAI-Sys 与阿里 cvl 团队的正式关系亦未核实（org 无主页/无描述），不作推测。",
+    "36.4× 是 8×H20 结果，非单卡：消融图上的 +SP(8) 柱表明序列并行（8 路）是叠加到 baseline 之上的第一步增量，终点 188s 是 8 路 SP 结果，README 完整优化示例同样是 torchrun --nproc_per_node=8。同时 baseline（6836s）的卡数官方未明示，「未启用 SP 的单卡等效 baseline」是从消融结构推出的读法（属推断）；更稳妥的表述是「per-video wall time：未启用 SP 的 baseline 6836s → 8×H20 + 全优化 188s」。H20 集群形态（单机 8 卡 NVLink 还是 8 节点）未披露。单卡部署时序列并行这一项失效，不能直接复用该倍数。",
+    "证据等级＝仓库 benchmark（我方整理口径，原样带出、未升格）：与知识库 management/docs/knowledge/视频生成训练与推理加速专题.md §2.4 记的「DAX | 序列并行、SageAttention、compile、INT8线性层、TeaCache | 零训练 | Wan2.1-T2V-14B、720p、5s、8×H20：6836s→188s，36.4× | 仓库benchmark；8卡结果，不能当单卡速度」逐条核对一致，无口径冲突。该项目只有仓库、没有论文、也没有官方技术报告，全部数字集中在一张 README 图片里（assets/benchmark.png，本报告用 tesseract 5.5.2 + rapidocr 双引擎交叉 OCR 读出同一组秒数 6836/925/474/448/432/357/188，互证一致）。",
+    "36.4× 是派生值，官方无此字面数字：图上只有绝对秒数、没有 × 倍率标注，README 文字亦无；6836 / 188 = 36.36 ≈ 36.4。正文式 2 把它拆成累积消融的边际倍率（SP ≈7.4×、SageAttention ≈2.0×、compile ≈1.06×、overlap comm ≈1.04×、INT8 ≈1.21×、TeaCache ≈1.9×，均标注「我方派生」），并提醒这是累积消融、各台阶不可单独摘出当孤立加速比。",
+    "口径差异提示：官方口径细节与知识库记法有两处小差——① 官方写的是 SageAttention2（*SageAttention2 for attention quantization*），知识库简记为 SageAttention；② 官方量化同时支持 FP8 与 INT8（*FP8/INT8 quantization for linear layers*），知识库只登记 INT8。引用时以官方原文为准。另外官方 docs/communication_overlap.md 明确 overlap 策略带来 4%–5% E2E 加速，与消融台阶 448→432（≈1.04×）一致。",
+    "不可横比：本组 8 卡 H20 口径与其它工作不是同一硬件/同一测量协议，不得与单卡论文口径（如 TurboDiffusion 单张 RTX 5090、需训练的 199×）并列排榜。DAX 与 TurboDiffusion 的关系是互补（系统侧零训练 vs 训练侧蒸馏），不是同日而语的速度对比。",
+    "无原图：上游是代码仓库，无论文 figure、无项目页配图，故本篇不发布任何图片、正文不写任何 docs-assets 链接；改用 1 张自绘 Mermaid（五个优化项各作用在链路哪一段）+ 2 个块级公式 + 数值/未披露表格。理由登记见 .cache/article-note/dax/analysis/image-collection.md。",
+    "公式说明：README 与代码均无编号公式，正文 2 个块级公式均为我方——式 1（T_e2e = N_eff(T_attn+T_linear+T_other)+T_comm，且 T_attn/T_linear ∝ 1/P）为「我方形式化」，用于区分「降每步成本」与「减有效步数」；式 2（6836/188 = ∏ 各台阶倍率 ≈ 36.4）为「我方派生」，基于 benchmark 图的秒数。两者均不当成官方实测分解。",
+    "未披露项（一律写「未披露」，不猜）：baseline 卡数、benchmark 精度组合（BF16/FP8/INT8 具体搭配）、是否含 VAE decode、torch.compile 编译时间是否计入、是否 warmup、prompt/seed（示例默认 seed=0）、H20 的 SKU 与集群形态、「5s」与示例默认 num_frames=81 的绑定（README 文字未写，81 帧 @16fps ≈ 5s 属推断）。",
+    "机制与上游判定均来自一手可复现来源：README（raw/main）、首版 README（按 commit 取 raw）、commit 2f1e00c04bbb 的 diff、assets/benchmark.png、docs/communication_overlap.md、examples/wan2_1_t2v_example.py、代码目录 dax/quant/**、dax/parallel/**（all_to_all.py、split_gather.py、wanx2_1_t2v_opt）、dax/cache/teacache.py、GitHub API（仓库元数据 / org 仓库列表 / 提交历史 / releases 为空）。本笔记未 clone 仓库复核，只依据 repo-brief.md 记录的官方 raw/API 抓取结果。",
+    "未入本地 papers 库（data/papers.db 无该条）。定位结论：思路可借鉴度高（零训练、系统侧、风险低于蒸馏/QAT 路线），但前置是多卡环境 + 算子/缓存改造，且需与我们的 chunk 流式链路（更在意单 chunk 时延与抖动）一起评估；单卡场景不能直接复用 36.4×。"
+  ]
+}

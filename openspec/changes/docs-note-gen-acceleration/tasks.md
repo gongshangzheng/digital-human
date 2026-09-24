@@ -21,16 +21,16 @@
 
 - [x] 3.1 第一批两篇正文 + sidecar（blade 304 行 / latent-spatial-memory 377 行，均双校验通过）
 - [x] 3.2 第二批三篇（zipar 323 行 / nar 345 行 / flashar 444 行，均双校验通过）
-- [~] 3.3 第三批：turbodiffusion（402 行）、inferix（353 行）已完成；worldattention、dax 待写（仓库类，按 D2 骨架）
+- [x] 3.3 第三批：turbodiffusion（402 行）、inferix（353 行）+ 仓库类 worldattention（194 行）、dax（178 行）全部完成（仓库类按 D2 骨架）
 
 ## 4. 回补与收口
 
-- [ ] 4.1 十篇齐备后，一次性把《数字人加速》「生成侧加速」四方向里的工作名替换为文档链接（= `docs-intern-acceleration` 3.1）
+- [x] 4.1 十篇齐备后，一次性把《数字人加速》生成侧加速四方向里的工作名替换为文档链接（10 处首现；浏览器实测该页文档链接 15 个、0 公式错误）
 - [x] 4.2 更新 `论文笔记/README.md` 九行状态（blade / latent-spatial-memory 已标完成；fpsattention 由另一会话完成）
-- [ ] 4.3 同步伞 change `internship-work-review-docs` 2.14 与 `docs-intern-acceleration` 3.1 状态
+- [x] 4.3 同步伞 change `internship-work-review-docs` 2.14 与 `docs-intern-acceleration` 3.1 状态
 
 ## 5. 校验与提交
 
-- [ ] 5.1 每批 `validate-note.py` + 浏览器抽查（公式 / 图 / 链接 / Mermaid）
-- [ ] 5.2 `openspec validate docs-note-gen-acceleration --strict`
+- [x] 5.1 每批 `validate-note.py` + 浏览器抽查（10 篇均 0 公式错误，图/Mermaid/链接正常）
+- [x] 5.2 `openspec validate docs-note-gen-acceleration --strict`
 - [ ] 5.3 分批聚焦提交（每批一个提交，不夹带他人工作）

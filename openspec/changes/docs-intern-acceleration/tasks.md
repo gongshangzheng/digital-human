@@ -18,4 +18,4 @@
 
 ## 3. 生成侧加速的笔记链接（待办）
 
-- [ ] 3.1 等论文笔记十篇建成后，在正文《生成侧加速》的四个方向里把工作名替换为文档链接（笔记登记见主 change 论文笔记登记表；当前文中只点名不加链接）
+- [x] 3.1 十篇笔记建成后，已在正文《生成侧加速》四个方向把 10 个工作名替换为文档链接（fpsattention / blade / nar / flashar / latent-spatial-memory / worldattention / zipar / dax / turbodiffusion / inferix）

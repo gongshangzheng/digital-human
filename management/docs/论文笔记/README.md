@@ -53,9 +53,9 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `nar.md` | 深读（邻域自回归建模；需从头训练） | ✅ 已完成（论文标注：3 图 + 2 公式 + sidecar） |
 | `flashar.md` | 深读（自回归生成的后训练加速；配图受抓取限制） | ✅ 已完成（论文标注：1 图 + 2 Mermaid + 10 公式 + sidecar） |
 | `latent-spatial-memory.md` | 深读（隐空间空间记忆；注意：任务是相机轨迹 world model） | ✅ 已完成（论文标注：3 图 + 7 公式 + sidecar） |
-| `worldattention.md` | 深读（缓存与计算系统协同） | 待写 |
+| `worldattention.md` | 方案笔记（无同行评议论文：代码/README 证据；HSA 稀疏 + 分层 KV） | ✅ 已完成（D2 骨架 + 1 Mermaid + 2 公式 + sidecar） |
 | `zipar.md` | 深读（空间局部性并行解码；零训练） | ✅ 已完成（论文标注：3 图 + 3 公式 + sidecar） |
-| `dax.md` | 深读（VideoGen 推理基础设施） | 待写 |
+| `dax.md` | 方案笔记（无同行评议论文：仓库 benchmark；算子/系统组合优化） | ✅ 已完成（D2 骨架 + 1 Mermaid + 2 公式 + sidecar） |
 | `turbodiffusion.md` | 深读（步数蒸馏 + 系统优化栈；无原图，图均为无图题定性帧对比） | ✅ 已完成（2 Mermaid + 4 公式 + sidecar） |
 | `inferix.md` | 深读（block-diffusion 推理引擎；证据等级＝引擎能力/待自测） | ✅ 已完成（2 图 + 2 Mermaid + 3 公式 + sidecar） |
 | `vorch-streamer.md` | 深读（实时长时 T2AV 流式：后训练框架、暴露偏差与漂移治理、因果生成下“该说哪一段”）｜论文 [arXiv:2608.05663](https://arxiv.org/abs/2608.05663) Vorch-Streamer: Extending Human Audio-Visual Generation to Real-Time Long-Form Streaming | ✅ 已完成（10 节骨架 + 4 图 + sidecar，order: 26） |
