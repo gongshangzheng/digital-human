@@ -47,10 +47,10 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `float.md` | 深读 + 定位层（基座：Avatar Forcing 复用的 motion latent 空间） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `face-vid2vid.md` | 深读 + 定位层（LivePortrait 前置：3D 隐式关键点与 free-view） | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `fpsattention.md` | 深读（FP8 量化 × 稀疏注意力协同） | ✅ 已完成（10 节骨架 + 3 图 + sidecar，order: 100） |
-| `blade.md` | 深读（块稀疏 × 步数蒸馏） | 待写 |
+| `blade.md` | 深读（块稀疏注意力 × 步数蒸馏联合训练） | ✅ 已完成（论文标注：2 图 + 5 公式 + sidecar） |
 | `nar.md` | 深读（邻域自回归建模） | 待写 |
 | `flashar.md` | 深读（自回归生成的后训练加速） | 待写 |
-| `latent-spatial-memory.md` | 深读（隐空间空间记忆） | 待写 |
+| `latent-spatial-memory.md` | 深读（隐空间空间记忆；注意：任务是相机轨迹 world model） | ✅ 已完成（论文标注：3 图 + 7 公式 + sidecar） |
 | `worldattention.md` | 深读（缓存与计算系统协同） | 待写 |
 | `zipar.md` | 深读（空间局部性并行解码） | 待写 |
 | `dax.md` | 深读（VideoGen 推理基础设施） | 待写 |
@@ -59,6 +59,8 @@ summary: 数字人论文/模型统一笔记库：一篇一个论文/模型、夹
 | `vorch-streamer.md` | 深读（实时长时 T2AV 流式：后训练框架、暴露偏差与漂移治理、因果生成下“该说哪一段”）｜论文 [arXiv:2608.05663](https://arxiv.org/abs/2608.05663) Vorch-Streamer: Extending Human Audio-Visual Generation to Real-Time Long-Form Streaming | ✅ 已完成（10 节骨架 + 4 图 + sidecar，order: 26） |
 | `causal-forcing.md` | 深读（自回归扩散蒸馏：frame-level injectivity 与条件期望解、TF 优于 DF、causal ODE + asymmetric DMD、causal CD；Avatar Forcing 被引最高的后续工作）｜论文 [arXiv:2602.02214](https://arxiv.org/abs/2602.02214) Causal Forcing: Autoregressive Diffusion Distillation Done Right for High-Quality Real-Time Interactive Video Generation | ✅ 已完成（10 节骨架 + 6 图 + sidecar） |
 | `wan-streamer.md` | 深读（端到端实时交互基座）｜论文 [arXiv:2606.25041](https://arxiv.org/abs/2606.25041) Wan-Streamer v0.1: End-to-end Real-time Interactive Foundation Models | 待写 |
+| `adaptok.md` | 深读（自适应 token 分配 + 时间因果的 1D 视频分词；拟用于「从视频提角色身份」，见 [[数字人概述/数字人领域问题|数字人领域问题]] 第七章）｜论文 [arXiv:2505.17011](https://arxiv.org/abs/2505.17011) Learning Adaptive and Temporally Causal Video Tokenization in a 1D Latent Space | 待写 |
+| `tivtok.md` | 深读（时间不变/时变 token 分解：TIV 跨帧复用 + TV 逐帧残差；拟用于「从视频提角色身份」，见 [[数字人概述/数字人领域问题|数字人领域问题]] 第七章）｜论文 [arXiv:2606.17590](https://arxiv.org/abs/2606.17590) TivTok: Broadcasting Time-Invariant Tokens for Scalable Video Tokenization | 待写 |
 
 > 新增登记说明（2026-09-23）：
 > - `talker-t2av` 之前只在 papers 库之外（知识库固定阅读上游版本 `6712f62`），现已补上论文出处 arXiv:2604.23586（v2，2026-08-04）。

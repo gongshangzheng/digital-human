@@ -1,0 +1,55 @@
+{
+  "slug": "论文笔记/latent-spatial-memory",
+  "title": "Latent Spatial Memory 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "change": "docs-note-gen-acceleration",
+      "summary": "首次创建：生成侧加速十篇的「缓存与记忆」篇。10 节骨架 + sidecar + 3 张论文原图（Figure 3 / 2 / 4）+ 1 张 Mermaid（记忆读写路径）+ 式 (1)-(7) 逐式符号表与中文解释；写清它加速的是缓存与记忆段（消除每步 render→VAE-encode 往返，把像素操作下沉到 chunk 级）、训练前提是两阶段后训练（side branch + rank-32 LoRA，32×A100）、证据等级为「论文已验证」且无代码/仓库证据，并显式登记「相机轨迹世界模型 ≠ 交互式数字人」这一任务形态边界与不可横比口径。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2606.09828v2 仅 HTML 成功（source tarball HTTP 406、PDF IncompleteRead 失败）→ 全文锚点只用章节/公式/图/表/算法号，不写页码；已发布图 3 张（publish-webp → management/docs/_assets/latent-spatial-memory/）",
+    "analysis": "methodology / experiment / terminology 三 lane 由分析产物提供（image-collection lane 本次补写）；validate-analysis 通过",
+    "writing": "正文与 sidecar 已完成并校验（validate-note / validate-analysis 双通过）",
+    "scope": "单篇笔记，不修改其它文件、不做 git 提交、不创建 change"
+  },
+  "related": [
+    { "slug": "knowledge/视频生成训练与推理加速专题", "title": "视频生成训练与推理加速专题" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" },
+    { "slug": "论文笔记/fpsattention", "title": "FPSAttention 模型笔记" },
+    { "slug": "论文笔记/blade", "title": "BLADE 模型笔记" },
+    { "slug": "论文笔记/ditto", "title": "Ditto 模型笔记" },
+    { "slug": "论文笔记/liveact", "title": "SoulX-LiveAct 模型笔记" }
+  ],
+  "appendix": {
+    "figures": [
+      { "figure": 1, "paper": "Figure 3", "file": "fig-1-lsm-world-overview.webp", "section": "方法精析", "note": "Overview of LSM-World：初始化 → 读出 → 更新 的三步循环" },
+      { "figure": 2, "paper": "Figure 2", "file": "fig-2-latent-vs-rgb-memory.webp", "section": "方法精析（记忆读出）", "note": "(a) RGB 点云每步 render→encode / (b) latent 记忆一次投影 / (c) profiling 显示记忆维护是瓶颈" },
+      { "figure": 3, "paper": "Figure 4", "file": "fig-3-closed-loop-revisit.webp", "section": "实验与结果", "note": "RealEstate10K 闭环回访：末帧与首帧一致性" }
+    ],
+    "formulas": [
+      { "id": "(1)", "content": "RGB 点云记忆定义（世界坐标 + 颜色）", "anchor": "§3 Preliminaries" },
+      { "id": "(2)", "content": "RGB 记忆的每步 render→VAE-encode 往返（被本文删除的那一步）", "anchor": "§3 Preliminaries" },
+      { "id": "(3)", "content": "latent 空间记忆定义（世界坐标 + latent 特征）", "anchor": "§4.2" },
+      { "id": "(4)", "content": "记忆构造：深度引导反投影 + 直接取 encoder token", "anchor": "§4.2" },
+      { "id": "(5)", "content": "记忆读出：latent 网格 z-buffer 取最前点", "anchor": "§4.3" },
+      { "id": "(6)", "content": "自回归记忆更新（仅并入非动态、非天空 cell）", "anchor": "§4.4" },
+      { "id": "(7)", "content": "latent 分辨率内参按各轴 stride 缩放", "anchor": "§Appendix A" }
+    ],
+    "formulaNote": "式 (8)(9)(10)（针孔反投影 / 投影到 latent 网格取整 / 候选集与可并入集定义）是本篇几何工具链的组成部分，正文只作文字指认、未复制公式，避免与式 (7) 重复；无 PDF 故所有公式锚点为章节号。",
+    "imageNote": "论文 Figure 1（teaser）与 Figure 5/6/7/8 未发布：Figure 6 效率曲线与 Figure 8 人体评测为 SVG（需先转位图），Figure 1/5/7 为定性对比图，本笔记只用 3 张最能承担论证的图。映射关系见 .cache/article-note/latent-spatial-memory/analysis/image-collection.md。"
+  },
+  "notes": [
+    "**未入本地 papers 库**：data/papers.db 无该篇记录，frontmatter 按命名规范写 papers_id: arxiv-2606.09828（与 arxiv_id 对齐），不声称已入库。",
+    "**证据等级「论文已验证」**：来源为我方整理（知识库《视频生成训练与推理加速专题》§2.2 表格「论文已验证」），原样带出、不升格。论文正文无 GitHub 仓库/weights/release 语句，但 **arXiv 元信息 comment 字段给出代码仓库 microsoft/LatentSpatialMemory**（已补入正文论文信息表）；项目页 aka.ms/latent-spatial-memory。**代码未核**（我们未运行它）。mory，因此没有「代码或 README 证据」、也没有仓库 benchmark；本地未复现 → 对我方叠加「待自测」。",
+    "**任务形态边界（不得省略）**：任务是相机轨迹驱动的 world model（长时 3D 一致回访，评测 WorldScore 与 RealEstate10K），**不是交互式数字人**——没有音频条件、没有口型/身份指标、没有交互时延口径；论文 §6 明确不维护动态主体跨 chunk 的状态，所以数字人最需要的「跨 chunk 主体一致性」恰是本方法主动放弃的部分。任何把 10.57× 迁移到 talking-head 的说法都属超范围。",
+    "**不可横比**：10.57× 是相对「representative RGB point cloud baselines」（论文未点名具体实现）的端到端倍数、单张 H100；55× 明确限定为 3D cache 自身显存。与 DAX（8×H20 系统组合）、TurboDiffusion（RTX5090 + 蒸馏）、FPSAttention（H20 FP8 kernel）在模型、硬件、分辨率、任务、基线定义上全不同，不可拼成速度排行榜（我方整理开篇亦禁止）。",
+    "**两处数值口径易错**：① Appendix B 的解析比值 s²·(3/C) = 16²×3/48 = 16 是逐元素比值，与实测 55× 不是同一口径（论文解释差额来自 per-step 像素分辨率 buffer），不可互相代入；② 0.25 s 是 cache read 时间而非整帧生成时间，不能当 FPS。",
+    "**未披露项（不得替论文补全）**：训练步数 / epoch / wall-clock / 总 GPU-hours；LoRA rank 取 32 的理由与 side branch 参数量；RGB 基线的具体实现与绝对秒数/显存绝对值；端到端绝对延迟、FPS、单 chunk 耗时、峰值总显存；分割误差敏感性（只做了深度源敏感性 Table 4）；跨 backbone 结果；代码 / 权重 / 许可证。",
+    "**两处影响读法的细节**：① 默认 bilinear 下仍有 42.53% 的 latent cell 投影为空（零填充 + 掩码标 unseen），论文未量化其质量影响；② WorldScore Avg 70.36 全表最高，但 Camera Ctrl 55.36 明显低于 Spatia（75.66）与 Voyager（85.95），Content Align 42.09 偏低——不能只挑 Avg 说「全面 SOTA」。",
+    "**素材缺 PDF**：source tarball HTTP 406、PDF IncompleteRead 失败，故全文指针只用章节/公式/图/表/算法号；arXiv HTML 首页标注 27 Aug 2026（同页 Date June 8, 2026），时间戳按原文保留、未改写、未核对最终版本。",
+    "**知识库待补项（本次不改 management/docs/knowledge/）**：我方整理 §2.2 该行未登记训练要求（实际为两阶段后训练 + 32×A100 + ViPE/DA3/Qwen3-VL/SAM3 数据引擎）与推理配置（40 步 UniPC、CFG 关闭）；另外该表把本篇写作「Latent Spatial Memory / Mirage」，而论文 HTML 中 0 命中 Mirage，映射关系未披露。按流程需走 OpenSpec 后另行处理。"
+  ]
+}

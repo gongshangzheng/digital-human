@@ -1,0 +1,52 @@
+{
+  "slug": "论文笔记/blade",
+  "title": "BLADE 模型笔记",
+  "changelog": [
+    {
+      "date": "2026-09-24",
+      "change": "docs-note-gen-acceleration",
+      "summary": "首次创建：生成侧加速十篇中的 BLADE。10 节骨架 + sidecar + 2 张已发布图（训练机制、掩码可视化）；写清「块稀疏 ASA + data-free 步数蒸馏联合训练」的两段成本、训练前提（需要蒸馏）、证据等级（论文已验证，中等长度序列为主）与报告口径（Wan2.1-1.3B 14.10×、CogVideoX-5B 8.89×，规模不同不可横比）。"
+    }
+  ],
+  "progress": {
+    "status": "completed",
+    "extraction": "arXiv 2508.10774v2（HTML 成功；PDF 失败 IncompleteRead、source tarball HTTP 406），故全文只用章节/公式/图/表/算法号，不写页码",
+    "analysis": "methodology / experiment / terminology 三 lane 委派 + image-collection 与 synthesis 归并；validate-analysis 通过",
+    "writing": "正文与 sidecar 已完成并校验"
+  },
+  "appendix": [
+    {
+      "title": "分析方法学 lane",
+      "path": ".cache/article-note/blade/analysis/methodology.md"
+    },
+    {
+      "title": "分析实验与证据 lane",
+      "path": ".cache/article-note/blade/analysis/experiment.md"
+    },
+    {
+      "title": "分析术语与符号 lane",
+      "path": ".cache/article-note/blade/analysis/terminology.md"
+    },
+    {
+      "title": "配图候选与章节映射",
+      "path": ".cache/article-note/blade/analysis/image-collection.md"
+    }
+  ],
+  "related": [
+    { "slug": "knowledge/视频生成训练与推理加速专题", "title": "视频生成训练与推理加速专题" },
+    { "slug": "数字人概述/数字人加速", "title": "数字人加速" },
+    { "slug": "论文笔记/fpsattention", "title": "FPSAttention 模型笔记" },
+    { "slug": "论文笔记/avatar-forcing", "title": "Avatar Forcing 模型笔记" },
+    { "slug": "论文笔记/ditto", "title": "Ditto 模型笔记" },
+    { "slug": "论文笔记/README", "title": "论文笔记（篇目索引）" }
+  ],
+  "notes": [
+    "未入本地 papers 库（data/papers.db 无 arXiv:2508.10774），frontmatter 按命名规范写 papers_id: arxiv-2508.10774。",
+    "证据等级原样保留为「论文已验证（中等长度序列为主）」，来源为本仓库知识库整理（management/docs/knowledge/视频生成训练与推理加速专题.md §2.1 BLADE 行），未升格；论文全文未给出任何 GitHub 仓库地址，只有项目页 http://ziplab.co/BLADE-Homepage/，故不能升格为「代码或 README 证据」或「仓库 benchmark」。",
+    "口径边界已在正文第 6 节写明：14.10× 是 Wan2.1-1.3B（480×832、16fps、32760 token、单张 H20、8 步 vs 官方 50 步）的端到端结果，8.89× 是 CogVideoX-5B（480×720、8fps、17550 token）的结果；训练用 8×A800(80GB)，效率计时为 H20（表 2 未写明卡数）。两者规模/分辨率/序列长不同，且不可与 FPSAttention/WorldAttention/DAX/TurboDiffusion 直接横比。",
+    "论文自陈的质量边界：Wan2.1 上 FA2-8 的 VBench-2.0 Total（0.580）高于 ASA_G（0.570），故正文只写「相对 50 步 baseline 提升」，不写「全面优于所有 8 步稠密蒸馏」。",
+    "未披露项：阈值 tau 的主结果取值（正文 90% / 图 2 题注 95% 不一致）、mean-pool 窗口 n、保留率上下界、batch size、训练总时长与收敛判据、LoRA rank、表 2 的 H20 卡数。",
+    "我方未接入：本地训练源码矩阵无 CogVideoX-5B / Wan2.1-1.3B 条目，正文第 8 节只写定位与可复用点（瓶颈转移判断、训练回路内注入稀疏约束、附录 D 算法 1 规格），不承诺本地可用。",
+    "配图 2 张已发布到 management/docs/_assets/blade/（fig-1-training-mechanism.webp 1600×824、fig-2-mask-visualization.webp 1162×250），分别对应论文 Figure 1 与 Figure 4。"
+  ]
+}
